@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	
+
+	<ItemGroup>
+	  <ProjectReference Include="..\EQ.Domain\EQ.Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="ApiBufferApi_CLRLib">
+	    <HintPath>C:\Program Files\SoftServo\WMX3\Lib\ApiBufferApi_CLRLib.dll</HintPath>
+	  </Reference>
+	  <Reference Include="CoreMotionApi_CLRLib">
+	    <HintPath>C:\Program Files\SoftServo\WMX3\Lib\CoreMotionApi_CLRLib.dll</HintPath>
+	  </Reference>
+	  <Reference Include="EcApi_CLRLib">
+	    <HintPath>C:\Program Files\SoftServo\WMX3\Lib\EcApi_CLRLib.dll</HintPath>
+	  </Reference>
+	  <Reference Include="EventApi_CLRLib">
+	    <HintPath>C:\Program Files\SoftServo\WMX3\Lib\EventApi_CLRLib.dll</HintPath>
+	  </Reference>
+	  <Reference Include="SimuApi_CLRLib">
+	    <HintPath>C:\Program Files\SoftServo\WMX3\Lib\SimuApi_CLRLib.dll</HintPath>
+	  </Reference>
+	  <Reference Include="UserMemoryApi_CLRLib">
+	    <HintPath>C:\Program Files\SoftServo\WMX3\Lib\UserMemoryApi_CLRLib.dll</HintPath>
+	  </Reference>
+	  <Reference Include="WMX3Api_CLRLib">
+	    <HintPath>C:\Program Files\SoftServo\WMX3\Lib\WMX3Api_CLRLib.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+</Project>

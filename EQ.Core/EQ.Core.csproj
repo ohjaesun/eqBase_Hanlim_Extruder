@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Platforms>AnyCPU;x64</Platforms>
+	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EQ.Common\EQ.Common.csproj" />
+    <ProjectReference Include="..\EQ.Domain\EQ.Domain.csproj" />
+    <ProjectReference Include="..\EQ.Infra\EQ.Infra.csproj" />
+  </ItemGroup>
+
+</Project>

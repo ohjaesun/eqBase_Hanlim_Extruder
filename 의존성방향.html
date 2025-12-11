@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EqBase 의존성 방향</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "Segoe UI", Roboto, Oxygen,
+                Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            line-height: 1.6;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        h2 {
+            color: #3498db;
+            border-bottom: 1px solid #eeeeee;
+            padding-bottom: 5px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            color: #2980b9;
+            margin-top: 25px;
+        }
+
+        code {
+            font-family: Consolas, "Courier New", monospace;
+            background-color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 1.1em;
+            color: #c0392b;
+        }
+        
+        .code-block {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 1.1em;
+            overflow-x: auto;
+            text-align: center;
+        }
+
+        ul {
+            padding-left: 20px;
+            list-style-type: square;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            color: #2c3e50;
+        }
+        
+        .project-name {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #34495e;
+        }
+
+        .summary {
+            background-color: #f8f9fa;
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .warning {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+         .version-tag {
+            background-color: #34495e;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.6em;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+         hr.divider {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+            margin: 50px 0;
+        }
+        .history-header {
+            color: #7f8c8d;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>EqBase 솔루션 의존성 구조 <span class="version-tag">V1.1 (Updated)</span></h1>
+
+        <div class="section">
+            <h2>핵심 아키텍처: 플러그인 방식 (Plugin Architecture)</h2>
+            <div class="summary">
+                <p>
+                    이 솔루션은 <strong>DIP(의존성 역전)</strong>와 <strong>동적 로딩(Dynamic Loading)</strong>을 결합하여, 하드웨어 변경 시 코드를 다시 컴파일할 필요가 없는 구조를 가집니다.
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>참조 흐름도 (Reference Flow)</h2>
+            
+            <div class="code-block">
+                UI → Core → Domain ← Infra ... [Dynamic Load] ... > Hardware(DLL)
+            </div>
+            
+            <ul>
+                <li><strong>정적 참조 (Compile-time):</strong> 
+                    <ul>
+                        <li><code>UI</code>, <code>Core</code>, <code>Infra</code>는 모두 <code>Domain</code>(계약서)을 참조합니다.</li>
+                        <li><code>Core</code>는 <code>Infra</code>를 알지 못합니다.</li>
+                    </ul>
+                </li>
+                <li><strong>동적 로딩 (Runtime):</strong>
+                    <ul>
+                        <li><code>EQ.Infra</code>는 <code>Hardware.Infra.XXX</code> 프로젝트를 직접 참조하지 않습니다.</li>
+                        <li>대신 <code>Factory</code>가 설정에 따라 해당 <strong>DLL 파일</strong>을 읽어와 객체를 생성합니다. (<code>Assembly.LoadFrom</code>)</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>프로젝트별 상세 역할</h2>
+
+            <h3>1. <span class="project-name">EQ.UI</span> (Composition Root)</h3>
+            <ul>
+                <li><strong>역할:</strong> 프로그램 시작점. 모든 모듈을 조립합니다.</li>
+                <li><strong>특징:</strong> <code>ActManager</code>를 통해 <code>Core</code> 서비스를 사용하고, <code>Factory</code>를 통해 하드웨어 구현체를 주입합니다.</li>
+            </ul>
+
+            <h3>2. <span class="project-name">EQ.Core</span> (Business Logic)</h3>
+            <ul>
+                <li><strong>역할:</strong> 시퀀스, 액션, 알람 등 순수 제어 로직을 담당합니다.</li>
+                <li><strong>규칙:</strong> <span class="warning">하드웨어(Infra)에 대한 직접적인 의존성이 0이어야 합니다.</span> 오직 <code>IIoController</code> 같은 인터페이스만 사용합니다.</li>
+            </ul>
+
+            <h3>3. <span class="project-name">EQ.Infra</span> (Adapter / Factory)</h3>
+            <ul>
+                <li><strong>역할:</strong> <code>Domain</code> 인터페이스를 구현하는 구체적인 클래스를 제공하거나, 외부 DLL을 로드하는 공장(Factory) 역할을 합니다.</li>
+                <li><strong>핵심 코드:</strong> <code>HardwareIOFactory.cs</code> (<code>Assembly.LoadFrom(...)</code> 사용)</li>
+            </ul>
+
+            <h3>4. <span class="project-name">Hardware.Infra.XXX</span> (Drivers)</h3>
+            <ul>
+                <li><strong>역할:</strong> 특정 제조사(WMX, Ajin 등)의 라이브러리를 사용하는 실질적인 드라이버 코드입니다.</li>
+                <li><strong>특징:</strong> 메인 솔루션과 느슨하게 결합되어 있으며, 빌드 후 DLL 형태(플러그인)로 제공됩니다.</li>
+            </ul>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="container" style="opacity: 0.7;">
+        <h2 class="history-header">▼ Previous Version (V1.0)</h2>
+        <h1>EqBase 솔루션 의존성 방향</h1>
+
+        <div class="section">
+            <h2>핵심 규칙: 의존성 역전 원칙 (DIP)</h2>
+            <div class="summary">
+                <p>
+                    이 솔루션의 모든 의존성은 <strong>"구현(Infra)이 아닌 추상화(Domain)를 향해야 한다"</strong>는 규칙을 따릅니다.
+                </p>
+                <p>
+                    즉, <strong>"두뇌(<code>EQ.Core</code>)는 손발(<code>EQ.Infra</code>)을 알지 못하며"</strong>, 둘 다 오직 <strong>"계약서(<code>EQ.Domain</code>)"</strong>만 바라봅니다.
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>의존성 흐름도</h2>
+            <p>프로젝트 간의 참조 방향은 다음과 같습니다. 화살표(→)는 '참조한다'는 의미입니다.</p>
+            
+            <div class="code-block">
+                UI → Core → Domain ← Infra
+            </div>
+            
+            <ul>
+                <li><strong><code>EQ.UI</code></strong>는 <code>EQ.Core</code>와 <code>EQ.Infra</code>를 모두 참조하여 '조립'합니다.</li>
+                <li><strong><code>EQ.Core</code></strong>(두뇌)는 <code>EQ.Domain</code>(계약서)만 참조합니다.</li>
+                <li><strong><code>EQ.Infra</code></strong>(손발)도 <code>EQ.Domain</code>(계약서)만 참조하여 구현합니다.</li>
+                <li><strong><code>EQ.Domain</code></strong>은 <code>Common</code>을 참조합니다.</li>
+                <li><strong><code>Common</code></strong>은 솔루션 내 다른 프로젝트를 참조하지 않습니다.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>프로젝트별 역할 및 참조</h2>
+
+            <h3>1. <span class="project-name">EQ.UI</span> (조립자 / 얼굴)</h3>
+            <ul>
+                <li><strong>역할:</strong> 프로그램의 시작점(<code>Program.cs</code>, <code>FormSplash.cs</code>). 모든 부품을 조립(Composition Root)하고 <code>Core</code>의 서비스를 호출합니다.</li>
+                <li><strong>참조:</strong>
+                    <ul>
+                        <li><code>EQ.Core</code> (서비스 호출)</li>
+                        <li><code>EQ.Domain</code> (데이터 모델 표시)</li>
+                        <li><code>EQ.Infra</code> (<code>IoFactory</code> 등 실제 하드웨어 객체 생성용)</li>
+                        <li><code>Common</code></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>2. <span class="project-name">EQ.Core</span> (두뇌)</h3>
+            <ul>
+                <li><strong>역할:</strong> 실제 응용 로직(시퀀스, 액션)을 처리합니다.</li>
+                <li><strong>참조:</strong>
+                    <ul>
+                        <li><code>EQ.Domain</code> (<code>IIoController</code> 등 인터페이스만 사용)</li>
+                        <li><code>Common</code></li>
+                    </ul>
+                </li>
+                <li><span class="warning">**중요:** <code>EQ.Infra</code>를 절대로 참조해서는 안 됩니다.</span></li>
+            </ul>
+
+            <h3>3. <span class="project-name">EQ.Infra</span> (손발)</h3>
+            <ul>
+                <li><strong>역할:</strong> <code>Domain</code>에 정의된 인터페이스(<code>IIoController</code> 등)를 실제 하드웨어(WMX, Ajin)로 구현합니다. (예: <code>WMX_IO.cs</code>)</li>
+                <li><strong>참조:</strong>
+                    <ul>
+                        <li><code>EQ.Domain</code> (인터페이스 구현)</li>
+                        <li><code>Common</code></li>
+                        <li>(외부 DLL: WMX3Api_CLRLib.dll 등)</li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <h3>4. <span class="project-name">EQ.Domain</span> (핵심 계약 / 심장)</h3>
+            <ul>
+                <li><strong>역할:</strong> 비즈니스 규칙, 데이터 모델(엔티티), 그리고 <code>Infra</code>가 구현할 인터페이스(<code>IIoController</code>, <code>IMotionController</code>, <code>IDataStorage</code> 등)를 정의합니다.</li>
+                <li><strong>참조:</strong>
+                    <ul>
+                        <li><code>Common</code></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>5. <span class="project-name">Common</span> (공구함)</h3>
+            <ul>
+                <li><strong>역할:</strong> 모든 프로젝트가 공통으로 사용하는 유틸리티(<code>Logs.cs</code>, <code>INI.cs</code> 등)를 제공합니다.</li>
+                <li><strong>참조:</strong> 없음 (솔루션 내 다른 프로젝트 참조 금지)</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows7.0</TargetFramework>
+		<!-- 또는 net7.0-windows, net6.0-windows 등 -->
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<BaseOutputPath></BaseOutputPath>
+		<PlatformTarget>x64</PlatformTarget>
+		<Platforms>AnyCPU;x64</Platforms>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EQ.Common\EQ.Common.csproj" />
+  </ItemGroup>
+
+</Project>

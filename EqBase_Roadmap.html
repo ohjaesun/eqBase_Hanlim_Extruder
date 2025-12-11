@@ -1,0 +1,495 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EqBase 기능 구현 로드맵</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "Segoe UI", Roboto, Oxygen,
+                Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            line-height: 1.6;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        h2 {
+            color: #3498db;
+            border-bottom: 1px solid #eeeeee;
+            padding-bottom: 5px;
+            margin-top: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            color: #34495e;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* 상태 태그 스타일 */
+        .status {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 0.9em;
+            text-align: center;
+            white-space: nowrap;
+            display: inline-block;
+            min-width: 80px;
+        }
+
+        .status-not-started {
+            background-color: #e74c3c;
+        }
+
+        /* Red */
+        .status-in-progress {
+            background-color: #f39c12;
+        }
+
+        /* Yellow */
+        .status-complete {
+            background-color: #27ae60;
+        }
+
+        /* Green */
+
+        .version-tag {
+            background-color: #34495e;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+
+        hr.divider {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+            margin: 50px 0;
+        }
+
+        .history-header {
+            color: #7f8c8d;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>EqBase 기능 구현 로드맵 <span class="version-tag">V1.2 (Current)</span></h1>
+        <p>
+            현재 소스 코드 분석을 기반으로 업데이트된 로드맵입니다. <br>
+            모션 티칭, 인터락, 타워 램프, 데이터 복구, SECS/GEM 기능이 모두 구현 완료되었습니다.
+        </p>
+
+        <div class="section">
+            <h2>0. 핵심 프레임워크 (Infrastructure)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>기능</th>
+                        <th>상세 설명</th>
+                        <th>핵심 파일</th>
+                        <th>상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>아키텍처 (DIP)</strong></td>
+                        <td>UI ↔ Core ↔ Domain ↔ Infra 의존성 분리 및 <code>ActManager</code> 싱글톤.</td>
+                        <td><code>ActManager.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>하드웨어 팩토리</strong></td>
+                        <td><code>HardwareIOFactory</code>를 통한 DLL 동적 로딩(Reflection) 및 드라이버 주입.</td>
+                        <td><code>HardwareFactory.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>이중 데이터 저장소</strong></td>
+                        <td><code>DualStorage</code> (JSON+SQLite) 구현. 실시간 저장 및 이력 관리.</td>
+                        <td><code>SqliteStorage.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>1. 공정 및 데이터 관리</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>기능</th>
+                        <th>상세 설명</th>
+                        <th>관련 모듈</th>
+                        <th>상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>레시피 관리</strong></td>
+                        <td>레시피 생성, 복사, 삭제, 선택 및 폴더 구조 자동 관리.</td>
+                        <td><code>ActRecipe.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>옵션/파라미터</strong></td>
+                        <td>제네릭(<code>Get&lt;T&gt;</code>) 기반 옵션 관리 및 <code>PropertyGrid</code> 바인딩.</td>
+                        <td><code>ActUserOption.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>시퀀스 엔진</strong></td>
+                        <td>Step 기반 시퀀스 실행, 에러 복구(Recovery), 타임아웃, 병렬 실행.</td>
+                        <td><code>SEQ.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>데이터 백업/복구</strong></td>
+                        <td>SQLite DB를 이용한 설정/레시피 자동 백업 및 복구(Export) 도구.</td>
+                        <td><code>DB_Export_View.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>2. 장비 제어 및 모니터링 UI</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>기능</th>
+                        <th>상세 설명</th>
+                        <th>관련 모듈</th>
+                        <th>상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>모션 제어 (Basic)</strong></td>
+                        <td>축 상태 모니터링, Servo On/Off, Homing, JOG, 에러 리셋.</td>
+                        <td><code>Motor_View.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>모션 티칭 (Teaching)</strong></td>
+                        <td>포지션 데이터 Grid UI, 현재 위치 티칭(Right Click), 필터링.</td>
+                        <td><code>MotorPosition_View.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>모션 인터락</strong></td>
+                        <td>사용자 정의 인터락 규칙(Position/IO) 설정 및 관리 UI.</td>
+                        <td><code>MotorInterlock_View.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>I/O 제어</strong></td>
+                        <td>전체 I/O 리스트 및 제어, 시각적 인터락 상태 모니터링.</td>
+                        <td><code>IO_View.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>FSM / 타워램프</strong></td>
+                        <td>장비 상태(Init, Idle, Run, Error)에 따른 램프/부저 자동 제어.</td>
+                        <td><code>ActTowerLamp.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>비전 (Vision)</strong></td>
+                        <td>TCP/IP 클라이언트, JSON 패킷 파싱, Mock 시뮬레이터.</td>
+                        <td><code>ActVision.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>3. 기타 및 미구현</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>기능</th>
+                        <th>상세 설명</th>
+                        <th>상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>사용자/로그</strong></td>
+                        <td>레벨별 권한 관리(SHA256), 파일 로깅, 알람 이력 DB.</td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>공정 데이터 로깅</strong></td>
+                        <td>Tact Time, 생산 수량 등 공정 결과 데이터 DB 저장.</td>
+                        <td><span class="status status-not-started">미구현</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>SECS/GEM</strong></td>
+                        <td>상위 시스템 통신 프로토콜 구현. SVID/ECID/CEID/ALID/RCMD 관리, 연결 상태 모니터링, Data 탭 편집 UI.</td>
+                        <td><code>ActSecsGem.cs</code><br><code>SecsGem_View.cs</code><br><code>EZGemPlusDriver.cs</code>
+                        </td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>레이저 거리 계측기</strong></td>
+                        <td>ILaserMeasure 인터페이스. HL_G1(RS485), ZW7000(TCP) 드라이버. 단발/연속 측정 지원.</td>
+                        <td><code>ILaserMeasure.cs</code><br><code>ActLaserMeasure.cs</code><br><code>LaserMeasure_View.cs</code>
+                        </td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>로드셀</strong></td>
+                        <td>ILoadCell 인터페이스. Mettler Toledo, HBM 등 무게 측정 센서.</td>
+                        <td><span class="status status-not-started">미구현</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>아날로그 I/O 확장</strong></td>
+                        <td>IIoController에 ReadAnalogInput/WriteAnalogOutput 추가. EtherCAT AI 모듈 지원.</td>
+                        <td><span class="status status-not-started">미구현</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>가스 유량계 (MFC)</strong></td>
+                        <td>IMassFlowController 인터페이스. Brooks, MKS 등 가스 유량 제어.</td>
+                        <td><span class="status status-not-started">미구현</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>바코드/QR 리더</strong></td>
+                        <td>IBarCodeReader 인터페이스. Cognex, Keyence 등 로트 추적용.</td>
+                        <td><span class="status status-not-started">미구현</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="container" style="opacity: 0.7;">
+        <h2 class="history-header">▼ Previous Version (V1.0)</h2>
+        <h1>EqBase 기능 구현 로드맵 (Current)</h1>
+        <p>
+            현재 프로젝트 코드 베이스를 기준으로 기능 구현 상태를 업데이트한 로드맵입니다.<br>
+            대부분의 핵심 기능과 UI, 하드웨어 제어부가 구현 완료되었습니다.
+        </p>
+
+        <div class="section">
+            <h2>0. 핵심 프레임워크 (Infrastructure)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>기능</th>
+                        <th>상세 설명</th>
+                        <th>핵심 파일</th>
+                        <th>상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>아키텍처 (DIP)</strong></td>
+                        <td>UI ↔ Core ↔ Domain ↔ Infra 의존성 분리 및 <code>ActManager</code> 싱글톤 구성.</td>
+                        <td><code>EqBase.sln</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>하드웨어 추상화</strong></td>
+                        <td><code>IIoController</code>, <code>IMotionController</code> 및 Factory 패턴 적용.</td>
+                        <td><code>HardwareFactory.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>데이터 저장소</strong></td>
+                        <td><code>DualStorage</code> (JSON+SQLite) 및 자동 백업/복원 로직.</td>
+                        <td><code>SqliteStorage.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>리소스 관리</strong></td>
+                        <td>메모리 누수 탐지 및 안전한 이벤트 구독/해제 패턴.</td>
+                        <td><code>LeakDetector.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>1. 공정 및 레시피 관리</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>기능</th>
+                        <th>상세 설명</th>
+                        <th>관련 모듈</th>
+                        <th>상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>레시피 관리</strong></td>
+                        <td>레시피 생성, 복사, 삭제, 선택 및 폴더 구조 자동 관리.</td>
+                        <td><code>ActRecipe.cs</code><br><code>Recipe_View.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>파라미터 편집</strong></td>
+                        <td>UserOption 객체 직렬화 및 <code>PropertyGrid</code> UI 바인딩.</td>
+                        <td><code>UserOption_View.cs</code><br><code>ActUserOption.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>시퀀스 엔진</strong></td>
+                        <td>Step 기반 시퀀스 실행, 에러 복구(Recovery), 타임아웃 처리.</td>
+                        <td><code>SEQ.cs</code>, <code>ACT.cs</code><br><code>SequencesPanel_View.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>공정 데이터 로깅</strong></td>
+                        <td>Tact Time, 생산 수량 등 공정 결과 데이터 DB 저장.</td>
+                        <td>-</td>
+                        <td><span class="status status-not-started">미구현</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>2. 사용자 및 알람/로그</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>기능</th>
+                        <th>상세 설명</th>
+                        <th>관련 모듈</th>
+                        <th>상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>사용자 인증</strong></td>
+                        <td>Operator/Engineer/Admin 레벨 관리 및 암호 해시(SHA256) 저장.</td>
+                        <td><code>ActUser.cs</code><br><code>FormLogin.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>알람 시스템</strong></td>
+                        <td>알람 발생 시 SQLite DB 저장, 팝업 표시, 이력 조회/통계 UI.</td>
+                        <td><code>ActAlarm.cs</code><br><code>Alarm_View.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>시스템 로그</strong></td>
+                        <td>파일 로깅(날짜별 폴더), <code>Log_View</code> (실시간 필터링/하이라이트).</td>
+                        <td><code>Logs.cs</code><br><code>Log_View.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>3. 장비 제어 및 모니터링 UI</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>기능</th>
+                        <th>상세 설명</th>
+                        <th>관련 모듈</th>
+                        <th>상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>모션 제어 (Motor)</strong></td>
+                        <td>축 상태 모니터링, Servo On/Off, Homing, JOG, 알람 리셋.</td>
+                        <td><code>ActMotion.cs</code><br><code>Motor_View.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>I/O 제어</strong></td>
+                        <td>전체 I/O 리스트 뷰 및 토글 제어, 시각적 인터락 상태 뷰.</td>
+                        <td><code>ActIO.cs</code><br><code>IO_View.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>비전 통신 (Vision)</strong></td>
+                        <td>TCP/IP 클라이언트 관리, JSON 패킷 파싱, Mock(시뮬레이션) 지원.</td>
+                        <td><code>ActVision.cs</code><br><code>GVision_View.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>외부 장치 통신</strong></td>
+                        <td>Modbus(PLC, Temp) 및 Serial Port 클라이언트 통합 관리.</td>
+                        <td><code>ActModbus.cs</code><br><code>ActSerialPort.cs</code></td>
+                        <td><span class="status status-complete">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>FSM / 타워램프</strong></td>
+                        <td>장비 상태(Init, Idle, Run, Error)에 따른 램프/부저 제어.</td>
+                        <td><code>ActTowerLamp.cs</code></td>
+                        <td><span class="status status-in-progress">진행 중</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>호스트 통신 (SECS/GEM)</strong></td>
+                        <td>상위 시스템 통신 프로토콜 구현.</td>
+                        <td>-</td>
+                        <td><span class="status status-not-started">미구현</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

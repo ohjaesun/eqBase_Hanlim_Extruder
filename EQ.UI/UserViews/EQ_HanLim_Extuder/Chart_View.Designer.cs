@@ -36,6 +36,7 @@
             _CheckBox2 = new EQ.UI.Controls._CheckBox();
             _CheckBox3 = new EQ.UI.Controls._CheckBox();
             _CheckBox4 = new EQ.UI.Controls._CheckBox();
+            _CheckBox5 = new EQ.UI.Controls._CheckBox();
             _PanelMain.SuspendLayout();
             _Panel1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
@@ -43,12 +44,18 @@
             // 
             // _LabelTitle
             // 
+            _LabelTitle.Size = new Size(393, 59);
             _LabelTitle.Text = "Chart";
             // 
             // _PanelMain
             // 
             _PanelMain.Controls.Add(_formsPlot1);
             _PanelMain.Controls.Add(flowLayoutPanel1);
+            _PanelMain.Size = new Size(393, 313);
+            // 
+            // _Panel1
+            // 
+            _Panel1.Size = new Size(393, 59);
             // 
             // _formsPlot1
             // 
@@ -56,7 +63,7 @@
             _formsPlot1.Dock = DockStyle.Fill;
             _formsPlot1.Location = new Point(0, 37);
             _formsPlot1.Name = "_formsPlot1";
-            _formsPlot1.Size = new Size(363, 276);
+            _formsPlot1.Size = new Size(393, 276);
             _formsPlot1.TabIndex = 0;
             // 
             // timer1
@@ -69,10 +76,11 @@
             flowLayoutPanel1.Controls.Add(_CheckBox2);
             flowLayoutPanel1.Controls.Add(_CheckBox3);
             flowLayoutPanel1.Controls.Add(_CheckBox4);
+            flowLayoutPanel1.Controls.Add(_CheckBox5);
             flowLayoutPanel1.Dock = DockStyle.Top;
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(363, 37);
+            flowLayoutPanel1.Size = new Size(393, 37);
             flowLayoutPanel1.TabIndex = 1;
             // 
             // _CheckBox1
@@ -143,11 +151,29 @@
             _CheckBox4.UseVisualStyleBackColor = false;
             _CheckBox4.CheckedChanged += _CheckBox1_CheckedChanged;
             // 
+            // _CheckBox5
+            // 
+            _CheckBox5.AutoSize = true;
+            _CheckBox5.BackColor = SystemColors.Control;
+            _CheckBox5.Checked = true;
+            _CheckBox5.CheckState = CheckState.Checked;
+            _CheckBox5.Font = new Font("D2Coding", 12F);
+            _CheckBox5.ForeColor = SystemColors.ControlText;
+            _CheckBox5.Location = new Point(287, 3);
+            _CheckBox5.Name = "_CheckBox5";
+            _CheckBox5.Size = new Size(83, 22);
+            _CheckBox5.TabIndex = 0;
+            _CheckBox5.Text = "Tooltip";
+            _CheckBox5.ThemeStyle = UI.Controls.ThemeStyle.Default;
+            _CheckBox5.UseVisualStyleBackColor = false;
+            _CheckBox5.CheckedChanged += _CheckBox5_CheckedChanged;
+            // 
             // Chart_View
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             Name = "Chart_View";
+            Size = new Size(393, 372);
             Load += Chart_View_Load;
             _PanelMain.ResumeLayout(false);
             _Panel1.ResumeLayout(false);
@@ -165,5 +191,6 @@
         private Controls._CheckBox _CheckBox2;
         private Controls._CheckBox _CheckBox3;
         private Controls._CheckBox _CheckBox4;
+        private Controls._CheckBox _CheckBox5;
     }
 }

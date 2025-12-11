@@ -7,7 +7,7 @@
     {
         Zone1,      // 예: Top_Heater
         Zone2,      // 예: Bottom_Cooler
-        Chamber_A,  // 예: 챔버 A
-        Chamber_B   // 예: 챔버 B
+       // Chamber_A,  // 예: 챔버 A
+       // Chamber_B   // 예: 챔버 B
     }
 }

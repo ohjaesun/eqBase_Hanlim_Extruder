@@ -3,6 +3,7 @@ using EQ.Common.Logs;
 using EQ.Core.Act;
 using EQ.Core.Service;
 using EQ.Domain.Entities;
+using EQ.Domain.Entities.EQ_Hanlim_Extuder;
 using EQ.Domain.Entities.LaserMeasure;
 using EQ.Domain.Entities.SecsGem;
 using EQ.Domain.Enums;
@@ -83,6 +84,8 @@ namespace EQ.UI
             InitHardware_PIO, // IO 초기화 이후로 순서 변경
             InitHardware_Motion,
             InitHardware_SecsGem,
+
+            Init_EQ_Exturder,
             Complete
         }
 
@@ -136,6 +139,7 @@ namespace EQ.UI
                                     RegisterOption<UserOption3>(act);
                                     RegisterOption<UserOption4>(act);
                                     RegisterOption<List<UserOptionUI>>(act);
+                                    RegisterOption<List<Extuder_Recipe>>(act);
 
                                     //Motion
                                     RegisterOption<UserOptionMotionSpeed>(act);
@@ -154,9 +158,9 @@ namespace EQ.UI
 
                             case LoadStep.LoadProduct:
                                 {
+                                    break;
                                     //장비의 형태에 따라 (웨이퍼 , 트레이 , 매거진 등 ) 로딩
-
-                                    InitProduct(act);                                
+                                 //   InitProduct(act);                                
                                                                 
                                 }
                                 break;
@@ -171,12 +175,14 @@ namespace EQ.UI
 
                             case LoadStep.LoadGVision:
                                 {
+                                    break;
                                     InitVision(act);
                                 }
                                 break;
 
                             case LoadStep.LoadModbus:
                                 {
+                                    break;
                                     InitModbus(act);
                                 }
                                 break;
@@ -195,6 +201,7 @@ namespace EQ.UI
 
                             case LoadStep.LoadLaserMeasure:
                                 {
+                                    break;
                                     InitLaserMeasure(act);
                                 }
                                 break;
@@ -218,7 +225,8 @@ namespace EQ.UI
                                 break;
 
                             case LoadStep.InitHardware_PIO:
-                                {                                    
+                                {
+                                    break;
                                     IIoController mainIoController = act.IO.GetHardwareController();
                                     if (mainIoController != null)
                                     {
@@ -255,6 +263,7 @@ namespace EQ.UI
 
                             case LoadStep.InitHardware_SecsGem:
                                 {
+                                    break;
                                     //EzGem DLL이 스레드 안에서 start를 시키면 동작 하지 않는다. COM 기반으로 구현 된 것 같음.
                                     //UI 스레드에서 실행 시키면 정상 동작 함
 
@@ -262,6 +271,13 @@ namespace EQ.UI
                                     {
                                         InitSecsGem(act);
                                     }));                                  
+                                }
+                                break;
+
+
+                            case LoadStep.Init_EQ_Exturder:
+                                {
+                                    act.Extuder.Init();
                                 }
                                 break;
                         }
@@ -374,105 +390,7 @@ namespace EQ.UI
             }
         }
 
-        private void InitProduct(ACT act)
-        {
-         
-            var opt = act.Option.Option4;
-
-            string recipePath = Path.Combine(Environment.CurrentDirectory, "ProductData", act.Recipe.CurrentRecipeName);
-            int keepDays = 30; 
-
-            updateLable($" - Product Type Init: {opt.ProductType}");
-
-            switch (opt.ProductType)
-            {
-                // -------------------------------------------------------
-                // Case 1: 낱장 웨이퍼 (Wafer)
-                // -------------------------------------------------------
-                case ProductType.Wafer:
-                    {
-                        updateLable($" - [Wafer Mode] Loading ({opt.ProductX}x{opt.ProductY})");
-
-                        var storage = new ProductMapStorage<WaferCell>();
-                        storage.DeleteOldBackups(recipePath, "WaferData", TimeSpan.FromDays(keepDays));
-
-                        act.Wafer.RegisterStorage(storage);
-                        act.Wafer.LoadMap();
-
-                        // 기존 데이터 크기가 설정(Option)과 다르면 새로 생성 (Row=Y, Col=X)
-                        if (act.Wafer.CurrentMap.Rows != opt.ProductY || act.Wafer.CurrentMap.Cols != opt.ProductX)
-                        {
-                            act.Wafer.CreateNewMap(opt.ProductY, opt.ProductX);
-                            updateLable($"   -> New Map Created ({opt.ProductX}x{opt.ProductY})");
-                        }
-                    }
-                    break;
-
-                // -------------------------------------------------------
-                // Case 2: 낱장 트레이 (Tray)
-                // -------------------------------------------------------
-                case ProductType.Tray:
-                    {
-                        updateLable($" - [Tray Mode] Loading ({opt.ProductX}x{opt.ProductY})");
-
-                        var storage = new ProductMapStorage<TrayCell>();
-                        storage.DeleteOldBackups(recipePath, "TrayData", TimeSpan.FromDays(keepDays));
-
-                        act.Tray.RegisterStorage(storage);
-                        act.Tray.LoadMap();
-
-                        if (act.Tray.CurrentMap.Rows != opt.ProductY || act.Tray.CurrentMap.Cols != opt.ProductX)
-                        {
-                            act.Tray.CreateNewMap(opt.ProductY, opt.ProductX);
-                            updateLable($"   -> New Map Created ({opt.ProductX}x{opt.ProductY})");
-                        }
-                    }
-                    break;
-
-                // -------------------------------------------------------
-                // Case 3: 웨이퍼 매거진 (Wafer Magazine)
-                // -------------------------------------------------------
-                case ProductType.Wafer_Magazine:
-                    {
-                        updateLable($" - [Wafer Magazine] Mag({opt.MagazineSlot}) + Wafer({opt.ProductX}x{opt.ProductY})");
-
-                        var magStorage = new MagazineStorage<WaferCell>();
-                        act.WaferMagazine.RegisterStorage(magStorage);
-                      
-                        magStorage.DeleteOldBackups(recipePath, "WaferMag", TimeSpan.FromDays(keepDays));
-
-                        act.WaferMagazine.CreateMagazine(MagazineName.LoadPort1, opt.MagazineSlot, opt.ProductY, opt.ProductX);
-                        act.WaferMagazine.CreateMagazine(MagazineName.UnloadPort1, opt.MagazineSlot, opt.ProductY, opt.ProductX);
-                        act.WaferMagazine.CreateMagazine(MagazineName.Buffer, opt.MagazineSlot, opt.ProductY, opt.ProductX);                       
-                    }
-                    break;
-
-                // -------------------------------------------------------
-                // Case 4: 트레이 매거진 (Tray Magazine)
-                // -------------------------------------------------------
-                case ProductType.Tray_Magazine:
-                    {
-                        updateLable($" - [Tray Magazine] Mag({opt.MagazineSlot}) + Tray({opt.ProductX}x{opt.ProductY})");
-
-                        var magStorage = new MagazineStorage<TrayCell>();
-                        act.TrayMagazine.RegisterStorage(magStorage);
-
-                        magStorage.DeleteOldBackups(recipePath, "TrayMag", TimeSpan.FromDays(keepDays));
-
-
-                        act.WaferMagazine.CreateMagazine(MagazineName.LoadPort1, opt.MagazineSlot, opt.ProductY, opt.ProductX);
-                        act.WaferMagazine.CreateMagazine(MagazineName.UnloadPort1, opt.MagazineSlot, opt.ProductY, opt.ProductX);
-                        act.WaferMagazine.CreateMagazine(MagazineName.Buffer, opt.MagazineSlot, opt.ProductY, opt.ProductX);
-                    }
-                    break;
-
-               
-
-                default:
-                    updateLable($" - [Warning] 정의되지 않은 ProductType: {opt.ProductType}");
-                    break;
-            }
-        }
+      
 
         private void InitTemp(ACT act)
         {
@@ -491,16 +409,16 @@ namespace EQ.UI
 
                 
                     act.Temp.Register(TempID.Zone1, mockZone1);
-                    act.Temp.Register(TempID.Zone2, mockZone2);
-                    act.Temp.Register(TempID.Chamber_A, mockChamber);
+                    act.Temp.Register(TempID.Zone2, mockZone2);                  
 
                     Log.Instance.Info("온도 컨트롤러(MOCK) 등록 완료");
                 }
                 else
-                {                 
+                {
 
                     // 1. 시리얼 포트 설정 및 오픈
-                    SerialPort port = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
+                    var comPort = act.Option.Option4.Temperature_COMPort;
+                    SerialPort port = new SerialPort(comPort, 9600, Parity.None, 8, StopBits.One);
                     port.Open();
 
                     // 2. NModbus RTU Master 생성
@@ -508,17 +426,19 @@ namespace EQ.UI
                     modbusMaster.Transport.ReadTimeout = 300;
                     modbusMaster.Transport.WriteTimeout = 300;
 
-                    Log.Instance.Info("[ModbusRTU] Port Opened (COM3)");
+                    if(!port.IsOpen)
+                    {
+                        updateLable($"[ModbusRTU] Port Open failed : {comPort}\n");
+                        Log.Instance.Error($"[ModbusRTU] Port Open failed : {comPort}");
+                    }
+                        
 
-                    // 3. 온도 컨트롤러 구현체 생성
-                    var toho1 = new TOHO_Controller(modbusMaster, slaveId: 1);
-                    var toho2 = new TOHO_Controller(modbusMaster, slaveId: 2);
-                    var vx4_3 = new VX4_Controller(modbusMaster, slaveId: 3);
-
-                    // 4. 등록
-                    act.Temp.Register(TempID.Zone1, toho1);
-                    act.Temp.Register(TempID.Zone2, toho2);
-                    act.Temp.Register(TempID.Chamber_A, vx4_3);
+                    byte slaveIdx = 1;
+                    foreach(var p in Enum.GetValues< TempID>())
+                    {
+                        var vx = new VX4_Controller(modbusMaster, slaveId: slaveIdx);
+                        act.Temp.Register(p, vx);
+                    }                  
 
                     Log.Instance.Info("온도 컨트롤러(REAL) 등록 완료");
                 }

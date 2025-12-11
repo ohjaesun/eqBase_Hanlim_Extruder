@@ -4,7 +4,7 @@ using EQ.Core.Act;
 using EQ.Core.Act.Composition;
 using EQ.Core.Act.Composition.LaserMeasure;
 using EQ.Core.Act.Composition.SecsGem;
-
+using EQ.Core.Act.EQ_Hanlim_Extuder;
 using EQ.Core.Sequence;
 using EQ.Core.Service;
 using EQ.Domain.Entities;
@@ -115,6 +115,9 @@ namespace EQ.Core.Act
         /// </summary>
         public ActLaserMeasure LaserMeasure { get; private set; }
 
+
+        public ActExtuder Extuder { get; private set; } // 한림 익스투더
+
         /// <summary>
         /// 의존성 주입 부
         /// </summary>
@@ -149,6 +152,8 @@ namespace EQ.Core.Act
             this.SecsGem = new ActSecsGem(this);
 
             this.LaserMeasure = new ActLaserMeasure(this);
+
+            this.Extuder = new ActExtuder(this);
         }
 
 

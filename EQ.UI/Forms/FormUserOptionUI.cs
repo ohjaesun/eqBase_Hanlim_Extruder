@@ -52,6 +52,13 @@ namespace EQ.UI.Forms
 
             // 초기 타이틀 설정
             _LabelTitle.Text = tabControl1.SelectedTab.Text;
+
+            for(int i=0; i < ActManager.Instance.Act.Option.ExtruderRecipes.Count(); i++)
+            {
+                var p = ActManager.Instance.Act.Option.ExtruderRecipes[i];
+                _ComboBoxSelectRCP.Items.Add($"[{i+1:D2}] {p.RecipeName}");
+            }
+                
         }
 
         private void TabButton_Click(object sender, EventArgs e)

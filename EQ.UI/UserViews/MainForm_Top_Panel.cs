@@ -32,7 +32,8 @@ namespace EQ.UI.UserViews
             if (DesignMode) return;
 
             // 버전 표시 
-            _LabelVer.Text = VersionHelper.GetDisplayVersion();
+            //_LabelVer.Text = VersionHelper.GetDisplayVersion(); // 빌드된 어셈블리 버전 정보 표시
+            _LabelVer.Text = "V:251211";
 
             _Label_rcpName.MouseDoubleClick += (s, e1) =>
             {

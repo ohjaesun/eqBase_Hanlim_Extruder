@@ -36,12 +36,7 @@ namespace EQ.UI
 
         private void FormMain_Shown(object sender, EventArgs e)
         {
-            Form fm = new FormTest();
-            fm.TopLevel = false;
-            fm.Dock = DockStyle.Fill;
-            fm.Show();
-
-            panelMain.Controls.Add(fm);
+         
         }
 
         private void FormMain_Load(object sender, EventArgs e)

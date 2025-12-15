@@ -20,18 +20,11 @@
             panel2 = new EQ.UI.Controls._Panel();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            _TextBox2 = new EQ.UI.Controls._TextBox();
-            _TextBox1 = new EQ.UI.Controls._TextBox();
-            _ListBox1 = new EQ.UI.Controls._ListBox();
             groupBox2 = new EQ.UI.Controls._GroupBox();
-            _RadioButton4 = new EQ.UI.Controls._RadioButton();
-            _RadioButton3 = new EQ.UI.Controls._RadioButton();
+            _ComboBoxSelectRCP = new EQ.UI.Controls._ComboBox();
             groupBox1 = new EQ.UI.Controls._GroupBox();
-            _RadioButton1 = new EQ.UI.Controls._RadioButton();
+            _RadioButtonCelsius = new EQ.UI.Controls._RadioButton();
             _RadioButton2 = new EQ.UI.Controls._RadioButton();
-            _ComboBox1 = new EQ.UI.Controls._ComboBox();
-            _CheckBox2 = new EQ.UI.Controls._CheckBox();
-            _CheckBox1 = new EQ.UI.Controls._CheckBox();
             tabPage2 = new TabPage();
             flowLayoutPanel1 = new FlowLayoutPanel();
             panelTop = new Panel();
@@ -70,14 +63,8 @@
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(_TextBox2);
-            tabPage1.Controls.Add(_TextBox1);
-            tabPage1.Controls.Add(_ListBox1);
             tabPage1.Controls.Add(groupBox2);
             tabPage1.Controls.Add(groupBox1);
-            tabPage1.Controls.Add(_ComboBox1);
-            tabPage1.Controls.Add(_CheckBox2);
-            tabPage1.Controls.Add(_CheckBox1);
             tabPage1.Location = new Point(4, 27);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
@@ -86,173 +73,79 @@
             tabPage1.Text = "General";
             tabPage1.UseVisualStyleBackColor = true;
             // 
-            // _TextBox2
-            // 
-            _TextBox2.BackColor = Color.FromArgb(149, 165, 166);
-            _TextBox2.Font = new Font("D2Coding", 12F);
-            _TextBox2.ForeColor = Color.White;
-            _TextBox2.Location = new Point(56, 320);
-            _TextBox2.Name = "_TextBox2";
-            _TextBox2.Size = new Size(100, 26);
-            _TextBox2.TabIndex = 6;
-            _TextBox2.Text = "Default";
-            _TextBox2.ThemeStyle = UI.Controls.ThemeStyle.Neutral_Gray;
-            // 
-            // _TextBox1
-            // 
-            _TextBox1.BackColor = Color.FromArgb(149, 165, 166);
-            _TextBox1.Font = new Font("D2Coding", 12F);
-            _TextBox1.ForeColor = Color.White;
-            _TextBox1.Location = new Point(56, 280);
-            _TextBox1.Name = "_TextBox1";
-            _TextBox1.Size = new Size(100, 26);
-            _TextBox1.TabIndex = 6;
-            _TextBox1.Text = "0";
-            _TextBox1.ThemeStyle = UI.Controls.ThemeStyle.Neutral_Gray;
-            // 
-            // _ListBox1
-            // 
-            _ListBox1.BackColor = Color.FromArgb(149, 165, 166);
-            _ListBox1.DrawMode = DrawMode.OwnerDrawFixed;
-            _ListBox1.Font = new Font("D2Coding", 12F);
-            _ListBox1.ForeColor = Color.White;
-            _ListBox1.FormattingEnabled = true;
-            _ListBox1.Items.AddRange(new object[] { "Option A", "Option B", "Option C", "333" });
-            _ListBox1.Location = new Point(495, 20);
-            _ListBox1.Name = "_ListBox1";
-            _ListBox1.Size = new Size(120, 84);
-            _ListBox1.TabIndex = 5;
-            _ListBox1.ThemeStyle = UI.Controls.ThemeStyle.Neutral_Gray;
-            // 
             // groupBox2
             // 
-            groupBox2.BackColor = Color.FromArgb(155, 89, 182);
-            groupBox2.Controls.Add(_RadioButton4);
-            groupBox2.Controls.Add(_RadioButton3);
+            groupBox2.BackColor = SystemColors.Control;
+            groupBox2.Controls.Add(_ComboBoxSelectRCP);
             groupBox2.Font = new Font("D2Coding", 12F);
-            groupBox2.ForeColor = Color.Black;
-            groupBox2.Location = new Point(262, 150);
+            groupBox2.ForeColor = SystemColors.ControlText;
+            groupBox2.Location = new Point(214, 14);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(200, 100);
+            groupBox2.Size = new Size(200, 90);
             groupBox2.TabIndex = 4;
             groupBox2.TabStop = false;
-            groupBox2.Text = "Mode Select";
-            groupBox2.ThemeStyle = UI.Controls.ThemeStyle.Highlight_DeepYellow;
+            groupBox2.Text = "Select Recpie";
+            groupBox2.ThemeStyle = UI.Controls.ThemeStyle.Default;
             // 
-            // _RadioButton4
+            // _ComboBoxSelectRCP
             // 
-            _RadioButton4.AutoSize = true;
-            _RadioButton4.BackColor = Color.FromArgb(52, 152, 219);
-            _RadioButton4.Font = new Font("D2Coding", 12F);
-            _RadioButton4.ForeColor = Color.Black;
-            _RadioButton4.Location = new Point(6, 48);
-            _RadioButton4.Name = "_RadioButton4";
-            _RadioButton4.Size = new Size(74, 22);
-            _RadioButton4.TabIndex = 3;
-            _RadioButton4.Text = "Mode B";
-            _RadioButton4.ThemeStyle = UI.Controls.ThemeStyle.Info_Sky;
-            _RadioButton4.UseVisualStyleBackColor = false;
-            // 
-            // _RadioButton3
-            // 
-            _RadioButton3.AutoSize = true;
-            _RadioButton3.BackColor = Color.FromArgb(52, 152, 219);
-            _RadioButton3.Font = new Font("D2Coding", 12F);
-            _RadioButton3.ForeColor = Color.Black;
-            _RadioButton3.Location = new Point(6, 20);
-            _RadioButton3.Name = "_RadioButton3";
-            _RadioButton3.Size = new Size(74, 22);
-            _RadioButton3.TabIndex = 3;
-            _RadioButton3.Text = "Mode A";
-            _RadioButton3.ThemeStyle = UI.Controls.ThemeStyle.Info_Sky;
-            _RadioButton3.UseVisualStyleBackColor = false;
+            _ComboBoxSelectRCP.BackColor = SystemColors.Control;
+            _ComboBoxSelectRCP.DrawMode = DrawMode.OwnerDrawFixed;
+            _ComboBoxSelectRCP.DropDownStyle = ComboBoxStyle.DropDownList;
+            _ComboBoxSelectRCP.Font = new Font("D2Coding", 12F);
+            _ComboBoxSelectRCP.ForeColor = SystemColors.ControlText;
+            _ComboBoxSelectRCP.FormattingEnabled = true;
+            _ComboBoxSelectRCP.Location = new Point(6, 25);
+            _ComboBoxSelectRCP.Name = "_ComboBoxSelectRCP";
+            _ComboBoxSelectRCP.Size = new Size(188, 27);
+            _ComboBoxSelectRCP.TabIndex = 2;
+            _ComboBoxSelectRCP.ThemeStyle = UI.Controls.ThemeStyle.Default;
+            _ComboBoxSelectRCP.TooltipText = null;
             // 
             // groupBox1
             // 
-            groupBox1.BackColor = Color.FromArgb(155, 89, 182);
-            groupBox1.Controls.Add(_RadioButton1);
+            groupBox1.BackColor = SystemColors.Control;
+            groupBox1.Controls.Add(_RadioButtonCelsius);
             groupBox1.Controls.Add(_RadioButton2);
             groupBox1.Font = new Font("D2Coding", 12F);
-            groupBox1.ForeColor = Color.Black;
-            groupBox1.Location = new Point(56, 150);
+            groupBox1.ForeColor = SystemColors.ControlText;
+            groupBox1.Location = new Point(8, 14);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(200, 100);
+            groupBox1.Size = new Size(200, 90);
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Type Select";
-            groupBox1.ThemeStyle = UI.Controls.ThemeStyle.Highlight_DeepYellow;
+            groupBox1.Text = "Temperature Unit";
+            groupBox1.ThemeStyle = UI.Controls.ThemeStyle.Default;
             // 
-            // _RadioButton1
+            // _RadioButtonCelsius
             // 
-            _RadioButton1.AutoSize = true;
-            _RadioButton1.BackColor = Color.FromArgb(52, 152, 219);
-            _RadioButton1.Font = new Font("D2Coding", 12F);
-            _RadioButton1.ForeColor = Color.Black;
-            _RadioButton1.Location = new Point(6, 20);
-            _RadioButton1.Name = "_RadioButton1";
-            _RadioButton1.Size = new Size(74, 22);
-            _RadioButton1.TabIndex = 3;
-            _RadioButton1.Text = "Type 1";
-            _RadioButton1.ThemeStyle = UI.Controls.ThemeStyle.Info_Sky;
-            _RadioButton1.UseVisualStyleBackColor = false;
+            _RadioButtonCelsius.AutoSize = true;
+            _RadioButtonCelsius.BackColor = SystemColors.Control;
+            _RadioButtonCelsius.Checked = true;
+            _RadioButtonCelsius.Font = new Font("D2Coding", 12F);
+            _RadioButtonCelsius.ForeColor = SystemColors.ControlText;
+            _RadioButtonCelsius.Location = new Point(6, 20);
+            _RadioButtonCelsius.Name = "_RadioButtonCelsius";
+            _RadioButtonCelsius.Size = new Size(82, 22);
+            _RadioButtonCelsius.TabIndex = 3;
+            _RadioButtonCelsius.TabStop = true;
+            _RadioButtonCelsius.Text = "Celsius";
+            _RadioButtonCelsius.ThemeStyle = UI.Controls.ThemeStyle.Default;
+            _RadioButtonCelsius.UseVisualStyleBackColor = false;
             // 
             // _RadioButton2
             // 
             _RadioButton2.AutoSize = true;
-            _RadioButton2.BackColor = Color.FromArgb(52, 152, 219);
+            _RadioButton2.BackColor = SystemColors.Control;
             _RadioButton2.Font = new Font("D2Coding", 12F);
-            _RadioButton2.ForeColor = Color.Black;
-            _RadioButton2.Location = new Point(6, 48);
+            _RadioButton2.ForeColor = SystemColors.ControlText;
+            _RadioButton2.Location = new Point(6, 54);
             _RadioButton2.Name = "_RadioButton2";
-            _RadioButton2.Size = new Size(74, 22);
+            _RadioButton2.Size = new Size(106, 22);
             _RadioButton2.TabIndex = 3;
-            _RadioButton2.Text = "Type 2";
-            _RadioButton2.ThemeStyle = UI.Controls.ThemeStyle.Info_Sky;
+            _RadioButton2.Text = "Fahrenheit";
+            _RadioButton2.ThemeStyle = UI.Controls.ThemeStyle.Default;
             _RadioButton2.UseVisualStyleBackColor = false;
-            // 
-            // _ComboBox1
-            // 
-            _ComboBox1.BackColor = Color.FromArgb(155, 89, 182);
-            _ComboBox1.DrawMode = DrawMode.OwnerDrawFixed;
-            _ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            _ComboBox1.Font = new Font("D2Coding", 12F);
-            _ComboBox1.ForeColor = Color.Black;
-            _ComboBox1.FormattingEnabled = true;
-            _ComboBox1.Items.AddRange(new object[] { "Item 1", "Item 2", "Item 3" });
-            _ComboBox1.Location = new Point(240, 60);
-            _ComboBox1.Name = "_ComboBox1";
-            _ComboBox1.Size = new Size(121, 27);
-            _ComboBox1.TabIndex = 2;
-            _ComboBox1.ThemeStyle = UI.Controls.ThemeStyle.Highlight_DeepYellow;
-            _ComboBox1.TooltipText = null;
-            // 
-            // _CheckBox2
-            // 
-            _CheckBox2.AutoSize = true;
-            _CheckBox2.BackColor = Color.FromArgb(52, 152, 219);
-            _CheckBox2.Font = new Font("D2Coding", 12F);
-            _CheckBox2.ForeColor = Color.Black;
-            _CheckBox2.Location = new Point(56, 100);
-            _CheckBox2.Name = "_CheckBox2";
-            _CheckBox2.Size = new Size(91, 22);
-            _CheckBox2.TabIndex = 1;
-            _CheckBox2.Text = "Option 2";
-            _CheckBox2.ThemeStyle = UI.Controls.ThemeStyle.Info_Sky;
-            _CheckBox2.UseVisualStyleBackColor = false;
-            // 
-            // _CheckBox1
-            // 
-            _CheckBox1.AutoSize = true;
-            _CheckBox1.BackColor = Color.FromArgb(52, 152, 219);
-            _CheckBox1.Font = new Font("D2Coding", 12F);
-            _CheckBox1.ForeColor = Color.Black;
-            _CheckBox1.Location = new Point(56, 60);
-            _CheckBox1.Name = "_CheckBox1";
-            _CheckBox1.Size = new Size(91, 22);
-            _CheckBox1.TabIndex = 1;
-            _CheckBox1.Text = "Option 1";
-            _CheckBox1.ThemeStyle = UI.Controls.ThemeStyle.Info_Sky;
-            _CheckBox1.UseVisualStyleBackColor = false;
             // 
             // tabPage2
             // 
@@ -284,7 +177,7 @@
             // 
             // _ButtonSave
             // 
-            _ButtonSave.BackColor = Color.FromArgb(52, 73, 94);
+            _ButtonSave.BackColor = Color.FromArgb(48, 63, 159);
             _ButtonSave.Dock = DockStyle.Right;
             _ButtonSave.Font = new Font("D2Coding", 12F);
             _ButtonSave.ForeColor = Color.White;
@@ -293,7 +186,6 @@
             _ButtonSave.Size = new Size(100, 60);
             _ButtonSave.TabIndex = 1;
             _ButtonSave.Text = "SAVE";
-            _ButtonSave.ThemeStyle = UI.Controls.ThemeStyle.Primary_Indigo;
             _ButtonSave.TooltipText = null;
             _ButtonSave.UseVisualStyleBackColor = false;
             _ButtonSave.Click += _ButtonSave_Click;
@@ -310,7 +202,6 @@
             _LabelTitle.TabIndex = 0;
             _LabelTitle.Text = "User Options (UI Controls)";
             _LabelTitle.TextAlign = ContentAlignment.MiddleCenter;
-            _LabelTitle.ThemeStyle = UI.Controls.ThemeStyle.Neutral_Gray;
             _LabelTitle.TooltipText = null;
             // 
             // FormUserOptionUI
@@ -326,9 +217,7 @@
             panel2.ResumeLayout(false);
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
-            tabPage1.PerformLayout();
             groupBox2.ResumeLayout(false);
-            groupBox2.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             panelTop.ResumeLayout(false);
@@ -342,18 +231,11 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private EQ.UI.Controls._TextBox _TextBox2;
-        private EQ.UI.Controls._TextBox _TextBox1;
-        private EQ.UI.Controls._ListBox _ListBox1;
         private EQ.UI.Controls._GroupBox groupBox2;
-        private EQ.UI.Controls._RadioButton _RadioButton4;
-        private EQ.UI.Controls._RadioButton _RadioButton3;
         private EQ.UI.Controls._GroupBox groupBox1;
-        private EQ.UI.Controls._RadioButton _RadioButton1;
+        private EQ.UI.Controls._RadioButton _RadioButtonCelsius;
         private EQ.UI.Controls._RadioButton _RadioButton2;
-        private EQ.UI.Controls._ComboBox _ComboBox1;
-        private EQ.UI.Controls._CheckBox _CheckBox2;
-        private EQ.UI.Controls._CheckBox _CheckBox1;
+        private EQ.UI.Controls._ComboBox _ComboBoxSelectRCP;
         private System.Windows.Forms.Panel panelTop;
         private EQ.UI.Controls._Button _ButtonSave;
         private EQ.UI.Controls._Label _LabelTitle;

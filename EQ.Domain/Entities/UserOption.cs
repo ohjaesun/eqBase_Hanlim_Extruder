@@ -42,6 +42,19 @@ namespace EQ.Domain.Entities
         [DescriptionAttribute("언어설정")]
         public LanguageType Language { get; set; } = LanguageType.English;
 
+        [CategoryAttribute("Soaking")]
+        [DescriptionAttribute("Soaking Start Temp")]
+        public double SoakingZone1 { get; set; } = 50.0;
+        [CategoryAttribute("Soaking")]
+        [DescriptionAttribute("Soaking Start Temp")]
+        public double SoakingZone2 { get; set; } = 50.0;
+        [CategoryAttribute("Soaking")]
+        [DescriptionAttribute("Soaking Time (Minute)")]
+        public long SoakingTime { get; set; } = 5;
+        [CategoryAttribute("Soaking")]
+        [DescriptionAttribute("Soaking Off Margin (Persent)")]
+        public long SoakingOffMargin { get; set; } = 5;
+
     }
 
     public class UserOption2  // 네트워크 관련
@@ -104,28 +117,32 @@ namespace EQ.Domain.Entities
     }
     public class UserOption4 // 데이터 설정 ( 동일 프로젝트에서는 바뀔일이 없겠지? )
     {
+        [CategoryAttribute("Temperature")]
+        [DescriptionAttribute("COM Port")]
+public string Temperature_COMPort { get; set; } = "COM1";
+
         [CategoryAttribute("Product")]
         [DescriptionAttribute("장비 구동 타입 설정 (재시작 필요)")]
-        public ProductType ProductType { get; set; } = ProductType.Wafer_Magazine;
+        ProductType ProductType { get; set; } = ProductType.Wafer_Magazine;
 
         [CategoryAttribute("Product")]
         [DescriptionAttribute("Tray or Wafer의 X Y 사이즈")]
-        public int ProductX { get; set; } = 10;
+         int ProductX { get; set; } = 10;
         [CategoryAttribute("Product")]
         [DescriptionAttribute("Tray or Wafer의 X Y 사이즈")]
-        public int ProductY { get; set; } = 10;
+         int ProductY { get; set; } = 10;
 
         [CategoryAttribute("Product")]
         [DescriptionAttribute("Magazine의 slot수")]
-        public int MagazineSlot { get; set; } = 10;
+         int MagazineSlot { get; set; } = 10;
         [CategoryAttribute("Product")]
         [DescriptionAttribute("Magazine의 갯수")]
-        public int MagazineSet { get; set; } = 1;             
+         int MagazineSet { get; set; } = 1;             
 
 
         [CategoryAttribute("Sequence")]
         [DescriptionAttribute("Sequence TimeOut")]
-        public int MaxSequenceTime { get; set; } = 1000 * 60;       
+         public int MaxSequenceTime { get; set; } = 1000 * 60;       
 
     }
 

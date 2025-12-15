@@ -158,9 +158,6 @@ namespace EQ.Core.Act
             this.SecsGem = new ActSecsGem(this);
 
             this.LaserMeasure = new ActLaserMeasure(this);
-
-            this.ExtruderRecipe = new ActExtruderRecipe(this);
-            this.Extuder = new ActExtuder(this);
         }
 
 

@@ -12,101 +12,47 @@ namespace EQ.UI
             InitializeComponent();
         }
 
-        private void _Button1_Click(object sender, EventArgs e)
+     
+
+        private void extruderSystemGroup1_View1_Load(object sender, EventArgs e)
         {
-            Button btn = sender as Button;
-            var idx = Utils.GetButtonIdx(btn.Name);
 
-            try
+        }
+
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            TabPage tabPage = tabControl1.TabPages[e.Index];
+            Rectangle tabBounds = tabControl1.GetTabRect(e.Index);
+
+            // 배경 그리기
+            if (e.State == DrawItemState.Selected)
             {
-                if (PanelMain.Controls.Count > 0)
-                {
-                    for (int i = PanelMain.Controls.Count - 1; i >= 0; i--)
-                    {
-                        Control ctrl = PanelMain.Controls[i];
-                        if (ctrl is Form form)
-                            form.Close();
-
-                        ctrl.Dispose();
-                    }
-                }
-                PanelMain.Controls.Clear();
+                g.FillRectangle(new SolidBrush(Color.FromArgb(230, 230, 230)), tabBounds);
             }
-            catch { }
-
-            ActManager.Instance.Act.Option.LoadAllOptionsFromStorage();
-
-            switch (idx)
+            else
             {
-                case 1:
-                    {
-                        var p = new UserOption_View();                       
-                        p.Dock = DockStyle.Fill;
-                        PanelMain.Controls.Add(p);
-                    }
-                    break;
-                case 2:
-                    {
-                        var p = new FormUserOptionUI();
-                        p.TopLevel = false;
-                        p.Dock = DockStyle.Fill;
-                        p.Show();
-                        PanelMain.Controls.Add(p);
-                    }
-                    break;
-                case 3:
-                    {
-                        var p = new Motor_View();                     
-                        p.Dock = DockStyle.Fill;
-                        PanelMain.Controls.Add(p);
-                    }
-                    break;
-                case 4:
-                    {
-                        var p = new MotorPosition_View();
-                        p.Dock = DockStyle.Fill;
-                        PanelMain.Controls.Add(p);
-                    }
-                    break;
-                case 5:
-                    {
-                        var p = new MotionSpeed_View();
-                        p.Dock = DockStyle.Fill;
-                        PanelMain.Controls.Add(p);
-                    }
-                    break;
-                case 6:
-                    {
-                        var p = new IO_View();
-                        p.Dock = DockStyle.Fill;
-                        PanelMain.Controls.Add(p);
-                    }
-                    break;
-                case 7:
-                    {
+                g.FillRectangle(new SolidBrush(Color.White), tabBounds);
+            }
 
-                    }
-                    break;
-                case 8:
-                    {
+            // 텍스트를 세로로 그리기 (위에서 아래로)
+            g.TranslateTransform(tabBounds.X, tabBounds.Y);
+            g.RotateTransform(90);
 
-                    }
-                    break;
-                case 9:
-                    {
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;
 
-                    }
-                    break;
-                case 10:
-                    {
-                        var p = new Recipe_View();
-                        p.Dock = DockStyle.Fill;
-                        PanelMain.Controls.Add(p);
-                    }
-                    break;
-            }        
+            using (SolidBrush brush = new SolidBrush(Color.Black))
+            {
+                g.DrawString(tabPage.Text,
+                    new Font("D2Coding", 11F, FontStyle.Bold),
+                    brush,
+                    new RectangleF(0, 0, tabBounds.Height, tabBounds.Width),
+                    sf);
+            }
 
-
+            g.ResetTransform();
         }
     }
 }

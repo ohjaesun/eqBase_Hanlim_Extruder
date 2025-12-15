@@ -28,109 +28,91 @@
         /// </summary>
         private void InitializeComponent()
         {
-            PanelMain = new EQ.UI.Controls._Panel();
-            _Panel1 = new EQ.UI.Controls._Panel();
-            _Panel2 = new EQ.UI.Controls._Panel();
-            _Button1 = new EQ.UI.Controls._Button();
-            _Button2 = new EQ.UI.Controls._Button();
-            _Button3 = new EQ.UI.Controls._Button();
-            PanelMain.SuspendLayout();
-            _Panel1.SuspendLayout();
+            tabControl1 = new TabControl();
+            tabPage1 = new TabPage();
+            tabPage2 = new TabPage();
+            tabPage3 = new TabPage();
+            extruderSystemGroup1_View1 = new EQ.UI.UserViews.Extruder.ExtruderSystemGroup1_View();
+            tabControl1.SuspendLayout();
+            tabPage1.SuspendLayout();
             SuspendLayout();
             // 
-            // PanelMain
+            // tabControl1
             // 
-            PanelMain.BackColor = SystemColors.Control;
-            PanelMain.Controls.Add(_Panel2);
-            PanelMain.Controls.Add(_Panel1);
-            PanelMain.Dock = DockStyle.Fill;
-            PanelMain.ForeColor = SystemColors.ControlText;
-            PanelMain.Location = new Point(0, 0);
-            PanelMain.Name = "PanelMain";
-            PanelMain.Size = new Size(1920, 851);
-            PanelMain.TabIndex = 0;
+            tabControl1.Alignment = TabAlignment.Left;
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(tabPage3);
+            tabControl1.Dock = DockStyle.Fill;
+            tabControl1.ItemSize = new Size(200, 30);
+            tabControl1.Location = new Point(0, 0);
+            tabControl1.Multiline = true;
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(1920, 851);
+            tabControl1.TabIndex = 0;
             // 
-            // _Panel1
+            // tabPage1
             // 
-            _Panel1.BackColor = SystemColors.Control;
-            _Panel1.Controls.Add(_Button3);
-            _Panel1.Controls.Add(_Button2);
-            _Panel1.Controls.Add(_Button1);
-            _Panel1.Dock = DockStyle.Left;
-            _Panel1.ForeColor = SystemColors.ControlText;
-            _Panel1.Location = new Point(0, 0);
-            _Panel1.Name = "_Panel1";
-            _Panel1.Size = new Size(155, 851);
-            _Panel1.TabIndex = 0;
+            tabPage1.Controls.Add(extruderSystemGroup1_View1);
+            tabPage1.Location = new Point(34, 4);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(1882, 843);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "Group 1   ";
+            tabPage1.UseVisualStyleBackColor = true;
             // 
-            // _Panel2
+            // tabPage2
             // 
-            _Panel2.BackColor = SystemColors.Control;
-            _Panel2.Dock = DockStyle.Fill;
-            _Panel2.ForeColor = SystemColors.ControlText;
-            _Panel2.Location = new Point(155, 0);
-            _Panel2.Name = "_Panel2";
-            _Panel2.Size = new Size(1765, 851);
-            _Panel2.TabIndex = 0;
+            tabPage2.Location = new Point(34, 4);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(1882, 843);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "   Group 2   ";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
-            // _Button1
+            // tabPage3
             // 
-            _Button1.BackColor = Color.FromArgb(48, 63, 159);
-            _Button1.Font = new Font("D2Coding", 12F);
-            _Button1.ForeColor = Color.White;
-            _Button1.Location = new Point(12, 12);
-            _Button1.Name = "_Button1";
-            _Button1.Size = new Size(137, 62);
-            _Button1.TabIndex = 0;
-            _Button1.Text = "Group 1";
-            _Button1.TooltipText = null;
-            _Button1.UseVisualStyleBackColor = false;
+            tabPage3.Location = new Point(34, 4);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new Padding(3);
+            tabPage3.Size = new Size(1882, 843);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "   PID   ";
+            tabPage3.UseVisualStyleBackColor = true;
             // 
-            // _Button2
+            // extruderSystemGroup1_View1
             // 
-            _Button2.BackColor = Color.FromArgb(48, 63, 159);
-            _Button2.Font = new Font("D2Coding", 12F);
-            _Button2.ForeColor = Color.White;
-            _Button2.Location = new Point(12, 97);
-            _Button2.Name = "_Button2";
-            _Button2.Size = new Size(137, 62);
-            _Button2.TabIndex = 0;
-            _Button2.Text = "Group 2";
-            _Button2.TooltipText = null;
-            _Button2.UseVisualStyleBackColor = false;
-            // 
-            // _Button3
-            // 
-            _Button3.BackColor = Color.FromArgb(48, 63, 159);
-            _Button3.Font = new Font("D2Coding", 12F);
-            _Button3.ForeColor = Color.White;
-            _Button3.Location = new Point(12, 189);
-            _Button3.Name = "_Button3";
-            _Button3.Size = new Size(137, 62);
-            _Button3.TabIndex = 0;
-            _Button3.Text = "PID";
-            _Button3.TooltipText = null;
-            _Button3.UseVisualStyleBackColor = false;
+            extruderSystemGroup1_View1.BackColor = Color.FromArgb(240, 240, 240);
+            extruderSystemGroup1_View1.Dock = DockStyle.Fill;
+            extruderSystemGroup1_View1.Font = new Font("D2Coding", 10F);
+            extruderSystemGroup1_View1.Location = new Point(3, 3);
+            extruderSystemGroup1_View1.Margin = new Padding(3, 5, 3, 5);
+            extruderSystemGroup1_View1.Name = "extruderSystemGroup1_View1";
+            extruderSystemGroup1_View1.Size = new Size(1876, 837);
+            extruderSystemGroup1_View1.TabIndex = 0;
             // 
             // Form03SETUP
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1920, 851);
-            Controls.Add(PanelMain);
+            Controls.Add(tabControl1);
             Name = "Form03SETUP";
             Text = "Form3";
-            PanelMain.ResumeLayout(false);
-            _Panel1.ResumeLayout(false);
+            tabControl1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-        private Controls._Panel PanelMain;
-        private Controls._Panel _Panel2;
-        private Controls._Panel _Panel1;
-        private Controls._Button _Button1;
-        private Controls._Button _Button3;
-        private Controls._Button _Button2;
+
+        private TabControl tabControl1;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        private UserViews.Extruder.ExtruderSystemGroup1_View extruderSystemGroup1_View1;
+        private TabPage tabPage3;
     }
 }

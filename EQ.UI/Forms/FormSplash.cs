@@ -3,6 +3,7 @@ using EQ.Common.Logs;
 using EQ.Core.Act;
 using EQ.Core.Service;
 using EQ.Domain.Entities;
+using EQ.Domain.Entities.Extruder;
 using EQ.Domain.Entities.LaserMeasure;
 using EQ.Domain.Entities.SecsGem;
 using EQ.Domain.Enums;
@@ -142,7 +143,10 @@ namespace EQ.UI
                                     RegisterOption<UserOptionMotionPos>(act);
                                     RegisterOption<UserOptionMotionInterlock>(act);
 
-                                    act.Option.LoadAllOptionsFromStorage();                                    
+                                    act.Option.LoadAllOptionsFromStorage();
+
+                                    // ExtruderRecipe Storage 등록 및 로드
+                                    RegisterExtruderRecipeStorage(act);
                                 }
                                 break;
 
@@ -743,6 +747,28 @@ namespace EQ.UI
 
             // 삭제 실행
             new SqliteStorage<T>().DeleteOldBackups(currentRecipePath, key);
+        }
+
+        /// <summary>
+        /// ExtruderRecipe용 DualStorage 등록 및 로드
+        /// </summary>
+        private void RegisterExtruderRecipeStorage(ACT act)
+        {
+            // 1. DualStorage 생성 (List<ExtruderRecipe> 타입)
+            var storage = new DualStorage<List<ExtruderRecipe>>(
+                new JsonFileStorage<List<ExtruderRecipe>>(),
+                new SqliteStorage<List<ExtruderRecipe>>()
+            );
+
+            // 2. ActExtruderRecipe에 등록
+            act.ExtruderRecipe.RegisterStorageService(storage);
+
+            // 3. 현재 레시피 경로에서 로드 (없으면 30개 기본 생성)
+            act.ExtruderRecipe.Load();
+
+            // 4. Old DB 백업 자동 삭제 (60일 경과)
+            string currentRecipePath = act.Recipe.GetCurrentRecipePath();
+            new SqliteStorage<List<ExtruderRecipe>>().DeleteOldBackups(currentRecipePath, "ExtruderRecipes");
         }
 
         private void InitSerial(ACT act)

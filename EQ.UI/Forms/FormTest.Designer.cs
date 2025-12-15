@@ -43,24 +43,14 @@
             _Button2 = new EQ.UI.Controls._Button();
             _Button1 = new EQ.UI.Controls._Button();
             tabPage2 = new TabPage();
-            waferMap_View2 = new EQ.UI.UserViews.WaferMap_View();
-            waferMap_View1 = new EQ.UI.UserViews.WaferMap_View();
             tabPage3 = new TabPage();
-            piO_View1 = new EQ.UI.UserViews.Setup.PIO_View();
             tabPage4 = new TabPage();
-            laserMeasure_View1 = new EQ.UI.UserViews.LaserMeasure.LaserMeasure_View();
-            secsGem_View1 = new EQ.UI.UserViews.SecsGem.SecsGem_View();
             tabPage5 = new TabPage();
-            log_View1 = new EQ.UI.UserViews.Log_View();
-            sequencesPanel_View1 = new EQ.UI.UserViews.SequencesPanel_View();
             tabPage6 = new TabPage();
             alarm_View1 = new EQ.UI.UserViews.Alarm_View();
             tabPage7 = new TabPage();
-            gVision_View1 = new EQ.UI.UserViews.GVision_View();
             tabPage8 = new TabPage();
-            motionSpeed_View1 = new EQ.UI.UserViews.MotionSpeed_View();
             tabPage9 = new TabPage();
-            motor_View1 = new EQ.UI.UserViews.Motor_View();
             tabPage10 = new TabPage();
             motorPosition_View1 = new EQ.UI.UserViews.MotorPosition_View();
             tabPage11 = new TabPage();
@@ -69,16 +59,12 @@
             alarmSolution_View1 = new EQ.UI.UserViews.AlarmSolution_View();
             tabPage13 = new TabPage();
             statistics_ScottPlot_View1 = new EQ.UI.UserViews.Statistics_ScottPlot_View();
+            extruderRecipe_View1 = new EQ.UI.UserViews.Extruder.ExtruderRecipe_View();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
-            tabPage3.SuspendLayout();
-            tabPage4.SuspendLayout();
             tabPage5.SuspendLayout();
             tabPage6.SuspendLayout();
-            tabPage7.SuspendLayout();
-            tabPage8.SuspendLayout();
-            tabPage9.SuspendLayout();
             tabPage10.SuspendLayout();
             tabPage11.SuspendLayout();
             tabPage12.SuspendLayout();
@@ -298,8 +284,7 @@
             // 
             // tabPage2
             // 
-            tabPage2.Controls.Add(waferMap_View2);
-            tabPage2.Controls.Add(waferMap_View1);
+            tabPage2.Controls.Add(extruderRecipe_View1);
             tabPage2.Location = new Point(4, 27);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
@@ -308,33 +293,8 @@
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
             // 
-            // waferMap_View2
-            // 
-            waferMap_View2.Font = new Font("D2Coding", 12F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            waferMap_View2.Location = new Point(467, 18);
-            waferMap_View2.Margin = new Padding(3, 4, 3, 4);
-            waferMap_View2.Name = "waferMap_View2";
-            waferMap_View2.ShotSizeX = 5;
-            waferMap_View2.ShotSizeY = 5;
-            waferMap_View2.ShowGrid = true;
-            waferMap_View2.Size = new Size(439, 423);
-            waferMap_View2.TabIndex = 0;
-            // 
-            // waferMap_View1
-            // 
-            waferMap_View1.Font = new Font("D2Coding", 12F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            waferMap_View1.Location = new Point(8, 18);
-            waferMap_View1.Margin = new Padding(3, 4, 3, 4);
-            waferMap_View1.Name = "waferMap_View1";
-            waferMap_View1.ShotSizeX = 5;
-            waferMap_View1.ShotSizeY = 5;
-            waferMap_View1.ShowGrid = true;
-            waferMap_View1.Size = new Size(425, 423);
-            waferMap_View1.TabIndex = 0;
-            // 
             // tabPage3
             // 
-            tabPage3.Controls.Add(piO_View1);
             tabPage3.Location = new Point(4, 27);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
@@ -343,20 +303,8 @@
             tabPage3.Text = "tabPage3";
             tabPage3.UseVisualStyleBackColor = true;
             // 
-            // piO_View1
-            // 
-            piO_View1.Dock = DockStyle.Fill;
-            piO_View1.Font = new Font("D2Coding", 12F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            piO_View1.Location = new Point(3, 3);
-            piO_View1.Margin = new Padding(3, 6, 3, 6);
-            piO_View1.Name = "piO_View1";
-            piO_View1.Size = new Size(979, 835);
-            piO_View1.TabIndex = 0;
-            // 
             // tabPage4
             // 
-            tabPage4.Controls.Add(laserMeasure_View1);
-            tabPage4.Controls.Add(secsGem_View1);
             tabPage4.Location = new Point(4, 27);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
@@ -365,28 +313,8 @@
             tabPage4.Text = "tabPage4";
             tabPage4.UseVisualStyleBackColor = true;
             // 
-            // laserMeasure_View1
-            // 
-            laserMeasure_View1.Font = new Font("D2Coding", 12F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            laserMeasure_View1.Location = new Point(8, 64);
-            laserMeasure_View1.Margin = new Padding(3, 4, 3, 4);
-            laserMeasure_View1.Name = "laserMeasure_View1";
-            laserMeasure_View1.Size = new Size(945, 484);
-            laserMeasure_View1.TabIndex = 1;
-            // 
-            // secsGem_View1
-            // 
-            secsGem_View1.Font = new Font("D2Coding", 12F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            secsGem_View1.Location = new Point(8, 7);
-            secsGem_View1.Margin = new Padding(3, 4, 3, 4);
-            secsGem_View1.Name = "secsGem_View1";
-            secsGem_View1.Size = new Size(297, 228);
-            secsGem_View1.TabIndex = 0;
-            // 
             // tabPage5
             // 
-            tabPage5.Controls.Add(log_View1);
-            tabPage5.Controls.Add(sequencesPanel_View1);
             tabPage5.Controls.Add(_Label1);
             tabPage5.Location = new Point(4, 27);
             tabPage5.Name = "tabPage5";
@@ -395,24 +323,6 @@
             tabPage5.TabIndex = 4;
             tabPage5.Text = "tabPage5";
             tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // log_View1
-            // 
-            log_View1.Font = new Font("D2Coding", 12F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            log_View1.Location = new Point(258, 41);
-            log_View1.Margin = new Padding(3, 4, 3, 4);
-            log_View1.Name = "log_View1";
-            log_View1.Size = new Size(719, 484);
-            log_View1.TabIndex = 2;
-            // 
-            // sequencesPanel_View1
-            // 
-            sequencesPanel_View1.Font = new Font("D2Coding", 12F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            sequencesPanel_View1.Location = new Point(17, 19);
-            sequencesPanel_View1.Margin = new Padding(3, 4, 3, 4);
-            sequencesPanel_View1.Name = "sequencesPanel_View1";
-            sequencesPanel_View1.Size = new Size(203, 222);
-            sequencesPanel_View1.TabIndex = 1;
             // 
             // tabPage6
             // 
@@ -436,7 +346,6 @@
             // 
             // tabPage7
             // 
-            tabPage7.Controls.Add(gVision_View1);
             tabPage7.Location = new Point(4, 27);
             tabPage7.Name = "tabPage7";
             tabPage7.Padding = new Padding(3);
@@ -445,18 +354,8 @@
             tabPage7.Text = "tabPage7";
             tabPage7.UseVisualStyleBackColor = true;
             // 
-            // gVision_View1
-            // 
-            gVision_View1.Font = new Font("D2Coding", 12F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            gVision_View1.Location = new Point(58, 7);
-            gVision_View1.Margin = new Padding(3, 4, 3, 4);
-            gVision_View1.Name = "gVision_View1";
-            gVision_View1.Size = new Size(703, 639);
-            gVision_View1.TabIndex = 0;
-            // 
             // tabPage8
             // 
-            tabPage8.Controls.Add(motionSpeed_View1);
             tabPage8.Location = new Point(4, 27);
             tabPage8.Name = "tabPage8";
             tabPage8.Padding = new Padding(3);
@@ -465,18 +364,8 @@
             tabPage8.Text = "tabPage8";
             tabPage8.UseVisualStyleBackColor = true;
             // 
-            // motionSpeed_View1
-            // 
-            motionSpeed_View1.Font = new Font("D2Coding", 12F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            motionSpeed_View1.Location = new Point(43, 4);
-            motionSpeed_View1.Margin = new Padding(3, 4, 3, 4);
-            motionSpeed_View1.Name = "motionSpeed_View1";
-            motionSpeed_View1.Size = new Size(800, 600);
-            motionSpeed_View1.TabIndex = 0;
-            // 
             // tabPage9
             // 
-            tabPage9.Controls.Add(motor_View1);
             tabPage9.Location = new Point(4, 27);
             tabPage9.Name = "tabPage9";
             tabPage9.Padding = new Padding(3);
@@ -484,16 +373,6 @@
             tabPage9.TabIndex = 8;
             tabPage9.Text = "tabPage9";
             tabPage9.UseVisualStyleBackColor = true;
-            // 
-            // motor_View1
-            // 
-            motor_View1.Dock = DockStyle.Fill;
-            motor_View1.Font = new Font("D2Coding", 12F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            motor_View1.Location = new Point(3, 3);
-            motor_View1.Margin = new Padding(3, 4, 3, 4);
-            motor_View1.Name = "motor_View1";
-            motor_View1.Size = new Size(979, 835);
-            motor_View1.TabIndex = 0;
             // 
             // tabPage10
             // 
@@ -575,6 +454,16 @@
             statistics_ScottPlot_View1.Size = new Size(900, 600);
             statistics_ScottPlot_View1.TabIndex = 0;
             // 
+            // extruderRecipe_View1
+            // 
+            extruderRecipe_View1.Dock = DockStyle.Fill;
+            extruderRecipe_View1.Font = new Font("D2Coding", 12F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            extruderRecipe_View1.Location = new Point(3, 3);
+            extruderRecipe_View1.Margin = new Padding(3, 4, 3, 4);
+            extruderRecipe_View1.Name = "extruderRecipe_View1";
+            extruderRecipe_View1.Size = new Size(979, 835);
+            extruderRecipe_View1.TabIndex = 0;
+            // 
             // FormTest
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
@@ -586,14 +475,9 @@
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
-            tabPage3.ResumeLayout(false);
-            tabPage4.ResumeLayout(false);
             tabPage5.ResumeLayout(false);
             tabPage5.PerformLayout();
             tabPage6.ResumeLayout(false);
-            tabPage7.ResumeLayout(false);
-            tabPage8.ResumeLayout(false);
-            tabPage9.ResumeLayout(false);
             tabPage10.ResumeLayout(false);
             tabPage11.ResumeLayout(false);
             tabPage12.ResumeLayout(false);
@@ -609,8 +493,6 @@
         private TabPage tabPage3;
         private TabPage tabPage4;
         private TabPage tabPage5;
-        private UserViews.SequencesPanel_View sequencesPanel_View1;
-        private UserViews.Log_View log_View1;
         private TabPage tabPage6;
         private TabPage tabPage7;
         private TabPage tabPage8;
@@ -619,9 +501,6 @@
         private TabPage tabPage11;
         private TabPage tabPage12;
         private UserViews.Alarm_View alarm_View1;
-        private UserViews.GVision_View gVision_View1;
-        private UserViews.Motor_View motor_View1;
-        private UserViews.MotionSpeed_View motionSpeed_View1;
         private UserViews.MotorPosition_View motorPosition_View1;
         private UserViews.MotorInterlock_View motorInterlock_View1;
         private UserViews.AlarmSolution_View alarmSolution_View1;
@@ -637,12 +516,8 @@
         private TabPage tabPage13;
         private Controls._Button _Button10;
         private Controls._Button _Button9;
-        private UserViews.WaferMap_View waferMap_View2;
-        private UserViews.WaferMap_View waferMap_View1;
         private UserViews.Statistics_ScottPlot_View statistics_ScottPlot_View1;
-        private UserViews.Setup.PIO_View piO_View1;
         private Controls._Button _Button11;
-        private UserViews.SecsGem.SecsGem_View secsGem_View1;
-        private UserViews.LaserMeasure.LaserMeasure_View laserMeasure_View1;
+        private UserViews.Extruder.ExtruderRecipe_View extruderRecipe_View1;
     }
 }

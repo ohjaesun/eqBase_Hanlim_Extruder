@@ -14,4 +14,8 @@
     <ProjectReference Include="..\EQ.Infra\EQ.Infra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Act\Composition\Extruder\" />
+  </ItemGroup>
+
 </Project>

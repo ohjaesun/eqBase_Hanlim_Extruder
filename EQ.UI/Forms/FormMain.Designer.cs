@@ -83,7 +83,7 @@ namespace EQ.UI
             _Panel1.ForeColor = SystemColors.ControlText;
             _Panel1.Location = new Point(0, 0);
             _Panel1.Name = "_Panel1";
-            _Panel1.Size = new Size(1083, 65);
+            _Panel1.Size = new Size(1920, 65);
             _Panel1.TabIndex = 2;
             // 
             // mainForm_Top_Panel1
@@ -93,7 +93,7 @@ namespace EQ.UI
             mainForm_Top_Panel1.Location = new Point(0, 0);
             mainForm_Top_Panel1.Margin = new Padding(3, 4, 3, 4);
             mainForm_Top_Panel1.Name = "mainForm_Top_Panel1";
-            mainForm_Top_Panel1.Size = new Size(1083, 65);
+            mainForm_Top_Panel1.Size = new Size(1920, 65);
             mainForm_Top_Panel1.TabIndex = 0;
             // 
             // _Panel2
@@ -105,7 +105,7 @@ namespace EQ.UI
             _Panel2.ForeColor = SystemColors.ControlText;
             _Panel2.Location = new Point(0, 935);
             _Panel2.Name = "_Panel2";
-            _Panel2.Size = new Size(1083, 65);
+            _Panel2.Size = new Size(1920, 65);
             _Panel2.TabIndex = 3;
             // 
             // flowLayoutPanel1
@@ -123,7 +123,7 @@ namespace EQ.UI
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(983, 65);
+            flowLayoutPanel1.Size = new Size(1820, 65);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // _ButtonBottom1
@@ -259,7 +259,7 @@ namespace EQ.UI
             _ButtonBottom10.Dock = DockStyle.Right;
             _ButtonBottom10.Font = new Font("D2Coding", 12F);
             _ButtonBottom10.ForeColor = Color.White;
-            _ButtonBottom10.Location = new Point(983, 0);
+            _ButtonBottom10.Location = new Point(1820, 0);
             _ButtonBottom10.Name = "_ButtonBottom10";
             _ButtonBottom10.Size = new Size(100, 65);
             _ButtonBottom10.TabIndex = 8;
@@ -275,10 +275,11 @@ namespace EQ.UI
             _Panel3.Controls.Add(flowLayoutPanel2);
             _Panel3.Dock = DockStyle.Right;
             _Panel3.ForeColor = SystemColors.ControlText;
-            _Panel3.Location = new Point(988, 65);
+            _Panel3.Location = new Point(1825, 65);
             _Panel3.Name = "_Panel3";
             _Panel3.Size = new Size(95, 870);
             _Panel3.TabIndex = 4;
+            _Panel3.Visible = false;
             // 
             // flowLayoutPanel2
             // 
@@ -419,7 +420,7 @@ namespace EQ.UI
             panelMain.ForeColor = SystemColors.ControlText;
             panelMain.Location = new Point(0, 65);
             panelMain.Name = "panelMain";
-            panelMain.Size = new Size(988, 870);
+            panelMain.Size = new Size(1825, 870);
             panelMain.TabIndex = 5;
             // 
             // statusStrip1
@@ -427,7 +428,7 @@ namespace EQ.UI
             statusStrip1.Items.AddRange(new ToolStripItem[] { toolStrip1, toolStrip2, toolStrip3, toolStrip4, toolStrip5, toolStrip6, toolStrip7, toolStrip8, toolStrip9, toolStrip10 });
             statusStrip1.Location = new Point(0, 1000);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1083, 24);
+            statusStrip1.Size = new Size(1920, 24);
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -519,7 +520,7 @@ namespace EQ.UI
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1083, 1024);
+            ClientSize = new Size(1920, 1024);
             Controls.Add(panelMain);
             Controls.Add(_Panel3);
             Controls.Add(_Panel2);

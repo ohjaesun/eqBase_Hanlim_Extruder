@@ -295,6 +295,36 @@ namespace EQ.UI.UserViews.Extruder
             }
         }
 
+        private void _ButtonScrollUp_Click(object sender, EventArgs e)
+        {
+            //5보다 크면 5칸 이동 아니면 1칸 이동 처음이면 무시
+            if (_dataGridView1.FirstDisplayedScrollingRowIndex > 5)
+            {
+                _dataGridView1.FirstDisplayedScrollingRowIndex -= 5;
+            }
+            else if (_dataGridView1.FirstDisplayedScrollingRowIndex > 0)
+            {
+                _dataGridView1.FirstDisplayedScrollingRowIndex--;
+            }
+        }
+
+        private void _ButtonScrollDown_Click(object sender, EventArgs e)
+        {
+            //5보다 크면 5칸 이동 아니면 1칸 이동 마지막이면 무시
+            int lastVisibleRow = _dataGridView1.FirstDisplayedScrollingRowIndex + _dataGridView1.DisplayedRowCount(false);
+            if (lastVisibleRow < _dataGridView1.RowCount)
+            {
+                if (_dataGridView1.FirstDisplayedScrollingRowIndex + 5 < _dataGridView1.RowCount)
+                {
+                    _dataGridView1.FirstDisplayedScrollingRowIndex += 5;
+                }
+                else if (_dataGridView1.FirstDisplayedScrollingRowIndex < _dataGridView1.RowCount - 1)
+                {
+                    _dataGridView1.FirstDisplayedScrollingRowIndex++;
+                }
+            }
+        }
+
         /// <summary>
         /// Value 셀 클릭 시 키패드 표시
         /// </summary>
@@ -318,8 +348,17 @@ namespace EQ.UI.UserViews.Extruder
             // 값 타입 확인
             if (currentValue == null || currentValue == DBNull.Value || currentValue is string)
             {
-                // 문자열 타입 - 아직 미구현
-                // TODO: 문자열 키보드 구현 시 추가
+                // 문자열 타입 - FormKeyboard 호출
+                string initialValue = currentValue?.ToString() ?? "";
+                string title = propertyName;
+                
+                using (var keyboard = new EQ.UI.Forms.FormKeyboard(title, initialValue))
+                {
+                    if (keyboard.ShowDialog() == DialogResult.OK)
+                    {
+                        cell.Value = keyboard.ResultValue;
+                    }
+                }
                 return;
             }
 

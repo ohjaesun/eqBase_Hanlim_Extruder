@@ -36,10 +36,14 @@ namespace EQ.UI.UserViews.Extruder
             _Panel2 = new EQ.UI.Controls._Panel();
             _ButtonDown = new EQ.UI.Controls._Button();
             _ButtonUp = new EQ.UI.Controls._Button();
+            _ButtonScrollUp = new EQ.UI.Controls._Button();
+            _ButtonScrollDown = new EQ.UI.Controls._Button();
+            _PanelScroll = new EQ.UI.Controls._Panel();
             _PanelMain.SuspendLayout();
             _Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)_dataGridView1).BeginInit();
             _Panel2.SuspendLayout();
+            _PanelScroll.SuspendLayout();
             SuspendLayout();
             // 
             // _LabelTitle
@@ -142,12 +146,52 @@ namespace EQ.UI.UserViews.Extruder
             _Panel2.Controls.Add(_ButtonUp);
             _Panel2.Controls.Add(_comboRecipe);
             _Panel2.Controls.Add(_labelRecipe);
+            _Panel2.Controls.Add(_PanelScroll);
             _Panel2.Dock = DockStyle.Top;
             _Panel2.ForeColor = SystemColors.ControlText;
             _Panel2.Location = new Point(0, 0);
             _Panel2.Name = "_Panel2";
             _Panel2.Size = new Size(800, 40);
             _Panel2.TabIndex = 1;
+            // 
+            // _PanelScroll
+            // 
+            _PanelScroll.BackColor = SystemColors.Control;
+            _PanelScroll.Controls.Add(_ButtonScrollDown);
+            _PanelScroll.Controls.Add(_ButtonScrollUp);
+            _PanelScroll.Dock = DockStyle.Right;
+            _PanelScroll.ForeColor = SystemColors.ControlText;
+            _PanelScroll.Name = "_PanelScroll";
+            _PanelScroll.Size = new Size(110, 40);
+            _PanelScroll.TabIndex = 6;
+            // 
+            // _ButtonScrollUp
+            // 
+            _ButtonScrollUp.BackColor = Color.FromArgb(52, 73, 94);
+            _ButtonScrollUp.Font = new Font("D2Coding", 12F);
+            _ButtonScrollUp.ForeColor = Color.White;
+            _ButtonScrollUp.Location = new Point(5, 5);
+            _ButtonScrollUp.Name = "_ButtonScrollUp";
+            _ButtonScrollUp.Size = new Size(50, 30);
+            _ButtonScrollUp.TabIndex = 0;
+            _ButtonScrollUp.Text = "▲";
+            _ButtonScrollUp.TooltipText = "Scroll Up";
+            _ButtonScrollUp.UseVisualStyleBackColor = false;
+            _ButtonScrollUp.Click += _ButtonScrollUp_Click;
+            // 
+            // _ButtonScrollDown
+            // 
+            _ButtonScrollDown.BackColor = Color.FromArgb(52, 73, 94);
+            _ButtonScrollDown.Font = new Font("D2Coding", 12F);
+            _ButtonScrollDown.ForeColor = Color.White;
+            _ButtonScrollDown.Location = new Point(55, 5);
+            _ButtonScrollDown.Name = "_ButtonScrollDown";
+            _ButtonScrollDown.Size = new Size(50, 30);
+            _ButtonScrollDown.TabIndex = 1;
+            _ButtonScrollDown.Text = "▼";
+            _ButtonScrollDown.TooltipText = "Scroll Down";
+            _ButtonScrollDown.UseVisualStyleBackColor = false;
+            _ButtonScrollDown.Click += _ButtonScrollDown_Click;
             // 
             // _ButtonDown
             // 
@@ -187,6 +231,7 @@ namespace EQ.UI.UserViews.Extruder
             _PanelMain.ResumeLayout(false);
             _Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)_dataGridView1).EndInit();
+            _PanelScroll.ResumeLayout(false);
             _Panel2.ResumeLayout(false);
             _Panel2.PerformLayout();
             ResumeLayout(false);
@@ -201,5 +246,8 @@ namespace EQ.UI.UserViews.Extruder
         private Controls._Panel _Panel2;
         private EQ.UI.Controls._Button _ButtonUp;
         private EQ.UI.Controls._Button _ButtonDown;
+        private EQ.UI.Controls._Panel _PanelScroll;
+        private EQ.UI.Controls._Button _ButtonScrollUp;
+        private EQ.UI.Controls._Button _ButtonScrollDown;
     }
 }

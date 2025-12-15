@@ -34,7 +34,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(993, 832);
+            ClientSize = new Size(1920, 850);
             Name = "Form08REV";
             Text = "Form8";
             Load += Form08REV_Load;

@@ -1,5 +1,6 @@
 using EQ.Core.Service;
 using EQ.Domain.Entities.Extruder;
+using EQ.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -82,10 +83,13 @@ namespace EQ.UI.UserViews.Extruder
             _dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
             _dataGridView1.MultiSelect = false;
             _dataGridView1.RowHeadersVisible = false;
-            _dataGridView1.EditMode = DataGridViewEditMode.EditOnEnter;
+            _dataGridView1.EditMode = DataGridViewEditMode.EditProgrammatically; // 직접 편집 비활성화
 
             // 저장 버튼 이벤트 연결
             _ButtonSave.Click += _ButtonSave_Click;
+
+            // 셀 클릭 이벤트 등록
+            _dataGridView1.CellClick += _dataGridView1_CellClick;
         }
 
         private void LoadData()
@@ -288,6 +292,107 @@ namespace EQ.UI.UserViews.Extruder
             if (_comboRecipe.SelectedIndex < _comboRecipe.Items.Count - 1)
             {
                 _comboRecipe.SelectedIndex++;
+            }
+        }
+
+        /// <summary>
+        /// Value 셀 클릭 시 키패드 표시
+        /// </summary>
+        private void _dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // 헤더 클릭 무시
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
+            var cell = _dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            var columnName = _dataGridView1.Columns[e.ColumnIndex].Name;
+
+            // Value 컬럼만 처리
+            if (columnName != "Value") return;
+
+            // 현재 행의 Property 이름과 Range 가져오기
+            var row = _dataGridView1.Rows[e.RowIndex];
+            string propertyName = row.Cells["Property"].Value?.ToString() ?? "";
+            string rangeStr = row.Cells["Range"].Value?.ToString() ?? "";
+            object currentValue = cell.Value;
+
+            // 값 타입 확인
+            if (currentValue == null || currentValue == DBNull.Value || currentValue is string)
+            {
+                // 문자열 타입 - 아직 미구현
+                // TODO: 문자열 키보드 구현 시 추가
+                return;
+            }
+
+            // 숫자 타입인 경우 FormKeypad 호출
+            if (IsNumericType(currentValue))
+            {
+                double initialValue = Convert.ToDouble(currentValue);
+                double? minValue = null;
+                double? maxValue = null;
+
+                // Range 파싱 (예: "0...30", "10...150")
+                ParseRange(rangeStr, out minValue, out maxValue);
+
+                string title = propertyName;
+                using (var keypad = new EQ.UI.Forms.FormKeypad(title, initialValue, minValue, maxValue))
+                {
+                    if (keypad.ShowDialog() == DialogResult.OK)
+                    {
+                        double newValue = keypad.ResultValue;
+
+                        // Range 유효성 검사 (FormKeypad 내부에서도 체크하지만 추가 확인)
+                        if (minValue.HasValue && newValue < minValue.Value)
+                        {
+                            ActManager.Instance.Act.PopupNoti(
+                                L("Range Warning"),
+                                L("Value {0} is below minimum {1}", newValue, minValue.Value),
+                                NotifyType.Warning);
+                        }
+                        else if (maxValue.HasValue && newValue > maxValue.Value)
+                        {
+                            ActManager.Instance.Act.PopupNoti(
+                                L("Range Warning"),
+                                L("Value {0} is above maximum {1}", newValue, maxValue.Value),
+                                NotifyType.Warning);
+                        }
+
+                        // DataTable에 값 반영
+                        cell.Value = newValue;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 숫자 타입 여부 확인
+        /// </summary>
+        private bool IsNumericType(object value)
+        {
+            return value is byte || value is sbyte ||
+                   value is short || value is ushort ||
+                   value is int || value is uint ||
+                   value is long || value is ulong ||
+                   value is float || value is double || value is decimal;
+        }
+
+        /// <summary>
+        /// Range 문자열 파싱 ("0...30" -> min=0, max=30)
+        /// </summary>
+        private void ParseRange(string rangeStr, out double? min, out double? max)
+        {
+            min = null;
+            max = null;
+
+            if (string.IsNullOrEmpty(rangeStr)) return;
+
+            // "0...30" 형태 파싱
+            string[] parts = rangeStr.Split(new[] { "..." }, StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length == 2)
+            {
+                if (double.TryParse(parts[0].Trim(), out double minVal))
+                    min = minVal;
+                if (double.TryParse(parts[1].Trim(), out double maxVal))
+                    max = maxVal;
             }
         }
     }

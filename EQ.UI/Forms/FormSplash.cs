@@ -4,7 +4,7 @@ using EQ.Core.Act;
 using EQ.Core.Service;
 using EQ.Domain.Entities;
 using EQ.Domain.Entities.Extruder;
-using EQ.Domain.Entities.EQ_Hanlim_Extuder;
+
 using EQ.Domain.Entities.LaserMeasure;
 using EQ.Domain.Entities.SecsGem;
 using EQ.Domain.Enums;
@@ -140,7 +140,7 @@ namespace EQ.UI
                                     RegisterOption<UserOption3>(act);
                                     RegisterOption<UserOption4>(act);
                                     RegisterOption<List<UserOptionUI>>(act);
-                                    RegisterOption<List<Extuder_Recipe>>(act);
+                                //    RegisterOption<List<Extuder_Recipe>>(act);
 
                                     //Motion
                                     RegisterOption<UserOptionMotionSpeed>(act);

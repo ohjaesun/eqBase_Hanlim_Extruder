@@ -3,7 +3,7 @@ using EQ.Core.Act;
 using EQ.Core.Sequence;
 using EQ.Core.Service;
 using EQ.Domain.Entities; // UserOption
-using EQ.Domain.Entities.EQ_Hanlim_Extuder;
+
 using EQ.Domain.Enums;
 using EQ.Domain.Interface; // IDataStorage
 using System;
@@ -34,7 +34,7 @@ namespace EQ.Core.Act
         public UserOptionMotionPos MotionPos => Get<UserOptionMotionPos>();
         public UserOptionMotionInterlock Interlock => Get<UserOptionMotionInterlock>();
 
-        public List<Extuder_Recipe> ExtruderRecipes => Get<List<Extuder_Recipe>>();
+    //    public List<Extuder_Recipe> ExtruderRecipes => Get<List<Extuder_Recipe>>();
 
         public ActUserOption(ACT act) : base(act)
         {

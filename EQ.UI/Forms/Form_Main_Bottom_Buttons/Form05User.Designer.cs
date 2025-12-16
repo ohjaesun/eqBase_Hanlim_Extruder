@@ -1,6 +1,6 @@
 ﻿namespace EQ.UI
 {
-    partial class Form02MANUAL
+    partial class Form05User
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,13 @@
         {
             SuspendLayout();
             // 
-            // Form02MANUAL
+            // Form05REV
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1920, 851);
-            Name = "Form02MANUAL";
-            Text = "Form2";
+            ClientSize = new Size(993, 832);
+            Name = "Form05REV";
+            Text = "Form5";
             ResumeLayout(false);
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace EQ.UI
 {
-    partial class Form06REV
+    partial class Form06Parameter
     {
         /// <summary>
         /// Required designer variable.

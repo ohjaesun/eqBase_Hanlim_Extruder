@@ -1,6 +1,6 @@
 ﻿namespace EQ.UI
 {
-    partial class Form03SETUP
+    partial class Form03System
     {
         /// <summary>
         /// Required designer variable.
@@ -30,11 +30,15 @@
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            extruderSystemGroup1_View1 = new EQ.UI.UserViews.Extruder.ExtruderSystemGroup1_View();
             tabPage2 = new TabPage();
             tabPage3 = new TabPage();
-            extruderSystemGroup1_View1 = new EQ.UI.UserViews.Extruder.ExtruderSystemGroup1_View();
+            extruderSystemGroup2_View1 = new EQ.UI.UserViews.Extruder.ExtruderSystemGroup2_View();
+            extruderSystempiD_View1 = new EQ.UI.UserViews.Extruder.ExtruderSystemPID_View();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
+            tabPage2.SuspendLayout();
+            tabPage3.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -63,26 +67,6 @@
             tabPage1.Text = "Group 1   ";
             tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
-            // 
-            tabPage2.Location = new Point(34, 4);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1882, 843);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "   Group 2   ";
-            tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            tabPage3.Location = new Point(34, 4);
-            tabPage3.Name = "tabPage3";
-            tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(1882, 843);
-            tabPage3.TabIndex = 2;
-            tabPage3.Text = "   PID   ";
-            tabPage3.UseVisualStyleBackColor = true;
-            // 
             // extruderSystemGroup1_View1
             // 
             extruderSystemGroup1_View1.BackColor = Color.FromArgb(240, 240, 240);
@@ -94,6 +78,50 @@
             extruderSystemGroup1_View1.Size = new Size(1876, 837);
             extruderSystemGroup1_View1.TabIndex = 0;
             // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(extruderSystemGroup2_View1);
+            tabPage2.Location = new Point(34, 4);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(1882, 843);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "   Group 2   ";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            tabPage3.Controls.Add(extruderSystempiD_View1);
+            tabPage3.Location = new Point(34, 4);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new Padding(3);
+            tabPage3.Size = new Size(1882, 843);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "   PID   ";
+            tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // extruderSystemGroup2_View1
+            // 
+            extruderSystemGroup2_View1.BackColor = Color.FromArgb(240, 240, 240);
+            extruderSystemGroup2_View1.Dock = DockStyle.Fill;
+            extruderSystemGroup2_View1.Font = new Font("D2Coding", 10F);
+            extruderSystemGroup2_View1.Location = new Point(3, 3);
+            extruderSystemGroup2_View1.Margin = new Padding(3, 5, 3, 5);
+            extruderSystemGroup2_View1.Name = "extruderSystemGroup2_View1";
+            extruderSystemGroup2_View1.Size = new Size(1876, 837);
+            extruderSystemGroup2_View1.TabIndex = 0;
+            // 
+            // extruderSystempiD_View1
+            // 
+            extruderSystempiD_View1.BackColor = Color.FromArgb(240, 240, 240);
+            extruderSystempiD_View1.Dock = DockStyle.Fill;
+            extruderSystempiD_View1.Font = new Font("D2Coding", 10F);
+            extruderSystempiD_View1.Location = new Point(3, 3);
+            extruderSystempiD_View1.Margin = new Padding(3, 5, 3, 5);
+            extruderSystempiD_View1.Name = "extruderSystempiD_View1";
+            extruderSystempiD_View1.Size = new Size(1876, 837);
+            extruderSystempiD_View1.TabIndex = 0;
+            // 
             // Form03SETUP
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
@@ -104,6 +132,8 @@
             Text = "Form3";
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
+            tabPage2.ResumeLayout(false);
+            tabPage3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -114,5 +144,7 @@
         private TabPage tabPage2;
         private UserViews.Extruder.ExtruderSystemGroup1_View extruderSystemGroup1_View1;
         private TabPage tabPage3;
+        private UserViews.Extruder.ExtruderSystemGroup2_View extruderSystemGroup2_View1;
+        private UserViews.Extruder.ExtruderSystemPID_View extruderSystempiD_View1;
     }
 }

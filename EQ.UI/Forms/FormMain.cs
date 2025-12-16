@@ -120,13 +120,13 @@ namespace EQ.UI
                             // 폼
                             Form fm = null;
 
-                            if (idx == 1) fm = new Form01AUTO();
-                            if (idx == 2) fm = new Form02MANUAL();
-                            if (idx == 3) fm = new Form03SETUP();
-                            if (idx == 4) fm = new Form04REV();
-                            if (idx == 5) fm = new Form05REV();
-                            if (idx == 6) fm = new Form06REV();
-                            if (idx == 7) fm = new Form07STATISTICS();
+                            if (idx == 1) fm = new Form01Setup();
+                            if (idx == 2) fm = new Form02Operation();
+                            if (idx == 3) fm = new Form03System();
+                            if (idx == 4) fm = new Form04Trends();
+                            if (idx == 5) fm = new Form05User();
+                            if (idx == 6) fm = new Form06Parameter();
+                            if (idx == 7) fm = new Form07Reporting();
                             if (idx == 8) fm = new FormTest();
 
                             fm.TopLevel = false;

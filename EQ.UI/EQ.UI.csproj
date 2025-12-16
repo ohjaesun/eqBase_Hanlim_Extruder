@@ -34,6 +34,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="UserViews\Extruder\ExtruderSystemGroup2_View - 복사.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserViews\Extruder\ExtruderSystemPID_View.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserViews\Parents\UserControlBaseWithTitle.cs">
       <SubType>UserControl</SubType>
     </Compile>

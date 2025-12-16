@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace EQ.UI
 {
-    public partial class Form05REV : FormBase
+    public partial class Form06Parameter : FormBase
     {
-        public Form05REV()
+        public Form06Parameter()
         {
             InitializeComponent();
         }

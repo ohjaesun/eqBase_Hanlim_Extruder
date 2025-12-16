@@ -5,9 +5,9 @@ using EQ.UI.UserViews;
 
 namespace EQ.UI
 {
-    public partial class Form03SETUP : FormBase
+    public partial class Form03System : FormBase
     {
-        public Form03SETUP()
+        public Form03System()
         {
             InitializeComponent();
         }

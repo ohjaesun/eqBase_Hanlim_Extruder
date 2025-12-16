@@ -1,6 +1,6 @@
 ﻿namespace EQ.UI
 {
-    partial class Form01AUTO
+    partial class Form01Setup
     {
         /// <summary>
         /// Required designer variable.

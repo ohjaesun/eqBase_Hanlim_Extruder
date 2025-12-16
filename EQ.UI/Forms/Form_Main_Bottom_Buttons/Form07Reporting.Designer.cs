@@ -1,6 +1,6 @@
 ﻿namespace EQ.UI
 {
-    partial class Form07STATISTICS
+    partial class Form07Reporting
     {
         /// <summary>
         /// Required designer variable.

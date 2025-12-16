@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace EQ.UI
 {
-    public partial class Form07STATISTICS : FormBase
+    public partial class Form07Reporting : FormBase
     {
-        public Form07STATISTICS()
+        public Form07Reporting()
         {
             InitializeComponent();
         }

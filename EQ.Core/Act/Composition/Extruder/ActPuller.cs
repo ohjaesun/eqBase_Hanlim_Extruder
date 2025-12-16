@@ -2,7 +2,7 @@ using EQ.Common.Logs;
 using EQ.Core.Act;
 using EQ.Core.Act.Composition.Extrusion.Utils;
 using EQ.Domain.Enums;
-using EQ.Domain.Entities;
+using EQ.Domain.Entities.Extruder;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,12 +27,7 @@ namespace EQ.Core.Act.Composition.Extruder
         /// <summary>
         /// 인취기 가동 및 PID 직경 제어 시작
         /// </summary>
-        public async Task<ActionStatus> StartPullingWithControlAsync(
-            double targetDiameter, 
-            double pullerSpeed,
-            double kp, double ki, double kd,
-            double minCV, double maxCV,
-            double deadBand)
+        public async Task<ActionStatus> StartPullingWithControlAsync(ExtruderRecipe recipe)
         {
             var stepString = new System.Collections.Generic.List<string> { "Start", "InitPID", "StartMotor", "StartControl", "End" };
 
@@ -46,29 +41,29 @@ namespace EQ.Core.Act.Composition.Extruder
                     switch (stepName)
                     {
                         case "Start":
-                            Log.Instance.Info(L("인취 제어 시작 - 목표 직경: {0}mm", targetDiameter));
+                            Log.Instance.Info(L("인취 제어 시작 - 목표 직경: {0}mm", recipe.Diameter));
                             nextStep++;
                             break;
 
                         case "InitPID":
                             // PID 파라미터 설정
-                            _pid.SetGains(kp, ki, kd);
-                            _pid.SetLimits(minCV, maxCV);
+                            _pid.SetGains(recipe.Kp, recipe.Ki, recipe.Kd);
+                            _pid.SetLimits(recipe.MINCV, recipe.MAXCV);
                             _pid.Reset();
-                            Log.Instance.Info(L("PID 초기화 완료 - Kp:{0}, Ki:{1}, Kd:{2}", kp, ki, kd));
+                            Log.Instance.Info(L("PID 초기화 완료 - Kp:{0}, Ki:{1}, Kd:{2}", recipe.Kp, recipe.Ki, recipe.Kd));
                             nextStep++;
                             break;
 
                         case "StartMotor":
                             // 기본 속도로 모터 기동
-                            // await _act.Motion.JogAsync(MotionID.PULLER_T, pullerSpeed);
+                            // await _act.Motion.JogAsync(MotionID.PULLER_T, recipe.PullerMotorSpeed);
                             await Task.Delay(500);
                             nextStep++;
                             break;
 
                         case "StartControl":
                             // PID 제어 루프 시작
-                            StartControlLoop(targetDiameter, pullerSpeed, deadBand);
+                            StartControlLoop(recipe);
                             nextStep++;
                             break;
 
@@ -90,7 +85,7 @@ namespace EQ.Core.Act.Composition.Extruder
         /// <summary>
         /// PID 제어 루프 (백그라운드 Task)
         /// </summary>
-        private void StartControlLoop(double targetDiameter, double baseSpeed, double deadBand)
+        private void StartControlLoop(ExtruderRecipe recipe)
         {
             _isControlling = true;
             _controlCts = new CancellationTokenSource();
@@ -110,12 +105,12 @@ namespace EQ.Core.Act.Composition.Extruder
                         double currentDia = 0.0; // Placeholder
 
                         // PID 계산
-                        double correction = _pid.Compute(targetDiameter, currentDia);
+                        double correction = _pid.Compute(recipe.Diameter, currentDia);
 
                         // 데드밴드 체크
-                        if (Math.Abs(targetDiameter - currentDia) > deadBand)
+                        if (Math.Abs(recipe.Diameter - currentDia) > recipe.DB)
                         {
-                            double newSpeed = baseSpeed + correction;
+                            double newSpeed = recipe.PullerMotorSpeed + correction;
                             // 미구현: 속도 변경
                             // await _act.Motion.ChangeSpeedAsync(MotionID.PULLER_T, newSpeed);
                         }

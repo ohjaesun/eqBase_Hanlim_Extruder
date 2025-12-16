@@ -78,6 +78,7 @@ namespace EQ.Core.Act.Composition.Extruder
                     _storage.Save(_recipes, path, STORAGE_KEY);
                     Log.Instance.Info($"ExtruderRecipe {RECIPE_COUNT - startIndex}개 추가 생성: {path}");
                 }
+                                
                 
                 Log.Instance.Info($"ExtruderRecipe {_recipes.Count}개 로드 완료: {path}");
             }

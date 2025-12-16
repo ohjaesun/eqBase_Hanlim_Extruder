@@ -21,25 +21,25 @@ namespace EQ.Domain.Entities
 
     public static class STAGE_X
     {
-        public static MotionKey Wait => new MotionKey(MotionID.STAGE_X, DefinePos.Wait);
-        public static MotionKey Target => new MotionKey(MotionID.STAGE_X, DefinePos.Target);
-        public static MotionKey VisionStart => new MotionKey(MotionID.STAGE_X, DefinePos.VisionStart);
-        public static MotionKey VisionEnd => new MotionKey(MotionID.STAGE_X, DefinePos.VisionEnd);
+        public static MotionKey Wait => new MotionKey(MotionID.PULLER_T, DefinePos.Wait);
+        public static MotionKey Target => new MotionKey(MotionID.PULLER_T, DefinePos.Target);
+        public static MotionKey VisionStart => new MotionKey(MotionID.PULLER_T, DefinePos.VisionStart);
+        public static MotionKey VisionEnd => new MotionKey(MotionID.PULLER_T, DefinePos.VisionEnd);
     }
 
     public static class STAGE_Y
     {
-        public static MotionKey Wait => new MotionKey(MotionID.STAGE_Y, DefinePos.Wait);
-        public static MotionKey Target => new MotionKey(MotionID.STAGE_Y, DefinePos.Target);
-        public static MotionKey VisionStart => new MotionKey(MotionID.STAGE_Y, DefinePos.VisionStart);
-        public static MotionKey VisionEnd => new MotionKey(MotionID.STAGE_Y, DefinePos.VisionEnd);
+        public static MotionKey Wait => new MotionKey(MotionID.FEEDER_T, DefinePos.Wait);
+        public static MotionKey Target => new MotionKey(MotionID.FEEDER_T, DefinePos.Target);
+        public static MotionKey VisionStart => new MotionKey(MotionID.FEEDER_T, DefinePos.VisionStart);
+        public static MotionKey VisionEnd => new MotionKey(MotionID.FEEDER_T, DefinePos.VisionEnd);
     }
 
     public static class STAGE_Z
     {
-        public static MotionKey Wait => new MotionKey(MotionID.STAGE_Z, DefinePos.Wait);
-        public static MotionKey Up => new MotionKey(MotionID.STAGE_Z, DefinePos.Target); // Target을 Up으로 매핑
-        public static MotionKey Down => new MotionKey(MotionID.STAGE_Z, DefinePos.VisionStart); // VisionStart를 Down으로 매핑
+        public static MotionKey Wait => new MotionKey(MotionID.SCREW_T, DefinePos.Wait);
+        public static MotionKey Up => new MotionKey(MotionID.SCREW_T, DefinePos.Target); // Target을 Up으로 매핑
+        public static MotionKey Down => new MotionKey(MotionID.SCREW_T, DefinePos.VisionStart); // VisionStart를 Down으로 매핑
     }
 
     // 필요한 다른 축들도 동일한 패턴으로 추가...

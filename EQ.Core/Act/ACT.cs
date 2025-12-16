@@ -158,6 +158,10 @@ namespace EQ.Core.Act
             this.SecsGem = new ActSecsGem(this);
 
             this.LaserMeasure = new ActLaserMeasure(this);
+
+            // 한림 익스투더 관련 초기화
+            this.Extuder = new ActExtuder(this);
+            this.ExtruderRecipe = new ActExtruderRecipe(this);
         }
 
 

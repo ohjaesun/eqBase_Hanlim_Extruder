@@ -28,6 +28,7 @@ namespace EQ.UI.UserViews.Extruder
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             _pnlLeftParams = new EQ.UI.Controls._Panel();
             _txtPullerSpeedTarget = new EQ.UI.Controls._TextBox();
             _txtFeederSpeedTarget = new EQ.UI.Controls._TextBox();
@@ -55,6 +56,8 @@ namespace EQ.UI.UserViews.Extruder
             _txtHeatPlateRightTarget = new EQ.UI.Controls._TextBox();
             _lblHeatPlateRightActual = new EQ.UI.Controls._Label();
             _lblHeatPlateRightLabel = new EQ.UI.Controls._Label();
+            _Label47 = new EQ.UI.Controls._Label();
+            _Label46 = new EQ.UI.Controls._Label();
             _lblBarrelTemp2State = new EQ.UI.Controls._Label();
             _txtBarrelTemp2Target = new EQ.UI.Controls._TextBox();
             _lblBarrelTemp2Actual = new EQ.UI.Controls._Label();
@@ -117,6 +120,12 @@ namespace EQ.UI.UserViews.Extruder
             _Panel2 = new EQ.UI.Controls._Panel();
             _Label16 = new EQ.UI.Controls._Label();
             _Label15 = new EQ.UI.Controls._Label();
+            _Label37 = new EQ.UI.Controls._Label();
+            _Label36 = new EQ.UI.Controls._Label();
+            _Label32 = new EQ.UI.Controls._Label();
+            _Label31 = new EQ.UI.Controls._Label();
+            _Label30 = new EQ.UI.Controls._Label();
+            _Label29 = new EQ.UI.Controls._Label();
             _Label17 = new EQ.UI.Controls._Label();
             _Label18 = new EQ.UI.Controls._Label();
             _Label20 = new EQ.UI.Controls._Label();
@@ -125,6 +134,12 @@ namespace EQ.UI.UserViews.Extruder
             _Panel3 = new EQ.UI.Controls._Panel();
             _Label19 = new EQ.UI.Controls._Label();
             _Label21 = new EQ.UI.Controls._Label();
+            _Label43 = new EQ.UI.Controls._Label();
+            _Label42 = new EQ.UI.Controls._Label();
+            _Label41 = new EQ.UI.Controls._Label();
+            _Label40 = new EQ.UI.Controls._Label();
+            _Label39 = new EQ.UI.Controls._Label();
+            _Label38 = new EQ.UI.Controls._Label();
             _Label24 = new EQ.UI.Controls._Label();
             _Label25 = new EQ.UI.Controls._Label();
             _Label26 = new EQ.UI.Controls._Label();
@@ -133,21 +148,10 @@ namespace EQ.UI.UserViews.Extruder
             _Panel4 = new EQ.UI.Controls._Panel();
             _Label33 = new EQ.UI.Controls._Label();
             _Label34 = new EQ.UI.Controls._Label();
-            _Label35 = new EQ.UI.Controls._Label();
-            _Label29 = new EQ.UI.Controls._Label();
-            _Label30 = new EQ.UI.Controls._Label();
-            _Label31 = new EQ.UI.Controls._Label();
-            _Label32 = new EQ.UI.Controls._Label();
-            _Label36 = new EQ.UI.Controls._Label();
-            _Label37 = new EQ.UI.Controls._Label();
-            _Label38 = new EQ.UI.Controls._Label();
-            _Label39 = new EQ.UI.Controls._Label();
-            _Label40 = new EQ.UI.Controls._Label();
-            _Label41 = new EQ.UI.Controls._Label();
-            _Label42 = new EQ.UI.Controls._Label();
-            _Label43 = new EQ.UI.Controls._Label();
-            _Label44 = new EQ.UI.Controls._Label();
             _Label45 = new EQ.UI.Controls._Label();
+            _Label44 = new EQ.UI.Controls._Label();
+            _Label35 = new EQ.UI.Controls._Label();
+            timer1 = new System.Windows.Forms.Timer(components);
             _pnlLeftParams.SuspendLayout();
             _pnlRightParams.SuspendLayout();
             _pnlMeanDiameter.SuspendLayout();
@@ -419,6 +423,8 @@ namespace EQ.UI.UserViews.Extruder
             _pnlRightParams.Controls.Add(_txtHeatPlateRightTarget);
             _pnlRightParams.Controls.Add(_lblHeatPlateRightActual);
             _pnlRightParams.Controls.Add(_lblHeatPlateRightLabel);
+            _pnlRightParams.Controls.Add(_Label47);
+            _pnlRightParams.Controls.Add(_Label46);
             _pnlRightParams.Controls.Add(_lblBarrelTemp2State);
             _pnlRightParams.Controls.Add(_txtBarrelTemp2Target);
             _pnlRightParams.Controls.Add(_lblBarrelTemp2Actual);
@@ -544,6 +550,32 @@ namespace EQ.UI.UserViews.Extruder
             _lblHeatPlateRightLabel.Text = "Heating plate right temp. [°C]";
             _lblHeatPlateRightLabel.TextAlign = ContentAlignment.MiddleLeft;
             _lblHeatPlateRightLabel.TooltipText = null;
+            // 
+            // _Label47
+            // 
+            _Label47.BackColor = Color.FromArgb(150, 150, 150);
+            _Label47.Font = new Font("D2Coding", 12F);
+            _Label47.ForeColor = Color.White;
+            _Label47.Location = new Point(545, 152);
+            _Label47.Name = "_Label47";
+            _Label47.Size = new Size(60, 30);
+            _Label47.TabIndex = 8;
+            _Label47.Text = "Off";
+            _Label47.TextAlign = ContentAlignment.MiddleCenter;
+            _Label47.TooltipText = null;
+            // 
+            // _Label46
+            // 
+            _Label46.BackColor = Color.FromArgb(150, 150, 150);
+            _Label46.Font = new Font("D2Coding", 12F);
+            _Label46.ForeColor = Color.White;
+            _Label46.Location = new Point(545, 117);
+            _Label46.Name = "_Label46";
+            _Label46.Size = new Size(60, 30);
+            _Label46.TabIndex = 8;
+            _Label46.Text = "Off";
+            _Label46.TextAlign = ContentAlignment.MiddleCenter;
+            _Label46.TooltipText = null;
             // 
             // _lblBarrelTemp2State
             // 
@@ -1330,6 +1362,84 @@ namespace EQ.UI.UserViews.Extruder
             _Label15.TextAlign = ContentAlignment.MiddleLeft;
             _Label15.TooltipText = null;
             // 
+            // _Label37
+            // 
+            _Label37.BackColor = Color.FromArgb(149, 165, 166);
+            _Label37.Font = new Font("D2Coding", 14F);
+            _Label37.ForeColor = Color.White;
+            _Label37.Location = new Point(216, 254);
+            _Label37.Name = "_Label37";
+            _Label37.Size = new Size(70, 30);
+            _Label37.TabIndex = 1;
+            _Label37.Text = "Off";
+            _Label37.TextAlign = ContentAlignment.MiddleCenter;
+            _Label37.TooltipText = null;
+            // 
+            // _Label36
+            // 
+            _Label36.BackColor = Color.FromArgb(149, 165, 166);
+            _Label36.Font = new Font("D2Coding", 14F);
+            _Label36.ForeColor = Color.White;
+            _Label36.Location = new Point(216, 213);
+            _Label36.Name = "_Label36";
+            _Label36.Size = new Size(70, 30);
+            _Label36.TabIndex = 1;
+            _Label36.Text = "Off";
+            _Label36.TextAlign = ContentAlignment.MiddleCenter;
+            _Label36.TooltipText = null;
+            // 
+            // _Label32
+            // 
+            _Label32.BackColor = Color.FromArgb(149, 165, 166);
+            _Label32.Font = new Font("D2Coding", 14F);
+            _Label32.ForeColor = Color.White;
+            _Label32.Location = new Point(216, 172);
+            _Label32.Name = "_Label32";
+            _Label32.Size = new Size(70, 30);
+            _Label32.TabIndex = 1;
+            _Label32.Text = "Off";
+            _Label32.TextAlign = ContentAlignment.MiddleCenter;
+            _Label32.TooltipText = null;
+            // 
+            // _Label31
+            // 
+            _Label31.BackColor = Color.FromArgb(149, 165, 166);
+            _Label31.Font = new Font("D2Coding", 14F);
+            _Label31.ForeColor = Color.White;
+            _Label31.Location = new Point(216, 130);
+            _Label31.Name = "_Label31";
+            _Label31.Size = new Size(70, 30);
+            _Label31.TabIndex = 1;
+            _Label31.Text = "Off";
+            _Label31.TextAlign = ContentAlignment.MiddleCenter;
+            _Label31.TooltipText = null;
+            // 
+            // _Label30
+            // 
+            _Label30.BackColor = Color.FromArgb(149, 165, 166);
+            _Label30.Font = new Font("D2Coding", 14F);
+            _Label30.ForeColor = Color.White;
+            _Label30.Location = new Point(216, 88);
+            _Label30.Name = "_Label30";
+            _Label30.Size = new Size(70, 30);
+            _Label30.TabIndex = 1;
+            _Label30.Text = "Off";
+            _Label30.TextAlign = ContentAlignment.MiddleCenter;
+            _Label30.TooltipText = null;
+            // 
+            // _Label29
+            // 
+            _Label29.BackColor = Color.FromArgb(149, 165, 166);
+            _Label29.Font = new Font("D2Coding", 14F);
+            _Label29.ForeColor = Color.White;
+            _Label29.Location = new Point(216, 45);
+            _Label29.Name = "_Label29";
+            _Label29.Size = new Size(70, 30);
+            _Label29.TabIndex = 1;
+            _Label29.Text = "Off";
+            _Label29.TextAlign = ContentAlignment.MiddleCenter;
+            _Label29.TooltipText = null;
+            // 
             // _Label17
             // 
             _Label17.BackColor = Color.FromArgb(149, 165, 166);
@@ -1445,6 +1555,84 @@ namespace EQ.UI.UserViews.Extruder
             _Label21.TextAlign = ContentAlignment.MiddleLeft;
             _Label21.TooltipText = null;
             // 
+            // _Label43
+            // 
+            _Label43.BackColor = Color.FromArgb(149, 165, 166);
+            _Label43.Font = new Font("D2Coding", 14F);
+            _Label43.ForeColor = Color.White;
+            _Label43.Location = new Point(216, 254);
+            _Label43.Name = "_Label43";
+            _Label43.Size = new Size(70, 30);
+            _Label43.TabIndex = 1;
+            _Label43.Text = "Off";
+            _Label43.TextAlign = ContentAlignment.MiddleCenter;
+            _Label43.TooltipText = null;
+            // 
+            // _Label42
+            // 
+            _Label42.BackColor = Color.FromArgb(149, 165, 166);
+            _Label42.Font = new Font("D2Coding", 14F);
+            _Label42.ForeColor = Color.White;
+            _Label42.Location = new Point(216, 213);
+            _Label42.Name = "_Label42";
+            _Label42.Size = new Size(70, 30);
+            _Label42.TabIndex = 1;
+            _Label42.Text = "Off";
+            _Label42.TextAlign = ContentAlignment.MiddleCenter;
+            _Label42.TooltipText = null;
+            // 
+            // _Label41
+            // 
+            _Label41.BackColor = Color.FromArgb(149, 165, 166);
+            _Label41.Font = new Font("D2Coding", 14F);
+            _Label41.ForeColor = Color.White;
+            _Label41.Location = new Point(216, 171);
+            _Label41.Name = "_Label41";
+            _Label41.Size = new Size(70, 30);
+            _Label41.TabIndex = 1;
+            _Label41.Text = "Off";
+            _Label41.TextAlign = ContentAlignment.MiddleCenter;
+            _Label41.TooltipText = null;
+            // 
+            // _Label40
+            // 
+            _Label40.BackColor = Color.FromArgb(149, 165, 166);
+            _Label40.Font = new Font("D2Coding", 14F);
+            _Label40.ForeColor = Color.White;
+            _Label40.Location = new Point(216, 130);
+            _Label40.Name = "_Label40";
+            _Label40.Size = new Size(70, 30);
+            _Label40.TabIndex = 1;
+            _Label40.Text = "Off";
+            _Label40.TextAlign = ContentAlignment.MiddleCenter;
+            _Label40.TooltipText = null;
+            // 
+            // _Label39
+            // 
+            _Label39.BackColor = Color.FromArgb(149, 165, 166);
+            _Label39.Font = new Font("D2Coding", 14F);
+            _Label39.ForeColor = Color.White;
+            _Label39.Location = new Point(216, 88);
+            _Label39.Name = "_Label39";
+            _Label39.Size = new Size(70, 30);
+            _Label39.TabIndex = 1;
+            _Label39.Text = "Off";
+            _Label39.TextAlign = ContentAlignment.MiddleCenter;
+            _Label39.TooltipText = null;
+            // 
+            // _Label38
+            // 
+            _Label38.BackColor = Color.FromArgb(149, 165, 166);
+            _Label38.Font = new Font("D2Coding", 14F);
+            _Label38.ForeColor = Color.White;
+            _Label38.Location = new Point(216, 45);
+            _Label38.Name = "_Label38";
+            _Label38.Size = new Size(70, 30);
+            _Label38.TabIndex = 1;
+            _Label38.Text = "Off";
+            _Label38.TextAlign = ContentAlignment.MiddleCenter;
+            _Label38.TooltipText = null;
+            // 
             // _Label24
             // 
             _Label24.BackColor = Color.FromArgb(149, 165, 166);
@@ -1552,6 +1740,32 @@ namespace EQ.UI.UserViews.Extruder
             _Label34.TextAlign = ContentAlignment.MiddleLeft;
             _Label34.TooltipText = null;
             // 
+            // _Label45
+            // 
+            _Label45.BackColor = Color.FromArgb(149, 165, 166);
+            _Label45.Font = new Font("D2Coding", 14F);
+            _Label45.ForeColor = Color.White;
+            _Label45.Location = new Point(216, 88);
+            _Label45.Name = "_Label45";
+            _Label45.Size = new Size(70, 30);
+            _Label45.TabIndex = 1;
+            _Label45.Text = "Off";
+            _Label45.TextAlign = ContentAlignment.MiddleCenter;
+            _Label45.TooltipText = null;
+            // 
+            // _Label44
+            // 
+            _Label44.BackColor = Color.FromArgb(149, 165, 166);
+            _Label44.Font = new Font("D2Coding", 14F);
+            _Label44.ForeColor = Color.White;
+            _Label44.Location = new Point(216, 45);
+            _Label44.Name = "_Label44";
+            _Label44.Size = new Size(70, 30);
+            _Label44.TabIndex = 1;
+            _Label44.Text = "Off";
+            _Label44.TextAlign = ContentAlignment.MiddleCenter;
+            _Label44.TooltipText = null;
+            // 
             // _Label35
             // 
             _Label35.BackColor = Color.Black;
@@ -1567,187 +1781,9 @@ namespace EQ.UI.UserViews.Extruder
             _Label35.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
             _Label35.TooltipText = null;
             // 
-            // _Label29
+            // timer1
             // 
-            _Label29.BackColor = Color.FromArgb(149, 165, 166);
-            _Label29.Font = new Font("D2Coding", 14F);
-            _Label29.ForeColor = Color.White;
-            _Label29.Location = new Point(216, 45);
-            _Label29.Name = "_Label29";
-            _Label29.Size = new Size(70, 30);
-            _Label29.TabIndex = 1;
-            _Label29.Text = "Off";
-            _Label29.TextAlign = ContentAlignment.MiddleCenter;
-            _Label29.TooltipText = null;
-            // 
-            // _Label30
-            // 
-            _Label30.BackColor = Color.FromArgb(149, 165, 166);
-            _Label30.Font = new Font("D2Coding", 14F);
-            _Label30.ForeColor = Color.White;
-            _Label30.Location = new Point(216, 88);
-            _Label30.Name = "_Label30";
-            _Label30.Size = new Size(70, 30);
-            _Label30.TabIndex = 1;
-            _Label30.Text = "Off";
-            _Label30.TextAlign = ContentAlignment.MiddleCenter;
-            _Label30.TooltipText = null;
-            // 
-            // _Label31
-            // 
-            _Label31.BackColor = Color.FromArgb(149, 165, 166);
-            _Label31.Font = new Font("D2Coding", 14F);
-            _Label31.ForeColor = Color.White;
-            _Label31.Location = new Point(216, 130);
-            _Label31.Name = "_Label31";
-            _Label31.Size = new Size(70, 30);
-            _Label31.TabIndex = 1;
-            _Label31.Text = "Off";
-            _Label31.TextAlign = ContentAlignment.MiddleCenter;
-            _Label31.TooltipText = null;
-            // 
-            // _Label32
-            // 
-            _Label32.BackColor = Color.FromArgb(149, 165, 166);
-            _Label32.Font = new Font("D2Coding", 14F);
-            _Label32.ForeColor = Color.White;
-            _Label32.Location = new Point(216, 172);
-            _Label32.Name = "_Label32";
-            _Label32.Size = new Size(70, 30);
-            _Label32.TabIndex = 1;
-            _Label32.Text = "Off";
-            _Label32.TextAlign = ContentAlignment.MiddleCenter;
-            _Label32.TooltipText = null;
-            // 
-            // _Label36
-            // 
-            _Label36.BackColor = Color.FromArgb(149, 165, 166);
-            _Label36.Font = new Font("D2Coding", 14F);
-            _Label36.ForeColor = Color.White;
-            _Label36.Location = new Point(216, 213);
-            _Label36.Name = "_Label36";
-            _Label36.Size = new Size(70, 30);
-            _Label36.TabIndex = 1;
-            _Label36.Text = "Off";
-            _Label36.TextAlign = ContentAlignment.MiddleCenter;
-            _Label36.TooltipText = null;
-            // 
-            // _Label37
-            // 
-            _Label37.BackColor = Color.FromArgb(149, 165, 166);
-            _Label37.Font = new Font("D2Coding", 14F);
-            _Label37.ForeColor = Color.White;
-            _Label37.Location = new Point(216, 254);
-            _Label37.Name = "_Label37";
-            _Label37.Size = new Size(70, 30);
-            _Label37.TabIndex = 1;
-            _Label37.Text = "Off";
-            _Label37.TextAlign = ContentAlignment.MiddleCenter;
-            _Label37.TooltipText = null;
-            // 
-            // _Label38
-            // 
-            _Label38.BackColor = Color.FromArgb(149, 165, 166);
-            _Label38.Font = new Font("D2Coding", 14F);
-            _Label38.ForeColor = Color.White;
-            _Label38.Location = new Point(216, 45);
-            _Label38.Name = "_Label38";
-            _Label38.Size = new Size(70, 30);
-            _Label38.TabIndex = 1;
-            _Label38.Text = "Off";
-            _Label38.TextAlign = ContentAlignment.MiddleCenter;
-            _Label38.TooltipText = null;
-            // 
-            // _Label39
-            // 
-            _Label39.BackColor = Color.FromArgb(149, 165, 166);
-            _Label39.Font = new Font("D2Coding", 14F);
-            _Label39.ForeColor = Color.White;
-            _Label39.Location = new Point(216, 88);
-            _Label39.Name = "_Label39";
-            _Label39.Size = new Size(70, 30);
-            _Label39.TabIndex = 1;
-            _Label39.Text = "Off";
-            _Label39.TextAlign = ContentAlignment.MiddleCenter;
-            _Label39.TooltipText = null;
-            // 
-            // _Label40
-            // 
-            _Label40.BackColor = Color.FromArgb(149, 165, 166);
-            _Label40.Font = new Font("D2Coding", 14F);
-            _Label40.ForeColor = Color.White;
-            _Label40.Location = new Point(216, 130);
-            _Label40.Name = "_Label40";
-            _Label40.Size = new Size(70, 30);
-            _Label40.TabIndex = 1;
-            _Label40.Text = "Off";
-            _Label40.TextAlign = ContentAlignment.MiddleCenter;
-            _Label40.TooltipText = null;
-            // 
-            // _Label41
-            // 
-            _Label41.BackColor = Color.FromArgb(149, 165, 166);
-            _Label41.Font = new Font("D2Coding", 14F);
-            _Label41.ForeColor = Color.White;
-            _Label41.Location = new Point(216, 171);
-            _Label41.Name = "_Label41";
-            _Label41.Size = new Size(70, 30);
-            _Label41.TabIndex = 1;
-            _Label41.Text = "Off";
-            _Label41.TextAlign = ContentAlignment.MiddleCenter;
-            _Label41.TooltipText = null;
-            // 
-            // _Label42
-            // 
-            _Label42.BackColor = Color.FromArgb(149, 165, 166);
-            _Label42.Font = new Font("D2Coding", 14F);
-            _Label42.ForeColor = Color.White;
-            _Label42.Location = new Point(216, 213);
-            _Label42.Name = "_Label42";
-            _Label42.Size = new Size(70, 30);
-            _Label42.TabIndex = 1;
-            _Label42.Text = "Off";
-            _Label42.TextAlign = ContentAlignment.MiddleCenter;
-            _Label42.TooltipText = null;
-            // 
-            // _Label43
-            // 
-            _Label43.BackColor = Color.FromArgb(149, 165, 166);
-            _Label43.Font = new Font("D2Coding", 14F);
-            _Label43.ForeColor = Color.White;
-            _Label43.Location = new Point(216, 254);
-            _Label43.Name = "_Label43";
-            _Label43.Size = new Size(70, 30);
-            _Label43.TabIndex = 1;
-            _Label43.Text = "Off";
-            _Label43.TextAlign = ContentAlignment.MiddleCenter;
-            _Label43.TooltipText = null;
-            // 
-            // _Label44
-            // 
-            _Label44.BackColor = Color.FromArgb(149, 165, 166);
-            _Label44.Font = new Font("D2Coding", 14F);
-            _Label44.ForeColor = Color.White;
-            _Label44.Location = new Point(216, 45);
-            _Label44.Name = "_Label44";
-            _Label44.Size = new Size(70, 30);
-            _Label44.TabIndex = 1;
-            _Label44.Text = "Off";
-            _Label44.TextAlign = ContentAlignment.MiddleCenter;
-            _Label44.TooltipText = null;
-            // 
-            // _Label45
-            // 
-            _Label45.BackColor = Color.FromArgb(149, 165, 166);
-            _Label45.Font = new Font("D2Coding", 14F);
-            _Label45.ForeColor = Color.White;
-            _Label45.Location = new Point(216, 88);
-            _Label45.Name = "_Label45";
-            _Label45.Size = new Size(70, 30);
-            _Label45.TabIndex = 1;
-            _Label45.Text = "Off";
-            _Label45.TextAlign = ContentAlignment.MiddleCenter;
-            _Label45.TooltipText = null;
+            timer1.Tick += timer1_Tick;
             // 
             // ExtruderOperation_View
             // 
@@ -1766,6 +1802,7 @@ namespace EQ.UI.UserViews.Extruder
             Controls.Add(_pnlLeftParams);
             Name = "ExtruderOperation_View";
             Size = new Size(1900, 850);
+            Load += ExtruderOperation_View_Load;
             _pnlLeftParams.ResumeLayout(false);
             _pnlLeftParams.PerformLayout();
             _pnlRightParams.ResumeLayout(false);
@@ -1910,5 +1947,8 @@ namespace EQ.UI.UserViews.Extruder
         private Controls._Label _Label38;
         private Controls._Label _Label45;
         private Controls._Label _Label44;
+        private Controls._Label _Label47;
+        private Controls._Label _Label46;
+        private System.Windows.Forms.Timer timer1;
     }
 }

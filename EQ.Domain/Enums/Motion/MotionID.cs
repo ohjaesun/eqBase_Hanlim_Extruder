@@ -7,9 +7,9 @@
     public enum MotionID
     {    
 
-        STAGE_Z = 0,
-        STAGE_X = 1,
-        STAGE_Y = 2,
+        SCREW_T = 0,
+        PULLER_T = 1,
+        FEEDER_T = 2,
      
     }
 }

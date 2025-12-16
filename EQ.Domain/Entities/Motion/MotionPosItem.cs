@@ -66,15 +66,15 @@ namespace EQ.Domain.Entities
                 // 사용자 요청 로직 적용
                 switch (motor)
                 {
-                    case MotionID.STAGE_X:
-                    case MotionID.STAGE_Y:
+                    case MotionID.PULLER_T:
+                    case MotionID.FEEDER_T:
                         targetEnum.Add(DefinePos.Wait, (PosGroup.Stage, "대기 위치"));
                         targetEnum.Add(DefinePos.Target, (PosGroup.Stage, "작업 위치"));
                         targetEnum.Add(DefinePos.VisionStart, (PosGroup.Stage, "비전 시작"));
                         targetEnum.Add(DefinePos.VisionEnd, (PosGroup.Stage, "비전 종료"));
                         break;
 
-                    case MotionID.STAGE_Z:
+                    case MotionID.SCREW_T:
                         targetEnum.Add(DefinePos.Wait, (PosGroup.Stage, "대기 위치"));
                         targetEnum.Add(DefinePos.Target, (PosGroup.Stage, "상승"));
                         targetEnum.Add(DefinePos.VisionStart, (PosGroup.Stage, "하강"));

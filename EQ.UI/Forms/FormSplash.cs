@@ -446,6 +446,7 @@ namespace EQ.UI
 
                     Log.Instance.Info("온도 컨트롤러(REAL) 등록 완료");
                 }
+                act.Temp.StartPolling(1000); // 1초 간격 폴링 시작
             }
             catch (Exception ex)
             {

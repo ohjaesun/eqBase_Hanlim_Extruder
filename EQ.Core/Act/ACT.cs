@@ -116,13 +116,32 @@ namespace EQ.Core.Act
         /// </summary>
         public ActLaserMeasure LaserMeasure { get; private set; }
 
-
-        public ActExtuder Extuder { get; private set; } // 한림 익스투더
+        // === 한림 압출기 전용 컴포넌트 ===
+        
+        /// <summary>
+        /// (Legacy) 압출기 통합 제어
+        /// </summary>
+        public ActExtuder Extuder { get; private set; }
 
         /// <summary>
-        /// ExtruderRecipe를 관리합니다.
+        /// 압출기 레시피 관리
         /// </summary>
         public ActExtruderRecipe ExtruderRecipe { get; private set; }
+
+        /// <summary>
+        /// 압출 및 피더 제어
+        /// </summary>
+        public Act.Composition.Extruder.ActExtruder Extruder { get; private set; }
+
+        /// <summary>
+        /// 인취 및 PID 직경 제어
+        /// </summary>
+        public Act.Composition.Extruder.ActPuller Puller { get; private set; }
+
+        /// <summary>
+        /// 후공정 제어 (커팅, 선별, 카운팅)
+        /// </summary>
+        public Act.Composition.Extruder.ActFinishing Finishing { get; private set; }
 
         /// <summary>
         /// 의존성 주입 부
@@ -159,9 +178,14 @@ namespace EQ.Core.Act
 
             this.LaserMeasure = new ActLaserMeasure(this);
 
-            // 한림 익스투더 관련 초기화
+            // 한림 익스투더 관련 초기화 (Legacy)
             this.Extuder = new ActExtuder(this);
             this.ExtruderRecipe = new ActExtruderRecipe(this);
+
+            // 한림 압출기 모듈형 컴포넌트
+            this.Extruder = new Act.Composition.Extruder.ActExtruder(this);
+            this.Puller = new Act.Composition.Extruder.ActPuller(this);
+            this.Finishing = new Act.Composition.Extruder.ActFinishing(this);
         }
 
 

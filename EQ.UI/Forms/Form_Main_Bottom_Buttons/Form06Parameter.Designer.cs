@@ -28,18 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+            extruderRecipe_View1 = new EQ.UI.UserViews.Extruder.ExtruderRecipe_View();
             SuspendLayout();
             // 
-            // Form06REV
+            // extruderRecipe_View1
+            // 
+            extruderRecipe_View1.Dock = DockStyle.Fill;
+            extruderRecipe_View1.Font = new Font("D2Coding", 12F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            extruderRecipe_View1.Location = new Point(0, 0);
+            extruderRecipe_View1.Margin = new Padding(3, 4, 3, 4);
+            extruderRecipe_View1.Name = "extruderRecipe_View1";
+            extruderRecipe_View1.Size = new Size(993, 832);
+            extruderRecipe_View1.TabIndex = 0;
+            // 
+            // Form06Parameter
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(993, 832);
-            Name = "Form06REV";
+            Controls.Add(extruderRecipe_View1);
+            Name = "Form06Parameter";
             Text = "Form6";
             ResumeLayout(false);
         }
 
         #endregion
+
+        private UserViews.Extruder.ExtruderRecipe_View extruderRecipe_View1;
     }
 }

@@ -45,7 +45,7 @@ namespace EQ.Core.Act.EQ_Hanlim_Extuder
             _timer.Elapsed += _timer_Elapsed;
             _timer.Start();
 
-            _act.Temp.Get(TempID.Zone1).SetRun(true);
+          
         }
 
         private void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)

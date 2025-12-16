@@ -20,29 +20,41 @@ namespace EQ.Common.Helper
     public static class CalcTorque
     {
         /// <summary>
-        /// 토크 % → N·cm 변환
+        /// SGMXJ 모델별 정격 토크 (Nm)
         /// </summary>
-        /// <param name="model">SGMXJ 모터 모델</param>
-        /// <param name="torquePercent">토크 지령 (%)</param>
-        /// <returns>토크 (N·cm)</returns>
-        public static double ToNcm(SGMXJModel model, double torquePercent)
+        private static double GetRatedTorqueNm(SGMXJModel model)
         {
-            // 1️⃣ 정격 토크 (Nm)
-            double ratedTorqueNm = model switch
+            return model switch
             {
                 SGMXJModel.A5A => 0.159,
                 SGMXJModel._01A => 0.318,
                 SGMXJModel.C2A => 0.477,
                 SGMXJModel._02A => 0.637,
                 SGMXJModel._04A => 1.27,
-                _ => throw new ArgumentOutOfRangeException(nameof(model))
+                _ => throw new ArgumentOutOfRangeException(nameof(model), model, "Unknown SGMXJ model")
             };
+        }
 
-            // 2️⃣ % → Nm
+        /// <summary>
+        /// 토크 % → N·cm 변환
+        /// </summary>
+        public static double ToNcm(SGMXJModel model, double torquePercent)
+        {
+            double ratedTorqueNm = GetRatedTorqueNm(model);
+
             double torqueNm = ratedTorqueNm * torquePercent / 100.0;
-
-            // 3️⃣ Nm → N·cm (×100)
             return torqueNm * 100.0;
+        }
+
+        /// <summary>
+        /// N·cm → 토크 % 변환
+        /// </summary>
+        public static double ToPercent(SGMXJModel model, double torqueNcm)
+        {
+            double ratedTorqueNm = GetRatedTorqueNm(model);
+            double ratedTorqueNcm = ratedTorqueNm * 100.0;
+
+            return torqueNcm / ratedTorqueNcm * 100.0;
         }
     }
 }

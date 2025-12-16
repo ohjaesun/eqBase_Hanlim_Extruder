@@ -46,33 +46,34 @@ namespace EQ.UI.UserViews.Extruder
             _Label8 = new EQ.UI.Controls._Label();
             _Label7 = new EQ.UI.Controls._Label();
             _Label6 = new EQ.UI.Controls._Label();
-            _Label5 = new EQ.UI.Controls._Label();
             _pnlRightParams = new EQ.UI.Controls._Panel();
+            _Label48 = new EQ.UI.Controls._Label();
             _lblCircBathValue = new EQ.UI.Controls._Label();
-            _lblCircBathLabel = new EQ.UI.Controls._Label();
-            _txtHeatPlateLeftTarget = new EQ.UI.Controls._TextBox();
+            Labels5 = new EQ.UI.Controls._Label();
+            Targets4 = new EQ.UI.Controls._TextBox();
             _lblHeatPlateLeftActual = new EQ.UI.Controls._Label();
-            _lblHeatPlateLeftLabel = new EQ.UI.Controls._Label();
-            _txtHeatPlateRightTarget = new EQ.UI.Controls._TextBox();
+            Labels4 = new EQ.UI.Controls._Label();
+            Targets3 = new EQ.UI.Controls._TextBox();
             _lblHeatPlateRightActual = new EQ.UI.Controls._Label();
-            _lblHeatPlateRightLabel = new EQ.UI.Controls._Label();
-            _Label47 = new EQ.UI.Controls._Label();
-            _Label46 = new EQ.UI.Controls._Label();
-            _lblBarrelTemp2State = new EQ.UI.Controls._Label();
-            _txtBarrelTemp2Target = new EQ.UI.Controls._TextBox();
+            Labels3 = new EQ.UI.Controls._Label();
+            tempState4 = new EQ.UI.Controls._Label();
+            tempState3 = new EQ.UI.Controls._Label();
+            tempState2 = new EQ.UI.Controls._Label();
+            Targets2 = new EQ.UI.Controls._TextBox();
             _lblBarrelTemp2Actual = new EQ.UI.Controls._Label();
-            _lblBarrelTemp2Label = new EQ.UI.Controls._Label();
-            _lblBarrelTemp1State = new EQ.UI.Controls._Label();
-            _txtBarrelTemp1Target = new EQ.UI.Controls._TextBox();
+            Labels2 = new EQ.UI.Controls._Label();
+            tempState1 = new EQ.UI.Controls._Label();
+            Targets1 = new EQ.UI.Controls._TextBox();
             _lblBarrelTemp1Actual = new EQ.UI.Controls._Label();
-            _lblBarrelTemp1Label = new EQ.UI.Controls._Label();
+            Labels1 = new EQ.UI.Controls._Label();
             _lblRightParamsTitle = new EQ.UI.Controls._Label();
-            _btnMinus01 = new EQ.UI.Controls._Button();
-            _btnPlus01 = new EQ.UI.Controls._Button();
-            _btnMinus1 = new EQ.UI.Controls._Button();
-            _btnPlus1 = new EQ.UI.Controls._Button();
-            _btnMinus5 = new EQ.UI.Controls._Button();
-            _btnPlus5 = new EQ.UI.Controls._Button();
+            _ButtonSet = new EQ.UI.Controls._Button();
+            _btns6 = new EQ.UI.Controls._Button();
+            _btns5 = new EQ.UI.Controls._Button();
+            _btns4 = new EQ.UI.Controls._Button();
+            _btns3 = new EQ.UI.Controls._Button();
+            _btns2 = new EQ.UI.Controls._Button();
+            _btns1 = new EQ.UI.Controls._Button();
             _pnlMeanDiameter = new EQ.UI.Controls._Panel();
             _lblDiameter3 = new EQ.UI.Controls._Label();
             _lblDiameter2 = new EQ.UI.Controls._Label();
@@ -183,7 +184,6 @@ namespace EQ.UI.UserViews.Extruder
             _pnlLeftParams.Controls.Add(_Label8);
             _pnlLeftParams.Controls.Add(_Label7);
             _pnlLeftParams.Controls.Add(_Label6);
-            _pnlLeftParams.Controls.Add(_Label5);
             _pnlLeftParams.ForeColor = SystemColors.ControlText;
             _pnlLeftParams.Location = new Point(20, 20);
             _pnlLeftParams.Name = "_pnlLeftParams";
@@ -195,11 +195,11 @@ namespace EQ.UI.UserViews.Extruder
             _txtPullerSpeedTarget.BackColor = SystemColors.Control;
             _txtPullerSpeedTarget.Font = new Font("D2Coding", 12F);
             _txtPullerSpeedTarget.ForeColor = SystemColors.ControlText;
-            _txtPullerSpeedTarget.Location = new Point(462, 211);
+            _txtPullerSpeedTarget.Location = new Point(462, 214);
             _txtPullerSpeedTarget.Name = "_txtPullerSpeedTarget";
             _txtPullerSpeedTarget.Size = new Size(80, 26);
             _txtPullerSpeedTarget.TabIndex = 2;
-            _txtPullerSpeedTarget.Text = "8.9";
+            _txtPullerSpeedTarget.Text = "50";
             _txtPullerSpeedTarget.ThemeStyle = UI.Controls.ThemeStyle.Default;
             // 
             // _txtFeederSpeedTarget
@@ -211,7 +211,7 @@ namespace EQ.UI.UserViews.Extruder
             _txtFeederSpeedTarget.Name = "_txtFeederSpeedTarget";
             _txtFeederSpeedTarget.Size = new Size(80, 26);
             _txtFeederSpeedTarget.TabIndex = 9;
-            _txtFeederSpeedTarget.Text = "0.00";
+            _txtFeederSpeedTarget.Text = "50";
             _txtFeederSpeedTarget.ThemeStyle = UI.Controls.ThemeStyle.Default;
             // 
             // _lblPullerSpeedActual
@@ -365,7 +365,7 @@ namespace EQ.UI.UserViews.Extruder
             _Label8.BackColor = Color.FromArgb(150, 150, 150);
             _Label8.Font = new Font("D2Coding", 12F);
             _Label8.ForeColor = Color.White;
-            _Label8.Location = new Point(548, 212);
+            _Label8.Location = new Point(548, 210);
             _Label8.Name = "_Label8";
             _Label8.Size = new Size(60, 30);
             _Label8.TabIndex = 4;
@@ -399,52 +399,55 @@ namespace EQ.UI.UserViews.Extruder
             _Label6.TextAlign = ContentAlignment.MiddleCenter;
             _Label6.TooltipText = null;
             // 
-            // _Label5
-            // 
-            _Label5.BackColor = Color.FromArgb(150, 150, 150);
-            _Label5.Font = new Font("D2Coding", 12F);
-            _Label5.ForeColor = Color.White;
-            _Label5.Location = new Point(548, 44);
-            _Label5.Name = "_Label5";
-            _Label5.Size = new Size(60, 30);
-            _Label5.TabIndex = 4;
-            _Label5.Text = "Off";
-            _Label5.TextAlign = ContentAlignment.MiddleCenter;
-            _Label5.TooltipText = null;
-            // 
             // _pnlRightParams
             // 
             _pnlRightParams.BackColor = Color.FromArgb(64, 64, 64);
+            _pnlRightParams.Controls.Add(_Label48);
             _pnlRightParams.Controls.Add(_lblCircBathValue);
-            _pnlRightParams.Controls.Add(_lblCircBathLabel);
-            _pnlRightParams.Controls.Add(_txtHeatPlateLeftTarget);
+            _pnlRightParams.Controls.Add(Labels5);
+            _pnlRightParams.Controls.Add(Targets4);
             _pnlRightParams.Controls.Add(_lblHeatPlateLeftActual);
-            _pnlRightParams.Controls.Add(_lblHeatPlateLeftLabel);
-            _pnlRightParams.Controls.Add(_txtHeatPlateRightTarget);
+            _pnlRightParams.Controls.Add(Labels4);
+            _pnlRightParams.Controls.Add(Targets3);
             _pnlRightParams.Controls.Add(_lblHeatPlateRightActual);
-            _pnlRightParams.Controls.Add(_lblHeatPlateRightLabel);
-            _pnlRightParams.Controls.Add(_Label47);
-            _pnlRightParams.Controls.Add(_Label46);
-            _pnlRightParams.Controls.Add(_lblBarrelTemp2State);
-            _pnlRightParams.Controls.Add(_txtBarrelTemp2Target);
+            _pnlRightParams.Controls.Add(Labels3);
+            _pnlRightParams.Controls.Add(tempState4);
+            _pnlRightParams.Controls.Add(tempState3);
+            _pnlRightParams.Controls.Add(tempState2);
+            _pnlRightParams.Controls.Add(Targets2);
             _pnlRightParams.Controls.Add(_lblBarrelTemp2Actual);
-            _pnlRightParams.Controls.Add(_lblBarrelTemp2Label);
-            _pnlRightParams.Controls.Add(_lblBarrelTemp1State);
-            _pnlRightParams.Controls.Add(_txtBarrelTemp1Target);
+            _pnlRightParams.Controls.Add(Labels2);
+            _pnlRightParams.Controls.Add(tempState1);
+            _pnlRightParams.Controls.Add(Targets1);
             _pnlRightParams.Controls.Add(_lblBarrelTemp1Actual);
-            _pnlRightParams.Controls.Add(_lblBarrelTemp1Label);
+            _pnlRightParams.Controls.Add(Labels1);
             _pnlRightParams.Controls.Add(_lblRightParamsTitle);
-            _pnlRightParams.Controls.Add(_btnMinus01);
-            _pnlRightParams.Controls.Add(_btnPlus01);
-            _pnlRightParams.Controls.Add(_btnMinus1);
-            _pnlRightParams.Controls.Add(_btnPlus1);
-            _pnlRightParams.Controls.Add(_btnMinus5);
-            _pnlRightParams.Controls.Add(_btnPlus5);
+            _pnlRightParams.Controls.Add(_ButtonSet);
+            _pnlRightParams.Controls.Add(_btns6);
+            _pnlRightParams.Controls.Add(_btns5);
+            _pnlRightParams.Controls.Add(_btns4);
+            _pnlRightParams.Controls.Add(_btns3);
+            _pnlRightParams.Controls.Add(_btns2);
+            _pnlRightParams.Controls.Add(_btns1);
             _pnlRightParams.ForeColor = SystemColors.ControlText;
             _pnlRightParams.Location = new Point(1069, 20);
             _pnlRightParams.Name = "_pnlRightParams";
             _pnlRightParams.Size = new Size(806, 303);
             _pnlRightParams.TabIndex = 1;
+            // 
+            // _Label48
+            // 
+            _Label48.BackColor = Color.Black;
+            _Label48.Font = new Font("D2Coding", 12F);
+            _Label48.ForeColor = Color.White;
+            _Label48.Location = new Point(702, 207);
+            _Label48.Name = "_Label48";
+            _Label48.Size = new Size(90, 30);
+            _Label48.TabIndex = 16;
+            _Label48.Text = "0.0";
+            _Label48.TextAlign = ContentAlignment.MiddleRight;
+            _Label48.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
+            _Label48.TooltipText = null;
             // 
             // _lblCircBathValue
             // 
@@ -460,30 +463,31 @@ namespace EQ.UI.UserViews.Extruder
             _lblCircBathValue.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
             _lblCircBathValue.TooltipText = null;
             // 
-            // _lblCircBathLabel
+            // Labels5
             // 
-            _lblCircBathLabel.BackColor = Color.FromArgb(149, 165, 166);
-            _lblCircBathLabel.Font = new Font("D2Coding", 12F);
-            _lblCircBathLabel.ForeColor = Color.White;
-            _lblCircBathLabel.Location = new Point(10, 185);
-            _lblCircBathLabel.Name = "_lblCircBathLabel";
-            _lblCircBathLabel.Size = new Size(300, 30);
-            _lblCircBathLabel.TabIndex = 15;
-            _lblCircBathLabel.Text = "Circulation bath temp. [°C]";
-            _lblCircBathLabel.TextAlign = ContentAlignment.MiddleLeft;
-            _lblCircBathLabel.TooltipText = null;
+            Labels5.BackColor = Color.FromArgb(149, 165, 166);
+            Labels5.Font = new Font("D2Coding", 12F);
+            Labels5.ForeColor = Color.White;
+            Labels5.Location = new Point(10, 185);
+            Labels5.Name = "Labels5";
+            Labels5.Size = new Size(300, 30);
+            Labels5.TabIndex = 15;
+            Labels5.Text = "Circulation bath temp. [°C]";
+            Labels5.TextAlign = ContentAlignment.MiddleLeft;
+            Labels5.TooltipText = null;
+            Labels5.Click += Labels1_Click;
             // 
-            // _txtHeatPlateLeftTarget
+            // Targets4
             // 
-            _txtHeatPlateLeftTarget.BackColor = Color.FromArgb(255, 255, 225);
-            _txtHeatPlateLeftTarget.Font = new Font("D2Coding", 12F);
-            _txtHeatPlateLeftTarget.ForeColor = Color.Black;
-            _txtHeatPlateLeftTarget.Location = new Point(459, 152);
-            _txtHeatPlateLeftTarget.Name = "_txtHeatPlateLeftTarget";
-            _txtHeatPlateLeftTarget.Size = new Size(80, 26);
-            _txtHeatPlateLeftTarget.TabIndex = 14;
-            _txtHeatPlateLeftTarget.Text = "0.0";
-            _txtHeatPlateLeftTarget.ThemeStyle = UI.Controls.ThemeStyle.Display_LightYellow;
+            Targets4.BackColor = Color.FromArgb(255, 255, 225);
+            Targets4.Font = new Font("D2Coding", 12F);
+            Targets4.ForeColor = Color.Black;
+            Targets4.Location = new Point(459, 152);
+            Targets4.Name = "Targets4";
+            Targets4.Size = new Size(80, 26);
+            Targets4.TabIndex = 14;
+            Targets4.Text = "0.0";
+            Targets4.ThemeStyle = UI.Controls.ThemeStyle.Display_LightYellow;
             // 
             // _lblHeatPlateLeftActual
             // 
@@ -499,30 +503,31 @@ namespace EQ.UI.UserViews.Extruder
             _lblHeatPlateLeftActual.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
             _lblHeatPlateLeftActual.TooltipText = null;
             // 
-            // _lblHeatPlateLeftLabel
+            // Labels4
             // 
-            _lblHeatPlateLeftLabel.BackColor = Color.FromArgb(149, 165, 166);
-            _lblHeatPlateLeftLabel.Font = new Font("D2Coding", 12F);
-            _lblHeatPlateLeftLabel.ForeColor = Color.White;
-            _lblHeatPlateLeftLabel.Location = new Point(10, 150);
-            _lblHeatPlateLeftLabel.Name = "_lblHeatPlateLeftLabel";
-            _lblHeatPlateLeftLabel.Size = new Size(300, 30);
-            _lblHeatPlateLeftLabel.TabIndex = 12;
-            _lblHeatPlateLeftLabel.Text = "Heating plate left temp. [°C]";
-            _lblHeatPlateLeftLabel.TextAlign = ContentAlignment.MiddleLeft;
-            _lblHeatPlateLeftLabel.TooltipText = null;
+            Labels4.BackColor = Color.FromArgb(149, 165, 166);
+            Labels4.Font = new Font("D2Coding", 12F);
+            Labels4.ForeColor = Color.White;
+            Labels4.Location = new Point(10, 150);
+            Labels4.Name = "Labels4";
+            Labels4.Size = new Size(300, 30);
+            Labels4.TabIndex = 12;
+            Labels4.Text = "Heating plate left temp. [°C]";
+            Labels4.TextAlign = ContentAlignment.MiddleLeft;
+            Labels4.TooltipText = null;
+            Labels4.Click += Labels1_Click;
             // 
-            // _txtHeatPlateRightTarget
+            // Targets3
             // 
-            _txtHeatPlateRightTarget.BackColor = Color.FromArgb(255, 255, 225);
-            _txtHeatPlateRightTarget.Font = new Font("D2Coding", 12F);
-            _txtHeatPlateRightTarget.ForeColor = Color.Black;
-            _txtHeatPlateRightTarget.Location = new Point(459, 117);
-            _txtHeatPlateRightTarget.Name = "_txtHeatPlateRightTarget";
-            _txtHeatPlateRightTarget.Size = new Size(80, 26);
-            _txtHeatPlateRightTarget.TabIndex = 11;
-            _txtHeatPlateRightTarget.Text = "0.0";
-            _txtHeatPlateRightTarget.ThemeStyle = UI.Controls.ThemeStyle.Display_LightYellow;
+            Targets3.BackColor = Color.FromArgb(255, 255, 225);
+            Targets3.Font = new Font("D2Coding", 12F);
+            Targets3.ForeColor = Color.Black;
+            Targets3.Location = new Point(459, 117);
+            Targets3.Name = "Targets3";
+            Targets3.Size = new Size(80, 26);
+            Targets3.TabIndex = 11;
+            Targets3.Text = "0.0";
+            Targets3.ThemeStyle = UI.Controls.ThemeStyle.Display_LightYellow;
             // 
             // _lblHeatPlateRightActual
             // 
@@ -538,69 +543,73 @@ namespace EQ.UI.UserViews.Extruder
             _lblHeatPlateRightActual.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
             _lblHeatPlateRightActual.TooltipText = null;
             // 
-            // _lblHeatPlateRightLabel
+            // Labels3
             // 
-            _lblHeatPlateRightLabel.BackColor = Color.FromArgb(149, 165, 166);
-            _lblHeatPlateRightLabel.Font = new Font("D2Coding", 12F);
-            _lblHeatPlateRightLabel.ForeColor = Color.White;
-            _lblHeatPlateRightLabel.Location = new Point(10, 115);
-            _lblHeatPlateRightLabel.Name = "_lblHeatPlateRightLabel";
-            _lblHeatPlateRightLabel.Size = new Size(300, 30);
-            _lblHeatPlateRightLabel.TabIndex = 9;
-            _lblHeatPlateRightLabel.Text = "Heating plate right temp. [°C]";
-            _lblHeatPlateRightLabel.TextAlign = ContentAlignment.MiddleLeft;
-            _lblHeatPlateRightLabel.TooltipText = null;
+            Labels3.BackColor = Color.FromArgb(149, 165, 166);
+            Labels3.Font = new Font("D2Coding", 12F);
+            Labels3.ForeColor = Color.White;
+            Labels3.Location = new Point(10, 115);
+            Labels3.Name = "Labels3";
+            Labels3.Size = new Size(300, 30);
+            Labels3.TabIndex = 9;
+            Labels3.Text = "Heating plate right temp. [°C]";
+            Labels3.TextAlign = ContentAlignment.MiddleLeft;
+            Labels3.TooltipText = null;
+            Labels3.Click += Labels1_Click;
             // 
-            // _Label47
+            // tempState4
             // 
-            _Label47.BackColor = Color.FromArgb(150, 150, 150);
-            _Label47.Font = new Font("D2Coding", 12F);
-            _Label47.ForeColor = Color.White;
-            _Label47.Location = new Point(545, 152);
-            _Label47.Name = "_Label47";
-            _Label47.Size = new Size(60, 30);
-            _Label47.TabIndex = 8;
-            _Label47.Text = "Off";
-            _Label47.TextAlign = ContentAlignment.MiddleCenter;
-            _Label47.TooltipText = null;
+            tempState4.BackColor = Color.FromArgb(150, 150, 150);
+            tempState4.Font = new Font("D2Coding", 12F);
+            tempState4.ForeColor = Color.White;
+            tempState4.Location = new Point(545, 152);
+            tempState4.Name = "tempState4";
+            tempState4.Size = new Size(60, 30);
+            tempState4.TabIndex = 8;
+            tempState4.Text = "Off";
+            tempState4.TextAlign = ContentAlignment.MiddleCenter;
+            tempState4.TooltipText = null;
+            tempState4.Click += _lblBarrelTemp1State_Click;
             // 
-            // _Label46
+            // tempState3
             // 
-            _Label46.BackColor = Color.FromArgb(150, 150, 150);
-            _Label46.Font = new Font("D2Coding", 12F);
-            _Label46.ForeColor = Color.White;
-            _Label46.Location = new Point(545, 117);
-            _Label46.Name = "_Label46";
-            _Label46.Size = new Size(60, 30);
-            _Label46.TabIndex = 8;
-            _Label46.Text = "Off";
-            _Label46.TextAlign = ContentAlignment.MiddleCenter;
-            _Label46.TooltipText = null;
+            tempState3.BackColor = Color.FromArgb(150, 150, 150);
+            tempState3.Font = new Font("D2Coding", 12F);
+            tempState3.ForeColor = Color.White;
+            tempState3.Location = new Point(545, 117);
+            tempState3.Name = "tempState3";
+            tempState3.Size = new Size(60, 30);
+            tempState3.TabIndex = 8;
+            tempState3.Text = "Off";
+            tempState3.TextAlign = ContentAlignment.MiddleCenter;
+            tempState3.TooltipText = null;
+            tempState3.Click += _lblBarrelTemp1State_Click;
             // 
-            // _lblBarrelTemp2State
+            // tempState2
             // 
-            _lblBarrelTemp2State.BackColor = Color.FromArgb(150, 150, 150);
-            _lblBarrelTemp2State.Font = new Font("D2Coding", 12F);
-            _lblBarrelTemp2State.ForeColor = Color.White;
-            _lblBarrelTemp2State.Location = new Point(545, 82);
-            _lblBarrelTemp2State.Name = "_lblBarrelTemp2State";
-            _lblBarrelTemp2State.Size = new Size(60, 30);
-            _lblBarrelTemp2State.TabIndex = 8;
-            _lblBarrelTemp2State.Text = "Off";
-            _lblBarrelTemp2State.TextAlign = ContentAlignment.MiddleCenter;
-            _lblBarrelTemp2State.TooltipText = null;
+            tempState2.BackColor = Color.FromArgb(150, 150, 150);
+            tempState2.Font = new Font("D2Coding", 12F);
+            tempState2.ForeColor = Color.White;
+            tempState2.Location = new Point(545, 82);
+            tempState2.Name = "tempState2";
+            tempState2.Size = new Size(60, 30);
+            tempState2.TabIndex = 8;
+            tempState2.Text = "Off";
+            tempState2.TextAlign = ContentAlignment.MiddleCenter;
+            tempState2.TooltipText = null;
+            tempState2.Click += _lblBarrelTemp1State_Click;
             // 
-            // _txtBarrelTemp2Target
+            // Targets2
             // 
-            _txtBarrelTemp2Target.BackColor = Color.FromArgb(255, 255, 225);
-            _txtBarrelTemp2Target.Font = new Font("D2Coding", 12F);
-            _txtBarrelTemp2Target.ForeColor = Color.Black;
-            _txtBarrelTemp2Target.Location = new Point(459, 82);
-            _txtBarrelTemp2Target.Name = "_txtBarrelTemp2Target";
-            _txtBarrelTemp2Target.Size = new Size(80, 26);
-            _txtBarrelTemp2Target.TabIndex = 7;
-            _txtBarrelTemp2Target.Text = "105.0";
-            _txtBarrelTemp2Target.ThemeStyle = UI.Controls.ThemeStyle.Display_LightYellow;
+            Targets2.BackColor = Color.FromArgb(255, 255, 225);
+            Targets2.Font = new Font("D2Coding", 12F);
+            Targets2.ForeColor = Color.Black;
+            Targets2.Location = new Point(459, 82);
+            Targets2.Name = "Targets2";
+            Targets2.Size = new Size(80, 26);
+            Targets2.TabIndex = 7;
+            Targets2.Text = "105.0";
+            Targets2.ThemeStyle = UI.Controls.ThemeStyle.Display_LightYellow;
             // 
             // _lblBarrelTemp2Actual
             // 
@@ -616,43 +625,45 @@ namespace EQ.UI.UserViews.Extruder
             _lblBarrelTemp2Actual.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
             _lblBarrelTemp2Actual.TooltipText = null;
             // 
-            // _lblBarrelTemp2Label
+            // Labels2
             // 
-            _lblBarrelTemp2Label.BackColor = Color.FromArgb(149, 165, 166);
-            _lblBarrelTemp2Label.Font = new Font("D2Coding", 12F);
-            _lblBarrelTemp2Label.ForeColor = Color.White;
-            _lblBarrelTemp2Label.Location = new Point(10, 80);
-            _lblBarrelTemp2Label.Name = "_lblBarrelTemp2Label";
-            _lblBarrelTemp2Label.Size = new Size(300, 30);
-            _lblBarrelTemp2Label.TabIndex = 5;
-            _lblBarrelTemp2Label.Text = "Barrel temperature 2 [°C]";
-            _lblBarrelTemp2Label.TextAlign = ContentAlignment.MiddleLeft;
-            _lblBarrelTemp2Label.TooltipText = null;
+            Labels2.BackColor = Color.FromArgb(149, 165, 166);
+            Labels2.Font = new Font("D2Coding", 12F);
+            Labels2.ForeColor = Color.White;
+            Labels2.Location = new Point(10, 80);
+            Labels2.Name = "Labels2";
+            Labels2.Size = new Size(300, 30);
+            Labels2.TabIndex = 5;
+            Labels2.Text = "Barrel temperature 2 [°C]";
+            Labels2.TextAlign = ContentAlignment.MiddleLeft;
+            Labels2.TooltipText = null;
+            Labels2.Click += Labels1_Click;
             // 
-            // _lblBarrelTemp1State
+            // tempState1
             // 
-            _lblBarrelTemp1State.BackColor = Color.FromArgb(150, 150, 150);
-            _lblBarrelTemp1State.Font = new Font("D2Coding", 12F);
-            _lblBarrelTemp1State.ForeColor = Color.White;
-            _lblBarrelTemp1State.Location = new Point(545, 47);
-            _lblBarrelTemp1State.Name = "_lblBarrelTemp1State";
-            _lblBarrelTemp1State.Size = new Size(60, 30);
-            _lblBarrelTemp1State.TabIndex = 4;
-            _lblBarrelTemp1State.Text = "Off";
-            _lblBarrelTemp1State.TextAlign = ContentAlignment.MiddleCenter;
-            _lblBarrelTemp1State.TooltipText = null;
+            tempState1.BackColor = Color.FromArgb(150, 150, 150);
+            tempState1.Font = new Font("D2Coding", 12F);
+            tempState1.ForeColor = Color.White;
+            tempState1.Location = new Point(545, 47);
+            tempState1.Name = "tempState1";
+            tempState1.Size = new Size(60, 30);
+            tempState1.TabIndex = 4;
+            tempState1.Text = "Off";
+            tempState1.TextAlign = ContentAlignment.MiddleCenter;
+            tempState1.TooltipText = null;
+            tempState1.Click += _lblBarrelTemp1State_Click;
             // 
-            // _txtBarrelTemp1Target
+            // Targets1
             // 
-            _txtBarrelTemp1Target.BackColor = Color.FromArgb(255, 255, 225);
-            _txtBarrelTemp1Target.Font = new Font("D2Coding", 12F);
-            _txtBarrelTemp1Target.ForeColor = Color.Black;
-            _txtBarrelTemp1Target.Location = new Point(459, 47);
-            _txtBarrelTemp1Target.Name = "_txtBarrelTemp1Target";
-            _txtBarrelTemp1Target.Size = new Size(80, 26);
-            _txtBarrelTemp1Target.TabIndex = 3;
-            _txtBarrelTemp1Target.Text = "105.0";
-            _txtBarrelTemp1Target.ThemeStyle = UI.Controls.ThemeStyle.Display_LightYellow;
+            Targets1.BackColor = Color.FromArgb(255, 255, 225);
+            Targets1.Font = new Font("D2Coding", 12F);
+            Targets1.ForeColor = Color.Black;
+            Targets1.Location = new Point(459, 47);
+            Targets1.Name = "Targets1";
+            Targets1.Size = new Size(80, 26);
+            Targets1.TabIndex = 3;
+            Targets1.Text = "105.0";
+            Targets1.ThemeStyle = UI.Controls.ThemeStyle.Display_LightYellow;
             // 
             // _lblBarrelTemp1Actual
             // 
@@ -668,18 +679,19 @@ namespace EQ.UI.UserViews.Extruder
             _lblBarrelTemp1Actual.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
             _lblBarrelTemp1Actual.TooltipText = null;
             // 
-            // _lblBarrelTemp1Label
+            // Labels1
             // 
-            _lblBarrelTemp1Label.BackColor = Color.FromArgb(149, 165, 166);
-            _lblBarrelTemp1Label.Font = new Font("D2Coding", 12F);
-            _lblBarrelTemp1Label.ForeColor = Color.White;
-            _lblBarrelTemp1Label.Location = new Point(10, 45);
-            _lblBarrelTemp1Label.Name = "_lblBarrelTemp1Label";
-            _lblBarrelTemp1Label.Size = new Size(300, 30);
-            _lblBarrelTemp1Label.TabIndex = 1;
-            _lblBarrelTemp1Label.Text = "Barrel temperature 1 [°C]";
-            _lblBarrelTemp1Label.TextAlign = ContentAlignment.MiddleLeft;
-            _lblBarrelTemp1Label.TooltipText = null;
+            Labels1.BackColor = Color.FromArgb(149, 165, 166);
+            Labels1.Font = new Font("D2Coding", 12F);
+            Labels1.ForeColor = Color.White;
+            Labels1.Location = new Point(10, 45);
+            Labels1.Name = "Labels1";
+            Labels1.Size = new Size(300, 30);
+            Labels1.TabIndex = 1;
+            Labels1.Text = "Barrel temperature 1 [°C]";
+            Labels1.TextAlign = ContentAlignment.MiddleLeft;
+            Labels1.TooltipText = null;
+            Labels1.Click += Labels1_Click;
             // 
             // _lblRightParamsTitle
             // 
@@ -696,89 +708,109 @@ namespace EQ.UI.UserViews.Extruder
             _lblRightParamsTitle.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
             _lblRightParamsTitle.TooltipText = null;
             // 
-            // _btnMinus01
+            // _ButtonSet
             // 
-            _btnMinus01.BackColor = Color.FromArgb(241, 196, 15);
-            _btnMinus01.Font = new Font("D2Coding", 9F);
-            _btnMinus01.ForeColor = Color.Black;
-            _btnMinus01.Location = new Point(555, 247);
-            _btnMinus01.Name = "_btnMinus01";
-            _btnMinus01.Size = new Size(90, 45);
-            _btnMinus01.TabIndex = 22;
-            _btnMinus01.Text = "-0.1";
-            _btnMinus01.ThemeStyle = UI.Controls.ThemeStyle.Warning_Yellow;
-            _btnMinus01.TooltipText = null;
-            _btnMinus01.UseVisualStyleBackColor = false;
+            _ButtonSet.BackColor = Color.FromArgb(48, 63, 159);
+            _ButtonSet.Font = new Font("D2Coding", 9F);
+            _ButtonSet.ForeColor = Color.White;
+            _ButtonSet.Location = new Point(702, 247);
+            _ButtonSet.Name = "_ButtonSet";
+            _ButtonSet.Size = new Size(90, 45);
+            _ButtonSet.TabIndex = 22;
+            _ButtonSet.Text = "Set";
+            _ButtonSet.TooltipText = null;
+            _ButtonSet.UseVisualStyleBackColor = false;
+            _ButtonSet.Click += _ButtonSet_Click;
             // 
-            // _btnPlus01
+            // _btns6
             // 
-            _btnPlus01.BackColor = Color.FromArgb(241, 196, 15);
-            _btnPlus01.Font = new Font("D2Coding", 9F);
-            _btnPlus01.ForeColor = Color.Black;
-            _btnPlus01.Location = new Point(449, 247);
-            _btnPlus01.Name = "_btnPlus01";
-            _btnPlus01.Size = new Size(90, 45);
-            _btnPlus01.TabIndex = 21;
-            _btnPlus01.Text = "+0.1";
-            _btnPlus01.ThemeStyle = UI.Controls.ThemeStyle.Warning_Yellow;
-            _btnPlus01.TooltipText = null;
-            _btnPlus01.UseVisualStyleBackColor = false;
+            _btns6.BackColor = Color.FromArgb(241, 196, 15);
+            _btns6.Font = new Font("D2Coding", 9F);
+            _btns6.ForeColor = Color.Black;
+            _btns6.Location = new Point(555, 247);
+            _btns6.Name = "_btns6";
+            _btns6.Size = new Size(90, 45);
+            _btns6.TabIndex = 22;
+            _btns6.Text = "-0.1";
+            _btns6.ThemeStyle = UI.Controls.ThemeStyle.Warning_Yellow;
+            _btns6.TooltipText = null;
+            _btns6.UseVisualStyleBackColor = false;
+            _btns6.Click += _btnPlus5_Click;
             // 
-            // _btnMinus1
+            // _btns5
             // 
-            _btnMinus1.BackColor = Color.FromArgb(241, 196, 15);
-            _btnMinus1.Font = new Font("D2Coding", 9F);
-            _btnMinus1.ForeColor = Color.Black;
-            _btnMinus1.Location = new Point(337, 247);
-            _btnMinus1.Name = "_btnMinus1";
-            _btnMinus1.Size = new Size(90, 45);
-            _btnMinus1.TabIndex = 20;
-            _btnMinus1.Text = "-1";
-            _btnMinus1.ThemeStyle = UI.Controls.ThemeStyle.Warning_Yellow;
-            _btnMinus1.TooltipText = null;
-            _btnMinus1.UseVisualStyleBackColor = false;
+            _btns5.BackColor = Color.FromArgb(241, 196, 15);
+            _btns5.Font = new Font("D2Coding", 9F);
+            _btns5.ForeColor = Color.Black;
+            _btns5.Location = new Point(449, 247);
+            _btns5.Name = "_btns5";
+            _btns5.Size = new Size(90, 45);
+            _btns5.TabIndex = 21;
+            _btns5.Text = "+0.1";
+            _btns5.ThemeStyle = UI.Controls.ThemeStyle.Warning_Yellow;
+            _btns5.TooltipText = null;
+            _btns5.UseVisualStyleBackColor = false;
+            _btns5.Click += _btnPlus5_Click;
             // 
-            // _btnPlus1
+            // _btns4
             // 
-            _btnPlus1.BackColor = Color.FromArgb(241, 196, 15);
-            _btnPlus1.Font = new Font("D2Coding", 9F);
-            _btnPlus1.ForeColor = Color.Black;
-            _btnPlus1.Location = new Point(228, 247);
-            _btnPlus1.Name = "_btnPlus1";
-            _btnPlus1.Size = new Size(90, 45);
-            _btnPlus1.TabIndex = 19;
-            _btnPlus1.Text = "+1";
-            _btnPlus1.ThemeStyle = UI.Controls.ThemeStyle.Warning_Yellow;
-            _btnPlus1.TooltipText = null;
-            _btnPlus1.UseVisualStyleBackColor = false;
+            _btns4.BackColor = Color.FromArgb(241, 196, 15);
+            _btns4.Font = new Font("D2Coding", 9F);
+            _btns4.ForeColor = Color.Black;
+            _btns4.Location = new Point(337, 247);
+            _btns4.Name = "_btns4";
+            _btns4.Size = new Size(90, 45);
+            _btns4.TabIndex = 20;
+            _btns4.Text = "-1";
+            _btns4.ThemeStyle = UI.Controls.ThemeStyle.Warning_Yellow;
+            _btns4.TooltipText = null;
+            _btns4.UseVisualStyleBackColor = false;
+            _btns4.Click += _btnPlus5_Click;
             // 
-            // _btnMinus5
+            // _btns3
             // 
-            _btnMinus5.BackColor = Color.FromArgb(241, 196, 15);
-            _btnMinus5.Font = new Font("D2Coding", 9F);
-            _btnMinus5.ForeColor = Color.Black;
-            _btnMinus5.Location = new Point(118, 247);
-            _btnMinus5.Name = "_btnMinus5";
-            _btnMinus5.Size = new Size(90, 45);
-            _btnMinus5.TabIndex = 18;
-            _btnMinus5.Text = "-5";
-            _btnMinus5.ThemeStyle = UI.Controls.ThemeStyle.Warning_Yellow;
-            _btnMinus5.TooltipText = null;
-            _btnMinus5.UseVisualStyleBackColor = false;
+            _btns3.BackColor = Color.FromArgb(241, 196, 15);
+            _btns3.Font = new Font("D2Coding", 9F);
+            _btns3.ForeColor = Color.Black;
+            _btns3.Location = new Point(228, 247);
+            _btns3.Name = "_btns3";
+            _btns3.Size = new Size(90, 45);
+            _btns3.TabIndex = 19;
+            _btns3.Text = "+1";
+            _btns3.ThemeStyle = UI.Controls.ThemeStyle.Warning_Yellow;
+            _btns3.TooltipText = null;
+            _btns3.UseVisualStyleBackColor = false;
+            _btns3.Click += _btnPlus5_Click;
             // 
-            // _btnPlus5
+            // _btns2
             // 
-            _btnPlus5.BackColor = Color.FromArgb(241, 196, 15);
-            _btnPlus5.Font = new Font("D2Coding", 9F);
-            _btnPlus5.ForeColor = Color.Black;
-            _btnPlus5.Location = new Point(10, 247);
-            _btnPlus5.Name = "_btnPlus5";
-            _btnPlus5.Size = new Size(90, 45);
-            _btnPlus5.TabIndex = 17;
-            _btnPlus5.Text = "+5";
-            _btnPlus5.ThemeStyle = UI.Controls.ThemeStyle.Warning_Yellow;
-            _btnPlus5.TooltipText = null;
-            _btnPlus5.UseVisualStyleBackColor = false;
+            _btns2.BackColor = Color.FromArgb(241, 196, 15);
+            _btns2.Font = new Font("D2Coding", 9F);
+            _btns2.ForeColor = Color.Black;
+            _btns2.Location = new Point(118, 247);
+            _btns2.Name = "_btns2";
+            _btns2.Size = new Size(90, 45);
+            _btns2.TabIndex = 18;
+            _btns2.Text = "-5";
+            _btns2.ThemeStyle = UI.Controls.ThemeStyle.Warning_Yellow;
+            _btns2.TooltipText = null;
+            _btns2.UseVisualStyleBackColor = false;
+            _btns2.Click += _btnPlus5_Click;
+            // 
+            // _btns1
+            // 
+            _btns1.BackColor = Color.FromArgb(241, 196, 15);
+            _btns1.Font = new Font("D2Coding", 9F);
+            _btns1.ForeColor = Color.Black;
+            _btns1.Location = new Point(10, 247);
+            _btns1.Name = "_btns1";
+            _btns1.Size = new Size(90, 45);
+            _btns1.TabIndex = 17;
+            _btns1.Text = "+5";
+            _btns1.ThemeStyle = UI.Controls.ThemeStyle.Warning_Yellow;
+            _btns1.TooltipText = null;
+            _btns1.UseVisualStyleBackColor = false;
+            _btns1.Click += _btnPlus5_Click;
             // 
             // _pnlMeanDiameter
             // 
@@ -1836,28 +1868,28 @@ namespace EQ.UI.UserViews.Extruder
         // Right Parameters
         private Controls._Panel _pnlRightParams;
         private Controls._Label _lblRightParamsTitle;
-        private Controls._Label _lblBarrelTemp1Label;
+        private Controls._Label Labels1;
         private Controls._Label _lblBarrelTemp1Actual;
-        private Controls._TextBox _txtBarrelTemp1Target;
-        private Controls._Label _lblBarrelTemp1State;
-        private Controls._Label _lblBarrelTemp2Label;
+        private Controls._TextBox Targets1;
+        private Controls._Label tempState1;
+        private Controls._Label Labels2;
         private Controls._Label _lblBarrelTemp2Actual;
-        private Controls._TextBox _txtBarrelTemp2Target;
-        private Controls._Label _lblBarrelTemp2State;
-        private Controls._Label _lblHeatPlateRightLabel;
+        private Controls._TextBox Targets2;
+        private Controls._Label tempState2;
+        private Controls._Label Labels3;
         private Controls._Label _lblHeatPlateRightActual;
-        private Controls._TextBox _txtHeatPlateRightTarget;
-        private Controls._Label _lblHeatPlateLeftLabel;
+        private Controls._TextBox Targets3;
+        private Controls._Label Labels4;
         private Controls._Label _lblHeatPlateLeftActual;
-        private Controls._TextBox _txtHeatPlateLeftTarget;
-        private Controls._Label _lblCircBathLabel;
+        private Controls._TextBox Targets4;
+        private Controls._Label Labels5;
         private Controls._Label _lblCircBathValue;
-        private Controls._Button _btnPlus5;
-        private Controls._Button _btnMinus5;
-        private Controls._Button _btnPlus1;
-        private Controls._Button _btnMinus1;
-        private Controls._Button _btnPlus01;
-        private Controls._Button _btnMinus01;
+        private Controls._Button _btns1;
+        private Controls._Button _btns2;
+        private Controls._Button _btns3;
+        private Controls._Button _btns4;
+        private Controls._Button _btns5;
+        private Controls._Button _btns6;
         private Controls._Label _lblPullerSpeedLabel;
         private Controls._Label _lblPullerSpeedActual;
         private Controls._TextBox _txtPullerSpeedTarget;
@@ -1898,7 +1930,6 @@ namespace EQ.UI.UserViews.Extruder
         private Controls._Label _lblRatioValue;
         private Controls._Label _Label7;
         private Controls._Label _Label6;
-        private Controls._Label _Label5;
         private Controls._Panel _Panel1;
         private Controls._Label _Label4;
         private Controls._Label _Label8;
@@ -1947,8 +1978,10 @@ namespace EQ.UI.UserViews.Extruder
         private Controls._Label _Label38;
         private Controls._Label _Label45;
         private Controls._Label _Label44;
-        private Controls._Label _Label47;
-        private Controls._Label _Label46;
+        private Controls._Label tempState4;
+        private Controls._Label tempState3;
         private System.Windows.Forms.Timer timer1;
+        private Controls._Label _Label48;
+        private Controls._Button _ButtonSet;
     }
 }

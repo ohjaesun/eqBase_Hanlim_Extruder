@@ -3,10 +3,7 @@ using EQ.Core.Act;
 using EQ.Core.Act.Composition;
 using EQ.Core.Service;
 using EQ.Domain.Enums;
-using System;
-using System.Windows.Forms;
-
-using static EQ.Core.Globals;
+using EQ.UI.Controls;
 
 namespace EQ.UI.UserViews.Extruder
 {
@@ -64,7 +61,7 @@ namespace EQ.UI.UserViews.Extruder
         {
             SuspendLayout();
 
-           
+
 
             //왼쪽 패널
             {
@@ -104,20 +101,20 @@ namespace EQ.UI.UserViews.Extruder
                     _lblHeatPlateRightActual.Text = _temp[0].CurrentTemperature.ToString("F1") ?? "0.0";
                     _lblHeatPlateLeftActual.Text = _temp[1].CurrentTemperature.ToString("F1") ?? "0.0";
 
-                    _txtHeatPlateRightTarget.Text = _temp[0].TargetTemperature.ToString("F1") ?? "0.0";
-                    _txtHeatPlateLeftTarget.Text = _temp[1].TargetTemperature.ToString("F1") ?? "0.0";
+                    Targets3.Text = _temp[0].TargetTemperature.ToString("F1") ?? "0.0";
+                    Targets4.Text = _temp[1].TargetTemperature.ToString("F1") ?? "0.0";
 
-                    _Label46.Text = _temp[0].IsRunning ? "RUN" : "STOP";
-                    _Label46.ThemeStyle = _temp[0].IsRunning ? UI.Controls.ThemeStyle.Success_Green : UI.Controls.ThemeStyle.Neutral_Gray;
-                    _Label47.Text = _temp[1].IsRunning ? "RUN" : "STOP";
-                    _Label47.ThemeStyle = _temp[1].IsRunning ? UI.Controls.ThemeStyle.Success_Green : UI.Controls.ThemeStyle.Neutral_Gray;
+                    tempState3.Text = _temp[0].IsRunning ? "RUN" : "STOP";
+                    tempState3.ThemeStyle = _temp[0].IsRunning ? UI.Controls.ThemeStyle.Success_Green : UI.Controls.ThemeStyle.Neutral_Gray;
+                    tempState4.Text = _temp[1].IsRunning ? "RUN" : "STOP";
+                    tempState4.ThemeStyle = _temp[1].IsRunning ? UI.Controls.ThemeStyle.Success_Green : UI.Controls.ThemeStyle.Neutral_Gray;
                 }
             }
 
             //중간 패널
             {
                 // 길이
-                { 
+                {
                 }
 
                 // 원형도
@@ -130,6 +127,106 @@ namespace EQ.UI.UserViews.Extruder
 
 
             ResumeLayout();
+        }
+
+        private void Labels1_Click(object sender, EventArgs e)
+        {
+            var idx = Utils.GetButtonIdx((sender as Label).Name);
+
+            for (int i = 1; i <= 4; i++)
+            {
+                string name = $"Labels{i}";
+
+                if (i == idx)
+                {
+                    (this.Controls.Find(name, true)[0] as _Label).ThemeStyle = ThemeStyle.Info_Sky;
+
+                    string name2 = $"Targets{idx}";
+                    _Label48.Text = (this.Controls.Find(name2, true)[0] as _TextBox).Text;
+                }
+                else
+                    (this.Controls.Find(name, true)[0] as _Label).ThemeStyle = ThemeStyle.Neutral_Gray;
+            }
+        }
+
+        private void _btnPlus5_Click(object sender, EventArgs e)
+        {
+            var idx = Utils.GetButtonIdx((sender as Button).Name);
+
+            //+5 -5 +1 -1 +0.1 -0.1
+            double addValue = idx switch
+            {
+                1 => 5.0,
+                2 => -5.0,
+                3 => 1.0,
+                4 => -1.0,
+                5 => 0.1,
+                6 => -0.1,
+                _ => 0.0
+            };
+
+            //선택된 값 _Label48 += 선택된 값
+            double value = double.Parse(_Label48.Text) + addValue;
+            _Label48.Text = value.ToString("F1");
+
+        }
+
+        private void _lblBarrelTemp1State_Click(object sender, EventArgs e)
+        {
+            var idx = Utils.GetButtonIdx((sender as Label).Name);
+
+            switch (idx)
+            {
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                case 3: //히터1
+                    {
+                        var heater1 = act.Temp.Get(TempID.Zone1).IsRunning();
+                        act.Temp.Get(TempID.Zone1).SetRun(!heater1);
+                    }
+                    break;
+                case 4: //히터2
+                    {
+                        var heater2 = act.Temp.Get(TempID.Zone2).IsRunning();
+                        act.Temp.Get(TempID.Zone2).SetRun(!heater2);
+                    }
+
+                    break;
+            }
+        }
+
+        private void _ButtonSet_Click(object sender, EventArgs e)
+        {          
+
+            for (int i = 1; i <= 4; i++)
+            {
+                string name = $"Labels{i}";
+                
+                if ((this.Controls.Find(name, true)[0] as _Label).ThemeStyle == ThemeStyle.Info_Sky)
+                {
+                    double value = double.Parse(_Label48.Text);
+                    switch (i)
+                    {
+                        case 1:
+
+                            break;
+                        case 2:
+
+                            break;
+                        case 3:
+                            act.Temp.Get(TempID.Zone1).WriteSV(value);
+                            break;
+                        case 4:
+                            act.Temp.Get(TempID.Zone2).WriteSV(value);
+                            break;
+                    }
+                }
+
+            }
         }
     }
 }

@@ -52,6 +52,12 @@
         [ExtruderParameter("PID", "#", "PID 비례(P) 게인", "0...1", 0.35)]
         public double Kp { get; set; } = 0.35;
 
+        [ExtruderParameter("PID", "s", "PID 측정 샘플링 주기", "0.5...5", 1.0)]
+        public double PidSamplingTime { get; set; } = 1.0;
+
+        [ExtruderParameter("PID", "#", "데드타임 보상 지연 버퍼 개수 (0=미사용)", "0...15", 10)]
+        public int DelayBufferCount { get; set; } = 10;
+
         // --- Quality ---
         [ExtruderParameter("Quality", "mm", "필라멘트 목표 직경", "0.1...1.6", 0.8)]
         public double Diameter { get; set; } = 0.8;

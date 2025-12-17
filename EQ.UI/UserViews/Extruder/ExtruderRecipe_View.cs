@@ -39,6 +39,7 @@ namespace EQ.UI.UserViews.Extruder
             InitializeComboBox();
             InitializeGrid();
             LoadData();
+            Invalidate();
         }
 
         private void InitializeComboBox()
@@ -52,7 +53,13 @@ namespace EQ.UI.UserViews.Extruder
                 _comboRecipe.Items.Add(recipe.Name);
             }
 
-            if (_comboRecipe.Items.Count > 0)
+            // ActExtruderRecipe의 현재 레시피 인덱스를 사용
+            int currentIndex = act.ExtruderRecipe.CurrentRecipeIndex;
+            if (currentIndex >= 0 && currentIndex < _comboRecipe.Items.Count)
+            {
+                _comboRecipe.SelectedIndex = currentIndex;
+            }
+            else if (_comboRecipe.Items.Count > 0)
             {
                 _comboRecipe.SelectedIndex = 0;
             }
@@ -62,6 +69,10 @@ namespace EQ.UI.UserViews.Extruder
 
         private void _comboRecipe_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // ActExtruderRecipe의 현재 레시피 인덱스 업데이트
+            var act = ActManager.Instance.Act;
+            act.ExtruderRecipe.SetCurrentRecipe(_comboRecipe.SelectedIndex);
+            
             LoadData();
             UpdateIndexLabel();
         }
@@ -90,6 +101,15 @@ namespace EQ.UI.UserViews.Extruder
 
             // 셀 클릭 이벤트 등록
             _dataGridView1.CellClick += _dataGridView1_CellClick;
+
+            // 데이터 바인딩 완료 이벤트 등록 (색상 적용)
+            _dataGridView1.DataBindingComplete += _dataGridView1_DataBindingComplete;
+        }
+
+        private void _dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            // 데이터 바인딩 완료 후 카테고리별 색상 적용
+            ApplyCategoryRowColors();
         }
 
         private void LoadData()
@@ -138,9 +158,6 @@ namespace EQ.UI.UserViews.Extruder
                     col.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill; // 나머지 공간 채움
                 }
             }
-
-            // 카테고리별 행 배경색 적용
-            ApplyCategoryRowColors();
 
             // 인덱스 레이블 업데이트
             UpdateIndexLabel();

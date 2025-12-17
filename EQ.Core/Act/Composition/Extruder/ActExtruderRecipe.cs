@@ -27,6 +27,16 @@ namespace EQ.Core.Act.Composition.Extruder
         /// </summary>
         public IReadOnlyList<ExtruderRecipe> Recipes => _recipes;
 
+        /// <summary>
+        /// 현재 선택된 레시피 인덱스 (0-based)
+        /// </summary>
+        public int CurrentRecipeIndex { get; private set; } = 0;
+
+        /// <summary>
+        /// 현재 선택된 레시피
+        /// </summary>
+        public ExtruderRecipe CurrentRecipe => GetByIndex(CurrentRecipeIndex);
+
         public ActExtruderRecipe(ACT act) : base(act)
         {
             _recipes = new List<ExtruderRecipe>();
@@ -120,6 +130,22 @@ namespace EQ.Core.Act.Composition.Extruder
                 return _recipes[index];
             }
             return null;
+        }
+
+        /// <summary>
+        /// 현재 선택된 레시피 인덱스를 설정합니다.
+        /// </summary>
+        /// <param name="index">레시피 인덱스 (0-based)</param>
+        /// <returns>설정 성공 여부</returns>
+        public bool SetCurrentRecipe(int index)
+        {
+            if (index >= 0 && index < _recipes.Count)
+            {
+                CurrentRecipeIndex = index;
+                Log.Instance.Info($"현재 레시피 변경: Recipe_{index + 1:D2} ({_recipes[index].Name})");
+                return true;
+            }
+            return false;
         }
 
         /// <summary>

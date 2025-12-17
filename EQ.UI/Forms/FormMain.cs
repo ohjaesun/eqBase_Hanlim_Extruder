@@ -36,7 +36,7 @@ namespace EQ.UI
 
         private void FormMain_Shown(object sender, EventArgs e)
         {
-         
+
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -47,6 +47,10 @@ namespace EQ.UI
             timerToolStrip.Start();
 
             buildDate = GetDisplayVersion();
+
+            // Start 1s timer to update date/time label
+            timer1000.Interval = 1000;
+            timer1000.Start();
         }
 
         private async void _Button_Bottom_Click(object sender, EventArgs e)
@@ -193,7 +197,7 @@ namespace EQ.UI
                         ActManager.Instance.Act.E_STOP();
                     }
                     break;
-            }           
+            }
 
         }
 
@@ -300,9 +304,23 @@ namespace EQ.UI
 
 
 
-
         }
 
+        private void timer1000_Tick(object sender, EventArgs e)
+        {
+            // Update top-right date/time label once per second
+            try
+            {
+                var now = DateTime.Now;
+                string text = now.ToString("yyyy-MM-dd HH:mm:ss");
 
+                if (_LabelDate.Text != text)
+                    _LabelDate.Text = text;
+            }
+            catch
+            {
+                // ignore UI update errors
+            }
+        }
     }
 }

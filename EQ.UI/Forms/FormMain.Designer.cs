@@ -38,10 +38,11 @@ namespace EQ.UI
             _Panel5 = new EQ.UI.Controls._Panel();
             _Label4 = new EQ.UI.Controls._Label();
             _Label7 = new EQ.UI.Controls._Label();
-            _Label6 = new EQ.UI.Controls._Label();
+            _LabelDate = new EQ.UI.Controls._Label();
             _Label5 = new EQ.UI.Controls._Label();
             _Label2 = new EQ.UI.Controls._Label();
             _Panel4 = new EQ.UI.Controls._Panel();
+            _Label10 = new EQ.UI.Controls._Label();
             _Label1 = new EQ.UI.Controls._Label();
             _Panel2 = new EQ.UI.Controls._Panel();
             flowLayoutPanel1 = new FlowLayoutPanel();
@@ -52,8 +53,10 @@ namespace EQ.UI
             _ButtonBottom5 = new EQ.UI.Controls._Button();
             _ButtonBottom6 = new EQ.UI.Controls._Button();
             _ButtonBottom7 = new EQ.UI.Controls._Button();
-            _ButtonBottom8 = new EQ.UI.Controls._Button();
             _ButtonBottom9 = new EQ.UI.Controls._Button();
+            flowLayoutPanel2 = new FlowLayoutPanel();
+            _Button1 = new EQ.UI.Controls._Button();
+            _ButtonBottom8 = new EQ.UI.Controls._Button();
             panelMain = new EQ.UI.Controls._Panel();
             statusStrip1 = new StatusStrip();
             toolStrip1 = new ToolStripStatusLabel();
@@ -67,16 +70,15 @@ namespace EQ.UI
             toolStrip9 = new ToolStripStatusLabel();
             toolStrip10 = new ToolStripStatusLabel();
             timerToolStrip = new System.Windows.Forms.Timer(components);
-            _Button1 = new EQ.UI.Controls._Button();
-            flowLayoutPanel2 = new FlowLayoutPanel();
+            timer1000 = new System.Windows.Forms.Timer(components);
             _Panel1.SuspendLayout();
             _Panel6.SuspendLayout();
             _Panel5.SuspendLayout();
             _Panel4.SuspendLayout();
             _Panel2.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
-            statusStrip1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // _Panel1
@@ -108,45 +110,50 @@ namespace EQ.UI
             // 
             // _Label9
             // 
-            _Label9.BackColor = Color.FromArgb(149, 165, 166);
+            _Label9.BackColor = SystemColors.Control;
+            _Label9.BorderStyle = BorderStyle.FixedSingle;
             _Label9.Dock = DockStyle.Fill;
             _Label9.Font = new Font("D2Coding", 12F);
-            _Label9.ForeColor = Color.White;
+            _Label9.ForeColor = SystemColors.ControlText;
             _Label9.Location = new Point(152, 0);
             _Label9.Name = "_Label9";
             _Label9.Size = new Size(1339, 43);
             _Label9.TabIndex = 2;
             _Label9.Text = "_Label9";
             _Label9.TextAlign = ContentAlignment.MiddleLeft;
+            _Label9.ThemeStyle = UI.Controls.ThemeStyle.Default;
             _Label9.TooltipText = null;
             // 
             // _Label8
             // 
-            _Label8.BackColor = SystemColors.Control;
+            _Label8.BackColor = Color.FromArgb(46, 204, 113);
+            _Label8.BorderStyle = BorderStyle.FixedSingle;
             _Label8.Dock = DockStyle.Right;
             _Label8.Font = new Font("D2Coding", 12F);
-            _Label8.ForeColor = SystemColors.ControlText;
+            _Label8.ForeColor = Color.Black;
             _Label8.Location = new Point(1491, 0);
             _Label8.Name = "_Label8";
             _Label8.Size = new Size(284, 43);
             _Label8.TabIndex = 1;
             _Label8.Text = "Login";
             _Label8.TextAlign = ContentAlignment.MiddleCenter;
-            _Label8.ThemeStyle = UI.Controls.ThemeStyle.Default;
+            _Label8.ThemeStyle = UI.Controls.ThemeStyle.Success_Green;
             _Label8.TooltipText = null;
             // 
             // _Label3
             // 
-            _Label3.BackColor = Color.FromArgb(149, 165, 166);
+            _Label3.BackColor = Color.FromArgb(46, 204, 113);
+            _Label3.BorderStyle = BorderStyle.FixedSingle;
             _Label3.Dock = DockStyle.Left;
             _Label3.Font = new Font("D2Coding", 12F);
-            _Label3.ForeColor = Color.White;
+            _Label3.ForeColor = Color.Black;
             _Label3.Location = new Point(0, 0);
             _Label3.Name = "_Label3";
             _Label3.Size = new Size(152, 43);
             _Label3.TabIndex = 0;
             _Label3.Text = "Fill levels ok";
             _Label3.TextAlign = ContentAlignment.MiddleCenter;
+            _Label3.ThemeStyle = UI.Controls.ThemeStyle.Success_Green;
             _Label3.TooltipText = null;
             // 
             // _Panel5
@@ -154,7 +161,7 @@ namespace EQ.UI
             _Panel5.BackColor = SystemColors.Control;
             _Panel5.Controls.Add(_Label4);
             _Panel5.Controls.Add(_Label7);
-            _Panel5.Controls.Add(_Label6);
+            _Panel5.Controls.Add(_LabelDate);
             _Panel5.Controls.Add(_Label5);
             _Panel5.Controls.Add(_Label2);
             _Panel5.Dock = DockStyle.Top;
@@ -166,21 +173,24 @@ namespace EQ.UI
             // 
             // _Label4
             // 
-            _Label4.BackColor = Color.FromArgb(149, 165, 166);
+            _Label4.BackColor = Color.FromArgb(231, 76, 60);
+            _Label4.BorderStyle = BorderStyle.FixedSingle;
             _Label4.Dock = DockStyle.Fill;
             _Label4.Font = new Font("D2Coding", 12F);
-            _Label4.ForeColor = Color.White;
+            _Label4.ForeColor = Color.Black;
             _Label4.Location = new Point(152, 0);
             _Label4.Name = "_Label4";
             _Label4.Size = new Size(1039, 45);
             _Label4.TabIndex = 1;
             _Label4.Text = "_Label4";
             _Label4.TextAlign = ContentAlignment.MiddleLeft;
+            _Label4.ThemeStyle = UI.Controls.ThemeStyle.Danger_Red;
             _Label4.TooltipText = null;
             // 
             // _Label7
             // 
             _Label7.BackColor = SystemColors.Control;
+            _Label7.BorderStyle = BorderStyle.FixedSingle;
             _Label7.Dock = DockStyle.Right;
             _Label7.Font = new Font("D2Coding", 12F);
             _Label7.ForeColor = SystemColors.ControlText;
@@ -193,23 +203,25 @@ namespace EQ.UI
             _Label7.ThemeStyle = UI.Controls.ThemeStyle.Default;
             _Label7.TooltipText = null;
             // 
-            // _Label6
+            // _LabelDate
             // 
-            _Label6.BackColor = Color.FromArgb(149, 165, 166);
-            _Label6.Dock = DockStyle.Right;
-            _Label6.Font = new Font("D2Coding", 12F);
-            _Label6.ForeColor = Color.White;
-            _Label6.Location = new Point(1491, 0);
-            _Label6.Name = "_Label6";
-            _Label6.Size = new Size(220, 45);
-            _Label6.TabIndex = 1;
-            _Label6.Text = "Date";
-            _Label6.TextAlign = ContentAlignment.MiddleLeft;
-            _Label6.TooltipText = null;
+            _LabelDate.BackColor = Color.FromArgb(149, 165, 166);
+            _LabelDate.BorderStyle = BorderStyle.FixedSingle;
+            _LabelDate.Dock = DockStyle.Right;
+            _LabelDate.Font = new Font("D2Coding", 12F);
+            _LabelDate.ForeColor = Color.White;
+            _LabelDate.Location = new Point(1491, 0);
+            _LabelDate.Name = "_LabelDate";
+            _LabelDate.Size = new Size(220, 45);
+            _LabelDate.TabIndex = 1;
+            _LabelDate.Text = "Date";
+            _LabelDate.TextAlign = ContentAlignment.MiddleLeft;
+            _LabelDate.TooltipText = null;
             // 
             // _Label5
             // 
             _Label5.BackColor = Color.FromArgb(231, 76, 60);
+            _Label5.BorderStyle = BorderStyle.FixedSingle;
             _Label5.Dock = DockStyle.Right;
             _Label5.Font = new Font("D2Coding", 12F);
             _Label5.ForeColor = Color.Black;
@@ -224,21 +236,24 @@ namespace EQ.UI
             // 
             // _Label2
             // 
-            _Label2.BackColor = Color.FromArgb(149, 165, 166);
+            _Label2.BackColor = Color.FromArgb(231, 76, 60);
+            _Label2.BorderStyle = BorderStyle.FixedSingle;
             _Label2.Dock = DockStyle.Left;
             _Label2.Font = new Font("D2Coding", 12F);
-            _Label2.ForeColor = Color.White;
+            _Label2.ForeColor = Color.Black;
             _Label2.Location = new Point(0, 0);
             _Label2.Name = "_Label2";
             _Label2.Size = new Size(152, 45);
             _Label2.TabIndex = 0;
             _Label2.Text = "Ack";
             _Label2.TextAlign = ContentAlignment.MiddleCenter;
+            _Label2.ThemeStyle = UI.Controls.ThemeStyle.Danger_Red;
             _Label2.TooltipText = null;
             // 
             // _Panel4
             // 
             _Panel4.BackColor = SystemColors.Control;
+            _Panel4.Controls.Add(_Label10);
             _Panel4.Controls.Add(_Label1);
             _Panel4.Dock = DockStyle.Left;
             _Panel4.ForeColor = SystemColors.ControlText;
@@ -247,15 +262,30 @@ namespace EQ.UI
             _Panel4.Size = new Size(143, 88);
             _Panel4.TabIndex = 0;
             // 
+            // _Label10
+            // 
+            _Label10.BackColor = Color.Black;
+            _Label10.Dock = DockStyle.Fill;
+            _Label10.Font = new Font("D2Coding", 12F);
+            _Label10.ForeColor = Color.White;
+            _Label10.Location = new Point(0, 45);
+            _Label10.Name = "_Label10";
+            _Label10.Size = new Size(143, 43);
+            _Label10.TabIndex = 0;
+            _Label10.Text = "Ver : 251217";
+            _Label10.TextAlign = ContentAlignment.MiddleCenter;
+            _Label10.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
+            _Label10.TooltipText = null;
+            // 
             // _Label1
             // 
             _Label1.BackColor = Color.Black;
-            _Label1.Dock = DockStyle.Fill;
+            _Label1.Dock = DockStyle.Top;
             _Label1.Font = new Font("D2Coding", 12F);
             _Label1.ForeColor = Color.White;
             _Label1.Location = new Point(0, 0);
             _Label1.Name = "_Label1";
-            _Label1.Size = new Size(143, 88);
+            _Label1.Size = new Size(143, 45);
             _Label1.TabIndex = 0;
             _Label1.Text = "Hanlim Extruder";
             _Label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -277,7 +307,7 @@ namespace EQ.UI
             // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.BackColor = SystemColors.ButtonHighlight;
+            flowLayoutPanel1.BackColor = Color.FromArgb(80, 80, 80);
             flowLayoutPanel1.Controls.Add(_ButtonBottom1);
             flowLayoutPanel1.Controls.Add(_ButtonBottom2);
             flowLayoutPanel1.Controls.Add(_ButtonBottom3);
@@ -390,20 +420,6 @@ namespace EQ.UI
             _ButtonBottom7.UseVisualStyleBackColor = false;
             _ButtonBottom7.Click += _Button_Bottom_Click;
             // 
-            // _ButtonBottom8
-            // 
-            _ButtonBottom8.BackColor = Color.FromArgb(48, 63, 159);
-            _ButtonBottom8.Font = new Font("D2Coding", 12F);
-            _ButtonBottom8.ForeColor = Color.White;
-            _ButtonBottom8.Location = new Point(94, 3);
-            _ButtonBottom8.Name = "_ButtonBottom8";
-            _ButtonBottom8.Size = new Size(100, 55);
-            _ButtonBottom8.TabIndex = 6;
-            _ButtonBottom8.Text = "Service";
-            _ButtonBottom8.TooltipText = null;
-            _ButtonBottom8.UseVisualStyleBackColor = false;
-            _ButtonBottom8.Click += _Button_Bottom_Click;
-            // 
             // _ButtonBottom9
             // 
             _ButtonBottom9.BackColor = Color.FromArgb(231, 76, 60);
@@ -418,6 +434,45 @@ namespace EQ.UI
             _ButtonBottom9.TooltipText = null;
             _ButtonBottom9.UseVisualStyleBackColor = false;
             _ButtonBottom9.Click += _Button_Bottom_Click;
+            // 
+            // flowLayoutPanel2
+            // 
+            flowLayoutPanel2.BackColor = Color.FromArgb(80, 80, 80);
+            flowLayoutPanel2.Controls.Add(_Button1);
+            flowLayoutPanel2.Controls.Add(_ButtonBottom8);
+            flowLayoutPanel2.Dock = DockStyle.Right;
+            flowLayoutPanel2.FlowDirection = FlowDirection.RightToLeft;
+            flowLayoutPanel2.Location = new Point(1615, 0);
+            flowLayoutPanel2.Name = "flowLayoutPanel2";
+            flowLayoutPanel2.Size = new Size(303, 63);
+            flowLayoutPanel2.TabIndex = 1;
+            // 
+            // _Button1
+            // 
+            _Button1.BackColor = Color.FromArgb(48, 63, 159);
+            _Button1.Font = new Font("D2Coding", 12F);
+            _Button1.ForeColor = Color.White;
+            _Button1.Location = new Point(200, 3);
+            _Button1.Name = "_Button1";
+            _Button1.Size = new Size(100, 55);
+            _Button1.TabIndex = 8;
+            _Button1.Text = "Alarms";
+            _Button1.TooltipText = null;
+            _Button1.UseVisualStyleBackColor = false;
+            // 
+            // _ButtonBottom8
+            // 
+            _ButtonBottom8.BackColor = Color.FromArgb(48, 63, 159);
+            _ButtonBottom8.Font = new Font("D2Coding", 12F);
+            _ButtonBottom8.ForeColor = Color.White;
+            _ButtonBottom8.Location = new Point(94, 3);
+            _ButtonBottom8.Name = "_ButtonBottom8";
+            _ButtonBottom8.Size = new Size(100, 55);
+            _ButtonBottom8.TabIndex = 6;
+            _ButtonBottom8.Text = "Service";
+            _ButtonBottom8.TooltipText = null;
+            _ButtonBottom8.UseVisualStyleBackColor = false;
+            _ButtonBottom8.Click += _Button_Bottom_Click;
             // 
             // panelMain
             // 
@@ -522,30 +577,9 @@ namespace EQ.UI
             // 
             timerToolStrip.Tick += timerToolStrip_Tick;
             // 
-            // _Button1
+            // timer1000
             // 
-            _Button1.BackColor = Color.FromArgb(48, 63, 159);
-            _Button1.Font = new Font("D2Coding", 12F);
-            _Button1.ForeColor = Color.White;
-            _Button1.Location = new Point(200, 3);
-            _Button1.Name = "_Button1";
-            _Button1.Size = new Size(100, 55);
-            _Button1.TabIndex = 8;
-            _Button1.Text = "Alarms";
-            _Button1.TooltipText = null;
-            _Button1.UseVisualStyleBackColor = false;
-            // 
-            // flowLayoutPanel2
-            // 
-            flowLayoutPanel2.BackColor = SystemColors.ButtonHighlight;
-            flowLayoutPanel2.Controls.Add(_Button1);
-            flowLayoutPanel2.Controls.Add(_ButtonBottom8);
-            flowLayoutPanel2.Dock = DockStyle.Right;
-            flowLayoutPanel2.FlowDirection = FlowDirection.RightToLeft;
-            flowLayoutPanel2.Location = new Point(1615, 0);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(303, 63);
-            flowLayoutPanel2.TabIndex = 1;
+            timer1000.Tick += timer1000_Tick;
             // 
             // FormMain
             // 
@@ -567,9 +601,9 @@ namespace EQ.UI
             _Panel4.ResumeLayout(false);
             _Panel2.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
+            flowLayoutPanel2.ResumeLayout(false);
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
-            flowLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -608,11 +642,13 @@ namespace EQ.UI
         private Controls._Label _Label1;
         private Controls._Label _Label4;
         private Controls._Label _Label7;
-        private Controls._Label _Label6;
+        private Controls._Label _LabelDate;
         private Controls._Label _Label5;
         private Controls._Label _Label9;
         private Controls._Label _Label8;
         private FlowLayoutPanel flowLayoutPanel2;
         private Controls._Button _Button1;
+        private Controls._Label _Label10;
+        private System.Windows.Forms.Timer timer1000;
     }
 }

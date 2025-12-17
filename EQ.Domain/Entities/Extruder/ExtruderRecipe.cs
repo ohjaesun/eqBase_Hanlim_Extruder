@@ -58,6 +58,12 @@
         [ExtruderParameter("PID", "#", "데드타임 보상 지연 버퍼 개수 (0=미사용)", "0...15", 10)]
         public int DelayBufferCount { get; set; } = 10;
 
+        [ExtruderParameter("PID", "ms", "레이저 센서 샘플링 주기", "10...100", 50)]
+        public int LaserSamplingMs { get; set; } = 50;
+
+        [ExtruderParameter("PID", "#", "레이저 센서 이동평균 개수", "5...50", 20)]
+        public int MovingAverageCount { get; set; } = 20;
+
         // --- Quality ---
         [ExtruderParameter("Quality", "mm", "필라멘트 목표 직경", "0.1...1.6", 0.8)]
         public double Diameter { get; set; } = 0.8;

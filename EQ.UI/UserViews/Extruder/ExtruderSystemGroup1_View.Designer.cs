@@ -127,7 +127,7 @@ namespace EQ.UI.UserViews.Extruder
             // 
             // _Panel0
             // 
-            _Panel0.BackColor = Color.White;
+            _Panel0.BackColor = Color.FromArgb(64, 64, 64);
             _Panel0.Controls.Add(_txtFeederActualSpeed);
             _Panel0.Controls.Add(_lblFeederActualSpeedLabel);
             _Panel0.Controls.Add(_txtFeederSpeed);
@@ -206,7 +206,7 @@ namespace EQ.UI.UserViews.Extruder
             // 
             // _lblFeederTitle
             // 
-            _lblFeederTitle.BackColor = Color.FromArgb(64, 64, 64);
+            _lblFeederTitle.BackColor = Color.Black;
             _lblFeederTitle.Dock = DockStyle.Top;
             _lblFeederTitle.Font = new Font("D2Coding", 12F);
             _lblFeederTitle.ForeColor = Color.White;
@@ -220,7 +220,7 @@ namespace EQ.UI.UserViews.Extruder
             // 
             // _Panel1
             // 
-            _Panel1.BackColor = Color.White;
+            _Panel1.BackColor = Color.FromArgb(64, 64, 64);
             _Panel1.Controls.Add(_lblFuseValue);
             _Panel1.Controls.Add(_lblFuseLabel);
             _Panel1.Controls.Add(_lblWarningIdValue);
@@ -565,7 +565,7 @@ namespace EQ.UI.UserViews.Extruder
             // 
             // _lblExtruderTitle
             // 
-            _lblExtruderTitle.BackColor = Color.FromArgb(64, 64, 64);
+            _lblExtruderTitle.BackColor = Color.Black;
             _lblExtruderTitle.Dock = DockStyle.Top;
             _lblExtruderTitle.Font = new Font("D2Coding", 12F);
             _lblExtruderTitle.ForeColor = Color.White;
@@ -579,7 +579,7 @@ namespace EQ.UI.UserViews.Extruder
             // 
             // _Panel3
             // 
-            _Panel3.BackColor = Color.White;
+            _Panel3.BackColor = Color.FromArgb(64, 64, 64);
             _Panel3.Controls.Add(_Label8);
             _Panel3.Controls.Add(_TextBox3);
             _Panel3.Controls.Add(_Label6);
@@ -602,7 +602,7 @@ namespace EQ.UI.UserViews.Extruder
             // 
             // _Label8
             // 
-            _Label8.BackColor = Color.FromArgb(64, 64, 64);
+            _Label8.BackColor = Color.Black;
             _Label8.Dock = DockStyle.Top;
             _Label8.Font = new Font("D2Coding", 12F);
             _Label8.ForeColor = Color.White;
@@ -772,7 +772,7 @@ namespace EQ.UI.UserViews.Extruder
             // 
             // _Panel4
             // 
-            _Panel4.BackColor = Color.White;
+            _Panel4.BackColor = Color.FromArgb(64, 64, 64);
             _Panel4.Controls.Add(_Label12);
             _Panel4.Controls.Add(_TextBox5);
             _Panel4.Controls.Add(_Label10);
@@ -788,7 +788,7 @@ namespace EQ.UI.UserViews.Extruder
             // 
             // _Label12
             // 
-            _Label12.BackColor = Color.FromArgb(64, 64, 64);
+            _Label12.BackColor = Color.Black;
             _Label12.Dock = DockStyle.Top;
             _Label12.Font = new Font("D2Coding", 12F);
             _Label12.ForeColor = Color.White;
@@ -869,7 +869,7 @@ namespace EQ.UI.UserViews.Extruder
             // 
             // _Panel2
             // 
-            _Panel2.BackColor = Color.White;
+            _Panel2.BackColor = Color.FromArgb(64, 64, 64);
             _Panel2.Controls.Add(_TextBox1);
             _Panel2.Controls.Add(_Label1);
             _Panel2.Controls.Add(_TextBox2);
@@ -993,7 +993,7 @@ namespace EQ.UI.UserViews.Extruder
             // 
             // _Label3
             // 
-            _Label3.BackColor = Color.FromArgb(64, 64, 64);
+            _Label3.BackColor = Color.Black;
             _Label3.Dock = DockStyle.Top;
             _Label3.Font = new Font("D2Coding", 12F);
             _Label3.ForeColor = Color.White;
@@ -1047,7 +1047,7 @@ namespace EQ.UI.UserViews.Extruder
             // 
             // _Panel5
             // 
-            _Panel5.BackColor = Color.White;
+            _Panel5.BackColor = Color.FromArgb(64, 64, 64);
             _Panel5.Controls.Add(_TextBox7);
             _Panel5.Controls.Add(_Label18);
             _Panel5.Controls.Add(_TextBox8);
@@ -1171,7 +1171,7 @@ namespace EQ.UI.UserViews.Extruder
             // 
             // _Label23
             // 
-            _Label23.BackColor = Color.FromArgb(64, 64, 64);
+            _Label23.BackColor = Color.Black;
             _Label23.Dock = DockStyle.Top;
             _Label23.Font = new Font("D2Coding", 12F);
             _Label23.ForeColor = Color.White;
@@ -1225,7 +1225,7 @@ namespace EQ.UI.UserViews.Extruder
             // 
             // _Panel6
             // 
-            _Panel6.BackColor = Color.White;
+            _Panel6.BackColor = Color.FromArgb(64, 64, 64);
             _Panel6.Controls.Add(_Label34);
             _Panel6.Controls.Add(_TextBox4);
             _Panel6.Controls.Add(_Label35);
@@ -1243,7 +1243,7 @@ namespace EQ.UI.UserViews.Extruder
             // 
             // _Label34
             // 
-            _Label34.BackColor = Color.FromArgb(64, 64, 64);
+            _Label34.BackColor = Color.Black;
             _Label34.Dock = DockStyle.Top;
             _Label34.Font = new Font("D2Coding", 12F);
             _Label34.ForeColor = Color.White;
@@ -1347,7 +1347,7 @@ namespace EQ.UI.UserViews.Extruder
             // 
             // _Panel7
             // 
-            _Panel7.BackColor = Color.White;
+            _Panel7.BackColor = Color.FromArgb(64, 64, 64);
             _Panel7.Controls.Add(_Label40);
             _Panel7.Controls.Add(_TextBox6);
             _Panel7.Controls.Add(_Label42);
@@ -1362,7 +1362,7 @@ namespace EQ.UI.UserViews.Extruder
             // 
             // _Label40
             // 
-            _Label40.BackColor = Color.FromArgb(64, 64, 64);
+            _Label40.BackColor = Color.Black;
             _Label40.Dock = DockStyle.Top;
             _Label40.Font = new Font("D2Coding", 12F);
             _Label40.ForeColor = Color.White;
@@ -1429,7 +1429,7 @@ namespace EQ.UI.UserViews.Extruder
             // 
             // _Panel8
             // 
-            _Panel8.BackColor = Color.White;
+            _Panel8.BackColor = Color.FromArgb(64, 64, 64);
             _Panel8.Controls.Add(_Label45);
             _Panel8.Controls.Add(_Label47);
             _Panel8.Controls.Add(_Label48);
@@ -1443,7 +1443,7 @@ namespace EQ.UI.UserViews.Extruder
             // 
             // _Label45
             // 
-            _Label45.BackColor = Color.FromArgb(64, 64, 64);
+            _Label45.BackColor = Color.Black;
             _Label45.Dock = DockStyle.Top;
             _Label45.Font = new Font("D2Coding", 12F);
             _Label45.ForeColor = Color.White;
@@ -1501,7 +1501,7 @@ namespace EQ.UI.UserViews.Extruder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(240, 240, 240);
+            BackColor = Color.FromArgb(80, 80, 80);
             Controls.Add(_Panel8);
             Controls.Add(_Panel7);
             Controls.Add(_Panel4);

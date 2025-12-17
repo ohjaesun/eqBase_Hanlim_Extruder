@@ -96,13 +96,16 @@ namespace EQ.Core.Act.Composition.Extruder
 
                 Log.Instance.Info(L("직경 제어 루프 시작"));
 
+                // PID 제어 주기 (레시피에서 읽어옴, ms 단위)
+                int controlIntervalMs = (int)(recipe.PidSamplingTime * 1000);
+
                 while (_isControlling && !token.IsCancellationRequested)
                 {
                     try
                     {
-                        // 미구현: 레이저 센서값 읽기
-                        // double currentDia = await _act.LaserMeasure.MeasureAsync(LaserMeasureId.Diameter);
-                        double currentDia = 0.0; // Placeholder
+                        // 캐시된 레이저 센서 값 사용 (이동평균 적용됨, 즉시 반환)
+                        // double currentDia = _act.LaserMeasure.GetCachedValue(LaserMeasureId.Diameter);
+                        double currentDia = 0.0; // Placeholder (실제 구현 시 주석 해제)
 
                         // PID 계산
                         double correction = _pid.Compute(recipe.Diameter, currentDia);
@@ -120,7 +123,8 @@ namespace EQ.Core.Act.Composition.Extruder
                         Log.Instance.Error(L("직경 제어 오류: {0}", ex.Message));
                     }
 
-                    await Task.Delay(100, token); // 100ms 제어 주기
+                    // 레시피의 PID 샘플링 주기만큼 대기
+                    await Task.Delay(controlIntervalMs, token);
                 }
 
                 Log.Instance.Info(L("직경 제어 루프 종료"));

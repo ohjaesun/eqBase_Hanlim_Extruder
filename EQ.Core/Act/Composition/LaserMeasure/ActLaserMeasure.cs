@@ -3,6 +3,7 @@ using EQ.Domain.Entities.LaserMeasure;
 using EQ.Domain.Enums.LaserMeasure;
 using EQ.Domain.Interface.LaserMeasure;
 using System.Collections.Concurrent;
+using System;
 
 namespace EQ.Core.Act.Composition.LaserMeasure
 {
@@ -15,6 +16,19 @@ namespace EQ.Core.Act.Composition.LaserMeasure
         #region Fields
         private readonly ConcurrentDictionary<LaserMeasureId, ILaserMeasure> _drivers = new();
         private readonly ConcurrentDictionary<LaserMeasureId, LaserMeasureConfig> _configs = new();
+        
+        // 백그라운드 폴링 및 캐싱
+        private CancellationTokenSource? _pollCts;
+        private bool _isPolling;
+        private readonly object _cacheLock = new object();
+        
+        // 캐시된 센서 값 (LaserMeasureId별)
+        private readonly Dictionary<LaserMeasureId, double> _cachedValues = new();
+        
+        // 이동평균 버퍼
+        private readonly Dictionary<LaserMeasureId, Queue<double>> _movingAverageBuffers = new();
+        private int _movingAverageCount = 20; // 기본값
+        private int _samplingIntervalMs = 50; // 기본값
         #endregion
 
         #region Events
@@ -196,15 +210,157 @@ namespace EQ.Core.Act.Composition.LaserMeasure
         }
         #endregion
 
+        #region Background Polling
+        /// <summary>
+        /// 백그라운드 폴링 시작 (모든 등록된 센서)
+        /// </summary>
+        /// <param name="samplingMs">샘플링 주기 (ms)</param>
+        /// <param name="movingAverageCount">이동평균 개수</param>
+        public void StartPolling(int samplingMs = 50, int movingAverageCount = 20)
+        {
+            if (_isPolling)
+            {
+                Log.Instance.Warning("ActLaserMeasure: 이미 폴링 중입니다.");
+                return;
+            }
+
+            _samplingIntervalMs = samplingMs;
+            _movingAverageCount = movingAverageCount;
+            _isPolling = true;
+            _pollCts = new CancellationTokenSource();
+
+            // 등록된 모든 센서에 대해 버퍼 초기화
+            lock (_cacheLock)
+            {
+                foreach (var id in _drivers.Keys)
+                {
+                    if (!_movingAverageBuffers.ContainsKey(id))
+                    {
+                        _movingAverageBuffers[id] = new Queue<double>();
+                    }
+                    if (!_cachedValues.ContainsKey(id))
+                    {
+                        _cachedValues[id] = 0.0;
+                    }
+                }
+            }
+
+            _ = Task.Run(async () => await PollingLoopAsync(_pollCts.Token));
+            Log.Instance.Info($"ActLaserMeasure: 폴링 시작 - {samplingMs}ms 주기, {movingAverageCount}개 이동평균");
+        }
+
+        /// <summary>
+        /// 백그라운드 폴링 정지
+        /// </summary>
+        public void StopPolling()
+        {
+            if (!_isPolling) return;
+
+            _isPolling = false;
+            _pollCts?.Cancel();
+            _pollCts?.Dispose();
+            _pollCts = null;
+
+            Log.Instance.Info("ActLaserMeasure: 폴링 정지");
+        }
+
+        /// <summary>
+        /// 폴링 루프 (백그라운드 Task)
+        /// </summary>
+        private async Task PollingLoopAsync(CancellationToken token)
+        {
+            while (_isPolling && !token.IsCancellationRequested)
+            {
+                try
+                {
+                    // 등록된 모든 센서에 대해 측정
+                    foreach (var kvp in _drivers)
+                    {
+                        var id = kvp.Key;
+                        var driver = kvp.Value;
+
+                        try
+                        {
+                            // 센서 값 읽기 (channelId 0 기본)
+                            double rawValue = await driver.MeasureAsync(0);
+
+                            // 이동평균 적용 및 캐싱
+                            lock (_cacheLock)
+                            {
+                                if (!_movingAverageBuffers.ContainsKey(id))
+                                    _movingAverageBuffers[id] = new Queue<double>();
+
+                                var buffer = _movingAverageBuffers[id];
+                                buffer.Enqueue(rawValue);
+
+                                // 버퍼 크기 유지
+                                while (buffer.Count > _movingAverageCount)
+                                    buffer.Dequeue();
+
+                                // 평균 계산 및 캐시 업데이트
+                                if (buffer.Count > 0)
+                                {
+                                    _cachedValues[id] = buffer.Average();
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Instance.Error($"ActLaserMeasure: ID {id} 폴링 오류 - {ex.Message}");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Instance.Error($"ActLaserMeasure: 폴링 루프 오류 - {ex.Message}");
+                }
+
+                // 다음 샘플링까지 대기
+                try
+                {
+                    await Task.Delay(_samplingIntervalMs, token);
+                }
+                catch (TaskCanceledException)
+                {
+                    // 정상 종료
+                    break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 캐시된 값 조회 (즉시 반환, 통신 지연 없음)
+        /// </summary>
+        /// <param name="id">센서 ID</param>
+        /// <returns>캐시된 측정값 (이동평균 적용됨)</returns>
+        public double GetCachedValue(LaserMeasureId id)
+        {
+            lock (_cacheLock)
+            {
+                return _cachedValues.GetValueOrDefault(id, 0.0);
+            }
+        }
+
+        /// <summary>
+        /// 폴링 실행 여부
+        /// </summary>
+        public bool IsPolling => _isPolling;
+        #endregion
+
         #region Dispose
         public void Dispose()
         {
+            // 폴링 정지
+            StopPolling();
+
             foreach (var driver in _drivers.Values)
             {
                 driver.Dispose();
             }
             _drivers.Clear();
             _configs.Clear();
+            _cachedValues.Clear();
+            _movingAverageBuffers.Clear();
         }
         #endregion
     }

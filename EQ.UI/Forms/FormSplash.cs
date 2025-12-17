@@ -11,6 +11,7 @@ using EQ.Domain.Enums;
 using EQ.Domain.Enums.LaserMeasure;
 using EQ.Domain.Interface;
 using EQ.Infra.Device;
+
 using EQ.Infra.HW.IO;
 using EQ.Infra.LaserMeasure;
 using EQ.Infra.Mock;
@@ -413,7 +414,8 @@ namespace EQ.UI
 
                 
                     act.Temp.Register(TempID.Zone1, mockZone1);
-                    act.Temp.Register(TempID.Zone2, mockZone2);                  
+                    act.Temp.Register(TempID.Zone2, mockZone2);
+                    act.Temp.Register(TempID.BathCirculator, mockChamber);
 
                     Log.Instance.Info("온도 컨트롤러(MOCK) 등록 완료");
                 }
@@ -434,15 +436,29 @@ namespace EQ.UI
                     {
                         updateLable($"[ModbusRTU] Port Open failed : {comPort}\n");
                         Log.Instance.Error($"[ModbusRTU] Port Open failed : {comPort}");
-                    }
-                        
+                    }                        
 
-                    byte slaveIdx = 1;
-                    foreach(var p in Enum.GetValues< TempID>())
-                    {
-                        var vx = new VX4_Controller(modbusMaster, slaveId: slaveIdx);
-                        act.Temp.Register(p, vx);
-                    }                  
+                    
+                    var vx = new VX4_Controller(modbusMaster, slaveId: 1);
+                    act.Temp.Register(TempID.Zone1, vx);
+
+                    var vx2 = new VX4_Controller(modbusMaster, slaveId: 1);
+                    act.Temp.Register(TempID.Zone2, vx2);
+
+
+                    //칠러 등록
+                    // 1. 시리얼 포트 설정 및 오픈
+                    var comPort2 = act.Option.Option4.Temperature_COMPort;
+                    SerialPort port2 = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
+                    port2.Open();
+
+                    // 2. NModbus RTU Master 생성
+                    var modbusMaster2 = ModbusSerialMaster.CreateRtu(port2);
+                    modbusMaster2.Transport.ReadTimeout = 300;
+                    modbusMaster2.Transport.WriteTimeout = 300;
+
+                    var rw3Driver = new JeioTechRW3Driver(modbusMaster2, slaveId: 1);
+                    act.Temp.Register(TempID.BathCirculator, rw3Driver);
 
                     Log.Instance.Info("온도 컨트롤러(REAL) 등록 완료");
                 }

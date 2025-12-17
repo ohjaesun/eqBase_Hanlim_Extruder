@@ -28,23 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-         
+            extruderChart_View1 = new EQ.UI.UserViews.Extruder.ExtruderChart_View();
             SuspendLayout();
-          
             // 
-            // Form04REV
+            // extruderChart_View1
+            // 
+            extruderChart_View1.Dock = DockStyle.Fill;
+            extruderChart_View1.Font = new Font("D2Coding", 12F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            extruderChart_View1.Location = new Point(0, 0);
+            extruderChart_View1.Margin = new Padding(3, 4, 3, 4);
+            extruderChart_View1.Name = "extruderChart_View1";
+            extruderChart_View1.Size = new Size(993, 832);
+            extruderChart_View1.TabIndex = 0;
+            // 
+            // Form04Trends
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(993, 832);
-       
-            Name = "Form04REV";
+            Controls.Add(extruderChart_View1);
+            Name = "Form04Trends";
             Text = "Form4";
             ResumeLayout(false);
         }
 
         #endregion
 
-       
+
+        private UserViews.Extruder.ExtruderChart_View extruderChart_View1;
     }
 }

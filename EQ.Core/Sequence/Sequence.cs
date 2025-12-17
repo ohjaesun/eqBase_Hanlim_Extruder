@@ -16,7 +16,7 @@ namespace EQ.Core.Sequence
     {
         public enum SeqName
         {
-            Seq1_시나리오명, //Seq1.cs .. to Seq[N]
+            Seq1_Extuder, //Seq1.cs .. to Seq[N]
             Seq2_시나리오명,
             Seq3_시나리오명,
             Seq4_시나리오명,
@@ -80,7 +80,7 @@ namespace EQ.Core.Sequence
             s15 = new Seq15(this, _act);
 
             // 딕셔너리에 연결
-            dicSeq.TryAdd(SeqName.Seq1_시나리오명, s1);
+            dicSeq.TryAdd(SeqName.Seq1_Extuder, s1);
             dicSeq.TryAdd(SeqName.Seq2_시나리오명, s2);
             dicSeq.TryAdd(SeqName.Seq3_시나리오명, s3);
             dicSeq.TryAdd(SeqName.Seq4_시나리오명, s4);

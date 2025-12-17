@@ -43,11 +43,11 @@ namespace EQ.UI
         private void _Button2_Click(object sender, EventArgs e)
         {
             var act = ActManager.Instance.Act;
-            SeqManager.Instance.Seq.RunSequence(SeqName.Seq1_시나리오명);
+            SeqManager.Instance.Seq.RunSequence(SeqName.Seq1_Extuder);
 
             var seq = SeqManager.Instance.Seq;
             //시퀀스의 현재 상태 가져오기
-            var status = seq.GetSequence(SeqName.Seq1_시나리오명)._Status;
+            var status = seq.GetSequence(SeqName.Seq1_Extuder)._Status;
         }
 
         private void _Button3_Click(object sender, EventArgs e)

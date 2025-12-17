@@ -55,7 +55,7 @@ namespace EQ.Core.Sequence
 
                 case Step3:
                     {
-                        await WaitSignalAsync(Seq01_Sig.TrayReady); // seq01 의 상태를 기다림.
+                        await WaitSignalAsync(Seq01_Sig.MachineReady); // seq01 의 상태를 기다림.
                         await Task.Delay(1000);
                         Step++;
                     }

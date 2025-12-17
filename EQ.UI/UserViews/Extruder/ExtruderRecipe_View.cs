@@ -362,6 +362,13 @@ namespace EQ.UI.UserViews.Extruder
             string rangeStr = row.Cells["Range"].Value?.ToString() ?? "";
             object currentValue = cell.Value;
 
+            // bool 타입인 경우 값 반전
+            if (currentValue is bool boolValue)
+            {
+                cell.Value = !boolValue;
+                return;
+            }
+
             // 값 타입 확인
             if (currentValue == null || currentValue == DBNull.Value || currentValue is string)
             {

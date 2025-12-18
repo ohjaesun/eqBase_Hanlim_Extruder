@@ -45,6 +45,7 @@
             _lblFrom = new EQ.UI.Controls._Label();
             panelMain = new Panel();
             _gridAuditTrail = new EQ.UI.Controls._DataGridView();
+            _Button1 = new EQ.UI.Controls._Button();
             flowLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
             panelMain.SuspendLayout();
@@ -158,6 +159,7 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(_Button1);
             panel1.Controls.Add(_btnExport);
             panel1.Controls.Add(_btnApplyFilter);
             panel1.Controls.Add(_dateTo);
@@ -278,6 +280,20 @@
             _gridAuditTrail.TabIndex = 0;
             _gridAuditTrail.CellDoubleClick += _gridAuditTrail_CellDoubleClick;
             // 
+            // _Button1
+            // 
+            _Button1.BackColor = Color.FromArgb(48, 63, 159);
+            _Button1.Font = new Font("D2Coding", 12F);
+            _Button1.ForeColor = Color.White;
+            _Button1.Location = new Point(706, 15);
+            _Button1.Name = "_Button1";
+            _Button1.Size = new Size(120, 32);
+            _Button1.TabIndex = 5;
+            _Button1.Text = "Export PDF";
+            _Button1.TooltipText = null;
+            _Button1.UseVisualStyleBackColor = false;
+            _Button1.Click += Export_PDF;
+            // 
             // AuditTrail_View
             // 
             AutoScaleDimensions = new SizeF(10F, 24F);
@@ -313,5 +329,6 @@
         private Controls._CheckBox _chkSystem;
         private Controls._Label _lblFrom;
         private Controls._Label _lblTo;
+        private Controls._Button _Button1;
     }
 }

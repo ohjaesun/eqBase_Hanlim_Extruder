@@ -358,6 +358,15 @@ namespace EQ.Core.Service
             return _storage.ExportToCsv(filePath, start, end);
         }
 
+        /// <summary>
+        /// PDF로 내보내기
+        /// (사양서 9.9.3.1 - PDF Export 기능)
+        /// </summary>
+        public bool ExportToPdf(string filePath, DateTime? start = null, DateTime? end = null)
+        {
+            return _storage.ExportToPdf(filePath, start, end);
+        }
+
         #endregion
     }
 }

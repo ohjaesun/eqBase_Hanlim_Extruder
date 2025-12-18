@@ -12,6 +12,7 @@
     <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="10.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="NModbus4" Version="2.1.0" />
+    <PackageReference Include="QuestPDF" Version="2025.12.0" />
     <PackageReference Include="System.IO.Ports" Version="10.0.0" />
   </ItemGroup>
 

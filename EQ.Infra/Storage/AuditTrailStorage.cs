@@ -2,12 +2,9 @@ using EQ.Common.Logs;
 using EQ.Domain.Entities;
 using EQ.Domain.Enums;
 using Microsoft.Data.Sqlite;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
 using System.Text;
 
 namespace EQ.Infra.Storage
@@ -34,7 +31,7 @@ namespace EQ.Infra.Storage
         {
             // 디렉토리 생성 (없으면)
             Directory.CreateDirectory(path);
-            
+
             _dbPath = Path.Combine(path, DB_FILE_NAME);
             InitializeTable();
         }
@@ -150,7 +147,7 @@ namespace EQ.Infra.Storage
             {
                 connection.Open();
                 var command = connection.CreateCommand();
-                command.CommandText = 
+                command.CommandText =
                     $"SELECT * FROM {TABLE_NAME} " +
                     "WHERE Timestamp >= @Start AND Timestamp <= @End " +
                     "ORDER BY Timestamp DESC";
@@ -313,6 +310,133 @@ namespace EQ.Infra.Storage
             }
 
             return entry;
+        }
+
+        /// <summary>
+        /// PDF로 내보내기
+        /// (사양서 9.9.3.1 - PDF export)
+        /// </summary>
+        public bool ExportToPdf(string filePath, DateTime? start = null, DateTime? end = null)
+        {
+            try
+            {
+                var entries = (start.HasValue && end.HasValue)
+                    ? LoadByDateRange(start.Value, end.Value)
+                    : LoadAll();
+
+                // QuestPDF 라이센스 설정 (Community Edition)
+                QuestPDF.Settings.License = LicenseType.Community;
+
+                Document.Create(container =>
+                {
+                    container.Page(page =>
+                    {
+                        page.Size(PageSizes.A4.Landscape());
+                        page.Margin(1, Unit.Centimetre);
+
+                        page.Header()
+    .Background(Colors.Grey.Lighten3)
+    .Padding(10)
+    .Column(column =>
+    {
+        column.Item().Text("Audit Trail Report")
+            .FontSize(20).Bold();
+
+        column.Item().Text($"Generated: {DateTime.Now:yyyy-MM-dd HH:mm:ss}")
+            .FontSize(10);
+
+        if (start.HasValue && end.HasValue)
+        {
+            column.Item().Text(
+                $"Period: {start.Value:yyyy-MM-dd} ~ {end.Value:yyyy-MM-dd}")
+                .FontSize(10);
+        }
+    });
+
+                        // 내용
+                        page.Content().Table(table =>
+                        {
+                            // 컬럼 정의
+                            table.ColumnsDefinition(columns =>
+                            {
+                                columns.ConstantColumn(120);  // DateTime
+                                columns.ConstantColumn(100);  // EventType
+                                columns.ConstantColumn(80);   // UserId
+                                columns.ConstantColumn(80);   // UserName
+                                columns.RelativeColumn(2);    // Description
+                                columns.RelativeColumn(1);    // Detail
+                            });
+
+                            // 헤더
+                            table.Header(header =>
+                            {
+                                header.Cell().Background(Colors.Grey.Medium)
+                                    .Padding(5).Text("DateTime").FontSize(10).Bold();
+                                header.Cell().Background(Colors.Grey.Medium)
+                                    .Padding(5).Text("Event Type").FontSize(10).Bold();
+                                header.Cell().Background(Colors.Grey.Medium)
+                                    .Padding(5).Text("User ID").FontSize(10).Bold();
+                                header.Cell().Background(Colors.Grey.Medium)
+                                    .Padding(5).Text("User Name").FontSize(10).Bold();
+                                header.Cell().Background(Colors.Grey.Medium)
+                                    .Padding(5).Text("Description").FontSize(10).Bold();
+                                header.Cell().Background(Colors.Grey.Medium)
+                                    .Padding(5).Text("Detail").FontSize(10).Bold();
+                            });
+
+                            // 데이터
+                            foreach (var entry in entries)
+                            {
+                                var backgroundColor = entries.IndexOf(entry) % 2 == 0
+                                    ? Colors.White
+                                    : Colors.Grey.Lighten4;
+
+                                table.Cell().Background(backgroundColor)
+                                    .BorderBottom(1).BorderColor(Colors.Grey.Lighten2)
+                                    .Padding(5).Text(entry.Timestamp.ToString("yyyy-MM-dd HH:mm:ss"))
+                                    .FontSize(8);
+
+                                table.Cell().Background(backgroundColor)
+                                    .BorderBottom(1).BorderColor(Colors.Grey.Lighten2)
+                                    .Padding(5).Text(entry.EventType.ToString())
+                                    .FontSize(8);
+
+                                table.Cell().Background(backgroundColor)
+                                    .BorderBottom(1).BorderColor(Colors.Grey.Lighten2)
+                                    .Padding(5).Text(entry.UserId)
+                                    .FontSize(8);
+
+                                table.Cell().Background(backgroundColor)
+                                    .BorderBottom(1).BorderColor(Colors.Grey.Lighten2)
+                                    .Padding(5).Text(entry.UserName)
+                                    .FontSize(8);
+
+                                table.Cell().Background(backgroundColor)
+                                    .BorderBottom(1).BorderColor(Colors.Grey.Lighten2)
+                                    .Padding(5).Text(entry.Description)
+                                    .FontSize(8);
+
+                                table.Cell().Background(backgroundColor)
+                                    .BorderBottom(1).BorderColor(Colors.Grey.Lighten2)
+                                    .Padding(5).Text(string.IsNullOrEmpty(entry.DetailJson) ? "-" : "JSON")
+                                    .FontSize(8);
+                            }
+                        });
+
+                        // 푸터
+                        page.Footer()
+                            .AlignCenter()
+                            .Text("Audit Trail Report - Medical Device Compliance Documentation").FontSize(8);
+                    });
+                })
+                .GeneratePdf(filePath);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

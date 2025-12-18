@@ -276,5 +276,50 @@ namespace EQ.UI.UserViews
             else
                 obj.ThemeStyle = ThemeStyle.Info_Sky;
         }
+
+        private void Export_PDF(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var saveDialog = new SaveFileDialog())
+                {
+                    saveDialog.Filter = "PDF Files (*.pdf)|*.pdf";
+                    saveDialog.FileName = $"AuditTrail_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+                    saveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+                    if (saveDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        var auditTrail = ActManager.Instance.Act.AuditTrail;
+                        bool success = auditTrail.ExportToPdf(
+                            saveDialog.FileName,
+                            _dateFrom.Value.Date,
+                            _dateTo.Value.Date.AddDays(1).AddSeconds(-1)
+                        );
+
+                        if (success)
+                        {
+                            ActManager.Instance.Act.PopupNoti(
+                                "Export Success",
+                                $"PDF exported to: {saveDialog.FileName}",
+                                NotifyType.Info);
+                        }
+                        else
+                        {
+                            ActManager.Instance.Act.PopupNoti(
+                                "Export Failed",
+                                "Failed to export PDF file",
+                                NotifyType.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ActManager.Instance.Act.PopupNoti(
+                    "Error",
+                    $"Export error: {ex.Message}",
+                    NotifyType.Error);
+            }
+        }
     }
 }

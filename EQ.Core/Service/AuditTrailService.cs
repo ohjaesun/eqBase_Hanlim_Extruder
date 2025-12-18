@@ -359,12 +359,28 @@ namespace EQ.Core.Service
         }
 
         /// <summary>
+        /// CSV로 내보내기 (필터링된 데이터 직접 전달)
+        /// </summary>
+        public bool ExportToCsv(string filePath, List<AuditTrailEntry> entries)
+        {
+            return _storage.ExportToCsv(filePath, entries);
+        }
+
+        /// <summary>
         /// PDF로 내보내기
         /// (사양서 9.9.3.1 - PDF Export 기능)
         /// </summary>
         public bool ExportToPdf(string filePath, DateTime? start = null, DateTime? end = null)
         {
             return _storage.ExportToPdf(filePath, start, end);
+        }
+
+        /// <summary>
+        /// PDF로 내보내기 (필터링된 데이터 직접 전달)
+        /// </summary>
+        public bool ExportToPdf(string filePath,string id, List<AuditTrailEntry> entries)
+        {
+            return _storage.ExportToPdf(filePath,id, entries);
         }
 
         #endregion

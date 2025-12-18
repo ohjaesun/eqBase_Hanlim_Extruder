@@ -28,6 +28,33 @@ namespace EQ.UI.UserViews
             _dateTo.Value = DateTime.Now;
 
             LoadAuditTrail();
+            DriveUsage();
+        }
+
+        void DriveUsage()
+        {
+            DriveInfo drive = new DriveInfo("D");
+
+            double total = drive.TotalSize;
+            double used = drive.TotalSize - drive.AvailableFreeSpace;
+
+            double usagePercent = (used / total) * 100;
+
+            _Label2.Text = $"{usagePercent.ToString("F2")} %";
+
+            if (usagePercent >= 80)
+            {
+                _Label2.ThemeStyle = ThemeStyle.Danger_Red;
+
+                ActManager.Instance.Act.PopupNoti(
+                    "Warning",
+                    $"Drive D: usage is at {usagePercent:F2}%. Please take necessary actions.",
+                    NotifyType.Warning);
+            }
+            else
+            {
+                _Label2.ThemeStyle = ThemeStyle.Success_Green;
+            }
         }
 
         private void InitializeGrid()
@@ -192,36 +219,43 @@ namespace EQ.UI.UserViews
         {
             try
             {
-                using (var saveDialog = new SaveFileDialog())
+                // 저장 경로 생성 (오늘 날짜 폴더)
+                string exportPath = Path.Combine(@"d:\Audit_Report", DateTime.Now.ToString("yyyyMMdd"));
+                Directory.CreateDirectory(exportPath);
+
+                // 현재 필터링된 데이터 가져오기
+                var auditTrail = ActManager.Instance.Act.AuditTrail;
+                var entries = auditTrail.GetEntriesByDateRange(
+                    _dateFrom.Value.Date,
+                    _dateTo.Value.Date.AddDays(1).AddSeconds(-1)
+                );
+
+                // 이벤트 타입 필터 적용
+                var filteredEntries = ApplyEventTypeFilter(entries);
+
+                // 파일명 생성: (필터항목)_(날짜범위)_(생성시간).csv
+                string filterNames = GetFilterNames();
+                string dateRange = $"{_dateFrom.Value:yyyyMMdd}_{_dateTo.Value:yyyyMMdd}";
+                string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                string fileName = $"({filterNames}_{dateRange})_{timestamp}.csv";
+                string filePath = Path.Combine(exportPath, fileName);
+
+                // 필터링된 데이터로 CSV 내보내기
+                bool success = auditTrail.ExportToCsv(filePath, filteredEntries);
+
+                if (success)
                 {
-                    saveDialog.Filter = "CSV Files (*.csv)|*.csv";
-                    saveDialog.FileName = $"AuditTrail_{DateTime.Now:yyyyMMdd_HHmmss}.csv";
-                    saveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-                    if (saveDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        var auditTrail = ActManager.Instance.Act.AuditTrail;
-                        bool success = auditTrail.ExportToCsv(
-                            saveDialog.FileName,
-                            _dateFrom.Value.Date,
-                            _dateTo.Value.Date.AddDays(1).AddSeconds(-1)
-                        );
-
-                        if (success)
-                        {
-                            ActManager.Instance.Act.PopupNoti(
-                                "Export Success",
-                                $"Exported to: {saveDialog.FileName}",
-                                NotifyType.Info);
-                        }
-                        else
-                        {
-                            ActManager.Instance.Act.PopupNoti(
-                                "Export Failed",
-                                "Failed to export CSV file",
-                                NotifyType.Error);
-                        }
-                    }
+                    ActManager.Instance.Act.PopupNoti(
+                        "Export Success",
+                        $"Exported {filteredEntries.Count} records to:\n{filePath}",
+                        NotifyType.Info);
+                }
+                else
+                {
+                    ActManager.Instance.Act.PopupNoti(
+                        "Export Failed",
+                        "Failed to export CSV file",
+                        NotifyType.Error);
                 }
             }
             catch (Exception ex)
@@ -277,40 +311,70 @@ namespace EQ.UI.UserViews
                 obj.ThemeStyle = ThemeStyle.Info_Sky;
         }
 
+        /// <summary>
+        /// 현재 체크된 필터 항목명들을 언더스코어로 연결하여 반환
+        /// </summary>
+        private string GetFilterNames()
+        {
+            var filterNames = new List<string>();
+
+            if (_chkLogin.Checked) filterNames.Add("Login");
+            if (_chkUser.Checked) filterNames.Add("User");
+            if (_chkRecipe.Checked) filterNames.Add("Recipe");
+            if (_chkParameter.Checked) filterNames.Add("Parameter");
+            if (_chkSystem.Checked) filterNames.Add("System");
+
+            // 아무것도 선택 안되었거나 All이 선택된 경우
+            if (filterNames.Count == 0 || _chkAll.Checked)
+                return "All";
+
+            return string.Join("_", filterNames);
+        }
+
         private void Export_PDF(object sender, EventArgs e)
         {
             try
             {
-                using (var saveDialog = new SaveFileDialog())
+                // 저장 경로 생성 (오늘 날짜 폴더)
+                string exportPath = Path.Combine(@"d:\Audit_Report", DateTime.Now.ToString("yyyyMMdd"));
+                Directory.CreateDirectory(exportPath);
+
+                // 현재 필터링된 데이터 가져오기
+                var auditTrail = ActManager.Instance.Act.AuditTrail;
+                var entries = auditTrail.GetEntriesByDateRange(
+                    _dateFrom.Value.Date,
+                    _dateTo.Value.Date.AddDays(1).AddSeconds(-1)
+                );
+
+                // 이벤트 타입 필터 적용
+                var filteredEntries = ApplyEventTypeFilter(entries);
+
+                // 파일명 생성: (필터항목)_(날짜범위)_(생성시간).pdf
+                string filterNames = GetFilterNames();
+                string dateRange = $"{_dateFrom.Value:yyyyMMdd}_{_dateTo.Value:yyyyMMdd}";
+                string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                string fileName = $"({filterNames}_{dateRange})_{timestamp}.pdf";
+                string filePath = Path.Combine(exportPath, fileName);
+
+                // 필터링된 데이터로 PDF 내보내기
+                bool success = auditTrail.ExportToPdf(
+                    filePath,
+                    ActManager.Instance.Act.User.CurrentUserId,
+                    filteredEntries);
+
+                if (success)
                 {
-                    saveDialog.Filter = "PDF Files (*.pdf)|*.pdf";
-                    saveDialog.FileName = $"AuditTrail_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
-                    saveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-                    if (saveDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        var auditTrail = ActManager.Instance.Act.AuditTrail;
-                        bool success = auditTrail.ExportToPdf(
-                            saveDialog.FileName,
-                            _dateFrom.Value.Date,
-                            _dateTo.Value.Date.AddDays(1).AddSeconds(-1)
-                        );
-
-                        if (success)
-                        {
-                            ActManager.Instance.Act.PopupNoti(
-                                "Export Success",
-                                $"PDF exported to: {saveDialog.FileName}",
-                                NotifyType.Info);
-                        }
-                        else
-                        {
-                            ActManager.Instance.Act.PopupNoti(
-                                "Export Failed",
-                                "Failed to export PDF file",
-                                NotifyType.Error);
-                        }
-                    }
+                    ActManager.Instance.Act.PopupNoti(
+                        "Export Success",
+                        $"PDF exported {filteredEntries.Count} records to:\n{filePath}",
+                        NotifyType.Info);
+                }
+                else
+                {
+                    ActManager.Instance.Act.PopupNoti(
+                        "Export Failed",
+                        "Failed to export PDF file",
+                        NotifyType.Error);
                 }
             }
             catch (Exception ex)

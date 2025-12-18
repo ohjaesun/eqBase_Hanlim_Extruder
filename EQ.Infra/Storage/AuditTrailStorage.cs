@@ -274,6 +274,39 @@ namespace EQ.Infra.Storage
         }
 
         /// <summary>
+        /// CSV로 내보내기 (필터링된 데이터 직접 전달)
+        /// </summary>
+        public bool ExportToCsv(string filePath, List<AuditTrailEntry> entries)
+        {
+            try
+            {
+                using (var writer = new StreamWriter(filePath, false, Encoding.UTF8))
+                {
+                    // 헤더
+                    writer.WriteLine("DateTime,EventType,UserId,UserName,Description,DetailJson");
+
+                    // 데이터
+                    foreach (var entry in entries)
+                    {
+                        var line = $"\"{entry.Timestamp:yyyy-MM-dd HH:mm:ss}\"^" +
+                                   $"\"{entry.EventType}\"^" +
+                                   $"\"{EscapeCsv(entry.UserId)}\"^" +
+                                   $"\"{EscapeCsv(entry.UserName)}\"^" +
+                                   $"\"{EscapeCsv(entry.Description)}\"^" +
+                                   $"\"{EscapeCsv(entry.DetailJson)}\"";
+                        writer.WriteLine(line);
+                    }
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// CSV 이스케이프 처리
         /// </summary>
         private string EscapeCsv(string value)
@@ -427,6 +460,126 @@ namespace EQ.Infra.Storage
                         page.Footer()
                             .AlignCenter()
                             .Text("Audit Trail Report - Medical Device Compliance Documentation").FontSize(8);
+                    });
+                })
+                .GeneratePdf(filePath);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// PDF로 내보내기 (필터링된 데이터 직접 전달)
+        /// </summary>
+        public bool ExportToPdf(string filePath,string id, List<AuditTrailEntry> entries)
+        {
+            try
+            {
+                // QuestPDF 라이센스 설정 (Community Edition)
+                QuestPDF.Settings.License = LicenseType.Community;
+
+                Document.Create(container =>
+                {
+                    container.Page(page =>
+                    {
+                        page.Size(PageSizes.A4.Landscape());
+                        page.Margin(1, Unit.Centimetre);
+
+                        page.Header()
+    .Background(Colors.Grey.Lighten3)
+    .Padding(10)
+    .Column(column =>
+    {
+        column.Item().Text("Audit Trail Report")
+            .FontSize(20).Bold();
+
+        column.Item().Text($"Generated: {DateTime.Now:yyyy-MM-dd HH:mm:ss} ID: {id}")
+            .FontSize(10);
+
+        column.Item().Text($"Total Records: {entries.Count}")
+            .FontSize(10);
+    });
+
+                        // 내용
+                        page.Content().Table(table =>
+                        {
+                            // 컬럼 정의
+                            table.ColumnsDefinition(columns =>
+                            {
+                                columns.ConstantColumn(120);  // DateTime
+                                columns.ConstantColumn(100);  // EventType
+                                columns.ConstantColumn(80);   // UserId
+                                columns.ConstantColumn(80);   // UserName
+                                columns.RelativeColumn(2);    // Description
+                                columns.RelativeColumn(1);    // Detail
+                            });
+
+                            // 헤더
+                            table.Header(header =>
+                            {
+                                header.Cell().Background(Colors.Grey.Medium)
+                                    .Padding(5).Text("DateTime").FontSize(10).Bold();
+                                header.Cell().Background(Colors.Grey.Medium)
+                                    .Padding(5).Text("Event Type").FontSize(10).Bold();
+                                header.Cell().Background(Colors.Grey.Medium)
+                                    .Padding(5).Text("User ID").FontSize(10).Bold();
+                                header.Cell().Background(Colors.Grey.Medium)
+                                    .Padding(5).Text("User Name").FontSize(10).Bold();
+                                header.Cell().Background(Colors.Grey.Medium)
+                                    .Padding(5).Text("Description").FontSize(10).Bold();
+                                header.Cell().Background(Colors.Grey.Medium)
+                                    .Padding(5).Text("Detail").FontSize(10).Bold();
+                            });
+
+                            // 데이터
+                            foreach (var entry in entries)
+                            {
+                                var backgroundColor = entries.IndexOf(entry) % 2 == 0
+                                    ? Colors.White
+                                    : Colors.Grey.Lighten4;
+
+                                table.Cell().Background(backgroundColor)
+                                    .BorderBottom(1).BorderColor(Colors.Grey.Lighten2)
+                                    .Padding(5).Text(entry.Timestamp.ToString("yyyy-MM-dd HH:mm:ss"))
+                                    .FontSize(8);
+
+                                table.Cell().Background(backgroundColor)
+                                    .BorderBottom(1).BorderColor(Colors.Grey.Lighten2)
+                                    .Padding(5).Text(entry.EventType.ToString())
+                                    .FontSize(8);
+
+                                table.Cell().Background(backgroundColor)
+                                    .BorderBottom(1).BorderColor(Colors.Grey.Lighten2)
+                                    .Padding(5).Text(entry.UserId)
+                                    .FontSize(8);
+
+                                table.Cell().Background(backgroundColor)
+                                    .BorderBottom(1).BorderColor(Colors.Grey.Lighten2)
+                                    .Padding(5).Text(entry.UserName)
+                                    .FontSize(8);
+
+                                table.Cell().Background(backgroundColor)
+                                    .BorderBottom(1).BorderColor(Colors.Grey.Lighten2)
+                                    .Padding(5).Text(entry.Description)
+                                    .FontSize(8);
+
+                                table.Cell().Background(backgroundColor)
+                                    .BorderBottom(1).BorderColor(Colors.Grey.Lighten2)
+                                    .Padding(5).Text(string.IsNullOrEmpty(entry.DetailJson) ? "-" : "JSON")
+                                    .FontSize(8);
+                            }
+                        });
+
+                        /*
+                        // 푸터
+                        page.Footer()
+                            .AlignCenter()
+                            .Text("Audit Trail Report - Medical Device Compliance Documentation").FontSize(8);
+                        */
                     });
                 })
                 .GeneratePdf(filePath);

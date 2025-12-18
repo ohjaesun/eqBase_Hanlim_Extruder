@@ -37,15 +37,17 @@
             _chkParameter = new EQ.UI.Controls._CheckBox();
             _chkSystem = new EQ.UI.Controls._CheckBox();
             panel1 = new Panel();
+            _Button1 = new EQ.UI.Controls._Button();
             _btnExport = new EQ.UI.Controls._Button();
             _btnApplyFilter = new EQ.UI.Controls._Button();
             _dateTo = new DateTimePicker();
             _lblTo = new EQ.UI.Controls._Label();
             _dateFrom = new DateTimePicker();
+            _Label2 = new EQ.UI.Controls._Label();
+            _Label1 = new EQ.UI.Controls._Label();
             _lblFrom = new EQ.UI.Controls._Label();
             panelMain = new Panel();
             _gridAuditTrail = new EQ.UI.Controls._DataGridView();
-            _Button1 = new EQ.UI.Controls._Button();
             flowLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
             panelMain.SuspendLayout();
@@ -165,12 +167,28 @@
             panel1.Controls.Add(_dateTo);
             panel1.Controls.Add(_lblTo);
             panel1.Controls.Add(_dateFrom);
+            panel1.Controls.Add(_Label2);
+            panel1.Controls.Add(_Label1);
             panel1.Controls.Add(_lblFrom);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(112, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(1788, 69);
             panel1.TabIndex = 1;
+            // 
+            // _Button1
+            // 
+            _Button1.BackColor = Color.FromArgb(48, 63, 159);
+            _Button1.Font = new Font("D2Coding", 12F);
+            _Button1.ForeColor = Color.White;
+            _Button1.Location = new Point(706, 15);
+            _Button1.Name = "_Button1";
+            _Button1.Size = new Size(120, 32);
+            _Button1.TabIndex = 5;
+            _Button1.Text = "Export PDF";
+            _Button1.TooltipText = null;
+            _Button1.UseVisualStyleBackColor = false;
+            _Button1.Click += Export_PDF;
             // 
             // _btnExport
             // 
@@ -231,6 +249,33 @@
             _dateFrom.Size = new Size(150, 32);
             _dateFrom.TabIndex = 1;
             // 
+            // _Label2
+            // 
+            _Label2.BackColor = Color.FromArgb(46, 204, 113);
+            _Label2.Font = new Font("D2Coding", 12F);
+            _Label2.ForeColor = Color.Black;
+            _Label2.Location = new Point(963, 17);
+            _Label2.Name = "_Label2";
+            _Label2.Size = new Size(143, 30);
+            _Label2.TabIndex = 0;
+            _Label2.Text = "용량";
+            _Label2.TextAlign = ContentAlignment.MiddleLeft;
+            _Label2.ThemeStyle = UI.Controls.ThemeStyle.Success_Green;
+            _Label2.TooltipText = null;
+            // 
+            // _Label1
+            // 
+            _Label1.BackColor = Color.FromArgb(149, 165, 166);
+            _Label1.Font = new Font("D2Coding", 12F);
+            _Label1.ForeColor = Color.White;
+            _Label1.Location = new Point(848, 17);
+            _Label1.Name = "_Label1";
+            _Label1.Size = new Size(109, 30);
+            _Label1.TabIndex = 0;
+            _Label1.Text = "Usage Disk :";
+            _Label1.TextAlign = ContentAlignment.MiddleRight;
+            _Label1.TooltipText = null;
+            // 
             // _lblFrom
             // 
             _lblFrom.BackColor = Color.FromArgb(149, 165, 166);
@@ -280,20 +325,6 @@
             _gridAuditTrail.TabIndex = 0;
             _gridAuditTrail.CellDoubleClick += _gridAuditTrail_CellDoubleClick;
             // 
-            // _Button1
-            // 
-            _Button1.BackColor = Color.FromArgb(48, 63, 159);
-            _Button1.Font = new Font("D2Coding", 12F);
-            _Button1.ForeColor = Color.White;
-            _Button1.Location = new Point(706, 15);
-            _Button1.Name = "_Button1";
-            _Button1.Size = new Size(120, 32);
-            _Button1.TabIndex = 5;
-            _Button1.Text = "Export PDF";
-            _Button1.TooltipText = null;
-            _Button1.UseVisualStyleBackColor = false;
-            _Button1.Click += Export_PDF;
-            // 
             // AuditTrail_View
             // 
             AutoScaleDimensions = new SizeF(10F, 24F);
@@ -330,5 +361,7 @@
         private Controls._Label _lblFrom;
         private Controls._Label _lblTo;
         private Controls._Button _Button1;
+        private Controls._Label _Label1;
+        private Controls._Label _Label2;
     }
 }

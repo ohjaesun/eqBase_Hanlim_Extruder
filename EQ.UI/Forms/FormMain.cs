@@ -351,6 +351,27 @@ namespace EQ.UI
 
         private void _Label8_Click(object sender, EventArgs e)
         {
+            //레벨에 안맞는 폼 열려 있을 수 있음 다 닫기
+            if (panelMain.Controls.Count > 0)
+            {
+                // 컨트롤이 여러 개일 수 있으므로 안전하게 뒤에서부터 제거
+                for (int i = panelMain.Controls.Count - 1; i >= 0; i--)
+                {
+                    Control ctrl = panelMain.Controls[i];
+
+                    if (ctrl is Form form)
+                    {
+                        form.Close(); // FormClosing, FormClosed 이벤트 발생 유도
+                    }
+
+                    ctrl.Dispose(); // 리소스 해제 (Controls 컬렉션에서도 제거됨)
+                }
+            }
+
+            // 혹시 모를 잔여물 제거 (보통 위 루프에서 다 제거됨)
+            panelMain.Controls.Clear();
+
+
             Form login = (FormLogin)Application.OpenForms["FormLogin"];
             if (login == null)
             {

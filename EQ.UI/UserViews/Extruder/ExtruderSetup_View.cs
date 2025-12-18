@@ -39,14 +39,26 @@ namespace EQ.UI.UserViews.Extruder
         {
             // TODO: ActManager에서 레시피 목록 로드
             _comboRecipe.Items.Clear();
-            _comboRecipe.Items.Add("RMO1 Rst");
-            _comboRecipe.Items.Add("Recipe 2");
-            _comboRecipe.Items.Add("Recipe 3");
 
-            if (_comboRecipe.Items.Count > 0)
+            var act = ActManager.Instance.Act;
+            var _recipes = act.ExtruderRecipe.Recipes.ToList();
+
+            _comboRecipe.Items.Clear();
+            foreach (var recipe in _recipes)
+            {
+                _comboRecipe.Items.Add(recipe.Name);
+            }
+
+            // ActExtruderRecipe의 현재 레시피 인덱스를 사용
+            int currentIndex = act.ExtruderRecipe.CurrentRecipeIndex;
+            if (currentIndex >= 0 && currentIndex < _comboRecipe.Items.Count)
+            {
+                _comboRecipe.SelectedIndex = currentIndex;
+            }
+            else if (_comboRecipe.Items.Count > 0)
             {
                 _comboRecipe.SelectedIndex = 0;
-            }
+            }           
 
             _comboRecipe.SelectedIndexChanged += OnRecipeChanged;
         }

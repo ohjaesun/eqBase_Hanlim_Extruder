@@ -21,13 +21,13 @@
             // 
             // UserControlBaseplain
             // 
-            AutoScaleDimensions = new SizeF(10F, 24F);
+            AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(80, 80, 80);
-            Font = new Font("D2Coding", 15.7499981F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            Margin = new Padding(4, 5, 4, 5);
+            Font = new Font("D2Coding", 12F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "UserControlBaseplain";
-            Size = new Size(862, 542);
+            Size = new Size(690, 406);
             ResumeLayout(false);
         }
 

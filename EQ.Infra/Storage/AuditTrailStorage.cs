@@ -258,11 +258,11 @@ namespace EQ.Infra.Storage
                     // 데이터
                     foreach (var entry in entries)
                     {
-                        var line = $"\"{entry.Timestamp:yyyy-MM-dd HH:mm:ss}\"," +
-                                   $"\"{entry.EventType}\"," +
-                                   $"\"{EscapeCsv(entry.UserId)}\"," +
-                                   $"\"{EscapeCsv(entry.UserName)}\"," +
-                                   $"\"{EscapeCsv(entry.Description)}\"," +
+                        var line = $"\"{entry.Timestamp:yyyy-MM-dd HH:mm:ss}\"^" +
+                                   $"\"{entry.EventType}\"^" +
+                                   $"\"{EscapeCsv(entry.UserId)}\"^" +
+                                   $"\"{EscapeCsv(entry.UserName)}\"^" +
+                                   $"\"{EscapeCsv(entry.Description)}\"^" +
                                    $"\"{EscapeCsv(entry.DetailJson)}\"";
                         writer.WriteLine(line);
                     }

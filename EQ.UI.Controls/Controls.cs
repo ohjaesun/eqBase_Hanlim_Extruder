@@ -356,7 +356,7 @@ namespace EQ.UI.Controls
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
-            tooltip.Show(this.Text, this, Width / 2, Height / 2, 1000);
+         //   tooltip.Show(this.Text, this, Width / 2, Height / 2, 1000);
             Log.Instance.Controls($"CheckBox Click: Name:[{this.Name}] Text:[{this.Text}] Checked:[{this.Checked}]");
         }
 

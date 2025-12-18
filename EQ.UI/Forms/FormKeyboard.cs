@@ -44,6 +44,12 @@ namespace EQ.UI.Forms
                 if (ctrl is _Button btn && btn.Tag != null && btn.Tag.ToString() == "char")
                 {
                     btn.Click += Char_Click;
+                    
+                    // 초기 상태: 알파벳은 소문자로 표시 (숫자는 그대로)
+                    if (btn.Text.Length == 1 && char.IsLetter(btn.Text[0]))
+                    {
+                        btn.Text = btn.Text.ToLower();
+                    }
                 }
             }
 

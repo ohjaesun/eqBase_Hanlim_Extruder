@@ -33,7 +33,7 @@ namespace EQ.UI
             _Panel1 = new EQ.UI.Controls._Panel();
             _Panel6 = new EQ.UI.Controls._Panel();
             _Label9 = new EQ.UI.Controls._Label();
-            _Label8 = new EQ.UI.Controls._Label();
+            _LabelLogin = new EQ.UI.Controls._Label();
             _Label3 = new EQ.UI.Controls._Label();
             _Panel5 = new EQ.UI.Controls._Panel();
             _Label4 = new EQ.UI.Controls._Label();
@@ -99,7 +99,7 @@ namespace EQ.UI
             // 
             _Panel6.BackColor = SystemColors.Control;
             _Panel6.Controls.Add(_Label9);
-            _Panel6.Controls.Add(_Label8);
+            _Panel6.Controls.Add(_LabelLogin);
             _Panel6.Controls.Add(_Label3);
             _Panel6.Dock = DockStyle.Fill;
             _Panel6.ForeColor = SystemColors.ControlText;
@@ -124,21 +124,22 @@ namespace EQ.UI
             _Label9.ThemeStyle = UI.Controls.ThemeStyle.Default;
             _Label9.TooltipText = null;
             // 
-            // _Label8
+            // _LabelLogin
             // 
-            _Label8.BackColor = Color.FromArgb(46, 204, 113);
-            _Label8.BorderStyle = BorderStyle.FixedSingle;
-            _Label8.Dock = DockStyle.Right;
-            _Label8.Font = new Font("D2Coding", 12F);
-            _Label8.ForeColor = Color.Black;
-            _Label8.Location = new Point(1491, 0);
-            _Label8.Name = "_Label8";
-            _Label8.Size = new Size(284, 43);
-            _Label8.TabIndex = 1;
-            _Label8.Text = "Login";
-            _Label8.TextAlign = ContentAlignment.MiddleCenter;
-            _Label8.ThemeStyle = UI.Controls.ThemeStyle.Success_Green;
-            _Label8.TooltipText = null;
+            _LabelLogin.BackColor = Color.FromArgb(46, 204, 113);
+            _LabelLogin.BorderStyle = BorderStyle.FixedSingle;
+            _LabelLogin.Dock = DockStyle.Right;
+            _LabelLogin.Font = new Font("D2Coding", 12F);
+            _LabelLogin.ForeColor = Color.Black;
+            _LabelLogin.Location = new Point(1491, 0);
+            _LabelLogin.Name = "_LabelLogin";
+            _LabelLogin.Size = new Size(284, 43);
+            _LabelLogin.TabIndex = 1;
+            _LabelLogin.Text = "Login";
+            _LabelLogin.TextAlign = ContentAlignment.MiddleCenter;
+            _LabelLogin.ThemeStyle = UI.Controls.ThemeStyle.Success_Green;
+            _LabelLogin.TooltipText = null;
+            _LabelLogin.Click += _Label8_Click;
             // 
             // _Label3
             // 
@@ -645,7 +646,7 @@ namespace EQ.UI
         private Controls._Label _LabelDate;
         private Controls._Label _Label5;
         private Controls._Label _Label9;
-        private Controls._Label _Label8;
+        private Controls._Label _LabelLogin;
         private FlowLayoutPanel flowLayoutPanel2;
         private Controls._Button _Button1;
         private Controls._Label _Label10;

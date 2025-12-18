@@ -174,7 +174,7 @@ namespace EQ.UI
 
                             case LoadStep.LoadPasswords:
                                 {
-                                    act.User.LoadPasswords();
+                                    act.User.LoadUsers();
                                 }
                                 break;
 

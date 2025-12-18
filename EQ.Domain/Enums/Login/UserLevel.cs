@@ -7,6 +7,8 @@ namespace EQ.Domain.Enums
     /// </summary>
     public enum UserLevel
     {
+        Lock = 0,
+
         /// <summary>
         /// 공정 운용자 (기본 권한)
         /// </summary>

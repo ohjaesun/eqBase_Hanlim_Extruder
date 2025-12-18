@@ -3,6 +3,7 @@ using EQ.Core.Service;
 using EQ.Domain.Entities;
 using EQ.Domain.Enums;
 using EQ.UI.Controls;
+using EQ.UI.Forms;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -28,21 +29,28 @@ namespace EQ.UI
             _TextBoxNewPassword.PasswordChar = '●';
             _TextBoxConfirmPassword.PasswordChar = '●';
 
-            // (요청 4) ActUser에서 목록을 가져오는 대신, Enum을 직접 바인딩
-            _ComboBoxLevel.Items.Clear();
-            _ComboBoxLevel.Items.Add(UserLevel.Operator);
-            _ComboBoxLevel.Items.Add(UserLevel.Engineer);
-            _ComboBoxLevel.Items.Add(UserLevel.Admin);
+            // 기본 메시지
+            _LabelStatus.Text = "Enter User ID and Password.";
+            _LabelStatus.ThemeStyle = ThemeStyle.Primary_Indigo;
 
-            // (요청 3) 기본값 Operator 선택
-            _ComboBoxLevel.SelectedItem = UserLevel.Operator;
+            // FormKeyboard 연동 (터치스크린용)
+            _TextBoxUserId.Click += TextBoxUserId_Click;
+            _TextBoxPW.Click += TextBoxPW_Click;
+            _TextBoxNewPassword.Click += TextBoxNewPassword_Click;
+            _TextBoxConfirmPassword.Click += TextBoxConfirmPassword_Click;
 
-            UpdateUIState();
+            var list = ReadUsers();
+
+            _ComboBox1.Items.AddRange(list);
         }
 
-        private void _ComboBoxLevel_SelectedIndexChanged(object sender, EventArgs e)
+        private void _TextBoxUserId_TextChanged(object sender, EventArgs e)
         {
-            UpdateUIState();
+            // UserId 입력 시 Change Password 체크박스 표시 여부 결정
+            string userId = _TextBoxUserId.Text.Trim().ToLower();
+
+            // 비어있지 않으면 Change Password 체크박스 표시
+            _CheckBoxChangePassword.Visible = !string.IsNullOrEmpty(userId);
         }
 
         private void _CheckBoxChangePassword_CheckedChanged(object sender, EventArgs e)
@@ -51,48 +59,25 @@ namespace EQ.UI
         }
 
         /// <summary>
-        /// (요청 4) 콤보박스/체크박스 상태에 따라 UI를 갱신
+        /// UI 상태 업데이트 (비밀번호 변경 모드)
         /// </summary>
         private void UpdateUIState()
         {
-            if (_ComboBoxLevel.SelectedItem == null) return;
+            bool isChangeMode = _CheckBoxChangePassword.Checked;
 
-            UserLevel selectedLevel = (UserLevel)_ComboBoxLevel.SelectedItem;
-
-            bool isOperator = (selectedLevel == UserLevel.Operator);
-
-            // 1. (요청 4) Operator일 때 암호창 비활성화
-            _TextBoxPW.Enabled = !isOperator;
-            if (isOperator) _TextBoxPW.Text = "";
-
-            // 2. (요청 4) Engineer/Admin일 때만 "암호 변경" 체크박스 보임
-            _CheckBoxChangePassword.Visible = !isOperator;
-            if (isOperator)
-            {
-                _CheckBoxChangePassword.Checked = false;
-            }
-
-            // 3. (요청 4) "암호 변경" 체크 시 새 암호/확인란 보임
-            bool isChangeMode = _CheckBoxChangePassword.Checked && !isOperator;
+            // 비밀번호 변경 필드 표시/숨김
             _LabelNewPassword.Visible = isChangeMode;
             _TextBoxNewPassword.Visible = isChangeMode;
             _LabelConfirmPassword.Visible = isChangeMode;
             _TextBoxConfirmPassword.Visible = isChangeMode;
 
-            // 4. 버튼 텍스트 변경
-            if (isOperator)
-            {
-                _ButtonConfirm.Text = "Select"; // Operator는 "로그인"이 아님
-            }
-            else
-            {
-                _ButtonConfirm.Text = isChangeMode ? "Change" : "Login";
-            }
+            // 버튼 텍스트 변경
+            _ButtonConfirm.Text = isChangeMode ? "Change" : "Login";
 
-            // 5. 레이블 변경
+            // 기존 비밀번호 레이블 변경
             label2.Text = isChangeMode ? "Old Password:" : "Password:";
 
-            // 6. 상태 레이블 초기화
+            // 상태 레이블 초기화
             _LabelStatus.Text = "";
             _LabelStatus.ThemeStyle = ThemeStyle.Primary_Indigo;
         }
@@ -105,54 +90,131 @@ namespace EQ.UI
             }
             else
             {
-                PerformLoginOrSelect();
+                PerformLogin();
             }
         }
 
         private void _ButtonCancel_Click(object sender, EventArgs e)
         {
+            // Logout 처리 (Lock 상태로 전환)
+            _act.User.Logout();
+
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
-        private void PerformLoginOrSelect()
+        /// <summary>
+        /// 로그인 수행 (모든 사용자 암호 입력 필요)
+        /// </summary>
+        private void PerformLogin()
         {
-            UserLevel selectedLevel = (UserLevel)_ComboBoxLevel.SelectedItem;
+            string userId = _TextBoxUserId.Text.Trim();
             string password = _TextBoxPW.Text;
 
-            // (요청 3 & 4) Operator 선택 시
-            if (selectedLevel == UserLevel.Operator)
+            // 입력 검증
+            if (string.IsNullOrEmpty(userId))
             {
-                _act.User.Logout(); // Operator로 복귀
-                this.DialogResult = DialogResult.OK; // (성공으로 간주)
-                this.Close();
+                _LabelStatus.Text = "Please enter User ID.";
+                _LabelStatus.ThemeStyle = ThemeStyle.Warning_Yellow;
                 return;
             }
 
-            // Engineer 또는 Admin 로그인
-            if (_act.User.Login(selectedLevel, password))
+            if (string.IsNullOrEmpty(password))
             {
-                this.DialogResult = DialogResult.OK; // 로그인 성공
+                _LabelStatus.Text = "Please enter Password.";
+                _LabelStatus.ThemeStyle = ThemeStyle.Warning_Yellow;
+                return;
+            }
+
+            // 로그인 시도
+            if (_act.User.Login(userId, password))
+            {
+                SaveRecent(userId);
+                // 로그인 성공
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
             {
-                _LabelStatus.Text = "Invalid Password.";
-                _LabelStatus.ThemeStyle = ThemeStyle.Danger_Red;
+                // 로그인 실패
+                var user = _act.User.GetUserById(userId);
+                if (user == null)
+                {
+                    _LabelStatus.Text = "User ID not found.";
+                    _LabelStatus.ThemeStyle = ThemeStyle.Danger_Red;
+                }
+                else if (user.IsLocked)
+                {
+                    _LabelStatus.Text = "Account is locked. Contact Admin.";
+                    _LabelStatus.ThemeStyle = ThemeStyle.Danger_Red;
+                }
+                else
+                {
+                    // 실패 횟수 표시
+                    int remaining = 5 - user.FailedAttempts;
+                    _LabelStatus.Text = $"Invalid Password. Attempts remaining: {remaining}/5";
+                    _LabelStatus.ThemeStyle = ThemeStyle.Danger_Red;
+                }
             }
         }
 
+        string[] ReadUsers()
+        {
+            string filePath = Application.StartupPath + "\\ModelData\\recent_users.txt";
+
+            if (!File.Exists(filePath))
+                return Array.Empty<string>();
+
+            return File.ReadAllLines(filePath)
+                       .Where(x => !string.IsNullOrWhiteSpace(x))
+                       .Take(5)
+                       .ToArray();
+        }
+        void SaveRecent(string newValue)
+        {
+            string filePath = Application.StartupPath + "\\ModelData\\recent_users.txt";
+            List<string> list = new List<string>();
+
+            // 파일 있으면 읽기
+            if (File.Exists(filePath))
+                list = File.ReadAllLines(filePath).ToList();
+
+            // 공백 제거
+            list = list.Where(x => !string.IsNullOrWhiteSpace(x)).ToList();
+
+            // 이미 있으면 제거
+            list.Remove(newValue);
+
+            // 맨 앞(1번)에 추가
+            list.Insert(0, newValue);
+
+            // 5개 초과 제거
+            if (list.Count > 5)
+                list = list.Take(5).ToList();
+
+            // 파일 저장
+            File.WriteAllLines(filePath, list);
+        }
+
         /// <summary>
-        /// (요청 4) 암호 변경 로직
+        /// 비밀번호 변경
         /// </summary>
         private void PerformChangePassword()
         {
-            UserLevel selectedLevel = (UserLevel)_ComboBoxLevel.SelectedItem;
+            string userId = _TextBoxUserId.Text.Trim();
             string oldPassword = _TextBoxPW.Text;
             string newPassword = _TextBoxNewPassword.Text;
             string confirmPassword = _TextBoxConfirmPassword.Text;
 
-            // (요청 4) 2자리 이하 설정 불가
+            // 입력 검증
+            if (string.IsNullOrEmpty(userId))
+            {
+                _LabelStatus.Text = "Please enter User ID.";
+                _LabelStatus.ThemeStyle = ThemeStyle.Warning_Yellow;
+                return;
+            }
+
+            // 비밀번호 길이 검증 (최소 3자)
             if (string.IsNullOrEmpty(newPassword) || newPassword.Length <= 2)
             {
                 _LabelStatus.Text = "New Password must be at least 3 characters.";
@@ -160,7 +222,7 @@ namespace EQ.UI
                 return;
             }
 
-            // (요청 4) 새 암호/확인 일치
+            // 비밀번호 일치 확인
             if (newPassword != confirmPassword)
             {
                 _LabelStatus.Text = "New passwords do not match.";
@@ -168,9 +230,10 @@ namespace EQ.UI
                 return;
             }
 
-            if (_act.User.ChangePassword(selectedLevel, oldPassword, newPassword))
+            // 비밀번호 변경 시도
+            if (_act.User.ChangePassword(userId, oldPassword, newPassword))
             {
-                _LabelStatus.Text = $"'{selectedLevel}' password changed!";
+                _LabelStatus.Text = $"'{userId}' password changed!";
                 _LabelStatus.ThemeStyle = ThemeStyle.Success_Green;
 
                 // 성공 후 폼 초기화
@@ -178,7 +241,6 @@ namespace EQ.UI
                 _TextBoxNewPassword.Text = "";
                 _TextBoxConfirmPassword.Text = "";
                 _CheckBoxChangePassword.Checked = false;
-                // (폼은 닫지 않고 로그인 모드로 전환)
                 UpdateUIState();
             }
             else
@@ -194,7 +256,7 @@ namespace EQ.UI
             {
                 if (_CheckBoxChangePassword.Checked)
                 {
-                    // 암호 변경 모드에서 엔터
+                    // 비밀번호 변경 모드에서 엔터
                     if (sender == _TextBoxConfirmPassword)
                     {
                         PerformChangePassword();
@@ -207,9 +269,63 @@ namespace EQ.UI
                 else
                 {
                     // 로그인 모드에서 엔터
-                    PerformLoginOrSelect();
+                    PerformLogin();
                 }
             }
+        }
+
+        #region FormKeyboard 연동 (터치스크린용)
+
+        private void TextBoxUserId_Click(object sender, EventArgs e)
+        {
+            using (var keyboard = new FormKeyboard("User ID", _TextBoxUserId.Text))
+            {
+                if (keyboard.ShowDialog() == DialogResult.OK)
+                {
+                    _TextBoxUserId.Text = keyboard.ResultValue;
+                }
+            }
+        }
+
+        private void TextBoxPW_Click(object sender, EventArgs e)
+        {
+            // 비밀번호는 초기값 없이 시작
+            using (var keyboard = new FormKeyboard(label2.Text, ""))
+            {
+                if (keyboard.ShowDialog() == DialogResult.OK)
+                {
+                    _TextBoxPW.Text = keyboard.ResultValue;
+                }
+            }
+        }
+
+        private void TextBoxNewPassword_Click(object sender, EventArgs e)
+        {
+            using (var keyboard = new FormKeyboard("New Password", ""))
+            {
+                if (keyboard.ShowDialog() == DialogResult.OK)
+                {
+                    _TextBoxNewPassword.Text = keyboard.ResultValue;
+                }
+            }
+        }
+
+        private void TextBoxConfirmPassword_Click(object sender, EventArgs e)
+        {
+            using (var keyboard = new FormKeyboard("Confirm Password", ""))
+            {
+                if (keyboard.ShowDialog() == DialogResult.OK)
+                {
+                    _TextBoxConfirmPassword.Text = keyboard.ResultValue;
+                }
+            }
+        }
+
+        #endregion
+
+        private void _ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _TextBoxUserId.Text = _ComboBox1.SelectedItem.ToString();
         }
     }
 }

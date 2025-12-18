@@ -126,9 +126,17 @@ namespace EQ.UI
                 return;
             }
 
+            if (userId == password)
+            {
+                _LabelStatus.Text = "Password is same as User ID.";
+                _LabelStatus.ThemeStyle = ThemeStyle.Warning_Yellow;
+                return;
+            }
+
             // 로그인 시도
             if (_act.User.Login(userId, password))
-            {
+            {              
+
                 SaveRecent(userId);
                 // 로그인 성공
                 this.DialogResult = DialogResult.OK;

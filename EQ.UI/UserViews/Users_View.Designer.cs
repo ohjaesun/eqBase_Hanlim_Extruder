@@ -38,12 +38,10 @@
             _Label1 = new EQ.UI.Controls._Label();
             _Label2 = new EQ.UI.Controls._Label();
             _TextBox2 = new EQ.UI.Controls._TextBox();
-            _GroupBox1 = new EQ.UI.Controls._GroupBox();
-            _RadioButton1 = new EQ.UI.Controls._RadioButton();
-            _RadioButton2 = new EQ.UI.Controls._RadioButton();
             _RadioButton3 = new EQ.UI.Controls._RadioButton();
+            _RadioButton2 = new EQ.UI.Controls._RadioButton();
+            _RadioButton1 = new EQ.UI.Controls._RadioButton();
             ((System.ComponentModel.ISupportInitialize)_gridUsers).BeginInit();
-            _GroupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // _gridUsers
@@ -187,21 +185,32 @@
             _TextBox2.TabIndex = 5;
             _TextBox2.ThemeStyle = UI.Controls.ThemeStyle.Default;
             // 
-            // _GroupBox1
+            // _RadioButton3
             // 
-            _GroupBox1.BackColor = SystemColors.Control;
-            _GroupBox1.Controls.Add(_RadioButton3);
-            _GroupBox1.Controls.Add(_RadioButton2);
-            _GroupBox1.Controls.Add(_RadioButton1);
-            _GroupBox1.Font = new Font("D2Coding", 12F);
-            _GroupBox1.ForeColor = SystemColors.ControlText;
-            _GroupBox1.Location = new Point(747, 17);
-            _GroupBox1.Name = "_GroupBox1";
-            _GroupBox1.Size = new Size(411, 100);
-            _GroupBox1.TabIndex = 7;
-            _GroupBox1.TabStop = false;
-            _GroupBox1.Text = "Level";
-            _GroupBox1.ThemeStyle = UI.Controls.ThemeStyle.Default;
+            _RadioButton3.AutoSize = true;
+            _RadioButton3.BackColor = Color.FromArgb(231, 76, 60);
+            _RadioButton3.Font = new Font("D2Coding", 17.9999981F);
+            _RadioButton3.ForeColor = Color.Black;
+            _RadioButton3.Location = new Point(1036, 19);
+            _RadioButton3.Name = "_RadioButton3";
+            _RadioButton3.Size = new Size(90, 32);
+            _RadioButton3.TabIndex = 0;
+            _RadioButton3.Text = "Admin";
+            _RadioButton3.ThemeStyle = UI.Controls.ThemeStyle.Danger_Red;
+            _RadioButton3.UseVisualStyleBackColor = false;
+            // 
+            // _RadioButton2
+            // 
+            _RadioButton2.AutoSize = true;
+            _RadioButton2.BackColor = Color.FromArgb(52, 152, 219);
+            _RadioButton2.Font = new Font("D2Coding", 17.9999981F);
+            _RadioButton2.ForeColor = Color.Black;
+            _RadioButton2.Location = new Point(894, 19);
+            _RadioButton2.Name = "_RadioButton2";
+            _RadioButton2.Size = new Size(126, 32);
+            _RadioButton2.TabIndex = 0;
+            _RadioButton2.Text = "Engineer";
+            _RadioButton2.UseVisualStyleBackColor = false;
             // 
             // _RadioButton1
             // 
@@ -210,7 +219,7 @@
             _RadioButton1.Checked = true;
             _RadioButton1.Font = new Font("D2Coding", 17.9999981F);
             _RadioButton1.ForeColor = Color.Black;
-            _RadioButton1.Location = new Point(20, 38);
+            _RadioButton1.Location = new Point(750, 19);
             _RadioButton1.Name = "_RadioButton1";
             _RadioButton1.Size = new Size(126, 32);
             _RadioButton1.TabIndex = 0;
@@ -219,39 +228,14 @@
             _RadioButton1.ThemeStyle = UI.Controls.ThemeStyle.Success_Green;
             _RadioButton1.UseVisualStyleBackColor = false;
             // 
-            // _RadioButton2
-            // 
-            _RadioButton2.AutoSize = true;
-            _RadioButton2.BackColor = Color.FromArgb(52, 152, 219);
-            _RadioButton2.Font = new Font("D2Coding", 17.9999981F);
-            _RadioButton2.ForeColor = Color.Black;
-            _RadioButton2.Location = new Point(168, 38);
-            _RadioButton2.Name = "_RadioButton2";
-            _RadioButton2.Size = new Size(126, 32);
-            _RadioButton2.TabIndex = 0;
-            _RadioButton2.Text = "Engineer";
-            _RadioButton2.UseVisualStyleBackColor = false;
-            // 
-            // _RadioButton3
-            // 
-            _RadioButton3.AutoSize = true;
-            _RadioButton3.BackColor = Color.FromArgb(231, 76, 60);
-            _RadioButton3.Font = new Font("D2Coding", 17.9999981F);
-            _RadioButton3.ForeColor = Color.Black;
-            _RadioButton3.Location = new Point(315, 38);
-            _RadioButton3.Name = "_RadioButton3";
-            _RadioButton3.Size = new Size(90, 32);
-            _RadioButton3.TabIndex = 0;
-            _RadioButton3.Text = "Admin";
-            _RadioButton3.ThemeStyle = UI.Controls.ThemeStyle.Danger_Red;
-            _RadioButton3.UseVisualStyleBackColor = false;
-            // 
             // Users_View
             // 
             AutoScaleDimensions = new SizeF(10F, 24F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(_GroupBox1);
+            Controls.Add(_RadioButton3);
+            Controls.Add(_RadioButton2);
             Controls.Add(_Label2);
+            Controls.Add(_RadioButton1);
             Controls.Add(_Label1);
             Controls.Add(_TextBox2);
             Controls.Add(_TextBox1);
@@ -265,8 +249,6 @@
             Size = new Size(2521, 1570);
             Load += Users_View_Load;
             ((System.ComponentModel.ISupportInitialize)_gridUsers).EndInit();
-            _GroupBox1.ResumeLayout(false);
-            _GroupBox1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
 
@@ -283,7 +265,6 @@
         private Controls._Label _Label1;
         private Controls._Label _Label2;
         private Controls._TextBox _TextBox2;
-        private Controls._GroupBox _GroupBox1;
         private Controls._RadioButton _RadioButton3;
         private Controls._RadioButton _RadioButton2;
         private Controls._RadioButton _RadioButton1;

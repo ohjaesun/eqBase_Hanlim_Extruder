@@ -26,6 +26,10 @@ namespace EQ.UI.UserViews
             InitializeGrid();
             LoadUsers();
             UpdateButtonStates();
+
+            // FormKeyboard 연동 (터치스크린용)
+            _TextBox1.Click += TextBox1_Click;
+            _TextBox2.Click += TextBox2_Click;
         }
 
         private void InitializeGrid()
@@ -240,5 +244,31 @@ namespace EQ.UI.UserViews
         {
             UpdateButtonStates();
         }
+
+        #region FormKeyboard 연동
+
+        private void TextBox1_Click(object sender, EventArgs e)
+        {
+            using (var keyboard = new FormKeyboard("User ID", _TextBox1.Text))
+            {
+                if (keyboard.ShowDialog() == DialogResult.OK)
+                {
+                    _TextBox1.Text = keyboard.ResultValue;
+                }
+            }
+        }
+
+        private void TextBox2_Click(object sender, EventArgs e)
+        {
+            using (var keyboard = new FormKeyboard("User Name", _TextBox2.Text))
+            {
+                if (keyboard.ShowDialog() == DialogResult.OK)
+                {
+                    _TextBox2.Text = keyboard.ResultValue;
+                }
+            }
+        }
+
+        #endregion
     }
 }

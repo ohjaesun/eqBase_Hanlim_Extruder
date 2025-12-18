@@ -123,11 +123,15 @@ namespace EQ.UI.UserViews
             var t = ActManager.Instance.Act.PopupYesNo.ConfirmAsync("Add User", $"Are you sure you want to Add User '{userId}'?");
             
                 if (t.Result == YesNoResult.Yes)
-                {
-                    try
-                    {
-                        ActManager.Instance.Act.User.CreateUser(userId, userName, selectedLevel, userId);
-                        LoadUsers();
+        {
+            try
+            {
+                ActManager.Instance.Act.User.CreateUser(userId, userName, selectedLevel, userId);
+                
+                // 사용자 생성 이력 기록
+                ActManager.Instance.Act.AuditTrail.RecordUserCreated(userId, userName);
+                
+                LoadUsers();
                     }
                     catch (Exception ex)
                     {
@@ -156,11 +160,19 @@ namespace EQ.UI.UserViews
             var t =ActManager.Instance.Act.PopupYesNo.ConfirmAsync("Delete User", $"Are you sure you want to delete user '{userId}'?");
             
                 if (t.Result == YesNoResult.Yes)
-                {
-                    try
-                    {
-                        ActManager.Instance.Act.User.DeleteUser(userId);                      
-                        LoadUsers();
+        {
+            try
+            {
+                // 사용자 정보 저장 (삭제 전)
+                var user = ActManager.Instance.Act.User.GetUserById(userId);
+                string userName = user?.UserName ?? userId;
+                
+                ActManager.Instance.Act.User.DeleteUser(userId);                      
+                
+                // 사용자 삭제 이력 기록
+                ActManager.Instance.Act.AuditTrail.RecordUserDeleted(userId, userName);
+                
+                LoadUsers();
                     }
                     catch (Exception ex)
                     {
@@ -193,11 +205,19 @@ namespace EQ.UI.UserViews
             var t = ActManager.Instance.Act.PopupYesNo.ConfirmAsync("UnlockUser", $"Are you sure you want to UnlockUser '{userId}'?");
             
                 if (t.Result == YesNoResult.Yes)
-                {
-                    try
-                    {
-                        ActManager.Instance.Act.User.UnlockUser(userId);
-                        LoadUsers();
+        {
+            try
+            {
+                // 사용자 정보 저장 (잠금 해제 전)
+                var user = ActManager.Instance.Act.User.GetUserById(userId);
+                string userName = user?.UserName ?? userId;
+                
+                ActManager.Instance.Act.User.UnlockUser(userId);
+                
+                // 사용자 잠금 해제 이력 기록
+                ActManager.Instance.Act.AuditTrail.RecordUserUnlocked(userId, userName);
+                
+                LoadUsers();
                     }
                     catch (Exception ex)
                     {
@@ -227,11 +247,19 @@ namespace EQ.UI.UserViews
             var t = ActManager.Instance.Act.PopupYesNo.ConfirmAsync("Reset Password", $"Are you sure you want to Reset Password '{userId}'?");
             
                 if (t.Result == YesNoResult.Yes)
-                {
-                    try
-                    {
-                        ActManager.Instance.Act.User.ResetPassword(userId, userId);
-                        LoadUsers();
+        {
+            try
+            {
+                // 사용자 정보 저장 (비밀번호 재설정 전)
+                var user = ActManager.Instance.Act.User.GetUserById(userId);
+                string userName = user?.UserName ?? userId;
+                
+                ActManager.Instance.Act.User.ResetPassword(userId, userId);
+                
+                // 비밀번호 재설정 이력 기록 (관리자가 재설정 = false)
+                ActManager.Instance.Act.AuditTrail.RecordPasswordChanged(userId, userName, false);
+                
+                LoadUsers();
                     }
                     catch (Exception ex)
                     {

@@ -116,6 +116,12 @@ namespace EQ.Core.Act
         /// </summary>
         public ActLaserMeasure LaserMeasure { get; private set; }
 
+        /// <summary>
+        /// Audit Trail 이력 관리 서비스
+        /// (사양서 9.9.3 - Audit Trail 요구사항)
+        /// </summary>
+        public AuditTrailService AuditTrail { get; private set; }
+
         // === 한림 압출기 전용 컴포넌트 ===
         
         /// <summary>
@@ -186,6 +192,10 @@ namespace EQ.Core.Act
             this.Extruder = new Act.Composition.Extruder.ActExtruder(this);
             this.Puller = new Act.Composition.Extruder.ActPuller(this);
             this.Finishing = new Act.Composition.Extruder.ActFinishing(this);
+
+            // Audit Trail 초기화 (d:\HistoryDB)
+            this.AuditTrail = new AuditTrailService(@"d:\HistoryDB");
+            this.AuditTrail.RecordSystemStartup();
         }
 
 

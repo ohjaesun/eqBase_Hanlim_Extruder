@@ -97,6 +97,12 @@ namespace EQ.UI
         private void _ButtonCancel_Click(object sender, EventArgs e)
         {
             // Logout 처리 (Lock 상태로 전환)
+            // 로그아웃 이력 기록 (로그인 상태에서만)
+            if (_act.User.CurrentUser != null)
+            {
+                _act.AuditTrail.RecordLogout();
+            }
+
             _act.User.Logout();
 
             this.DialogResult = DialogResult.Cancel;
@@ -136,9 +142,13 @@ namespace EQ.UI
             // 로그인 시도
             if (_act.User.Login(userId, password))
             {              
+                // 로그인 성공
+                var currentUser = _act.User.CurrentUser;
+                _act.AuditTrail.SetCurrentUser(currentUser.UserId, currentUser.UserName);
+                _act.AuditTrail.RecordLogin(currentUser.UserId, currentUser.UserName, true);
 
                 SaveRecent(userId);
-                // 로그인 성공
+                
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -162,6 +172,9 @@ namespace EQ.UI
                     int remaining = 5 - user.FailedAttempts;
                     _LabelStatus.Text = $"Invalid Password. Attempts remaining: {remaining}/5";
                     _LabelStatus.ThemeStyle = ThemeStyle.Danger_Red;
+
+                    // 로그인 실패 이력 기록
+                    _act.AuditTrail.RecordLogin(userId, user.UserName, false);
                 }
             }
         }
@@ -243,6 +256,13 @@ namespace EQ.UI
             {
                 _LabelStatus.Text = $"'{userId}' password changed!";
                 _LabelStatus.ThemeStyle = ThemeStyle.Success_Green;
+
+                // 비밀번호 변경 이력 기록
+                var user = _act.User.GetUserById(userId);
+                if (user != null)
+                {
+                    _act.AuditTrail.RecordPasswordChanged(userId, user.UserName, true);
+                }
 
                 // 성공 후 폼 초기화
                 _TextBoxPW.Text = "";

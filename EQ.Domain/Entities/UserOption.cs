@@ -91,9 +91,11 @@ namespace EQ.Domain.Entities
     }
     public class UserOption3
     {
-        [CategoryAttribute("ChipData")]
-        [DescriptionAttribute("Magazine 갯수")]
-        public int Chip_MagazineCount { get; set; } = 1;
+        [CategoryAttribute("Feeder")]
+        [DescriptionAttribute("encoder")]
+        public int FeederEncoder { get; set; } = 1; 
+
+
         [CategoryAttribute("ChipData")]
         [DescriptionAttribute("Magazine의 Tray 갯수")]
         public int Chip_TrayCount { get; set; } = 10;

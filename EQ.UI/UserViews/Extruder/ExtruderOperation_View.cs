@@ -107,7 +107,8 @@ namespace EQ.UI.UserViews.Extruder
                     tempState3.Text = _temp[0].IsRunning ? "RUN" : "STOP";
                     tempState3.ThemeStyle = _temp[0].IsRunning ? UI.Controls.ThemeStyle.Success_Green : UI.Controls.ThemeStyle.Neutral_Gray;
                     tempState4.Text = _temp[1].IsRunning ? "RUN" : "STOP";
-                    tempState4.ThemeStyle = _temp[1].IsRunning ? UI.Controls.ThemeStyle.Success_Green : UI.Controls.ThemeStyle.Neutral_Gray;
+                    tempState4.ThemeStyle = _temp[1].IsRunning ? UI.Controls.ThemeStyle.Success_Green : UI.Controls.ThemeStyle.Neutral_Gray;                  
+
                 }
             }
 

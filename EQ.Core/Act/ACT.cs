@@ -150,6 +150,11 @@ namespace EQ.Core.Act
         public Act.Composition.Extruder.ActFinishing Finishing { get; private set; }
 
         /// <summary>
+        /// 차트 데이터 수집 및 관리
+        /// </summary>
+        public ActChartData ChartData { get; private set; }
+
+        /// <summary>
         /// 의존성 주입 부
         /// </summary>
         public ACT()
@@ -192,6 +197,9 @@ namespace EQ.Core.Act
             this.Extruder = new Act.Composition.Extruder.ActExtruder(this);
             this.Puller = new Act.Composition.Extruder.ActPuller(this);
             this.Finishing = new Act.Composition.Extruder.ActFinishing(this);
+
+            // 차트 데이터 관리
+            this.ChartData = new ActChartData(this);
 
             // Audit Trail 초기화 (d:\HistoryDB)
             this.AuditTrail = new AuditTrailService(@"d:\HistoryDB");

@@ -1,5 +1,7 @@
 ﻿using EQ.Common.Logs;
 using EQ.Core.Act;
+using EQ.Core.Service;
+using EQ.Domain.Enums;
 using EQ.Domain.Interface;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -129,6 +131,8 @@ namespace EQ.Core.Act.Composition
                                     IsConnected = true // 읽기 성공 시 연결됨
                                 };
                                 OnTemperatureUpdated?.Invoke(data);
+
+                                
                             }
                             catch (System.Exception ex)
                             {
@@ -145,7 +149,7 @@ namespace EQ.Core.Act.Composition
                                 };
                                 OnTemperatureUpdated?.Invoke(errorData);
                             }
-                        }
+                        }                       
 
                         await Task.Delay(samplingTimeMs, token);
                     }

@@ -7,7 +7,7 @@
     {
         Zone1,      // heater1
         Zone2,      // heater2
-        BathCirculator      // 칠러1            // Chamber_A,  // 예: 챔버 A
-                             // Chamber_B   // 예: 챔버 B
+        BathCirculator,      // 칠러1            // Chamber_A,  // 예: 챔버 A
+        BathCirculator2,                     // Chamber_B   // 예: 챔버 B
     }
 }

@@ -411,11 +411,12 @@ namespace EQ.UI
                     var mockZone1 = new MockTempController("Zone1", initialTemp: 24.5);
                     var mockZone2 = new MockTempController("Zone2", initialTemp: 25.0);
                     var mockChamber = new MockTempController("Chamber_A", initialTemp: 60.0); // 이미 예열된 상태 가정
+                    var mockChamber2 = new MockTempController("Chamber_B", initialTemp: 50.0); // 이미 예열된 상태 가정
 
-                
                     act.Temp.Register(TempID.Zone1, mockZone1);
                     act.Temp.Register(TempID.Zone2, mockZone2);
                     act.Temp.Register(TempID.BathCirculator, mockChamber);
+                    act.Temp.Register(TempID.BathCirculator2, mockChamber2);
 
                     Log.Instance.Info("온도 컨트롤러(MOCK) 등록 완료");
                 }

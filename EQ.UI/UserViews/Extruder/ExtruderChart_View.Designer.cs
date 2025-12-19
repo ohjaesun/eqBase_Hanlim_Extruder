@@ -28,17 +28,20 @@ namespace EQ.UI.UserViews.Extruder
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             formsPlot1 = new ScottPlot.WinForms.FormsPlot();
             splitContainer1 = new SplitContainer();
-            chkSyncXAxis = new CheckBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
+            chkSyncXAxis = new CheckBox();
             flowLayoutPanel2 = new FlowLayoutPanel();
-            _Button1 = new EQ.UI.Controls._Button();
+            _CheckBox1 = new EQ.UI.Controls._CheckBox();
+            _CheckBox2 = new EQ.UI.Controls._CheckBox();
+            _CheckBox3 = new EQ.UI.Controls._CheckBox();
+            timer1 = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             SuspendLayout();
             // 
@@ -69,63 +72,102 @@ namespace EQ.UI.UserViews.Extruder
             splitContainer1.SplitterDistance = 65;
             splitContainer1.TabIndex = 1;
             // 
-            // chkSyncXAxis
-            // 
-            chkSyncXAxis.Appearance = Appearance.Button;
-            chkSyncXAxis.AutoSize = true;
-            chkSyncXAxis.Location = new Point(3, 3);
-            chkSyncXAxis.Name = "chkSyncXAxis";
-            chkSyncXAxis.Size = new Size(106, 28);
-            chkSyncXAxis.TabIndex = 0;
-            chkSyncXAxis.Text = "Sync X Axis";
-            chkSyncXAxis.UseVisualStyleBackColor = true;
-            chkSyncXAxis.CheckedChanged += ChkSyncXAxis_CheckedChanged;
-            // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.Controls.Add(chkSyncXAxis);
+            flowLayoutPanel1.BackColor = Color.Bisque;
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(775, 65);
             flowLayoutPanel1.TabIndex = 0;
             // 
+            // chkSyncXAxis
+            // 
+            chkSyncXAxis.Appearance = Appearance.Button;
+            chkSyncXAxis.Location = new Point(3, 3);
+            chkSyncXAxis.Name = "chkSyncXAxis";
+            chkSyncXAxis.Size = new Size(100, 42);
+            chkSyncXAxis.TabIndex = 0;
+            chkSyncXAxis.Text = "Sync X Axis";
+            chkSyncXAxis.UseVisualStyleBackColor = true;
+            chkSyncXAxis.CheckedChanged += ChkSyncXAxis_CheckedChanged;
+            // 
             // flowLayoutPanel2
             // 
-            flowLayoutPanel2.Controls.Add(_Button1);
+            flowLayoutPanel2.BackColor = Color.Bisque;
+            flowLayoutPanel2.Controls.Add(chkSyncXAxis);
+            flowLayoutPanel2.Controls.Add(_CheckBox1);
+            flowLayoutPanel2.Controls.Add(_CheckBox2);
+            flowLayoutPanel2.Controls.Add(_CheckBox3);
             flowLayoutPanel2.Dock = DockStyle.Left;
             flowLayoutPanel2.Location = new Point(0, 0);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
             flowLayoutPanel2.Size = new Size(115, 618);
             flowLayoutPanel2.TabIndex = 2;
             // 
-            // _Button1
+            // _CheckBox1
             // 
-            _Button1.BackColor = Color.FromArgb(48, 63, 159);
-            _Button1.Font = new Font("D2Coding", 12F);
-            _Button1.ForeColor = Color.White;
-            _Button1.Location = new Point(3, 3);
-            _Button1.Name = "_Button1";
-            _Button1.Size = new Size(100, 55);
-            _Button1.TabIndex = 0;
-            _Button1.Text = "_Button1";
-            _Button1.TooltipText = null;
-            _Button1.UseVisualStyleBackColor = false;
+            _CheckBox1.BackColor = Color.FromArgb(52, 152, 219);
+            _CheckBox1.Checked = true;
+            _CheckBox1.CheckState = CheckState.Checked;
+            _CheckBox1.Font = new Font("D2Coding", 15.7499981F);
+            _CheckBox1.ForeColor = Color.Black;
+            _CheckBox1.Location = new Point(3, 51);
+            _CheckBox1.Name = "_CheckBox1";
+            _CheckBox1.Size = new Size(100, 55);
+            _CheckBox1.TabIndex = 1;
+            _CheckBox1.Text = "Motor";
+            _CheckBox1.UseVisualStyleBackColor = false;
+            _CheckBox1.CheckStateChanged += _CheckBox1_CheckStateChanged;
+            // 
+            // _CheckBox2
+            // 
+            _CheckBox2.BackColor = Color.FromArgb(52, 152, 219);
+            _CheckBox2.Checked = true;
+            _CheckBox2.CheckState = CheckState.Checked;
+            _CheckBox2.Font = new Font("D2Coding", 15.7499981F);
+            _CheckBox2.ForeColor = Color.Black;
+            _CheckBox2.Location = new Point(3, 112);
+            _CheckBox2.Name = "_CheckBox2";
+            _CheckBox2.Size = new Size(100, 55);
+            _CheckBox2.TabIndex = 1;
+            _CheckBox2.Text = "Temp";
+            _CheckBox2.UseVisualStyleBackColor = false;
+            _CheckBox2.CheckStateChanged += _CheckBox1_CheckStateChanged;
+            // 
+            // _CheckBox3
+            // 
+            _CheckBox3.BackColor = Color.FromArgb(52, 152, 219);
+            _CheckBox3.Checked = true;
+            _CheckBox3.CheckState = CheckState.Checked;
+            _CheckBox3.Font = new Font("D2Coding", 15.7499981F);
+            _CheckBox3.ForeColor = Color.Black;
+            _CheckBox3.Location = new Point(3, 173);
+            _CheckBox3.Name = "_CheckBox3";
+            _CheckBox3.Size = new Size(100, 55);
+            _CheckBox3.TabIndex = 1;
+            _CheckBox3.Text = "Data";
+            _CheckBox3.UseVisualStyleBackColor = false;
+            _CheckBox3.CheckStateChanged += _CheckBox1_CheckStateChanged;
+            // 
+            // timer1
+            // 
+            timer1.Tick += timer1_Tick;
             // 
             // ExtruderChart_View
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             Controls.Add(splitContainer1);
             Controls.Add(flowLayoutPanel2);
             Name = "ExtruderChart_View";
             Size = new Size(890, 618);
+            Load += ExtruderChart_View_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
-            flowLayoutPanel1.ResumeLayout(false);
-            flowLayoutPanel1.PerformLayout();
             flowLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -136,6 +178,9 @@ namespace EQ.UI.UserViews.Extruder
         private FlowLayoutPanel flowLayoutPanel1;
         private CheckBox chkSyncXAxis;
         private FlowLayoutPanel flowLayoutPanel2;
-        private Controls._Button _Button1;
+        private System.Windows.Forms.Timer timer1;
+        private Controls._CheckBox _CheckBox1;
+        private Controls._CheckBox _CheckBox2;
+        private Controls._CheckBox _CheckBox3;
     }
 }

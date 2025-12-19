@@ -38,6 +38,7 @@ namespace EQ.UI.UserViews.Extruder
             _CheckBox2 = new EQ.UI.Controls._CheckBox();
             _CheckBox3 = new EQ.UI.Controls._CheckBox();
             timer1 = new System.Windows.Forms.Timer(components);
+            _CheckBox4 = new EQ.UI.Controls._CheckBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -99,6 +100,7 @@ namespace EQ.UI.UserViews.Extruder
             flowLayoutPanel2.Controls.Add(_CheckBox1);
             flowLayoutPanel2.Controls.Add(_CheckBox2);
             flowLayoutPanel2.Controls.Add(_CheckBox3);
+            flowLayoutPanel2.Controls.Add(_CheckBox4);
             flowLayoutPanel2.Dock = DockStyle.Left;
             flowLayoutPanel2.Location = new Point(0, 0);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
@@ -154,6 +156,20 @@ namespace EQ.UI.UserViews.Extruder
             // 
             timer1.Tick += timer1_Tick;
             // 
+            // _CheckBox4
+            // 
+            _CheckBox4.BackColor = Color.FromArgb(241, 196, 15);
+            _CheckBox4.Font = new Font("D2Coding", 15.7499981F);
+            _CheckBox4.ForeColor = Color.Black;
+            _CheckBox4.Location = new Point(3, 234);
+            _CheckBox4.Name = "_CheckBox4";
+            _CheckBox4.Size = new Size(100, 55);
+            _CheckBox4.TabIndex = 1;
+            _CheckBox4.Text = "Pause";
+            _CheckBox4.ThemeStyle = UI.Controls.ThemeStyle.Warning_Yellow;
+            _CheckBox4.UseVisualStyleBackColor = false;
+            _CheckBox4.CheckStateChanged += _CheckBox4_CheckStateChanged;
+            // 
             // ExtruderChart_View
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
@@ -182,5 +198,6 @@ namespace EQ.UI.UserViews.Extruder
         private Controls._CheckBox _CheckBox1;
         private Controls._CheckBox _CheckBox2;
         private Controls._CheckBox _CheckBox3;
+        private Controls._CheckBox _CheckBox4;
     }
 }

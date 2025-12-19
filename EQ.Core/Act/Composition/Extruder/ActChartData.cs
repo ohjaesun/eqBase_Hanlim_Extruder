@@ -210,6 +210,38 @@ namespace EQ.Core.Act.Composition
             }
         }
 
+        public List<List<DataPoint>> GetDataSinceAll( int fromIndex)
+        {
+            lock (_lock)
+            {
+                //전체 데이터 버퍼에서 fromIndex 이후의 데이터만 반환
+                var result = new List<List<DataPoint>>();
+                
+                foreach (var item in Enum.GetValues<ChartTypes>())
+                {
+                    if (!_dataBuffers.ContainsKey(item.ToString()))
+                    {
+                        result.Add(new List<DataPoint>());
+                        continue;
+                    }
+
+                    var data = _dataBuffers[item.ToString()];
+                    
+                    // fromIndex 이후의 데이터만 반환
+                    if (fromIndex < 0 || fromIndex >= data.Count)
+                    {
+                        result.Add(new List<DataPoint>());
+                    }
+                    else
+                    {
+                        result.Add(data.Skip(fromIndex).ToList());
+                    }
+                }
+                
+                return result;
+            }
+        }
+
         /// <summary>
         /// 특정 시간 이후의 데이터만 조회 (증분 업데이트용)
         /// </summary>

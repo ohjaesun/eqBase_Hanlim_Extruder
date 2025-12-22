@@ -3,6 +3,7 @@ using EQ.Core.Service;
 using EQ.Domain.Enums;
 using ScottPlot;
 using ScottPlot.Plottables;
+using ScottPlot.WinForms;
 
 namespace EQ.UI.UserViews.Extruder
 {
@@ -26,7 +27,7 @@ namespace EQ.UI.UserViews.Extruder
         private void InitializeCharts(int idx)
         {
 
-            timer1.Stop();
+            timer1.Stop();           
 
             var plots = new List<Plot>();
 
@@ -218,6 +219,15 @@ namespace EQ.UI.UserViews.Extruder
                 plot.Axes.SetLimitsY(0, 50, rightAxis2);
             }
 
+            for (int k = 0; k < chartCheckBoxes.Count(); k++)
+            {               
+                var pp = loggers[k].Color;
+                chartCheckBoxes[k].BackColor = ScottPlot.Color.ToColor(pp);
+            }          
+           
+
+            
+
             // X축을 시간으로 표시
             // 모든 플롯에 동일한 패딩을 적용하여 Y축 정렬
             var padding = new ScottPlot.PixelPadding(left: 80, right: 120, bottom: 50, top: 10);
@@ -336,6 +346,8 @@ namespace EQ.UI.UserViews.Extruder
                 timer1.Stop();
         }
 
+        List<CheckBox> chartCheckBoxes = new List<CheckBox>();
+
         private void ExtruderChart_View_Load(object sender, EventArgs e)
         {
             if (DesignMode) return;
@@ -356,7 +368,7 @@ namespace EQ.UI.UserViews.Extruder
                     Checked = true, // 기본 체크 상태
                     Margin = new Padding(5)
                 };
-
+                chartCheckBoxes.Add(checkbox);
                 // 체크 이벤트 핸들러 연결
                 checkbox.CheckedChanged += ChartCheckBox_CheckedChanged;
 

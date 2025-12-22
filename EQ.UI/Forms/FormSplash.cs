@@ -282,7 +282,7 @@ namespace EQ.UI
 
                             case LoadStep.Init_EQ_Exturder:
                                 {
-                                    act.Extuder.Init();
+                                  
                                 }
                                 break;
                         }

@@ -244,6 +244,8 @@ namespace EQ.Core.Service
             _storage.AddEntry(entry);
         }
 
+        
+
         /// <summary>
         /// 비상정지 이력 기록
         /// (사양서 9.5.4 - 비상정지 Audit Trail 기록)
@@ -286,8 +288,8 @@ namespace EQ.Core.Service
             var entry = new AuditTrailEntry(
                 AuditEventType.SystemStartup,
                 "SYSTEM",
-                "시스템",
-                "시스템 시작"
+                "SYSTEM",
+                "Program Start"
             );
 
             _storage.AddEntry(entry);
@@ -302,7 +304,7 @@ namespace EQ.Core.Service
                 AuditEventType.SystemShutdown,
                 _currentUserId,
                 _currentUserName,
-                "시스템 종료"
+                "Program End"
             );
 
             _storage.AddEntry(entry);

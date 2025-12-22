@@ -120,6 +120,7 @@ namespace EQ.Core.Act.Composition.Extruder
                     }
                     catch (Exception ex)
                     {
+                      
                         Log.Instance.Error(L("직경 제어 오류: {0}", ex.Message));
                     }
 

@@ -395,6 +395,7 @@ namespace EQ.UI.Forms
             Name = "FormKeypad";
             StartPosition = FormStartPosition.CenterParent;
             Text = "FormKeypad";
+            TopMost = true;
             _PanelTitle.ResumeLayout(false);
             tableLayoutPanelMain.ResumeLayout(false);
             ResumeLayout(false);

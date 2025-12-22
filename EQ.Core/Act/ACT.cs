@@ -5,7 +5,7 @@ using EQ.Core.Act.Composition;
 using EQ.Core.Act.Composition.LaserMeasure;
 using EQ.Core.Act.Composition.Extruder;
 using EQ.Core.Act.Composition.SecsGem;
-using EQ.Core.Act.EQ_Hanlim_Extuder;
+
 using EQ.Core.Sequence;
 using EQ.Core.Service;
 using EQ.Domain.Entities;
@@ -124,11 +124,7 @@ namespace EQ.Core.Act
 
         // === 한림 압출기 전용 컴포넌트 ===
         
-        /// <summary>
-        /// (Legacy) 압출기 통합 제어
-        /// </summary>
-        public ActExtuder Extuder { get; private set; }
-
+      
         /// <summary>
         /// 압출기 레시피 관리
         /// </summary>
@@ -189,8 +185,7 @@ namespace EQ.Core.Act
 
             this.LaserMeasure = new ActLaserMeasure(this);
 
-            // 한림 익스투더 관련 초기화 (Legacy)
-            this.Extuder = new ActExtuder(this);
+            // 한림 익스투더 관련 초기화 (Legacy)         
             this.ExtruderRecipe = new ActExtruderRecipe(this);
 
             // 한림 압출기 모듈형 컴포넌트

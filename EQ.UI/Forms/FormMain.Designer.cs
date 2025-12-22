@@ -71,6 +71,7 @@ namespace EQ.UI
             toolStrip10 = new ToolStripStatusLabel();
             timerToolStrip = new System.Windows.Forms.Timer(components);
             timer1000 = new System.Windows.Forms.Timer(components);
+            _Button2 = new EQ.UI.Controls._Button();
             _Panel1.SuspendLayout();
             _Panel6.SuspendLayout();
             _Panel5.SuspendLayout();
@@ -317,6 +318,7 @@ namespace EQ.UI
             flowLayoutPanel1.Controls.Add(_ButtonBottom6);
             flowLayoutPanel1.Controls.Add(_ButtonBottom7);
             flowLayoutPanel1.Controls.Add(_ButtonBottom9);
+            flowLayoutPanel1.Controls.Add(_Button2);
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -582,6 +584,21 @@ namespace EQ.UI
             // 
             timer1000.Tick += timer1000_Tick;
             // 
+            // _Button2
+            // 
+            _Button2.BackColor = Color.FromArgb(46, 204, 113);
+            _Button2.Font = new Font("D2Coding", 12F);
+            _Button2.ForeColor = Color.Black;
+            _Button2.Location = new Point(851, 3);
+            _Button2.Name = "_Button2";
+            _Button2.Size = new Size(100, 55);
+            _Button2.TabIndex = 8;
+            _Button2.Text = "Controls";
+            _Button2.ThemeStyle = UI.Controls.ThemeStyle.Success_Green;
+            _Button2.TooltipText = null;
+            _Button2.UseVisualStyleBackColor = false;
+            _Button2.Click += _Button2_Click;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
@@ -651,5 +668,6 @@ namespace EQ.UI
         private Controls._Button _Button1;
         private Controls._Label _Label10;
         private System.Windows.Forms.Timer timer1000;
+        private Controls._Button _Button2;
     }
 }

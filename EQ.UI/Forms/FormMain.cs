@@ -310,24 +310,24 @@ namespace EQ.UI
         {
             //login level display
             var level = _act.User.CurrentUserLevel;
-            if(level == UserLevel.Lock && _LabelLogin.ThemeStyle != UI.Controls.ThemeStyle.Neutral_Gray)
+            if (level == UserLevel.Lock && _LabelLogin.ThemeStyle != UI.Controls.ThemeStyle.Neutral_Gray)
             {
                 _LabelLogin.ThemeStyle = UI.Controls.ThemeStyle.Neutral_Gray;
                 _LabelLogin.Text = "LOCK";
             }
-            else if(level == UserLevel.Operator && _LabelLogin.ThemeStyle != UI.Controls.ThemeStyle.Success_Green)
+            else if (level == UserLevel.Operator && _LabelLogin.ThemeStyle != UI.Controls.ThemeStyle.Success_Green)
             {
                 _LabelLogin.ThemeStyle = UI.Controls.ThemeStyle.Success_Green;
                 _LabelLogin.Text = "OPERATOR";
             }
 
             //Flicker 기능
-            if(level == UserLevel.Engineer)
+            if (level == UserLevel.Engineer)
             {
                 _LabelLogin.ThemeStyle = (_LabelLogin.ThemeStyle == UI.Controls.ThemeStyle.Info_Sky) ? UI.Controls.ThemeStyle.Highlight_DeepYellow : UI.Controls.ThemeStyle.Info_Sky;
                 _LabelLogin.Text = "ENGINEER";
             }
-            if(level == UserLevel.Admin)
+            if (level == UserLevel.Admin)
             {
                 _LabelLogin.ThemeStyle = (_LabelLogin.ThemeStyle == UI.Controls.ThemeStyle.Info_Sky) ? UI.Controls.ThemeStyle.Danger_Red : UI.Controls.ThemeStyle.Info_Sky;
                 _LabelLogin.Text = "ADMIN";
@@ -377,6 +377,16 @@ namespace EQ.UI
             {
                 login = new FormLogin();
                 login.ShowDialog();
+            }
+        }
+
+        private void _Button2_Click(object sender, EventArgs e)
+        {
+            Form fm = (FormAdminTest)Application.OpenForms["FormAdminTest"];
+            if (fm == null)
+            {
+                fm = new FormAdminTest();
+                fm.Show();
             }
         }
     }

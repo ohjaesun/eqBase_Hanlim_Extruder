@@ -3,6 +3,7 @@ using EQ.Core.Service;
 using EQ.Domain.Enums;
 using EQ.Domain.Interface;
 using EQ.UI.Controls;
+using EQ.UI.Forms;
 using System;
 using System.Data;
 using System.Drawing;
@@ -53,9 +54,19 @@ namespace EQ.UI.UserViews
             _GridTemp.Columns["PV"].ReadOnly = true;
             _GridTemp.Columns["PV"].DefaultCellStyle.Font = new Font("D2Coding", 14F, FontStyle.Bold);
             _GridTemp.Columns["PV"].DefaultCellStyle.ForeColor = Color.Lime; // PV 강조
+            // PV 컬럼은 선택 시 색상 변경 안 함
+            _GridTemp.Columns["PV"].DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 255, 225);
+            _GridTemp.Columns["PV"].DefaultCellStyle.SelectionForeColor = Color.Lime;
 
             _GridTemp.Columns["SV_Read"].ReadOnly = true;
+            // SV_Read 컬럼은 선택 시 색상 변경 안 함
+            _GridTemp.Columns["SV_Read"].DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 255, 225);
+            _GridTemp.Columns["SV_Read"].DefaultCellStyle.SelectionForeColor = Color.Black;
+
             _GridTemp.Columns["Status"].ReadOnly = true;
+            // Status 컬럼은 선택 시 색상 변경 안 함
+            _GridTemp.Columns["Status"].DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 255, 225);
+            _GridTemp.Columns["Status"].DefaultCellStyle.SelectionForeColor = Color.Black;
 
             // --- 버튼 컬럼 추가 (SV 설정, Run/Stop 제어) ---
             AddButtonColumn("Btn_SetSV", "Set SV", "Change");
@@ -78,6 +89,9 @@ namespace EQ.UI.UserViews
             btn.FlatStyle = FlatStyle.Popup;
             btn.DefaultCellStyle.BackColor = Color.FromArgb(52, 152, 219); // Info_Sky
             btn.DefaultCellStyle.ForeColor = Color.White;
+            // 버튼 컬럼은 선택 시 색상 변경 안 함
+            btn.DefaultCellStyle.SelectionBackColor = Color.FromArgb(52, 152, 219);
+            btn.DefaultCellStyle.SelectionForeColor = Color.White;
             _GridTemp.Columns.Add(btn);
         }
 
@@ -206,26 +220,26 @@ namespace EQ.UI.UserViews
             // [1] SV 설정 버튼
             if (colName == "Btn_SetSV")
             {
-                // 간단한 입력 팝업 (Microsoft.VisualBasic 참조가 없으면 커스텀 폼 사용 필요)
-                // 여기서는 간단히 TextBox를 가진 커스텀 팝업을 띄운다고 가정하거나
-                // ActUserOption처럼 PropertyGrid 방식을 쓸 수도 있지만,
-                // 가장 쉬운 방법은 InputBox 구현입니다.
-
-                string input = Microsoft.VisualBasic.Interaction.InputBox(
-                    $"Enter new SV for {zoneName}", "Set Temperature", "0");
-
-                if (double.TryParse(input, out double newSv))
+                // FormKeypad를 사용하여 숫자 입력
+                double currentSv = ctrl.ReadSV();
+               
+                using (var keypad = new FormKeypad("input", currentSv))
                 {
-                    var confirm = await ActManager.Instance.Act.PopupYesNo.ConfirmAsync(
-                        "Temperature Set",
-                        $"[{zoneName}] 설정 온도를 {newSv}도로 변경하시겠습니까?",
-                        Domain.Enums.NotifyType.Info);
-
-                    if (confirm == Domain.Enums.YesNoResult.Yes)
+                    if (keypad.ShowDialog() == DialogResult.OK)
                     {
-                        // 통신 수행 (비동기 래핑 권장)
-                        await Task.Run(() => ctrl.WriteSV(newSv));
-                        Log.Instance.Info($"[{zoneName}] SV Changed to {newSv} by User.");
+                        double newSv = keypad.ResultValue;
+                        
+                        var confirm = await ActManager.Instance.Act.PopupYesNo.ConfirmAsync(
+                            "Temperature Set",
+                            $"[{zoneName}] 설정 온도를 {newSv}도로 변경하시겠습니까?",
+                            Domain.Enums.NotifyType.Info);
+
+                        if (confirm == Domain.Enums.YesNoResult.Yes)
+                        {
+                            // 통신 수행 (비동기 래핑 권장)
+                            await Task.Run(() => ctrl.WriteSV(newSv));
+                            Log.Instance.Info($"[{zoneName}] SV Changed to {newSv} by User.");
+                        }
                     }
                 }
             }

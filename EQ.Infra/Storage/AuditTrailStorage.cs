@@ -250,7 +250,7 @@ namespace EQ.Infra.Storage
                 using (var writer = new StreamWriter(filePath, false, Encoding.UTF8))
                 {
                     // 헤더
-                    writer.WriteLine("DateTime,EventType,UserId,UserName,Description,DetailJson");
+                    writer.WriteLine("DateTime^EventType^UserId^UserName^Description^DetailJson");
 
                     // 데이터
                     foreach (var entry in entries)

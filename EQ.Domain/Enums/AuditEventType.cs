@@ -38,6 +38,7 @@ namespace EQ.Domain.Enums
         // 시스템
         SystemStartup,          // 시스템 시작
         SystemShutdown,         // 시스템 종료
+        SystemCrash,           // 시스템 충돌
         ConfigurationChanged,   // 설정 변경
         
         // 데이터 관리

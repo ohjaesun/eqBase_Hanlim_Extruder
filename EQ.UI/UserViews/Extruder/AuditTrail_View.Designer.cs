@@ -37,6 +37,10 @@
             _chkParameter = new EQ.UI.Controls._CheckBox();
             _chkSystem = new EQ.UI.Controls._CheckBox();
             panel1 = new Panel();
+            _Button5 = new EQ.UI.Controls._Button();
+            _Button4 = new EQ.UI.Controls._Button();
+            _Button3 = new EQ.UI.Controls._Button();
+            _Button2 = new EQ.UI.Controls._Button();
             _Button1 = new EQ.UI.Controls._Button();
             _btnExport = new EQ.UI.Controls._Button();
             _btnApplyFilter = new EQ.UI.Controls._Button();
@@ -64,22 +68,25 @@
             flowLayoutPanel1.Controls.Add(_chkSystem);
             flowLayoutPanel1.Dock = DockStyle.Left;
             flowLayoutPanel1.Location = new Point(0, 0);
+            flowLayoutPanel1.Margin = new Padding(2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(112, 800);
+            flowLayoutPanel1.Size = new Size(102, 600);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // _chkAll
             // 
             _chkAll.Appearance = Appearance.Button;
-            _chkAll.BackColor = Color.FromArgb(52, 152, 219);
+            _chkAll.BackColor = SystemColors.Control;
             _chkAll.Font = new Font("D2Coding", 12F);
-            _chkAll.ForeColor = Color.Black;
-            _chkAll.Location = new Point(3, 3);
+            _chkAll.ForeColor = SystemColors.ControlText;
+            _chkAll.Location = new Point(2, 2);
+            _chkAll.Margin = new Padding(2);
             _chkAll.Name = "_chkAll";
-            _chkAll.Size = new Size(103, 42);
+            _chkAll.Size = new Size(95, 45);
             _chkAll.TabIndex = 7;
             _chkAll.Text = "All";
             _chkAll.TextAlign = ContentAlignment.MiddleCenter;
+            _chkAll.ThemeStyle = UI.Controls.ThemeStyle.Default;
             _chkAll.UseVisualStyleBackColor = false;
             _chkAll.Visible = false;
             _chkAll.CheckedChanged += _chkAll_CheckedChanged;
@@ -87,80 +94,94 @@
             // _chkLogin
             // 
             _chkLogin.Appearance = Appearance.Button;
-            _chkLogin.BackColor = Color.FromArgb(52, 152, 219);
+            _chkLogin.BackColor = SystemColors.Control;
             _chkLogin.Font = new Font("D2Coding", 12F);
-            _chkLogin.ForeColor = Color.Black;
-            _chkLogin.Location = new Point(3, 51);
+            _chkLogin.ForeColor = SystemColors.ControlText;
+            _chkLogin.Location = new Point(2, 51);
+            _chkLogin.Margin = new Padding(2);
             _chkLogin.Name = "_chkLogin";
-            _chkLogin.Size = new Size(103, 42);
+            _chkLogin.Size = new Size(95, 45);
             _chkLogin.TabIndex = 8;
             _chkLogin.Text = "Login";
             _chkLogin.TextAlign = ContentAlignment.MiddleCenter;
+            _chkLogin.ThemeStyle = UI.Controls.ThemeStyle.Default;
             _chkLogin.UseVisualStyleBackColor = false;
             _chkLogin.CheckStateChanged += _chkLogin_CheckStateChanged;
             // 
             // _chkUser
             // 
             _chkUser.Appearance = Appearance.Button;
-            _chkUser.BackColor = Color.FromArgb(52, 152, 219);
+            _chkUser.BackColor = SystemColors.Control;
             _chkUser.Font = new Font("D2Coding", 12F);
-            _chkUser.ForeColor = Color.Black;
-            _chkUser.Location = new Point(3, 99);
+            _chkUser.ForeColor = SystemColors.ControlText;
+            _chkUser.Location = new Point(2, 100);
+            _chkUser.Margin = new Padding(2);
             _chkUser.Name = "_chkUser";
-            _chkUser.Size = new Size(103, 42);
+            _chkUser.Size = new Size(95, 45);
             _chkUser.TabIndex = 9;
             _chkUser.Text = "User";
             _chkUser.TextAlign = ContentAlignment.MiddleCenter;
+            _chkUser.ThemeStyle = UI.Controls.ThemeStyle.Default;
             _chkUser.UseVisualStyleBackColor = false;
             _chkUser.CheckStateChanged += _chkLogin_CheckStateChanged;
             // 
             // _chkRecipe
             // 
             _chkRecipe.Appearance = Appearance.Button;
-            _chkRecipe.BackColor = Color.FromArgb(52, 152, 219);
+            _chkRecipe.BackColor = SystemColors.Control;
             _chkRecipe.Font = new Font("D2Coding", 12F);
-            _chkRecipe.ForeColor = Color.Black;
-            _chkRecipe.Location = new Point(3, 147);
+            _chkRecipe.ForeColor = SystemColors.ControlText;
+            _chkRecipe.Location = new Point(2, 149);
+            _chkRecipe.Margin = new Padding(2);
             _chkRecipe.Name = "_chkRecipe";
-            _chkRecipe.Size = new Size(103, 42);
+            _chkRecipe.Size = new Size(95, 45);
             _chkRecipe.TabIndex = 10;
             _chkRecipe.Text = "Recipe";
             _chkRecipe.TextAlign = ContentAlignment.MiddleCenter;
+            _chkRecipe.ThemeStyle = UI.Controls.ThemeStyle.Default;
             _chkRecipe.UseVisualStyleBackColor = false;
             _chkRecipe.CheckStateChanged += _chkLogin_CheckStateChanged;
             // 
             // _chkParameter
             // 
             _chkParameter.Appearance = Appearance.Button;
-            _chkParameter.BackColor = Color.FromArgb(52, 152, 219);
+            _chkParameter.BackColor = SystemColors.Control;
             _chkParameter.Font = new Font("D2Coding", 12F);
-            _chkParameter.ForeColor = Color.Black;
-            _chkParameter.Location = new Point(3, 195);
+            _chkParameter.ForeColor = SystemColors.ControlText;
+            _chkParameter.Location = new Point(2, 198);
+            _chkParameter.Margin = new Padding(2);
             _chkParameter.Name = "_chkParameter";
-            _chkParameter.Size = new Size(103, 42);
+            _chkParameter.Size = new Size(95, 45);
             _chkParameter.TabIndex = 11;
             _chkParameter.Text = "Parameter";
             _chkParameter.TextAlign = ContentAlignment.MiddleCenter;
+            _chkParameter.ThemeStyle = UI.Controls.ThemeStyle.Default;
             _chkParameter.UseVisualStyleBackColor = false;
             _chkParameter.CheckStateChanged += _chkLogin_CheckStateChanged;
             // 
             // _chkSystem
             // 
             _chkSystem.Appearance = Appearance.Button;
-            _chkSystem.BackColor = Color.FromArgb(52, 152, 219);
+            _chkSystem.BackColor = SystemColors.Control;
             _chkSystem.Font = new Font("D2Coding", 12F);
-            _chkSystem.ForeColor = Color.Black;
-            _chkSystem.Location = new Point(3, 243);
+            _chkSystem.ForeColor = SystemColors.ControlText;
+            _chkSystem.Location = new Point(2, 247);
+            _chkSystem.Margin = new Padding(2);
             _chkSystem.Name = "_chkSystem";
-            _chkSystem.Size = new Size(103, 42);
+            _chkSystem.Size = new Size(95, 45);
             _chkSystem.TabIndex = 12;
             _chkSystem.Text = "System";
             _chkSystem.TextAlign = ContentAlignment.MiddleCenter;
+            _chkSystem.ThemeStyle = UI.Controls.ThemeStyle.Default;
             _chkSystem.UseVisualStyleBackColor = false;
             _chkSystem.CheckStateChanged += _chkLogin_CheckStateChanged;
             // 
             // panel1
             // 
+            panel1.Controls.Add(_Button5);
+            panel1.Controls.Add(_Button4);
+            panel1.Controls.Add(_Button3);
+            panel1.Controls.Add(_Button2);
             panel1.Controls.Add(_Button1);
             panel1.Controls.Add(_btnExport);
             panel1.Controls.Add(_btnApplyFilter);
@@ -171,19 +192,77 @@
             panel1.Controls.Add(_Label1);
             panel1.Controls.Add(_lblFrom);
             panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(112, 0);
+            panel1.Location = new Point(102, 0);
+            panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1788, 69);
+            panel1.Size = new Size(1418, 52);
             panel1.TabIndex = 1;
+            // 
+            // _Button5
+            // 
+            _Button5.BackColor = Color.FromArgb(48, 63, 159);
+            _Button5.Font = new Font("D2Coding", 12F);
+            _Button5.ForeColor = Color.White;
+            _Button5.Location = new Point(493, 12);
+            _Button5.Name = "_Button5";
+            _Button5.Size = new Size(34, 28);
+            _Button5.TabIndex = 6;
+            _Button5.Text = "->";
+            _Button5.TooltipText = null;
+            _Button5.UseVisualStyleBackColor = false;
+            _Button5.Click += _Button5_Click;
+            // 
+            // _Button4
+            // 
+            _Button4.BackColor = Color.FromArgb(48, 63, 159);
+            _Button4.Font = new Font("D2Coding", 12F);
+            _Button4.ForeColor = Color.White;
+            _Button4.Location = new Point(453, 12);
+            _Button4.Name = "_Button4";
+            _Button4.Size = new Size(34, 28);
+            _Button4.TabIndex = 6;
+            _Button4.Text = "<-";
+            _Button4.TooltipText = null;
+            _Button4.UseVisualStyleBackColor = false;
+            _Button4.Click += _Button4_Click;
+            // 
+            // _Button3
+            // 
+            _Button3.BackColor = Color.FromArgb(48, 63, 159);
+            _Button3.Font = new Font("D2Coding", 12F);
+            _Button3.ForeColor = Color.White;
+            _Button3.Location = new Point(236, 11);
+            _Button3.Name = "_Button3";
+            _Button3.Size = new Size(34, 28);
+            _Button3.TabIndex = 6;
+            _Button3.Text = "->";
+            _Button3.TooltipText = null;
+            _Button3.UseVisualStyleBackColor = false;
+            _Button3.Click += _Button3_Click;
+            // 
+            // _Button2
+            // 
+            _Button2.BackColor = Color.FromArgb(48, 63, 159);
+            _Button2.Font = new Font("D2Coding", 12F);
+            _Button2.ForeColor = Color.White;
+            _Button2.Location = new Point(196, 11);
+            _Button2.Name = "_Button2";
+            _Button2.Size = new Size(34, 28);
+            _Button2.TabIndex = 6;
+            _Button2.Text = "<-";
+            _Button2.TooltipText = null;
+            _Button2.UseVisualStyleBackColor = false;
+            _Button2.Click += _Button2_Click;
             // 
             // _Button1
             // 
             _Button1.BackColor = Color.FromArgb(48, 63, 159);
             _Button1.Font = new Font("D2Coding", 12F);
             _Button1.ForeColor = Color.White;
-            _Button1.Location = new Point(706, 15);
+            _Button1.Location = new Point(795, 5);
+            _Button1.Margin = new Padding(2);
             _Button1.Name = "_Button1";
-            _Button1.Size = new Size(120, 32);
+            _Button1.Size = new Size(96, 37);
             _Button1.TabIndex = 5;
             _Button1.Text = "Export PDF";
             _Button1.TooltipText = null;
@@ -195,9 +274,10 @@
             _btnExport.BackColor = Color.FromArgb(48, 63, 159);
             _btnExport.Font = new Font("D2Coding", 12F);
             _btnExport.ForeColor = Color.White;
-            _btnExport.Location = new Point(580, 15);
+            _btnExport.Location = new Point(694, 5);
+            _btnExport.Margin = new Padding(2);
             _btnExport.Name = "_btnExport";
-            _btnExport.Size = new Size(120, 32);
+            _btnExport.Size = new Size(96, 37);
             _btnExport.TabIndex = 5;
             _btnExport.Text = "Export CSV";
             _btnExport.TooltipText = null;
@@ -209,11 +289,12 @@
             _btnApplyFilter.BackColor = Color.FromArgb(48, 63, 159);
             _btnApplyFilter.Font = new Font("D2Coding", 12F);
             _btnApplyFilter.ForeColor = Color.White;
-            _btnApplyFilter.Location = new Point(450, 15);
+            _btnApplyFilter.Location = new Point(590, 5);
+            _btnApplyFilter.Margin = new Padding(2);
             _btnApplyFilter.Name = "_btnApplyFilter";
-            _btnApplyFilter.Size = new Size(120, 32);
+            _btnApplyFilter.Size = new Size(96, 37);
             _btnApplyFilter.TabIndex = 4;
-            _btnApplyFilter.Text = "Apply Filter";
+            _btnApplyFilter.Text = "Apply";
             _btnApplyFilter.TooltipText = null;
             _btnApplyFilter.UseVisualStyleBackColor = false;
             _btnApplyFilter.Click += _btnApplyFilter_Click;
@@ -222,9 +303,10 @@
             // 
             _dateTo.CustomFormat = "yyyy-MM-dd";
             _dateTo.Format = DateTimePickerFormat.Custom;
-            _dateTo.Location = new Point(290, 15);
+            _dateTo.Location = new Point(322, 11);
+            _dateTo.Margin = new Padding(2);
             _dateTo.Name = "_dateTo";
-            _dateTo.Size = new Size(150, 32);
+            _dateTo.Size = new Size(121, 26);
             _dateTo.TabIndex = 3;
             // 
             // _lblTo
@@ -232,9 +314,10 @@
             _lblTo.BackColor = Color.FromArgb(149, 165, 166);
             _lblTo.Font = new Font("D2Coding", 12F);
             _lblTo.ForeColor = Color.White;
-            _lblTo.Location = new Point(245, 15);
+            _lblTo.Location = new Point(286, 11);
+            _lblTo.Margin = new Padding(2, 0, 2, 0);
             _lblTo.Name = "_lblTo";
-            _lblTo.Size = new Size(40, 30);
+            _lblTo.Size = new Size(32, 22);
             _lblTo.TabIndex = 2;
             _lblTo.Text = "To:";
             _lblTo.TextAlign = ContentAlignment.MiddleRight;
@@ -244,9 +327,10 @@
             // 
             _dateFrom.CustomFormat = "yyyy-MM-dd";
             _dateFrom.Format = DateTimePickerFormat.Custom;
-            _dateFrom.Location = new Point(85, 15);
+            _dateFrom.Location = new Point(68, 11);
+            _dateFrom.Margin = new Padding(2);
             _dateFrom.Name = "_dateFrom";
-            _dateFrom.Size = new Size(150, 32);
+            _dateFrom.Size = new Size(121, 26);
             _dateFrom.TabIndex = 1;
             // 
             // _Label2
@@ -254,9 +338,10 @@
             _Label2.BackColor = Color.FromArgb(46, 204, 113);
             _Label2.Font = new Font("D2Coding", 12F);
             _Label2.ForeColor = Color.Black;
-            _Label2.Location = new Point(963, 17);
+            _Label2.Location = new Point(1000, 7);
+            _Label2.Margin = new Padding(2, 0, 2, 0);
             _Label2.Name = "_Label2";
-            _Label2.Size = new Size(143, 30);
+            _Label2.Size = new Size(114, 22);
             _Label2.TabIndex = 0;
             _Label2.Text = "용량";
             _Label2.TextAlign = ContentAlignment.MiddleLeft;
@@ -268,9 +353,10 @@
             _Label1.BackColor = Color.FromArgb(149, 165, 166);
             _Label1.Font = new Font("D2Coding", 12F);
             _Label1.ForeColor = Color.White;
-            _Label1.Location = new Point(848, 17);
+            _Label1.Location = new Point(908, 7);
+            _Label1.Margin = new Padding(2, 0, 2, 0);
             _Label1.Name = "_Label1";
-            _Label1.Size = new Size(109, 30);
+            _Label1.Size = new Size(87, 22);
             _Label1.TabIndex = 0;
             _Label1.Text = "Usage Disk :";
             _Label1.TextAlign = ContentAlignment.MiddleRight;
@@ -281,9 +367,10 @@
             _lblFrom.BackColor = Color.FromArgb(149, 165, 166);
             _lblFrom.Font = new Font("D2Coding", 12F);
             _lblFrom.ForeColor = Color.White;
-            _lblFrom.Location = new Point(20, 15);
+            _lblFrom.Location = new Point(16, 11);
+            _lblFrom.Margin = new Padding(2, 0, 2, 0);
             _lblFrom.Name = "_lblFrom";
-            _lblFrom.Size = new Size(60, 30);
+            _lblFrom.Size = new Size(48, 22);
             _lblFrom.TabIndex = 0;
             _lblFrom.Text = "From:";
             _lblFrom.TextAlign = ContentAlignment.MiddleRight;
@@ -293,9 +380,10 @@
             // 
             panelMain.Controls.Add(_gridAuditTrail);
             panelMain.Dock = DockStyle.Fill;
-            panelMain.Location = new Point(112, 69);
+            panelMain.Location = new Point(102, 52);
+            panelMain.Margin = new Padding(2);
             panelMain.Name = "panelMain";
-            panelMain.Size = new Size(1788, 731);
+            panelMain.Size = new Size(1418, 548);
             panelMain.TabIndex = 1;
             // 
             // _gridAuditTrail
@@ -316,24 +404,26 @@
             _gridAuditTrail.Dock = DockStyle.Fill;
             _gridAuditTrail.Font = new Font("D2Coding", 12F);
             _gridAuditTrail.Location = new Point(0, 0);
+            _gridAuditTrail.Margin = new Padding(2);
             _gridAuditTrail.MultiSelect = false;
             _gridAuditTrail.Name = "_gridAuditTrail";
             _gridAuditTrail.ReadOnly = true;
             _gridAuditTrail.RowHeadersVisible = false;
             _gridAuditTrail.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            _gridAuditTrail.Size = new Size(1788, 731);
+            _gridAuditTrail.Size = new Size(1418, 548);
             _gridAuditTrail.TabIndex = 0;
             _gridAuditTrail.CellDoubleClick += _gridAuditTrail_CellDoubleClick;
             // 
             // AuditTrail_View
             // 
-            AutoScaleDimensions = new SizeF(10F, 24F);
+            AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(panelMain);
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
+            Margin = new Padding(2, 3, 2, 3);
             Name = "AuditTrail_View";
-            Size = new Size(1900, 800);
+            Size = new Size(1520, 600);
             Load += AuditTrail_View_Load;
             flowLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
@@ -363,5 +453,9 @@
         private Controls._Button _Button1;
         private Controls._Label _Label1;
         private Controls._Label _Label2;
+        private Controls._Button _Button5;
+        private Controls._Button _Button4;
+        private Controls._Button _Button3;
+        private Controls._Button _Button2;
     }
 }

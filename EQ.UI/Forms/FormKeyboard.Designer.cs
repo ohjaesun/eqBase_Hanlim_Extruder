@@ -195,6 +195,8 @@ namespace EQ.UI.Forms
             _btn1.Name = "_btn1";
             _btn1.Size = new Size(53, 55);
             _btn1.TabIndex = 0;
+            _btn1.Tag = "char";
+            _btn1.Text = "1";
             _btn1.TooltipText = null;
             _btn1.UseVisualStyleBackColor = false;
             // 
@@ -207,6 +209,8 @@ namespace EQ.UI.Forms
             _btn2.Name = "_btn2";
             _btn2.Size = new Size(53, 55);
             _btn2.TabIndex = 1;
+            _btn2.Tag = "char";
+            _btn2.Text = "2";
             _btn2.TooltipText = null;
             _btn2.UseVisualStyleBackColor = false;
             // 
@@ -219,6 +223,8 @@ namespace EQ.UI.Forms
             _btn3.Name = "_btn3";
             _btn3.Size = new Size(53, 55);
             _btn3.TabIndex = 2;
+            _btn3.Tag = "char";
+            _btn3.Text = "3";
             _btn3.TooltipText = null;
             _btn3.UseVisualStyleBackColor = false;
             // 
@@ -231,6 +237,8 @@ namespace EQ.UI.Forms
             _btn4.Name = "_btn4";
             _btn4.Size = new Size(53, 55);
             _btn4.TabIndex = 3;
+            _btn4.Tag = "char";
+            _btn4.Text = "4";
             _btn4.TooltipText = null;
             _btn4.UseVisualStyleBackColor = false;
             // 
@@ -243,6 +251,8 @@ namespace EQ.UI.Forms
             _btn5.Name = "_btn5";
             _btn5.Size = new Size(53, 55);
             _btn5.TabIndex = 4;
+            _btn5.Tag = "char";
+            _btn5.Text = "5";
             _btn5.TooltipText = null;
             _btn5.UseVisualStyleBackColor = false;
             // 
@@ -255,6 +265,8 @@ namespace EQ.UI.Forms
             _btn6.Name = "_btn6";
             _btn6.Size = new Size(53, 55);
             _btn6.TabIndex = 5;
+            _btn6.Tag = "char";
+            _btn6.Text = "6";
             _btn6.TooltipText = null;
             _btn6.UseVisualStyleBackColor = false;
             // 
@@ -267,6 +279,8 @@ namespace EQ.UI.Forms
             _btn7.Name = "_btn7";
             _btn7.Size = new Size(53, 55);
             _btn7.TabIndex = 6;
+            _btn7.Tag = "char";
+            _btn7.Text = "7";
             _btn7.TooltipText = null;
             _btn7.UseVisualStyleBackColor = false;
             // 
@@ -279,6 +293,8 @@ namespace EQ.UI.Forms
             _btn8.Name = "_btn8";
             _btn8.Size = new Size(53, 55);
             _btn8.TabIndex = 7;
+            _btn8.Tag = "char";
+            _btn8.Text = "8";
             _btn8.TooltipText = null;
             _btn8.UseVisualStyleBackColor = false;
             // 
@@ -291,6 +307,8 @@ namespace EQ.UI.Forms
             _btn9.Name = "_btn9";
             _btn9.Size = new Size(53, 55);
             _btn9.TabIndex = 8;
+            _btn9.Tag = "char";
+            _btn9.Text = "9";
             _btn9.TooltipText = null;
             _btn9.UseVisualStyleBackColor = false;
             // 
@@ -303,6 +321,8 @@ namespace EQ.UI.Forms
             _btn0.Name = "_btn0";
             _btn0.Size = new Size(53, 55);
             _btn0.TabIndex = 9;
+            _btn0.Tag = "char";
+            _btn0.Text = "0";
             _btn0.TooltipText = null;
             _btn0.UseVisualStyleBackColor = false;
             // 
@@ -347,6 +367,8 @@ namespace EQ.UI.Forms
             _btnQ.Name = "_btnQ";
             _btnQ.Size = new Size(53, 55);
             _btnQ.TabIndex = 12;
+            _btnQ.Tag = "char";
+            _btnQ.Text = "Q";
             _btnQ.TooltipText = null;
             _btnQ.UseVisualStyleBackColor = false;
             // 
@@ -359,6 +381,8 @@ namespace EQ.UI.Forms
             _btnW.Name = "_btnW";
             _btnW.Size = new Size(53, 55);
             _btnW.TabIndex = 13;
+            _btnW.Tag = "char";
+            _btnW.Text = "W";
             _btnW.TooltipText = null;
             _btnW.UseVisualStyleBackColor = false;
             // 
@@ -371,6 +395,8 @@ namespace EQ.UI.Forms
             _btnE.Name = "_btnE";
             _btnE.Size = new Size(53, 55);
             _btnE.TabIndex = 14;
+            _btnE.Tag = "char";
+            _btnE.Text = "E";
             _btnE.TooltipText = null;
             _btnE.UseVisualStyleBackColor = false;
             // 
@@ -383,6 +409,8 @@ namespace EQ.UI.Forms
             _btnR.Name = "_btnR";
             _btnR.Size = new Size(53, 55);
             _btnR.TabIndex = 15;
+            _btnR.Tag = "char";
+            _btnR.Text = "R";
             _btnR.TooltipText = null;
             _btnR.UseVisualStyleBackColor = false;
             // 
@@ -395,6 +423,8 @@ namespace EQ.UI.Forms
             _btnT.Name = "_btnT";
             _btnT.Size = new Size(53, 55);
             _btnT.TabIndex = 16;
+            _btnT.Tag = "char";
+            _btnT.Text = "T";
             _btnT.TooltipText = null;
             _btnT.UseVisualStyleBackColor = false;
             // 
@@ -407,6 +437,8 @@ namespace EQ.UI.Forms
             _btnY.Name = "_btnY";
             _btnY.Size = new Size(53, 55);
             _btnY.TabIndex = 17;
+            _btnY.Tag = "char";
+            _btnY.Text = "Y";
             _btnY.TooltipText = null;
             _btnY.UseVisualStyleBackColor = false;
             // 
@@ -419,6 +451,8 @@ namespace EQ.UI.Forms
             _btnU.Name = "_btnU";
             _btnU.Size = new Size(53, 55);
             _btnU.TabIndex = 18;
+            _btnU.Tag = "char";
+            _btnU.Text = "U";
             _btnU.TooltipText = null;
             _btnU.UseVisualStyleBackColor = false;
             // 
@@ -431,6 +465,8 @@ namespace EQ.UI.Forms
             _btnI.Name = "_btnI";
             _btnI.Size = new Size(53, 55);
             _btnI.TabIndex = 19;
+            _btnI.Tag = "char";
+            _btnI.Text = "I";
             _btnI.TooltipText = null;
             _btnI.UseVisualStyleBackColor = false;
             // 
@@ -443,6 +479,8 @@ namespace EQ.UI.Forms
             _btnO.Name = "_btnO";
             _btnO.Size = new Size(53, 55);
             _btnO.TabIndex = 20;
+            _btnO.Tag = "char";
+            _btnO.Text = "O";
             _btnO.TooltipText = null;
             _btnO.UseVisualStyleBackColor = false;
             // 
@@ -455,6 +493,8 @@ namespace EQ.UI.Forms
             _btnP.Name = "_btnP";
             _btnP.Size = new Size(53, 55);
             _btnP.TabIndex = 21;
+            _btnP.Tag = "char";
+            _btnP.Text = "P";
             _btnP.TooltipText = null;
             _btnP.UseVisualStyleBackColor = false;
             // 
@@ -467,6 +507,8 @@ namespace EQ.UI.Forms
             _btnA.Name = "_btnA";
             _btnA.Size = new Size(53, 55);
             _btnA.TabIndex = 22;
+            _btnA.Tag = "char";
+            _btnA.Text = "A";
             _btnA.TooltipText = null;
             _btnA.UseVisualStyleBackColor = false;
             // 
@@ -479,6 +521,8 @@ namespace EQ.UI.Forms
             _btnS.Name = "_btnS";
             _btnS.Size = new Size(53, 55);
             _btnS.TabIndex = 23;
+            _btnS.Tag = "char";
+            _btnS.Text = "S";
             _btnS.TooltipText = null;
             _btnS.UseVisualStyleBackColor = false;
             // 
@@ -491,6 +535,8 @@ namespace EQ.UI.Forms
             _btnD.Name = "_btnD";
             _btnD.Size = new Size(53, 55);
             _btnD.TabIndex = 24;
+            _btnD.Tag = "char";
+            _btnD.Text = "D";
             _btnD.TooltipText = null;
             _btnD.UseVisualStyleBackColor = false;
             // 
@@ -503,6 +549,8 @@ namespace EQ.UI.Forms
             _btnF.Name = "_btnF";
             _btnF.Size = new Size(53, 55);
             _btnF.TabIndex = 25;
+            _btnF.Tag = "char";
+            _btnF.Text = "F";
             _btnF.TooltipText = null;
             _btnF.UseVisualStyleBackColor = false;
             // 
@@ -515,6 +563,8 @@ namespace EQ.UI.Forms
             _btnG.Name = "_btnG";
             _btnG.Size = new Size(53, 55);
             _btnG.TabIndex = 26;
+            _btnG.Tag = "char";
+            _btnG.Text = "G";
             _btnG.TooltipText = null;
             _btnG.UseVisualStyleBackColor = false;
             // 
@@ -527,6 +577,8 @@ namespace EQ.UI.Forms
             _btnH.Name = "_btnH";
             _btnH.Size = new Size(53, 55);
             _btnH.TabIndex = 27;
+            _btnH.Tag = "char";
+            _btnH.Text = "H";
             _btnH.TooltipText = null;
             _btnH.UseVisualStyleBackColor = false;
             // 
@@ -539,6 +591,8 @@ namespace EQ.UI.Forms
             _btnJ.Name = "_btnJ";
             _btnJ.Size = new Size(53, 55);
             _btnJ.TabIndex = 28;
+            _btnJ.Tag = "char";
+            _btnJ.Text = "J";
             _btnJ.TooltipText = null;
             _btnJ.UseVisualStyleBackColor = false;
             // 
@@ -551,6 +605,8 @@ namespace EQ.UI.Forms
             _btnK.Name = "_btnK";
             _btnK.Size = new Size(53, 55);
             _btnK.TabIndex = 29;
+            _btnK.Tag = "char";
+            _btnK.Text = "K";
             _btnK.TooltipText = null;
             _btnK.UseVisualStyleBackColor = false;
             // 
@@ -563,6 +619,8 @@ namespace EQ.UI.Forms
             _btnL.Name = "_btnL";
             _btnL.Size = new Size(53, 55);
             _btnL.TabIndex = 30;
+            _btnL.Tag = "char";
+            _btnL.Text = "L";
             _btnL.TooltipText = null;
             _btnL.UseVisualStyleBackColor = false;
             // 
@@ -592,6 +650,8 @@ namespace EQ.UI.Forms
             _btnZ.Name = "_btnZ";
             _btnZ.Size = new Size(53, 55);
             _btnZ.TabIndex = 32;
+            _btnZ.Tag = "char";
+            _btnZ.Text = "Z";
             _btnZ.TooltipText = null;
             _btnZ.UseVisualStyleBackColor = false;
             // 
@@ -604,6 +664,8 @@ namespace EQ.UI.Forms
             _btnX.Name = "_btnX";
             _btnX.Size = new Size(53, 55);
             _btnX.TabIndex = 33;
+            _btnX.Tag = "char";
+            _btnX.Text = "X";
             _btnX.TooltipText = null;
             _btnX.UseVisualStyleBackColor = false;
             // 
@@ -616,6 +678,8 @@ namespace EQ.UI.Forms
             _btnC.Name = "_btnC";
             _btnC.Size = new Size(53, 55);
             _btnC.TabIndex = 34;
+            _btnC.Tag = "char";
+            _btnC.Text = "C";
             _btnC.TooltipText = null;
             _btnC.UseVisualStyleBackColor = false;
             // 
@@ -628,6 +692,8 @@ namespace EQ.UI.Forms
             _btnV.Name = "_btnV";
             _btnV.Size = new Size(53, 55);
             _btnV.TabIndex = 35;
+            _btnV.Tag = "char";
+            _btnV.Text = "V";
             _btnV.TooltipText = null;
             _btnV.UseVisualStyleBackColor = false;
             // 
@@ -640,6 +706,8 @@ namespace EQ.UI.Forms
             _btnB.Name = "_btnB";
             _btnB.Size = new Size(53, 55);
             _btnB.TabIndex = 36;
+            _btnB.Tag = "char";
+            _btnB.Text = "B";
             _btnB.TooltipText = null;
             _btnB.UseVisualStyleBackColor = false;
             // 
@@ -652,6 +720,8 @@ namespace EQ.UI.Forms
             _btnN.Name = "_btnN";
             _btnN.Size = new Size(53, 55);
             _btnN.TabIndex = 37;
+            _btnN.Tag = "char";
+            _btnN.Text = "N";
             _btnN.TooltipText = null;
             _btnN.UseVisualStyleBackColor = false;
             // 
@@ -664,6 +734,8 @@ namespace EQ.UI.Forms
             _btnM.Name = "_btnM";
             _btnM.Size = new Size(53, 55);
             _btnM.TabIndex = 38;
+            _btnM.Tag = "char";
+            _btnM.Text = "M";
             _btnM.TooltipText = null;
             _btnM.UseVisualStyleBackColor = false;
             // 

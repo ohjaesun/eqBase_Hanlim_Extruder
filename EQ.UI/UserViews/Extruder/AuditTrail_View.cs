@@ -306,9 +306,9 @@ namespace EQ.UI.UserViews
             var obj = sender as _CheckBox;
 
             if (obj.Checked)
-                obj.ThemeStyle = ThemeStyle.Display_LightYellow;
+                obj.ThemeStyle = ThemeStyle.Success_Green;
             else
-                obj.ThemeStyle = ThemeStyle.Info_Sky;
+                obj.ThemeStyle = ThemeStyle.Default;
         }
 
         /// <summary>
@@ -329,6 +329,38 @@ namespace EQ.UI.UserViews
                 return "All";
 
             return string.Join("_", filterNames);
+        }
+
+        /// <summary>
+        /// _Button2 클릭: _dateFrom을 하루 전으로
+        /// </summary>
+        private void _Button2_Click(object sender, EventArgs e)
+        {
+            _dateFrom.Value = _dateFrom.Value.AddDays(-1);
+        }
+
+        /// <summary>
+        /// _Button3 클릭: _dateFrom을 하루 후로
+        /// </summary>
+        private void _Button3_Click(object sender, EventArgs e)
+        {
+            _dateFrom.Value = _dateFrom.Value.AddDays(1);
+        }
+
+        /// <summary>
+        /// _Button4 클릭: _dateTo를 하루 전으로
+        /// </summary>
+        private void _Button4_Click(object sender, EventArgs e)
+        {
+            _dateTo.Value = _dateTo.Value.AddDays(-1);
+        }
+
+        /// <summary>
+        /// _Button5 클릭: _dateTo를 하루 후로
+        /// </summary>
+        private void _Button5_Click(object sender, EventArgs e)
+        {
+            _dateTo.Value = _dateTo.Value.AddDays(1);
         }
 
         private void Export_PDF(object sender, EventArgs e)

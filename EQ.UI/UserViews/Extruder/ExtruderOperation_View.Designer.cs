@@ -48,23 +48,23 @@ namespace EQ.UI.UserViews.Extruder
             _Label6 = new EQ.UI.Controls._Label();
             _pnlRightParams = new EQ.UI.Controls._Panel();
             _Label48 = new EQ.UI.Controls._Label();
-            _lblCircBathValue = new EQ.UI.Controls._Label();
+            temper5 = new EQ.UI.Controls._Label();
             Labels5 = new EQ.UI.Controls._Label();
             Targets4 = new EQ.UI.Controls._TextBox();
-            _lblHeatPlateLeftActual = new EQ.UI.Controls._Label();
+            temper4 = new EQ.UI.Controls._Label();
             Labels4 = new EQ.UI.Controls._Label();
             Targets3 = new EQ.UI.Controls._TextBox();
-            _lblHeatPlateRightActual = new EQ.UI.Controls._Label();
+            temper3 = new EQ.UI.Controls._Label();
             Labels3 = new EQ.UI.Controls._Label();
-            tempState4 = new EQ.UI.Controls._Label();
-            tempState3 = new EQ.UI.Controls._Label();
-            tempState2 = new EQ.UI.Controls._Label();
+            States4 = new EQ.UI.Controls._Label();
+            States3 = new EQ.UI.Controls._Label();
+            States2 = new EQ.UI.Controls._Label();
             Targets2 = new EQ.UI.Controls._TextBox();
-            _lblBarrelTemp2Actual = new EQ.UI.Controls._Label();
+            temper2 = new EQ.UI.Controls._Label();
             Labels2 = new EQ.UI.Controls._Label();
-            tempState1 = new EQ.UI.Controls._Label();
+            States1 = new EQ.UI.Controls._Label();
             Targets1 = new EQ.UI.Controls._TextBox();
-            _lblBarrelTemp1Actual = new EQ.UI.Controls._Label();
+            temper1 = new EQ.UI.Controls._Label();
             Labels1 = new EQ.UI.Controls._Label();
             _lblRightParamsTitle = new EQ.UI.Controls._Label();
             _ButtonSet = new EQ.UI.Controls._Button();
@@ -121,12 +121,12 @@ namespace EQ.UI.UserViews.Extruder
             _Panel2 = new EQ.UI.Controls._Panel();
             _Label16 = new EQ.UI.Controls._Label();
             _Label15 = new EQ.UI.Controls._Label();
-            _Label37 = new EQ.UI.Controls._Label();
-            _Label36 = new EQ.UI.Controls._Label();
-            _Label32 = new EQ.UI.Controls._Label();
-            _Label31 = new EQ.UI.Controls._Label();
-            _Label30 = new EQ.UI.Controls._Label();
-            _Label29 = new EQ.UI.Controls._Label();
+            _EqStatus6 = new EQ.UI.Controls._Label();
+            _EqStatus5 = new EQ.UI.Controls._Label();
+            _EqStatus4 = new EQ.UI.Controls._Label();
+            _EqStatus3 = new EQ.UI.Controls._Label();
+            _EqStatus2 = new EQ.UI.Controls._Label();
+            _EqStatus1 = new EQ.UI.Controls._Label();
             _Label17 = new EQ.UI.Controls._Label();
             _Label18 = new EQ.UI.Controls._Label();
             _Label20 = new EQ.UI.Controls._Label();
@@ -135,12 +135,12 @@ namespace EQ.UI.UserViews.Extruder
             _Panel3 = new EQ.UI.Controls._Panel();
             _Label19 = new EQ.UI.Controls._Label();
             _Label21 = new EQ.UI.Controls._Label();
-            _Label43 = new EQ.UI.Controls._Label();
-            _Label42 = new EQ.UI.Controls._Label();
-            _Label41 = new EQ.UI.Controls._Label();
-            _Label40 = new EQ.UI.Controls._Label();
-            _Label39 = new EQ.UI.Controls._Label();
-            _Label38 = new EQ.UI.Controls._Label();
+            _EqStatus12 = new EQ.UI.Controls._Label();
+            _EqStatus11 = new EQ.UI.Controls._Label();
+            _EqStatus10 = new EQ.UI.Controls._Label();
+            _EqStatus9 = new EQ.UI.Controls._Label();
+            _EqStatus8 = new EQ.UI.Controls._Label();
+            _EqStatus7 = new EQ.UI.Controls._Label();
             _Label24 = new EQ.UI.Controls._Label();
             _Label25 = new EQ.UI.Controls._Label();
             _Label26 = new EQ.UI.Controls._Label();
@@ -149,8 +149,8 @@ namespace EQ.UI.UserViews.Extruder
             _Panel4 = new EQ.UI.Controls._Panel();
             _Label33 = new EQ.UI.Controls._Label();
             _Label34 = new EQ.UI.Controls._Label();
-            _Label45 = new EQ.UI.Controls._Label();
-            _Label44 = new EQ.UI.Controls._Label();
+            _EqStatus14 = new EQ.UI.Controls._Label();
+            _EqStatus13 = new EQ.UI.Controls._Label();
             _Label35 = new EQ.UI.Controls._Label();
             timer1 = new System.Windows.Forms.Timer(components);
             _pnlLeftParams.SuspendLayout();
@@ -403,23 +403,23 @@ namespace EQ.UI.UserViews.Extruder
             // 
             _pnlRightParams.BackColor = Color.FromArgb(64, 64, 64);
             _pnlRightParams.Controls.Add(_Label48);
-            _pnlRightParams.Controls.Add(_lblCircBathValue);
+            _pnlRightParams.Controls.Add(temper5);
             _pnlRightParams.Controls.Add(Labels5);
             _pnlRightParams.Controls.Add(Targets4);
-            _pnlRightParams.Controls.Add(_lblHeatPlateLeftActual);
+            _pnlRightParams.Controls.Add(temper4);
             _pnlRightParams.Controls.Add(Labels4);
             _pnlRightParams.Controls.Add(Targets3);
-            _pnlRightParams.Controls.Add(_lblHeatPlateRightActual);
+            _pnlRightParams.Controls.Add(temper3);
             _pnlRightParams.Controls.Add(Labels3);
-            _pnlRightParams.Controls.Add(tempState4);
-            _pnlRightParams.Controls.Add(tempState3);
-            _pnlRightParams.Controls.Add(tempState2);
+            _pnlRightParams.Controls.Add(States4);
+            _pnlRightParams.Controls.Add(States3);
+            _pnlRightParams.Controls.Add(States2);
             _pnlRightParams.Controls.Add(Targets2);
-            _pnlRightParams.Controls.Add(_lblBarrelTemp2Actual);
+            _pnlRightParams.Controls.Add(temper2);
             _pnlRightParams.Controls.Add(Labels2);
-            _pnlRightParams.Controls.Add(tempState1);
+            _pnlRightParams.Controls.Add(States1);
             _pnlRightParams.Controls.Add(Targets1);
-            _pnlRightParams.Controls.Add(_lblBarrelTemp1Actual);
+            _pnlRightParams.Controls.Add(temper1);
             _pnlRightParams.Controls.Add(Labels1);
             _pnlRightParams.Controls.Add(_lblRightParamsTitle);
             _pnlRightParams.Controls.Add(_ButtonSet);
@@ -449,19 +449,19 @@ namespace EQ.UI.UserViews.Extruder
             _Label48.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
             _Label48.TooltipText = null;
             // 
-            // _lblCircBathValue
+            // temper5
             // 
-            _lblCircBathValue.BackColor = Color.Black;
-            _lblCircBathValue.Font = new Font("D2Coding", 12F);
-            _lblCircBathValue.ForeColor = Color.White;
-            _lblCircBathValue.Location = new Point(358, 185);
-            _lblCircBathValue.Name = "_lblCircBathValue";
-            _lblCircBathValue.Size = new Size(80, 30);
-            _lblCircBathValue.TabIndex = 16;
-            _lblCircBathValue.Text = "False";
-            _lblCircBathValue.TextAlign = ContentAlignment.MiddleRight;
-            _lblCircBathValue.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
-            _lblCircBathValue.TooltipText = null;
+            temper5.BackColor = Color.Black;
+            temper5.Font = new Font("D2Coding", 12F);
+            temper5.ForeColor = Color.White;
+            temper5.Location = new Point(358, 185);
+            temper5.Name = "temper5";
+            temper5.Size = new Size(80, 30);
+            temper5.TabIndex = 16;
+            temper5.Text = "False";
+            temper5.TextAlign = ContentAlignment.MiddleRight;
+            temper5.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
+            temper5.TooltipText = null;
             // 
             // Labels5
             // 
@@ -489,19 +489,19 @@ namespace EQ.UI.UserViews.Extruder
             Targets4.Text = "0.0";
             Targets4.ThemeStyle = UI.Controls.ThemeStyle.Display_LightYellow;
             // 
-            // _lblHeatPlateLeftActual
+            // temper4
             // 
-            _lblHeatPlateLeftActual.BackColor = Color.Black;
-            _lblHeatPlateLeftActual.Font = new Font("D2Coding", 12F);
-            _lblHeatPlateLeftActual.ForeColor = Color.White;
-            _lblHeatPlateLeftActual.Location = new Point(358, 150);
-            _lblHeatPlateLeftActual.Name = "_lblHeatPlateLeftActual";
-            _lblHeatPlateLeftActual.Size = new Size(80, 30);
-            _lblHeatPlateLeftActual.TabIndex = 13;
-            _lblHeatPlateLeftActual.Text = "19.7";
-            _lblHeatPlateLeftActual.TextAlign = ContentAlignment.MiddleRight;
-            _lblHeatPlateLeftActual.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
-            _lblHeatPlateLeftActual.TooltipText = null;
+            temper4.BackColor = Color.Black;
+            temper4.Font = new Font("D2Coding", 12F);
+            temper4.ForeColor = Color.White;
+            temper4.Location = new Point(358, 150);
+            temper4.Name = "temper4";
+            temper4.Size = new Size(80, 30);
+            temper4.TabIndex = 13;
+            temper4.Text = "19.7";
+            temper4.TextAlign = ContentAlignment.MiddleRight;
+            temper4.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
+            temper4.TooltipText = null;
             // 
             // Labels4
             // 
@@ -529,19 +529,19 @@ namespace EQ.UI.UserViews.Extruder
             Targets3.Text = "0.0";
             Targets3.ThemeStyle = UI.Controls.ThemeStyle.Display_LightYellow;
             // 
-            // _lblHeatPlateRightActual
+            // temper3
             // 
-            _lblHeatPlateRightActual.BackColor = Color.Black;
-            _lblHeatPlateRightActual.Font = new Font("D2Coding", 12F);
-            _lblHeatPlateRightActual.ForeColor = Color.White;
-            _lblHeatPlateRightActual.Location = new Point(358, 115);
-            _lblHeatPlateRightActual.Name = "_lblHeatPlateRightActual";
-            _lblHeatPlateRightActual.Size = new Size(80, 30);
-            _lblHeatPlateRightActual.TabIndex = 10;
-            _lblHeatPlateRightActual.Text = "19.5";
-            _lblHeatPlateRightActual.TextAlign = ContentAlignment.MiddleRight;
-            _lblHeatPlateRightActual.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
-            _lblHeatPlateRightActual.TooltipText = null;
+            temper3.BackColor = Color.Black;
+            temper3.Font = new Font("D2Coding", 12F);
+            temper3.ForeColor = Color.White;
+            temper3.Location = new Point(358, 115);
+            temper3.Name = "temper3";
+            temper3.Size = new Size(80, 30);
+            temper3.TabIndex = 10;
+            temper3.Text = "19.5";
+            temper3.TextAlign = ContentAlignment.MiddleRight;
+            temper3.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
+            temper3.TooltipText = null;
             // 
             // Labels3
             // 
@@ -557,47 +557,47 @@ namespace EQ.UI.UserViews.Extruder
             Labels3.TooltipText = null;
             Labels3.Click += Labels1_Click;
             // 
-            // tempState4
+            // States4
             // 
-            tempState4.BackColor = Color.FromArgb(150, 150, 150);
-            tempState4.Font = new Font("D2Coding", 12F);
-            tempState4.ForeColor = Color.White;
-            tempState4.Location = new Point(545, 152);
-            tempState4.Name = "tempState4";
-            tempState4.Size = new Size(60, 30);
-            tempState4.TabIndex = 8;
-            tempState4.Text = "Off";
-            tempState4.TextAlign = ContentAlignment.MiddleCenter;
-            tempState4.TooltipText = null;
-            tempState4.Click += _lblBarrelTemp1State_Click;
+            States4.BackColor = Color.FromArgb(150, 150, 150);
+            States4.Font = new Font("D2Coding", 12F);
+            States4.ForeColor = Color.White;
+            States4.Location = new Point(545, 152);
+            States4.Name = "States4";
+            States4.Size = new Size(60, 30);
+            States4.TabIndex = 8;
+            States4.Text = "Off";
+            States4.TextAlign = ContentAlignment.MiddleCenter;
+            States4.TooltipText = null;
+            States4.Click += _lblBarrelTemp1State_Click;
             // 
-            // tempState3
+            // States3
             // 
-            tempState3.BackColor = Color.FromArgb(150, 150, 150);
-            tempState3.Font = new Font("D2Coding", 12F);
-            tempState3.ForeColor = Color.White;
-            tempState3.Location = new Point(545, 117);
-            tempState3.Name = "tempState3";
-            tempState3.Size = new Size(60, 30);
-            tempState3.TabIndex = 8;
-            tempState3.Text = "Off";
-            tempState3.TextAlign = ContentAlignment.MiddleCenter;
-            tempState3.TooltipText = null;
-            tempState3.Click += _lblBarrelTemp1State_Click;
+            States3.BackColor = Color.FromArgb(150, 150, 150);
+            States3.Font = new Font("D2Coding", 12F);
+            States3.ForeColor = Color.White;
+            States3.Location = new Point(545, 117);
+            States3.Name = "States3";
+            States3.Size = new Size(60, 30);
+            States3.TabIndex = 8;
+            States3.Text = "Off";
+            States3.TextAlign = ContentAlignment.MiddleCenter;
+            States3.TooltipText = null;
+            States3.Click += _lblBarrelTemp1State_Click;
             // 
-            // tempState2
+            // States2
             // 
-            tempState2.BackColor = Color.FromArgb(150, 150, 150);
-            tempState2.Font = new Font("D2Coding", 12F);
-            tempState2.ForeColor = Color.White;
-            tempState2.Location = new Point(545, 82);
-            tempState2.Name = "tempState2";
-            tempState2.Size = new Size(60, 30);
-            tempState2.TabIndex = 8;
-            tempState2.Text = "Off";
-            tempState2.TextAlign = ContentAlignment.MiddleCenter;
-            tempState2.TooltipText = null;
-            tempState2.Click += _lblBarrelTemp1State_Click;
+            States2.BackColor = Color.FromArgb(150, 150, 150);
+            States2.Font = new Font("D2Coding", 12F);
+            States2.ForeColor = Color.White;
+            States2.Location = new Point(545, 82);
+            States2.Name = "States2";
+            States2.Size = new Size(60, 30);
+            States2.TabIndex = 8;
+            States2.Text = "Off";
+            States2.TextAlign = ContentAlignment.MiddleCenter;
+            States2.TooltipText = null;
+            States2.Click += _lblBarrelTemp1State_Click;
             // 
             // Targets2
             // 
@@ -611,19 +611,19 @@ namespace EQ.UI.UserViews.Extruder
             Targets2.Text = "105.0";
             Targets2.ThemeStyle = UI.Controls.ThemeStyle.Display_LightYellow;
             // 
-            // _lblBarrelTemp2Actual
+            // temper2
             // 
-            _lblBarrelTemp2Actual.BackColor = Color.Black;
-            _lblBarrelTemp2Actual.Font = new Font("D2Coding", 12F);
-            _lblBarrelTemp2Actual.ForeColor = Color.White;
-            _lblBarrelTemp2Actual.Location = new Point(358, 80);
-            _lblBarrelTemp2Actual.Name = "_lblBarrelTemp2Actual";
-            _lblBarrelTemp2Actual.Size = new Size(80, 30);
-            _lblBarrelTemp2Actual.TabIndex = 6;
-            _lblBarrelTemp2Actual.Text = "103.5";
-            _lblBarrelTemp2Actual.TextAlign = ContentAlignment.MiddleRight;
-            _lblBarrelTemp2Actual.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
-            _lblBarrelTemp2Actual.TooltipText = null;
+            temper2.BackColor = Color.Black;
+            temper2.Font = new Font("D2Coding", 12F);
+            temper2.ForeColor = Color.White;
+            temper2.Location = new Point(358, 80);
+            temper2.Name = "temper2";
+            temper2.Size = new Size(80, 30);
+            temper2.TabIndex = 6;
+            temper2.Text = "103.5";
+            temper2.TextAlign = ContentAlignment.MiddleRight;
+            temper2.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
+            temper2.TooltipText = null;
             // 
             // Labels2
             // 
@@ -639,19 +639,19 @@ namespace EQ.UI.UserViews.Extruder
             Labels2.TooltipText = null;
             Labels2.Click += Labels1_Click;
             // 
-            // tempState1
+            // States1
             // 
-            tempState1.BackColor = Color.FromArgb(150, 150, 150);
-            tempState1.Font = new Font("D2Coding", 12F);
-            tempState1.ForeColor = Color.White;
-            tempState1.Location = new Point(545, 47);
-            tempState1.Name = "tempState1";
-            tempState1.Size = new Size(60, 30);
-            tempState1.TabIndex = 4;
-            tempState1.Text = "Off";
-            tempState1.TextAlign = ContentAlignment.MiddleCenter;
-            tempState1.TooltipText = null;
-            tempState1.Click += _lblBarrelTemp1State_Click;
+            States1.BackColor = Color.FromArgb(150, 150, 150);
+            States1.Font = new Font("D2Coding", 12F);
+            States1.ForeColor = Color.White;
+            States1.Location = new Point(545, 47);
+            States1.Name = "States1";
+            States1.Size = new Size(60, 30);
+            States1.TabIndex = 4;
+            States1.Text = "Off";
+            States1.TextAlign = ContentAlignment.MiddleCenter;
+            States1.TooltipText = null;
+            States1.Click += _lblBarrelTemp1State_Click;
             // 
             // Targets1
             // 
@@ -665,19 +665,19 @@ namespace EQ.UI.UserViews.Extruder
             Targets1.Text = "105.0";
             Targets1.ThemeStyle = UI.Controls.ThemeStyle.Display_LightYellow;
             // 
-            // _lblBarrelTemp1Actual
+            // temper1
             // 
-            _lblBarrelTemp1Actual.BackColor = Color.Black;
-            _lblBarrelTemp1Actual.Font = new Font("D2Coding", 12F);
-            _lblBarrelTemp1Actual.ForeColor = Color.White;
-            _lblBarrelTemp1Actual.Location = new Point(358, 45);
-            _lblBarrelTemp1Actual.Name = "_lblBarrelTemp1Actual";
-            _lblBarrelTemp1Actual.Size = new Size(80, 30);
-            _lblBarrelTemp1Actual.TabIndex = 2;
-            _lblBarrelTemp1Actual.Text = "104.9";
-            _lblBarrelTemp1Actual.TextAlign = ContentAlignment.MiddleRight;
-            _lblBarrelTemp1Actual.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
-            _lblBarrelTemp1Actual.TooltipText = null;
+            temper1.BackColor = Color.Black;
+            temper1.Font = new Font("D2Coding", 12F);
+            temper1.ForeColor = Color.White;
+            temper1.Location = new Point(358, 45);
+            temper1.Name = "temper1";
+            temper1.Size = new Size(80, 30);
+            temper1.TabIndex = 2;
+            temper1.Text = "104.9";
+            temper1.TextAlign = ContentAlignment.MiddleRight;
+            temper1.ThemeStyle = UI.Controls.ThemeStyle.Black_White;
+            temper1.TooltipText = null;
             // 
             // Labels1
             // 
@@ -1351,12 +1351,12 @@ namespace EQ.UI.UserViews.Extruder
             _Panel2.BackColor = Color.FromArgb(64, 64, 64);
             _Panel2.Controls.Add(_Label16);
             _Panel2.Controls.Add(_Label15);
-            _Panel2.Controls.Add(_Label37);
-            _Panel2.Controls.Add(_Label36);
-            _Panel2.Controls.Add(_Label32);
-            _Panel2.Controls.Add(_Label31);
-            _Panel2.Controls.Add(_Label30);
-            _Panel2.Controls.Add(_Label29);
+            _Panel2.Controls.Add(_EqStatus6);
+            _Panel2.Controls.Add(_EqStatus5);
+            _Panel2.Controls.Add(_EqStatus4);
+            _Panel2.Controls.Add(_EqStatus3);
+            _Panel2.Controls.Add(_EqStatus2);
+            _Panel2.Controls.Add(_EqStatus1);
             _Panel2.Controls.Add(_Label17);
             _Panel2.Controls.Add(_Label18);
             _Panel2.Controls.Add(_Label20);
@@ -1394,83 +1394,83 @@ namespace EQ.UI.UserViews.Extruder
             _Label15.TextAlign = ContentAlignment.MiddleLeft;
             _Label15.TooltipText = null;
             // 
-            // _Label37
+            // _EqStatus6
             // 
-            _Label37.BackColor = Color.FromArgb(149, 165, 166);
-            _Label37.Font = new Font("D2Coding", 14F);
-            _Label37.ForeColor = Color.White;
-            _Label37.Location = new Point(216, 254);
-            _Label37.Name = "_Label37";
-            _Label37.Size = new Size(70, 30);
-            _Label37.TabIndex = 1;
-            _Label37.Text = "Off";
-            _Label37.TextAlign = ContentAlignment.MiddleCenter;
-            _Label37.TooltipText = null;
+            _EqStatus6.BackColor = Color.FromArgb(149, 165, 166);
+            _EqStatus6.Font = new Font("D2Coding", 14F);
+            _EqStatus6.ForeColor = Color.White;
+            _EqStatus6.Location = new Point(216, 254);
+            _EqStatus6.Name = "_EqStatus6";
+            _EqStatus6.Size = new Size(70, 30);
+            _EqStatus6.TabIndex = 1;
+            _EqStatus6.Text = "Off";
+            _EqStatus6.TextAlign = ContentAlignment.MiddleCenter;
+            _EqStatus6.TooltipText = null;
             // 
-            // _Label36
+            // _EqStatus5
             // 
-            _Label36.BackColor = Color.FromArgb(149, 165, 166);
-            _Label36.Font = new Font("D2Coding", 14F);
-            _Label36.ForeColor = Color.White;
-            _Label36.Location = new Point(216, 213);
-            _Label36.Name = "_Label36";
-            _Label36.Size = new Size(70, 30);
-            _Label36.TabIndex = 1;
-            _Label36.Text = "Off";
-            _Label36.TextAlign = ContentAlignment.MiddleCenter;
-            _Label36.TooltipText = null;
+            _EqStatus5.BackColor = Color.FromArgb(149, 165, 166);
+            _EqStatus5.Font = new Font("D2Coding", 14F);
+            _EqStatus5.ForeColor = Color.White;
+            _EqStatus5.Location = new Point(216, 213);
+            _EqStatus5.Name = "_EqStatus5";
+            _EqStatus5.Size = new Size(70, 30);
+            _EqStatus5.TabIndex = 1;
+            _EqStatus5.Text = "Off";
+            _EqStatus5.TextAlign = ContentAlignment.MiddleCenter;
+            _EqStatus5.TooltipText = null;
             // 
-            // _Label32
+            // _EqStatus4
             // 
-            _Label32.BackColor = Color.FromArgb(149, 165, 166);
-            _Label32.Font = new Font("D2Coding", 14F);
-            _Label32.ForeColor = Color.White;
-            _Label32.Location = new Point(216, 172);
-            _Label32.Name = "_Label32";
-            _Label32.Size = new Size(70, 30);
-            _Label32.TabIndex = 1;
-            _Label32.Text = "Off";
-            _Label32.TextAlign = ContentAlignment.MiddleCenter;
-            _Label32.TooltipText = null;
+            _EqStatus4.BackColor = Color.FromArgb(149, 165, 166);
+            _EqStatus4.Font = new Font("D2Coding", 14F);
+            _EqStatus4.ForeColor = Color.White;
+            _EqStatus4.Location = new Point(216, 172);
+            _EqStatus4.Name = "_EqStatus4";
+            _EqStatus4.Size = new Size(70, 30);
+            _EqStatus4.TabIndex = 1;
+            _EqStatus4.Text = "Off";
+            _EqStatus4.TextAlign = ContentAlignment.MiddleCenter;
+            _EqStatus4.TooltipText = null;
             // 
-            // _Label31
+            // _EqStatus3
             // 
-            _Label31.BackColor = Color.FromArgb(149, 165, 166);
-            _Label31.Font = new Font("D2Coding", 14F);
-            _Label31.ForeColor = Color.White;
-            _Label31.Location = new Point(216, 130);
-            _Label31.Name = "_Label31";
-            _Label31.Size = new Size(70, 30);
-            _Label31.TabIndex = 1;
-            _Label31.Text = "Off";
-            _Label31.TextAlign = ContentAlignment.MiddleCenter;
-            _Label31.TooltipText = null;
+            _EqStatus3.BackColor = Color.FromArgb(149, 165, 166);
+            _EqStatus3.Font = new Font("D2Coding", 14F);
+            _EqStatus3.ForeColor = Color.White;
+            _EqStatus3.Location = new Point(216, 130);
+            _EqStatus3.Name = "_EqStatus3";
+            _EqStatus3.Size = new Size(70, 30);
+            _EqStatus3.TabIndex = 1;
+            _EqStatus3.Text = "Off";
+            _EqStatus3.TextAlign = ContentAlignment.MiddleCenter;
+            _EqStatus3.TooltipText = null;
             // 
-            // _Label30
+            // _EqStatus2
             // 
-            _Label30.BackColor = Color.FromArgb(149, 165, 166);
-            _Label30.Font = new Font("D2Coding", 14F);
-            _Label30.ForeColor = Color.White;
-            _Label30.Location = new Point(216, 88);
-            _Label30.Name = "_Label30";
-            _Label30.Size = new Size(70, 30);
-            _Label30.TabIndex = 1;
-            _Label30.Text = "Off";
-            _Label30.TextAlign = ContentAlignment.MiddleCenter;
-            _Label30.TooltipText = null;
+            _EqStatus2.BackColor = Color.FromArgb(149, 165, 166);
+            _EqStatus2.Font = new Font("D2Coding", 14F);
+            _EqStatus2.ForeColor = Color.White;
+            _EqStatus2.Location = new Point(216, 88);
+            _EqStatus2.Name = "_EqStatus2";
+            _EqStatus2.Size = new Size(70, 30);
+            _EqStatus2.TabIndex = 1;
+            _EqStatus2.Text = "Off";
+            _EqStatus2.TextAlign = ContentAlignment.MiddleCenter;
+            _EqStatus2.TooltipText = null;
             // 
-            // _Label29
+            // _EqStatus1
             // 
-            _Label29.BackColor = Color.FromArgb(149, 165, 166);
-            _Label29.Font = new Font("D2Coding", 14F);
-            _Label29.ForeColor = Color.White;
-            _Label29.Location = new Point(216, 45);
-            _Label29.Name = "_Label29";
-            _Label29.Size = new Size(70, 30);
-            _Label29.TabIndex = 1;
-            _Label29.Text = "Off";
-            _Label29.TextAlign = ContentAlignment.MiddleCenter;
-            _Label29.TooltipText = null;
+            _EqStatus1.BackColor = Color.FromArgb(149, 165, 166);
+            _EqStatus1.Font = new Font("D2Coding", 14F);
+            _EqStatus1.ForeColor = Color.White;
+            _EqStatus1.Location = new Point(216, 45);
+            _EqStatus1.Name = "_EqStatus1";
+            _EqStatus1.Size = new Size(70, 30);
+            _EqStatus1.TabIndex = 1;
+            _EqStatus1.Text = "Off";
+            _EqStatus1.TextAlign = ContentAlignment.MiddleCenter;
+            _EqStatus1.TooltipText = null;
             // 
             // _Label17
             // 
@@ -1544,12 +1544,12 @@ namespace EQ.UI.UserViews.Extruder
             _Panel3.BackColor = Color.FromArgb(64, 64, 64);
             _Panel3.Controls.Add(_Label19);
             _Panel3.Controls.Add(_Label21);
-            _Panel3.Controls.Add(_Label43);
-            _Panel3.Controls.Add(_Label42);
-            _Panel3.Controls.Add(_Label41);
-            _Panel3.Controls.Add(_Label40);
-            _Panel3.Controls.Add(_Label39);
-            _Panel3.Controls.Add(_Label38);
+            _Panel3.Controls.Add(_EqStatus12);
+            _Panel3.Controls.Add(_EqStatus11);
+            _Panel3.Controls.Add(_EqStatus10);
+            _Panel3.Controls.Add(_EqStatus9);
+            _Panel3.Controls.Add(_EqStatus8);
+            _Panel3.Controls.Add(_EqStatus7);
             _Panel3.Controls.Add(_Label24);
             _Panel3.Controls.Add(_Label25);
             _Panel3.Controls.Add(_Label26);
@@ -1587,83 +1587,83 @@ namespace EQ.UI.UserViews.Extruder
             _Label21.TextAlign = ContentAlignment.MiddleLeft;
             _Label21.TooltipText = null;
             // 
-            // _Label43
+            // _EqStatus12
             // 
-            _Label43.BackColor = Color.FromArgb(149, 165, 166);
-            _Label43.Font = new Font("D2Coding", 14F);
-            _Label43.ForeColor = Color.White;
-            _Label43.Location = new Point(216, 254);
-            _Label43.Name = "_Label43";
-            _Label43.Size = new Size(70, 30);
-            _Label43.TabIndex = 1;
-            _Label43.Text = "Off";
-            _Label43.TextAlign = ContentAlignment.MiddleCenter;
-            _Label43.TooltipText = null;
+            _EqStatus12.BackColor = Color.FromArgb(149, 165, 166);
+            _EqStatus12.Font = new Font("D2Coding", 14F);
+            _EqStatus12.ForeColor = Color.White;
+            _EqStatus12.Location = new Point(216, 254);
+            _EqStatus12.Name = "_EqStatus12";
+            _EqStatus12.Size = new Size(70, 30);
+            _EqStatus12.TabIndex = 1;
+            _EqStatus12.Text = "Off";
+            _EqStatus12.TextAlign = ContentAlignment.MiddleCenter;
+            _EqStatus12.TooltipText = null;
             // 
-            // _Label42
+            // _EqStatus11
             // 
-            _Label42.BackColor = Color.FromArgb(149, 165, 166);
-            _Label42.Font = new Font("D2Coding", 14F);
-            _Label42.ForeColor = Color.White;
-            _Label42.Location = new Point(216, 213);
-            _Label42.Name = "_Label42";
-            _Label42.Size = new Size(70, 30);
-            _Label42.TabIndex = 1;
-            _Label42.Text = "Off";
-            _Label42.TextAlign = ContentAlignment.MiddleCenter;
-            _Label42.TooltipText = null;
+            _EqStatus11.BackColor = Color.FromArgb(149, 165, 166);
+            _EqStatus11.Font = new Font("D2Coding", 14F);
+            _EqStatus11.ForeColor = Color.White;
+            _EqStatus11.Location = new Point(216, 213);
+            _EqStatus11.Name = "_EqStatus11";
+            _EqStatus11.Size = new Size(70, 30);
+            _EqStatus11.TabIndex = 1;
+            _EqStatus11.Text = "Off";
+            _EqStatus11.TextAlign = ContentAlignment.MiddleCenter;
+            _EqStatus11.TooltipText = null;
             // 
-            // _Label41
+            // _EqStatus10
             // 
-            _Label41.BackColor = Color.FromArgb(149, 165, 166);
-            _Label41.Font = new Font("D2Coding", 14F);
-            _Label41.ForeColor = Color.White;
-            _Label41.Location = new Point(216, 171);
-            _Label41.Name = "_Label41";
-            _Label41.Size = new Size(70, 30);
-            _Label41.TabIndex = 1;
-            _Label41.Text = "Off";
-            _Label41.TextAlign = ContentAlignment.MiddleCenter;
-            _Label41.TooltipText = null;
+            _EqStatus10.BackColor = Color.FromArgb(149, 165, 166);
+            _EqStatus10.Font = new Font("D2Coding", 14F);
+            _EqStatus10.ForeColor = Color.White;
+            _EqStatus10.Location = new Point(216, 171);
+            _EqStatus10.Name = "_EqStatus10";
+            _EqStatus10.Size = new Size(70, 30);
+            _EqStatus10.TabIndex = 1;
+            _EqStatus10.Text = "Off";
+            _EqStatus10.TextAlign = ContentAlignment.MiddleCenter;
+            _EqStatus10.TooltipText = null;
             // 
-            // _Label40
+            // _EqStatus9
             // 
-            _Label40.BackColor = Color.FromArgb(149, 165, 166);
-            _Label40.Font = new Font("D2Coding", 14F);
-            _Label40.ForeColor = Color.White;
-            _Label40.Location = new Point(216, 130);
-            _Label40.Name = "_Label40";
-            _Label40.Size = new Size(70, 30);
-            _Label40.TabIndex = 1;
-            _Label40.Text = "Off";
-            _Label40.TextAlign = ContentAlignment.MiddleCenter;
-            _Label40.TooltipText = null;
+            _EqStatus9.BackColor = Color.FromArgb(149, 165, 166);
+            _EqStatus9.Font = new Font("D2Coding", 14F);
+            _EqStatus9.ForeColor = Color.White;
+            _EqStatus9.Location = new Point(216, 130);
+            _EqStatus9.Name = "_EqStatus9";
+            _EqStatus9.Size = new Size(70, 30);
+            _EqStatus9.TabIndex = 1;
+            _EqStatus9.Text = "Off";
+            _EqStatus9.TextAlign = ContentAlignment.MiddleCenter;
+            _EqStatus9.TooltipText = null;
             // 
-            // _Label39
+            // _EqStatus8
             // 
-            _Label39.BackColor = Color.FromArgb(149, 165, 166);
-            _Label39.Font = new Font("D2Coding", 14F);
-            _Label39.ForeColor = Color.White;
-            _Label39.Location = new Point(216, 88);
-            _Label39.Name = "_Label39";
-            _Label39.Size = new Size(70, 30);
-            _Label39.TabIndex = 1;
-            _Label39.Text = "Off";
-            _Label39.TextAlign = ContentAlignment.MiddleCenter;
-            _Label39.TooltipText = null;
+            _EqStatus8.BackColor = Color.FromArgb(149, 165, 166);
+            _EqStatus8.Font = new Font("D2Coding", 14F);
+            _EqStatus8.ForeColor = Color.White;
+            _EqStatus8.Location = new Point(216, 88);
+            _EqStatus8.Name = "_EqStatus8";
+            _EqStatus8.Size = new Size(70, 30);
+            _EqStatus8.TabIndex = 1;
+            _EqStatus8.Text = "Off";
+            _EqStatus8.TextAlign = ContentAlignment.MiddleCenter;
+            _EqStatus8.TooltipText = null;
             // 
-            // _Label38
+            // _EqStatus7
             // 
-            _Label38.BackColor = Color.FromArgb(149, 165, 166);
-            _Label38.Font = new Font("D2Coding", 14F);
-            _Label38.ForeColor = Color.White;
-            _Label38.Location = new Point(216, 45);
-            _Label38.Name = "_Label38";
-            _Label38.Size = new Size(70, 30);
-            _Label38.TabIndex = 1;
-            _Label38.Text = "Off";
-            _Label38.TextAlign = ContentAlignment.MiddleCenter;
-            _Label38.TooltipText = null;
+            _EqStatus7.BackColor = Color.FromArgb(149, 165, 166);
+            _EqStatus7.Font = new Font("D2Coding", 14F);
+            _EqStatus7.ForeColor = Color.White;
+            _EqStatus7.Location = new Point(216, 45);
+            _EqStatus7.Name = "_EqStatus7";
+            _EqStatus7.Size = new Size(70, 30);
+            _EqStatus7.TabIndex = 1;
+            _EqStatus7.Text = "Off";
+            _EqStatus7.TextAlign = ContentAlignment.MiddleCenter;
+            _EqStatus7.TooltipText = null;
             // 
             // _Label24
             // 
@@ -1737,8 +1737,8 @@ namespace EQ.UI.UserViews.Extruder
             _Panel4.BackColor = Color.FromArgb(64, 64, 64);
             _Panel4.Controls.Add(_Label33);
             _Panel4.Controls.Add(_Label34);
-            _Panel4.Controls.Add(_Label45);
-            _Panel4.Controls.Add(_Label44);
+            _Panel4.Controls.Add(_EqStatus14);
+            _Panel4.Controls.Add(_EqStatus13);
             _Panel4.Controls.Add(_Label35);
             _Panel4.ForeColor = SystemColors.ControlText;
             _Panel4.Location = new Point(690, 520);
@@ -1772,31 +1772,31 @@ namespace EQ.UI.UserViews.Extruder
             _Label34.TextAlign = ContentAlignment.MiddleLeft;
             _Label34.TooltipText = null;
             // 
-            // _Label45
+            // _EqStatus14
             // 
-            _Label45.BackColor = Color.FromArgb(149, 165, 166);
-            _Label45.Font = new Font("D2Coding", 14F);
-            _Label45.ForeColor = Color.White;
-            _Label45.Location = new Point(216, 88);
-            _Label45.Name = "_Label45";
-            _Label45.Size = new Size(70, 30);
-            _Label45.TabIndex = 1;
-            _Label45.Text = "Off";
-            _Label45.TextAlign = ContentAlignment.MiddleCenter;
-            _Label45.TooltipText = null;
+            _EqStatus14.BackColor = Color.FromArgb(149, 165, 166);
+            _EqStatus14.Font = new Font("D2Coding", 14F);
+            _EqStatus14.ForeColor = Color.White;
+            _EqStatus14.Location = new Point(216, 88);
+            _EqStatus14.Name = "_EqStatus14";
+            _EqStatus14.Size = new Size(70, 30);
+            _EqStatus14.TabIndex = 1;
+            _EqStatus14.Text = "Off";
+            _EqStatus14.TextAlign = ContentAlignment.MiddleCenter;
+            _EqStatus14.TooltipText = null;
             // 
-            // _Label44
+            // _EqStatus13
             // 
-            _Label44.BackColor = Color.FromArgb(149, 165, 166);
-            _Label44.Font = new Font("D2Coding", 14F);
-            _Label44.ForeColor = Color.White;
-            _Label44.Location = new Point(216, 45);
-            _Label44.Name = "_Label44";
-            _Label44.Size = new Size(70, 30);
-            _Label44.TabIndex = 1;
-            _Label44.Text = "Off";
-            _Label44.TextAlign = ContentAlignment.MiddleCenter;
-            _Label44.TooltipText = null;
+            _EqStatus13.BackColor = Color.FromArgb(149, 165, 166);
+            _EqStatus13.Font = new Font("D2Coding", 14F);
+            _EqStatus13.ForeColor = Color.White;
+            _EqStatus13.Location = new Point(216, 45);
+            _EqStatus13.Name = "_EqStatus13";
+            _EqStatus13.Size = new Size(70, 30);
+            _EqStatus13.TabIndex = 1;
+            _EqStatus13.Text = "Off";
+            _EqStatus13.TextAlign = ContentAlignment.MiddleCenter;
+            _EqStatus13.TooltipText = null;
             // 
             // _Label35
             // 
@@ -1869,21 +1869,21 @@ namespace EQ.UI.UserViews.Extruder
         private Controls._Panel _pnlRightParams;
         private Controls._Label _lblRightParamsTitle;
         private Controls._Label Labels1;
-        private Controls._Label _lblBarrelTemp1Actual;
+        private Controls._Label temper1;
         private Controls._TextBox Targets1;
-        private Controls._Label tempState1;
+        private Controls._Label States1;
         private Controls._Label Labels2;
-        private Controls._Label _lblBarrelTemp2Actual;
+        private Controls._Label temper2;
         private Controls._TextBox Targets2;
-        private Controls._Label tempState2;
+        private Controls._Label States2;
         private Controls._Label Labels3;
-        private Controls._Label _lblHeatPlateRightActual;
+        private Controls._Label temper3;
         private Controls._TextBox Targets3;
         private Controls._Label Labels4;
-        private Controls._Label _lblHeatPlateLeftActual;
+        private Controls._Label temper4;
         private Controls._TextBox Targets4;
         private Controls._Label Labels5;
-        private Controls._Label _lblCircBathValue;
+        private Controls._Label temper5;
         private Controls._Button _btns1;
         private Controls._Button _btns2;
         private Controls._Button _btns3;
@@ -1964,22 +1964,22 @@ namespace EQ.UI.UserViews.Extruder
         private Controls._Label _Label33;
         private Controls._Label _Label34;
         private Controls._Label _Label35;
-        private Controls._Label _Label37;
-        private Controls._Label _Label36;
-        private Controls._Label _Label32;
-        private Controls._Label _Label31;
-        private Controls._Label _Label30;
-        private Controls._Label _Label29;
-        private Controls._Label _Label43;
-        private Controls._Label _Label42;
-        private Controls._Label _Label41;
-        private Controls._Label _Label40;
-        private Controls._Label _Label39;
-        private Controls._Label _Label38;
-        private Controls._Label _Label45;
-        private Controls._Label _Label44;
-        private Controls._Label tempState4;
-        private Controls._Label tempState3;
+        private Controls._Label _EqStatus6;
+        private Controls._Label _EqStatus5;
+        private Controls._Label _EqStatus4;
+        private Controls._Label _EqStatus3;
+        private Controls._Label _EqStatus2;
+        private Controls._Label _EqStatus1;
+        private Controls._Label _EqStatus12;
+        private Controls._Label _EqStatus11;
+        private Controls._Label _EqStatus10;
+        private Controls._Label _EqStatus9;
+        private Controls._Label _EqStatus8;
+        private Controls._Label _EqStatus7;
+        private Controls._Label _EqStatus14;
+        private Controls._Label _EqStatus13;
+        private Controls._Label States4;
+        private Controls._Label States3;
         private System.Windows.Forms.Timer timer1;
         private Controls._Label _Label48;
         private Controls._Button _ButtonSet;

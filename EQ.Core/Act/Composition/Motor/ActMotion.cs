@@ -873,6 +873,8 @@ namespace EQ.Core.Act
 
             return ret;
         }
+
+
         public async Task<ActionStatus> MoveVelAsync(MotionID id, double vel)
         {
             string actionTitle = $"MoveVelAsync_Cmd_{id}_{vel}";
@@ -943,6 +945,8 @@ namespace EQ.Core.Act
 
                       case "MoveDoneCheck":
                           {
+                              nextStep++;
+                              /*
                               if (CheckInterlock(id, 0, checkMode, ref msg))
                               {
                                   _act.PopupAlarm(ErrorList.MOTOR_INTERLOCK, L("Velocity Move Blocked: {0}", msg));
@@ -956,6 +960,7 @@ namespace EQ.Core.Act
                                   nextStep++;
                               else
                                   await Task.Delay(10);
+                              */
                           }
                           break;
 
@@ -979,14 +984,14 @@ namespace EQ.Core.Act
 
        
 
-        const int coef = 1000;
+        const int coef = 1;
 
         private void SetCoefficient(ref posCommand[] commands)
         {
             var speedList = ActManager.Instance.Act.Option.MotionSpeed.SpeedList;
             for (int i = 0; i < commands.Length; i++)
             {
-                commands[i].velocity = commands[i].velocity == 0 ? speedList[i].AutoSpeed * coef : commands[i].velocity* coef;
+                commands[i].velocity =  commands[i].velocity* coef;
                 commands[i].acc = commands[i].acc == 0 ? speedList[i].Accel * coef : commands[i].acc * coef;
                 commands[i].dec = commands[i].dec == 0 ? speedList[i].Deaccel * coef : commands[i].dec * coef;
                 commands[i].JerkRatio = commands[i].JerkRatio == 0 ? speedList[i].JerkRatio : commands[i].JerkRatio ;
@@ -996,14 +1001,94 @@ namespace EQ.Core.Act
         {
             var speedList = ActManager.Instance.Act.Option.MotionSpeed.SpeedList[(int)commands.idx];
 
-            commands.velocity = commands.velocity == 0 ? speedList.AutoSpeed * coef : commands.velocity * coef;
+            commands.velocity =  commands.velocity * coef;
             commands.acc = commands.acc == 0 ? speedList.Accel * coef : commands.acc * coef;
             commands.dec = commands.dec == 0 ? speedList.Deaccel * coef : commands.dec * coef;
             commands.JerkRatio = commands.JerkRatio == 0 ? speedList.JerkRatio : commands.JerkRatio;
 
         }
 
-       
+        public async Task<ActionStatus> SetTorqueAsync(MotionID id, double torque , double pTorque = 0 , double nTorque = 0)
+        {
+            string actionTitle = $"SetTorqueAsync_Cmd_{id}_{torque}";
+
+            posCommand commands = new posCommand();
+
+          
+            string msg = string.Empty;
+
+            var ret = await _act.ExecuteAction(
+              title: actionTitle,
+              stepNames: new List<string> { "Start", "InterLockCheck", "paramCheck", "SetTrq", "GetTrq", "End" },
+              stepLogic: async (context, stepName) =>
+              {
+                  int nextStep = context.StepIndex;
+
+                  switch (stepName)
+                  {
+                      case "Start":
+                          
+                          nextStep++;
+                          break;
+
+                      case "InterLockCheck":
+                          {
+                              if (!CheckServoReady(id))
+                              {
+                                  _act.PopupAlarm(ErrorList.MOTOR_SERVO_OFF, L("{0}", id));
+                                  context.Status = ActionStatus.Error;
+                                  return nextStep;
+                              }                             
+
+                              nextStep++;
+                          }
+                          break;
+
+                      case "paramCheck":  
+                          {                            
+                              nextStep++;
+                          }
+                          break;
+
+                      case "SetTrq":
+                          {
+                              if (pTorque == 0 ) pTorque = torque;
+                              if (nTorque == 0 ) nTorque = torque;
+
+                              bool result = _ioHardware.SetTrq((int)id , torque, pTorque, nTorque);
+
+                              nextStep++;
+                          }
+                          break;
+
+                      case "GetTrq":
+                          {
+                              var result = _ioHardware.GetTrq((int)id);
+
+                              if(torque == result.Item1 && pTorque == result.Item2 && nTorque == result.Item3)
+                                  nextStep++;
+                              else
+                              {
+                                  Common.Logs.Log.Instance.Error($"[SetTrq] Hardware Command Failed. Set:{torque}/{pTorque}/{nTorque}  Get:{result.Item1}/{result.Item2}/{result.Item3}");
+                                  context.Status = ActionStatus.Error;
+                              }
+                          }
+                          break;
+
+                      case "End":
+                          context.Status = ActionStatus.Finished;
+                          break;
+
+                      default:
+                          context.Status = ActionStatus.Error;
+                          break;
+                  }
+                  return nextStep;
+              }
+          );          
+
+            return ret;
+        }
 
 
         public async Task<ActionStatus> HomeSearchAsync(MotionID motionID)
@@ -1023,6 +1108,8 @@ namespace EQ.Core.Act
                                 await Task.Delay(100);
                                 _act.Motion.ServoOn(motionID, true);
                                 await Task.Delay(100);
+
+                                nextStep++;
                             }
                             break;
                         case "CheckMotor":

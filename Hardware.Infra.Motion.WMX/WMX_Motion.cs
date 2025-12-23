@@ -241,6 +241,7 @@ namespace Hardware.Infra.Motion.WMX
             MotionStatus ss = new MotionStatus();
             ss.CommandPos = cmAxis.PosCmd;
             ss.ActualPos = cmAxis.ActualPos;
+            ss.CommandVel = cmAxis.VelocityCmd;
             ss.ActualVelocity = cmAxis.ActualVelocity;
             ss.ActualTorque = cmAxis.ActualTorque;
             ss.AmpAlarm = cmAxis.AmpAlarm;

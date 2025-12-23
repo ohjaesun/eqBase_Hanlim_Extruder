@@ -11,6 +11,7 @@ namespace EQ.Domain.Entities
     {
         public double CommandPos;
         public double ActualPos;
+        public double CommandVel;
         public double ActualVelocity;
         public double ActualTorque;
         public bool AmpAlarm;

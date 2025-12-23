@@ -54,6 +54,7 @@ namespace EQ.UI
             _ButtonBottom6 = new EQ.UI.Controls._Button();
             _ButtonBottom7 = new EQ.UI.Controls._Button();
             _ButtonBottom9 = new EQ.UI.Controls._Button();
+            _Button2 = new EQ.UI.Controls._Button();
             flowLayoutPanel2 = new FlowLayoutPanel();
             _Button1 = new EQ.UI.Controls._Button();
             _ButtonBottom8 = new EQ.UI.Controls._Button();
@@ -71,7 +72,6 @@ namespace EQ.UI
             toolStrip10 = new ToolStripStatusLabel();
             timerToolStrip = new System.Windows.Forms.Timer(components);
             timer1000 = new System.Windows.Forms.Timer(components);
-            _Button2 = new EQ.UI.Controls._Button();
             _Panel1.SuspendLayout();
             _Panel6.SuspendLayout();
             _Panel5.SuspendLayout();
@@ -235,6 +235,7 @@ namespace EQ.UI
             _Label5.TextAlign = ContentAlignment.MiddleCenter;
             _Label5.ThemeStyle = UI.Controls.ThemeStyle.Danger_Red;
             _Label5.TooltipText = null;
+            _Label5.Click += _Label5_Click;
             // 
             // _Label2
             // 
@@ -438,6 +439,21 @@ namespace EQ.UI
             _ButtonBottom9.UseVisualStyleBackColor = false;
             _ButtonBottom9.Click += _Button_Bottom_Click;
             // 
+            // _Button2
+            // 
+            _Button2.BackColor = Color.FromArgb(46, 204, 113);
+            _Button2.Font = new Font("D2Coding", 12F);
+            _Button2.ForeColor = Color.Black;
+            _Button2.Location = new Point(851, 3);
+            _Button2.Name = "_Button2";
+            _Button2.Size = new Size(100, 55);
+            _Button2.TabIndex = 8;
+            _Button2.Text = "Controls";
+            _Button2.ThemeStyle = UI.Controls.ThemeStyle.Success_Green;
+            _Button2.TooltipText = null;
+            _Button2.UseVisualStyleBackColor = false;
+            _Button2.Click += _Button2_Click;
+            // 
             // flowLayoutPanel2
             // 
             flowLayoutPanel2.BackColor = Color.FromArgb(80, 80, 80);
@@ -583,21 +599,6 @@ namespace EQ.UI
             // timer1000
             // 
             timer1000.Tick += timer1000_Tick;
-            // 
-            // _Button2
-            // 
-            _Button2.BackColor = Color.FromArgb(46, 204, 113);
-            _Button2.Font = new Font("D2Coding", 12F);
-            _Button2.ForeColor = Color.Black;
-            _Button2.Location = new Point(851, 3);
-            _Button2.Name = "_Button2";
-            _Button2.Size = new Size(100, 55);
-            _Button2.TabIndex = 8;
-            _Button2.Text = "Controls";
-            _Button2.ThemeStyle = UI.Controls.ThemeStyle.Success_Green;
-            _Button2.TooltipText = null;
-            _Button2.UseVisualStyleBackColor = false;
-            _Button2.Click += _Button2_Click;
             // 
             // FormMain
             // 

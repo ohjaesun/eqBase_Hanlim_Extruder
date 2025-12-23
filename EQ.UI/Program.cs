@@ -1,3 +1,5 @@
+using EQ.Core.Act;
+using EQ.Core.Service;
 using EQ.UI;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -74,6 +76,9 @@ namespace EQ
                 sw.WriteLine(stackStr);
                 sw.WriteLine($"END");
             }
+
+            ActManager.Instance.Act.AuditTrail.RecordSystemCrash();
+
             CreateMiniDump(rcpPath + $"\\Exception{DateTime.Now.ToString("yyyyMMdd_ff")}.dmp");
         }
 
@@ -111,7 +116,7 @@ namespace EQ
                 sw.WriteLine(stackStr);
                 sw.WriteLine($"END");
             }
-
+            ActManager.Instance.Act.AuditTrail.RecordSystemCrash();
             CreateMiniDump(rcpPath + $"\\Exception{DateTime.Now.ToString("yyyyMMdd_ff")}.dmp");
         }
 

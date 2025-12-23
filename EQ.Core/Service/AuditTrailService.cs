@@ -70,6 +70,18 @@ namespace EQ.Core.Service
             _storage.AddEntry(entry);
         }
 
+        public void RecordSystemCrash()
+        {
+            var entry = new AuditTrailEntry(
+                AuditEventType.SystemCrash,
+                _currentUserId,
+                _currentUserName,
+                $"사용자 '{_currentUserName}' SystemCrash"
+            );
+
+            _storage.AddEntry(entry);
+        }
+
         /// <summary>
         /// 사용자 생성 이력 기록
         /// </summary>

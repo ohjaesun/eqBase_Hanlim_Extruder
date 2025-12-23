@@ -39,7 +39,7 @@ namespace EQ.UI.UserViews.Extruder
             timer1.Start();
         }
 
-        TemperatureData[] _temp = new TemperatureData[2];
+        TemperatureData[] _temp = new TemperatureData[Enum.GetValues<TempID>().Length];
 
         private void OnTempUpdate(TemperatureData data)
         {
@@ -51,10 +51,9 @@ namespace EQ.UI.UserViews.Extruder
                 TargetTemperature = data.TargetTemperature,
                 IsConnected = data.IsConnected
             };
-            if (data.Name.Equals(TempID.Zone1.ToString()))
-                _temp[0] = temp;
-            else
-                _temp[1] = temp;
+
+            var idx = (int)Enum.Parse(typeof(TempID), temp.Name);
+            _temp[idx] = temp;            
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -69,22 +68,31 @@ namespace EQ.UI.UserViews.Extruder
                 {
                     var screwMotor = act.Motion.GetStatus(MotionID.SCREW_T);
                     _lblTorqueActual.Text = CalcTorque.ToNcm(SGMXJModel._04A, screwMotor.ActualTorque).ToString("F1");//토크 % to Ncm
-                    _lblScrewSpeedActual.Text = screwMotor.ActualVelocity.ToString("F1");     //RPM       
+                    _lblScrewSpeedActual.Text = screwMotor.ActualVelocity.ToString("F1");     //RPM
+
+                    _txtScrewSpeedTarget.Text = screwMotor.CommandVel.ToString("F1");     //RPM
                     _Label6.Text = screwMotor.InPos ? "Stop" : "Run";
+                    _Label6.ThemeStyle = screwMotor.InPos ? ThemeStyle.Default : ThemeStyle.Success_Green;
                 }
 
                 //Puller 모터 
                 {
                     var pullerMotor = act.Motion.GetStatus(MotionID.PULLER_T);
                     _lblPullerSpeedActual.Text = pullerMotor.ActualVelocity.ToString("F1");   //RPM
+                    _txtPullerSpeedTarget.Text = pullerMotor.CommandVel.ToString("F1");   //RPM
+
                     _Label8.Text = pullerMotor.InPos ? "Stop" : "Run";
+                    _Label8.ThemeStyle = pullerMotor.InPos ? ThemeStyle.Default : ThemeStyle.Success_Green;
                 }
 
                 //Feeder 모터 
                 {
                     var feederMotor = act.Motion.GetStatus(MotionID.FEEDER_T);
                     _lblFeederSpeedActual.Text = feederMotor.ActualVelocity.ToString("F1");   //RPM
+                    _txtFeederSpeedTarget.Text = feederMotor.CommandVel.ToString("F1");   //RPM
+
                     _Label7.Text = feederMotor.InPos ? "Stop" : "Run";
+                    _Label7.ThemeStyle = feederMotor.InPos ? ThemeStyle.Default : ThemeStyle.Success_Green;
                 }
             }
 
@@ -93,21 +101,33 @@ namespace EQ.UI.UserViews.Extruder
             {
                 //배럴 온도
                 {
+                    temper1.Text = _temp[(int)TempID.BathCirculator].CurrentTemperature.ToString("F1") ?? "0.0";
+                    temper2.Text = _temp[(int)TempID.BathCirculator2].CurrentTemperature.ToString("F1") ?? "0.0";
+
+                    Targets1.Text = _temp[(int)TempID.BathCirculator].TargetTemperature.ToString("F1") ?? "0.0";
+                    Targets2.Text = _temp[(int)TempID.BathCirculator2].TargetTemperature.ToString("F1") ?? "0.0";
+
+                    States1.Text = _temp[(int)TempID.BathCirculator].IsRunning ? "RUN" : "STOP";
+                    States1.ThemeStyle = _temp[(int)TempID.BathCirculator].IsRunning ? UI.Controls.ThemeStyle.Success_Green : UI.Controls.ThemeStyle.Neutral_Gray;
+
+                    States2.Text = _temp[(int)TempID.BathCirculator2].IsRunning ? "RUN" : "STOP";
+                    States2.ThemeStyle = _temp[(int)TempID.BathCirculator2].IsRunning ? UI.Controls.ThemeStyle.Success_Green : UI.Controls.ThemeStyle.Neutral_Gray;
 
                 }
 
                 //히터 온도
                 {
-                    _lblHeatPlateRightActual.Text = _temp[0].CurrentTemperature.ToString("F1") ?? "0.0";
-                    _lblHeatPlateLeftActual.Text = _temp[1].CurrentTemperature.ToString("F1") ?? "0.0";
+                    temper3.Text = _temp[(int)TempID.Zone1].CurrentTemperature.ToString("F1") ?? "0.0";
+                    temper4.Text = _temp[(int)TempID.Zone2].CurrentTemperature.ToString("F1") ?? "0.0";
 
-                    Targets3.Text = _temp[0].TargetTemperature.ToString("F1") ?? "0.0";
-                    Targets4.Text = _temp[1].TargetTemperature.ToString("F1") ?? "0.0";
+                    Targets3.Text = _temp[(int)TempID.Zone1].TargetTemperature.ToString("F1") ?? "0.0";
+                    Targets4.Text = _temp[(int)TempID.Zone2].TargetTemperature.ToString("F1") ?? "0.0";
 
-                    tempState3.Text = _temp[0].IsRunning ? "RUN" : "STOP";
-                    tempState3.ThemeStyle = _temp[0].IsRunning ? UI.Controls.ThemeStyle.Success_Green : UI.Controls.ThemeStyle.Neutral_Gray;
-                    tempState4.Text = _temp[1].IsRunning ? "RUN" : "STOP";
-                    tempState4.ThemeStyle = _temp[1].IsRunning ? UI.Controls.ThemeStyle.Success_Green : UI.Controls.ThemeStyle.Neutral_Gray;                  
+                    States3.Text = _temp[(int)TempID.Zone1].IsRunning ? "RUN" : "STOP";
+                    States3.ThemeStyle = _temp[(int)TempID.Zone1].IsRunning ? UI.Controls.ThemeStyle.Success_Green : UI.Controls.ThemeStyle.Neutral_Gray;
+                    
+                    States4.Text = _temp[(int)TempID.Zone2].IsRunning ? "RUN" : "STOP";
+                    States4.ThemeStyle = _temp[(int)TempID.Zone2].IsRunning ? UI.Controls.ThemeStyle.Success_Green : UI.Controls.ThemeStyle.Neutral_Gray;                  
 
                 }
             }
@@ -179,10 +199,12 @@ namespace EQ.UI.UserViews.Extruder
             switch (idx)
             {
                 case 1:
-
+                    var heater11 = act.Temp.Get(TempID.BathCirculator).IsRunning();
+                    act.Temp.Get(TempID.BathCirculator).SetRun(!heater11);
                     break;
                 case 2:
-
+                    var heater21 = act.Temp.Get(TempID.BathCirculator2).IsRunning();
+                    act.Temp.Get(TempID.BathCirculator2).SetRun(!heater21);
                     break;
                 case 3: //히터1
                     {
@@ -213,10 +235,10 @@ namespace EQ.UI.UserViews.Extruder
                     switch (i)
                     {
                         case 1:
-
+                            act.Temp.Get(TempID.BathCirculator).WriteSV(value);
                             break;
                         case 2:
-
+                            act.Temp.Get(TempID.BathCirculator2).WriteSV(value);
                             break;
                         case 3:
                             act.Temp.Get(TempID.Zone1).WriteSV(value);

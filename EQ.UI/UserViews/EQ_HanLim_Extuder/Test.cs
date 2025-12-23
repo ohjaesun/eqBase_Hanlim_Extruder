@@ -6,6 +6,7 @@ using System;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace EQ.UI.UserViews.EQ_HanLim_Extuder
 {
@@ -122,7 +123,7 @@ namespace EQ.UI.UserViews.EQ_HanLim_Extuder
             _DataGridView1.Columns["Trq"].DefaultCellStyle.Format = "F1";
 
             // Status 버튼 추가 (상태에 따라 Run/Stop 표시)
-            AddButtonColumn("Btn_Status", "Status", 60);
+            AddButtonColumn("Btn_Set", "Set", 60);
 
             // 편집 가능한 설정 컬럼 추가
             _DataGridView1.Columns["SetVel"].ReadOnly = false;
@@ -130,15 +131,22 @@ namespace EQ.UI.UserViews.EQ_HanLim_Extuder
             _DataGridView1.Columns["SetVel"].DefaultCellStyle.Format = "F1";
             _DataGridView1.Columns["SetVel"].HeaderText = "SetVel";
 
+            // SetVel UP/DN 버튼 추가
+            AddButtonColumn("Btn_VelUp", "▲", 40);
+            AddButtonColumn("Btn_VelDn", "▼", 40);
+
             _DataGridView1.Columns["SetTrq"].ReadOnly = false;
             _DataGridView1.Columns["SetTrq"].Width = 80;
             _DataGridView1.Columns["SetTrq"].DefaultCellStyle.Format = "F1";
             _DataGridView1.Columns["SetTrq"].HeaderText = "SetTrq";
 
             // Set 버튼 추가
-            AddButtonColumn("Btn_Set", "Set", 60);
+            AddButtonColumn("Btn_Run", "Run", 60);
 
             // 숨김 컬럼
+            _DataGridView1.Columns["CmdPos"].Visible = false;
+            _DataGridView1.Columns["ActPos"].Visible = false;
+            _DataGridView1.Columns["Follow"].Visible = false;
             _DataGridView1.Columns["Servo"].Visible = false;
             _DataGridView1.Columns["HomeDone"].Visible = false;
             _DataGridView1.Columns["Busy"].Visible = false;
@@ -171,6 +179,7 @@ namespace EQ.UI.UserViews.EQ_HanLim_Extuder
         {
             if (_act == null || _dataTable == null) return;
 
+           // return;
             // 현재 편집 중인 행 인덱스 확인
             int editingRowIndex = -1;
             if (_DataGridView1.CurrentCell != null && _DataGridView1.IsCurrentCellInEditMode)
@@ -237,12 +246,13 @@ namespace EQ.UI.UserViews.EQ_HanLim_Extuder
             }
 
             // Status 버튼 텍스트를 Run/Stop으로 업데이트
-            var statusCell = _DataGridView1.Rows[rowIndex].Cells["Btn_Status"];
-            bool isBusy = !status.InPos;
+            var statusCell = _DataGridView1.Rows[rowIndex].Cells["Btn_Run"];
+            bool isBusy = status.OP == "Idle" ? false : true;
             string statusText = isBusy ? "Run" : "Stop";
             
             if (statusCell.Value?.ToString() != statusText)
             {
+                
                 statusCell.Value = statusText;
             }
 
@@ -264,46 +274,128 @@ namespace EQ.UI.UserViews.EQ_HanLim_Extuder
             int axisNo = (int)_dataTable.Rows[e.RowIndex]["No"];
             MotionID motorId = (MotionID)axisNo;
 
-            if (colName == "Btn_Status")
+            if (colName == "Btn_VelUp")
+            {
+                // SetVel UP 버튼 클릭
+                try
+                {
+                    double currentVel = Convert.ToDouble(_dataTable.Rows[e.RowIndex]["SetVel"]);
+                    _dataTable.Rows[e.RowIndex]["SetVel"] = currentVel + 1.0;
+                    Log.Instance.Info($"Motor {axisNo} SetVel UP: {currentVel} -> {currentVel + 1.0}");
+
+                    var status = _act.Motion.GetStatus((MotionID)axisNo);
+                    if (status.OP == "Velocity") // 동작 중이면
+                    {
+                        await _act.Motion.MoveVelAsync((MotionID)axisNo, currentVel + 1.0);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Instance.Error($"SetVel UP error: {ex.Message}");
+                }
+            }
+            else if (colName == "Btn_VelDn")
+            {
+                // SetVel DN 버튼 클릭
+                try
+                {
+                    double currentVel = Convert.ToDouble(_dataTable.Rows[e.RowIndex]["SetVel"]);
+                    _dataTable.Rows[e.RowIndex]["SetVel"] = currentVel - 1.0;
+                    Log.Instance.Info($"Motor {axisNo} SetVel DN: {currentVel} -> {currentVel - 1.0}");
+
+                    var status = _act.Motion.GetStatus((MotionID)axisNo);
+                    if (status.OP == "Velocity") // 동작 중이면
+                    {                       
+                        await _act.Motion.MoveVelAsync((MotionID)axisNo, currentVel - 1.0);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Instance.Error($"SetVel DN error: {ex.Message}");
+                }
+            }
+            else if (colName == "Btn_Set")
             {
                 // Status 버튼 클릭 시 현재 상태 표시
                 Log.Instance.Info($"Status button clicked for Motor {axisNo} ({motorId})");
                 
-                bool currentServo = (bool)_dataTable.Rows[e.RowIndex]["Servo"];
-                bool homeDone = (bool)_dataTable.Rows[e.RowIndex]["HomeDone"];
-                bool busy = (bool)_dataTable.Rows[e.RowIndex]["Busy"];
-                
-                string message = $"Motor: {motorId}\n";
-                message += $"Servo: {(currentServo ? "ON" : "OFF")}\n";
-                message += $"Home Done: {(homeDone ? "YES" : "NO")}\n";
-                message += $"Status: {(busy ? "Run" : "Stop")}";
-                
-                await _act.PopupYesNo.ConfirmAsync(
-                    "Motor Status",
-                    message,
-                    NotifyType.Info
-                );
+                try
+                {
+                    double setVel = Convert.ToDouble(_dataTable.Rows[e.RowIndex]["SetVel"]);
+                    double setTrq = Convert.ToDouble(_dataTable.Rows[e.RowIndex]["SetTrq"]);
+
+                    double actVel = Convert.ToDouble(_dataTable.Rows[e.RowIndex]["Vel"]);
+
+                    Log.Instance.Info($"Set button clicked for Motor {axisNo} ({motorId}) - Vel: {setVel}, Trq: {setTrq}");
+
+                    var status = _act.Motion.GetStatus((MotionID)axisNo);
+
+                    if (status.OP == "Velocity") // 동작 중이면
+                    {
+                        await _act.Motion.SetTorqueAsync((MotionID)axisNo , setTrq);
+                        await _act.Motion.MoveVelAsync((MotionID)axisNo, setVel);
+                    }
+
+                 //   _act.PopupNoti($"Motor {motorId}\nVel: {setVel}, Trq: {setTrq} 설정됨", NotifyType.Info);
+                }
+                catch (Exception ex)
+                {
+                    Log.Instance.Error($"Set button error: {ex.Message}");
+                    _act.PopupNoti($"설정 실패: {ex.Message}", NotifyType.Error);
+                }
             }
-            else if (colName == "Btn_Set")
+            else if (colName == "Btn_Run")
             {
                 // Set 버튼 클릭 시 SetVel, SetTrq 값 적용
                 try
                 {
                     double setVel = Convert.ToDouble(_dataTable.Rows[e.RowIndex]["SetVel"]);
                     double setTrq = Convert.ToDouble(_dataTable.Rows[e.RowIndex]["SetTrq"]);
+                    double actVel = Convert.ToDouble(_dataTable.Rows[e.RowIndex]["Vel"]);
 
                     Log.Instance.Info($"Set button clicked for Motor {axisNo} ({motorId}) - Vel: {setVel}, Trq: {setTrq}");
 
-                    // TODO: 실제 모터 설정 적용 로직 구현
-                    // 예: _act.Motion.SetVelocity(motorId, setVel);
-                    // 예: _act.Motion.SetTorque(motorId, setTrq);
+                    var status = _act.Motion.GetStatus((MotionID)axisNo);
+                    if (status.OP == "Velocity") // 동작 중이면
+                    {
+                        _act.Motion.MoveStop((MotionID)axisNo);
+                    }
 
-                    _act.PopupNoti($"Motor {motorId}\nVel: {setVel}, Trq: {setTrq} 설정됨", NotifyType.Info);
+
+                    if (actVel > 0.1) // 동작 중이면 stop
+                    {
+                        _act.Motion.MoveStop((MotionID)axisNo);
+                    }
+                    else
+                    {                       
+
+                        if(status.AmpAlarm)
+                        {
+                            _act.Motion.AlarmReset((MotionID)axisNo);
+                            await Task.Delay(1000);
+                        }
+                        if(!status.ServoOn)
+                        {
+                            _act.Motion.ServoOn((MotionID)axisNo, true);
+                            await Task.Delay(1000);
+                        }
+                        if (!status.HomeDone)
+                        {
+                            _act.Motion.HomeSearchAsync((MotionID)axisNo);
+                            await Task.Delay(1000);
+                        }
+                       
+                        await _act.Motion.SetTorqueAsync((MotionID)axisNo, setTrq);
+                        await Task.Delay(100);
+
+                        await _act.Motion.MoveVelAsync((MotionID)axisNo, setVel);
+                    }
+
                 }
                 catch (Exception ex)
                 {
                     Log.Instance.Error($"Set button error: {ex.Message}");
-                    _act.PopupNoti($"설정 실패: {ex.Message}", NotifyType.Error);
+                    _act.PopupNoti($"run 실패: {ex.Message}", NotifyType.Error);
                 }
             }
         }

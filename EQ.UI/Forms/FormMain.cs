@@ -1,16 +1,9 @@
 ﻿using EQ.Common.Helper;
 using EQ.Core.Act;
-using EQ.Core.Sequence;
 using EQ.Core.Service;
 using EQ.Domain.Enums;
-using EQ.Domain.Interface;
 using EQ.UI.Forms;
-using EQ.UI.UserViews;
 using System.Reflection;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using static EQ.Core.Sequence.SEQ;
-using static EQ.Infra.HW.IO.HardwareIOFactory;
 
 namespace EQ.UI
 {
@@ -388,6 +381,32 @@ namespace EQ.UI
                 fm = new FormAdminTest();
                 fm.Show();
             }
+        }
+
+        private async void _Label5_Click(object sender, EventArgs e)
+        {
+            //Exit confirmation
+            var r = ActManager.Instance.Act.PopupYesNo.ConfirmAsync("EXIT", "EXIT");
+
+            if (r.Result == YesNoResult.Yes)
+            {                
+                _act.AuditTrail.RecordSystemShutdown();
+
+                //FormSplash 종료 처리 실행
+                var splash = Application.OpenForms.OfType<FormSplash>().FirstOrDefault();
+
+                if (splash != null)
+                {
+                    splash.Show();
+                    splash.BringToFront();
+                    Application.DoEvents();
+                    splash.EndProgram();
+                    await Task.Delay(1000);
+                }
+
+                Application.Exit();
+            }
+
         }
     }
 }

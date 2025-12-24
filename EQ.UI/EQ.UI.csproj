@@ -10,6 +10,41 @@
 	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
+	<Target Name="WriteGitInfo" AfterTargets="Build">
+
+		<!-- 출력 폴더 보장 -->
+		<MakeDir Directories="$(OutputPath)" />
+
+		<!-- 기본값 (Git 없을 때 fallback) -->
+		<PropertyGroup>
+			<GitHash>00000000</GitHash>
+			<GitBranch>nogit</GitBranch>
+			<GitMessage>no git commit</GitMessage>
+		</PropertyGroup>
+
+		<!-- Git 커밋 해시 (8자리) -->
+		<Exec Command="git rev-parse --short=8 HEAD" WorkingDirectory="$(MSBuildProjectDirectory)" ConsoleToMSBuild="true" IgnoreExitCode="true">
+			<Output TaskParameter="ConsoleOutput" PropertyName="GitHash" />
+		</Exec>
+
+		<!-- Git 브랜치 -->
+		<Exec Command="git branch --show-current" WorkingDirectory="$(MSBuildProjectDirectory)" ConsoleToMSBuild="true" IgnoreExitCode="true">
+			<Output TaskParameter="ConsoleOutput" PropertyName="GitBranch" />
+		</Exec>
+
+		<!-- ✅ 최신 커밋 메시지 -->
+		<Exec Command="git log -1 --pretty=format:%s" WorkingDirectory="$(MSBuildProjectDirectory)" ConsoleToMSBuild="true" IgnoreExitCode="true">
+			<Output TaskParameter="ConsoleOutput" PropertyName="GitMessage" />
+		</Exec>
+
+		<!-- 🔹 빌드 로그에 커밋 메시지 출력 -->
+		<Message Importance="High" Text="Git Commit → $(GitHash) [$(GitBranch)] : $(GitMessage)" />
+
+		<!-- 🔹 파일 생성 -->
+		<WriteLinesToFile File="$(OutputPath)git_info.txt" Lines="&#xD;&#xA;Commit=$(GitHash)&#xD;&#xA;Branch=$(GitBranch)&#xD;&#xA;Message=$(GitMessage)" Overwrite="true" />
+
+	</Target>
+	
   <ItemGroup>
     <Compile Remove="Controls\**" />
     <EmbeddedResource Remove="Controls\**" />
@@ -34,6 +69,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Forms\Form_Main_Bottom_Buttons\Form08REV - 복사.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UserViews\Extruder\ExtruderOperation_View.cs">
       <SubType>UserControl</SubType>
     </Compile>

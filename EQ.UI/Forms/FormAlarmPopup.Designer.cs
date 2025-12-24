@@ -28,110 +28,173 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this._PanelTitle = new EQ.UI.Controls._Panel();
-            this._LabelTitle = new EQ.UI.Controls._Label();
-            this.labelMessage = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this._ButtonSilence = new EQ.UI.Controls._Button();
-            this._ButtonReset = new EQ.UI.Controls._Button();
-            this._ButtonClose = new EQ.UI.Controls._Button();
-            this._PanelTitle.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.SuspendLayout();
+            _PanelTitle = new EQ.UI.Controls._Panel();
+            _LabelTitle = new EQ.UI.Controls._Label();
+            labelMessage = new Label();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            _ButtonSilence = new EQ.UI.Controls._Button();
+            _ButtonReset = new EQ.UI.Controls._Button();
+            _ButtonClose = new EQ.UI.Controls._Button();
+            _Panel1 = new EQ.UI.Controls._Panel();
+            label2 = new Label();
+            label1 = new Label();
+            _PanelTitle.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
+            _Panel1.SuspendLayout();
+            SuspendLayout();
             // 
             // _PanelTitle
             // 
-            this._PanelTitle.Controls.Add(this._LabelTitle);
-            this._PanelTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this._PanelTitle.Location = new System.Drawing.Point(0, 0);
-            this._PanelTitle.Name = "_PanelTitle";
-            this._PanelTitle.Size = new System.Drawing.Size(550, 40); // 너비 조금 더 확보
-            this._PanelTitle.TabIndex = 0;
+            _PanelTitle.BackColor = SystemColors.Control;
+            _PanelTitle.Controls.Add(_LabelTitle);
+            _PanelTitle.Dock = DockStyle.Top;
+            _PanelTitle.ForeColor = SystemColors.ControlText;
+            _PanelTitle.Location = new Point(0, 0);
+            _PanelTitle.Name = "_PanelTitle";
+            _PanelTitle.Size = new Size(683, 40);
+            _PanelTitle.TabIndex = 0;
             // 
             // _LabelTitle
             // 
-            this._LabelTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._LabelTitle.Font = new System.Drawing.Font("D2Coding", 14F, System.Drawing.FontStyle.Bold);
-            this._LabelTitle.Location = new System.Drawing.Point(0, 0);
-            this._LabelTitle.Name = "_LabelTitle";
-            this._LabelTitle.Size = new System.Drawing.Size(550, 40);
-            this._LabelTitle.TabIndex = 0;
-            this._LabelTitle.Text = "ALARM";
-            this._LabelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this._LabelTitle.ThemeStyle = EQ.UI.Controls.ThemeStyle.Danger_Red;
+            _LabelTitle.BackColor = Color.FromArgb(231, 76, 60);
+            _LabelTitle.Dock = DockStyle.Fill;
+            _LabelTitle.Font = new Font("D2Coding", 14F, FontStyle.Bold);
+            _LabelTitle.ForeColor = Color.Black;
+            _LabelTitle.Location = new Point(0, 0);
+            _LabelTitle.Name = "_LabelTitle";
+            _LabelTitle.Size = new Size(683, 40);
+            _LabelTitle.TabIndex = 0;
+            _LabelTitle.Text = "ALARM";
+            _LabelTitle.TextAlign = ContentAlignment.MiddleCenter;
+            _LabelTitle.ThemeStyle = UI.Controls.ThemeStyle.Danger_Red;
+            _LabelTitle.TooltipText = null;
             // 
             // labelMessage
             // 
-            this.labelMessage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelMessage.Font = new System.Drawing.Font("D2Coding", 12F);
-            this.labelMessage.Location = new System.Drawing.Point(0, 40);
-            this.labelMessage.Name = "labelMessage";
-            this.labelMessage.Padding = new System.Windows.Forms.Padding(10);
-            this.labelMessage.Size = new System.Drawing.Size(550, 160);
-            this.labelMessage.TabIndex = 1;
-            this.labelMessage.Text = "Alarm Message Here...";
-            this.labelMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            labelMessage.BorderStyle = BorderStyle.FixedSingle;
+            labelMessage.Dock = DockStyle.Top;
+            labelMessage.Font = new Font("D2Coding", 12F);
+            labelMessage.Location = new Point(0, 0);
+            labelMessage.Name = "labelMessage";
+            labelMessage.Padding = new Padding(10);
+            labelMessage.Size = new Size(683, 64);
+            labelMessage.TabIndex = 1;
+            labelMessage.Text = "Alarm Message Here...";
+            labelMessage.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33F));
-            this.tableLayoutPanel1.Controls.Add(this._ButtonSilence, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this._ButtonReset, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this._ButtonClose, 2, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 200);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(550, 50);
-            this.tableLayoutPanel1.TabIndex = 2;
+            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tableLayoutPanel1.Controls.Add(_ButtonSilence, 0, 0);
+            tableLayoutPanel1.Controls.Add(_ButtonReset, 1, 0);
+            tableLayoutPanel1.Controls.Add(_ButtonClose, 2, 0);
+            tableLayoutPanel1.Dock = DockStyle.Bottom;
+            tableLayoutPanel1.Location = new Point(0, 238);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 1;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Size = new Size(683, 50);
+            tableLayoutPanel1.TabIndex = 2;
             // 
             // _ButtonSilence
             // 
-            this._ButtonSilence.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._ButtonSilence.Location = new System.Drawing.Point(3, 3);
-            this._ButtonSilence.Name = "_ButtonSilence";
-            this._ButtonSilence.Size = new System.Drawing.Size(177, 44);
-            this._ButtonSilence.TabIndex = 0;
-            this._ButtonSilence.Text = "부저 끄기";
-            this._ButtonSilence.ThemeStyle = EQ.UI.Controls.ThemeStyle.Warning_Yellow;
+            _ButtonSilence.BackColor = Color.FromArgb(241, 196, 15);
+            _ButtonSilence.Dock = DockStyle.Fill;
+            _ButtonSilence.Font = new Font("D2Coding", 12F);
+            _ButtonSilence.ForeColor = Color.Black;
+            _ButtonSilence.Location = new Point(3, 3);
+            _ButtonSilence.Name = "_ButtonSilence";
+            _ButtonSilence.Size = new Size(221, 44);
+            _ButtonSilence.TabIndex = 0;
+            _ButtonSilence.Text = "부저 끄기";
+            _ButtonSilence.ThemeStyle = UI.Controls.ThemeStyle.Warning_Yellow;
+            _ButtonSilence.TooltipText = null;
+            _ButtonSilence.UseVisualStyleBackColor = false;
             // 
             // _ButtonReset
             // 
-            this._ButtonReset.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._ButtonReset.Location = new System.Drawing.Point(186, 3);
-            this._ButtonReset.Name = "_ButtonReset";
-            this._ButtonReset.Size = new System.Drawing.Size(177, 44);
-            this._ButtonReset.TabIndex = 1;
-            this._ButtonReset.Text = "초기화 (Reset)";
-            this._ButtonReset.ThemeStyle = EQ.UI.Controls.ThemeStyle.Primary_Indigo;
+            _ButtonReset.BackColor = Color.FromArgb(48, 63, 159);
+            _ButtonReset.Dock = DockStyle.Fill;
+            _ButtonReset.Font = new Font("D2Coding", 12F);
+            _ButtonReset.ForeColor = Color.White;
+            _ButtonReset.Location = new Point(230, 3);
+            _ButtonReset.Name = "_ButtonReset";
+            _ButtonReset.Size = new Size(221, 44);
+            _ButtonReset.TabIndex = 1;
+            _ButtonReset.Text = "초기화 (Reset)";
+            _ButtonReset.TooltipText = null;
+            _ButtonReset.UseVisualStyleBackColor = false;
             // 
             // _ButtonClose
             // 
-            this._ButtonClose.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._ButtonClose.Location = new System.Drawing.Point(369, 3);
-            this._ButtonClose.Name = "_ButtonClose";
-            this._ButtonClose.Size = new System.Drawing.Size(178, 44);
-            this._ButtonClose.TabIndex = 2;
-            this._ButtonClose.Text = "닫기";
-            this._ButtonClose.ThemeStyle = EQ.UI.Controls.ThemeStyle.Neutral_Gray;
+            _ButtonClose.BackColor = Color.FromArgb(149, 165, 166);
+            _ButtonClose.Dock = DockStyle.Fill;
+            _ButtonClose.Font = new Font("D2Coding", 12F);
+            _ButtonClose.ForeColor = Color.White;
+            _ButtonClose.Location = new Point(457, 3);
+            _ButtonClose.Name = "_ButtonClose";
+            _ButtonClose.Size = new Size(223, 44);
+            _ButtonClose.TabIndex = 2;
+            _ButtonClose.Text = "닫기";
+            _ButtonClose.ThemeStyle = UI.Controls.ThemeStyle.Neutral_Gray;
+            _ButtonClose.TooltipText = null;
+            _ButtonClose.UseVisualStyleBackColor = false;
+            // 
+            // _Panel1
+            // 
+            _Panel1.BackColor = SystemColors.Control;
+            _Panel1.Controls.Add(label2);
+            _Panel1.Controls.Add(label1);
+            _Panel1.Controls.Add(labelMessage);
+            _Panel1.Dock = DockStyle.Fill;
+            _Panel1.ForeColor = SystemColors.ControlText;
+            _Panel1.Location = new Point(0, 40);
+            _Panel1.Name = "_Panel1";
+            _Panel1.Size = new Size(683, 198);
+            _Panel1.TabIndex = 3;
+            // 
+            // label2
+            // 
+            label2.BorderStyle = BorderStyle.FixedSingle;
+            label2.Dock = DockStyle.Top;
+            label2.Font = new Font("D2Coding", 12F);
+            label2.Location = new Point(0, 128);
+            label2.Name = "label2";
+            label2.Padding = new Padding(10);
+            label2.Size = new Size(683, 64);
+            label2.TabIndex = 3;
+            label2.Text = "Alarm Message Here...";
+            label2.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label1
+            // 
+            label1.Dock = DockStyle.Top;
+            label1.Font = new Font("D2Coding", 12F);
+            label1.Location = new Point(0, 64);
+            label1.Name = "label1";
+            label1.Padding = new Padding(10);
+            label1.Size = new Size(683, 64);
+            label1.TabIndex = 2;
+            label1.Text = "Alarm Message Here...";
+            label1.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // FormAlarmPopup
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(550, 250);
-            this.Controls.Add(this.labelMessage);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this._PanelTitle);
-            this.Name = "FormAlarmPopup";
-            this.Text = "Alarm";
-            this._PanelTitle.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(8F, 18F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(683, 288);
+            Controls.Add(_Panel1);
+            Controls.Add(tableLayoutPanel1);
+            Controls.Add(_PanelTitle);
+            Name = "FormAlarmPopup";
+            Text = "Alarm";
+            _PanelTitle.ResumeLayout(false);
+            tableLayoutPanel1.ResumeLayout(false);
+            _Panel1.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
@@ -143,5 +206,8 @@
         private Controls._Button _ButtonSilence;
         private Controls._Button _ButtonReset;
         private Controls._Button _ButtonClose;
+        private Controls._Panel _Panel1;
+        private Label label1;
+        private Label label2;
     }
 }

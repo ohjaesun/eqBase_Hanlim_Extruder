@@ -56,7 +56,7 @@ namespace EQ.UI
             _ButtonBottom9 = new EQ.UI.Controls._Button();
             _Button2 = new EQ.UI.Controls._Button();
             flowLayoutPanel2 = new FlowLayoutPanel();
-            _Button1 = new EQ.UI.Controls._Button();
+            _ButtonBottom10 = new EQ.UI.Controls._Button();
             _ButtonBottom8 = new EQ.UI.Controls._Button();
             panelMain = new EQ.UI.Controls._Panel();
             statusStrip1 = new StatusStrip();
@@ -457,7 +457,7 @@ namespace EQ.UI
             // flowLayoutPanel2
             // 
             flowLayoutPanel2.BackColor = Color.FromArgb(80, 80, 80);
-            flowLayoutPanel2.Controls.Add(_Button1);
+            flowLayoutPanel2.Controls.Add(_ButtonBottom10);
             flowLayoutPanel2.Controls.Add(_ButtonBottom8);
             flowLayoutPanel2.Dock = DockStyle.Right;
             flowLayoutPanel2.FlowDirection = FlowDirection.RightToLeft;
@@ -466,18 +466,19 @@ namespace EQ.UI
             flowLayoutPanel2.Size = new Size(303, 63);
             flowLayoutPanel2.TabIndex = 1;
             // 
-            // _Button1
+            // _ButtonBottom10
             // 
-            _Button1.BackColor = Color.FromArgb(48, 63, 159);
-            _Button1.Font = new Font("D2Coding", 12F);
-            _Button1.ForeColor = Color.White;
-            _Button1.Location = new Point(200, 3);
-            _Button1.Name = "_Button1";
-            _Button1.Size = new Size(100, 55);
-            _Button1.TabIndex = 8;
-            _Button1.Text = "Alarms";
-            _Button1.TooltipText = null;
-            _Button1.UseVisualStyleBackColor = false;
+            _ButtonBottom10.BackColor = Color.FromArgb(48, 63, 159);
+            _ButtonBottom10.Font = new Font("D2Coding", 12F);
+            _ButtonBottom10.ForeColor = Color.White;
+            _ButtonBottom10.Location = new Point(200, 3);
+            _ButtonBottom10.Name = "_ButtonBottom10";
+            _ButtonBottom10.Size = new Size(100, 55);
+            _ButtonBottom10.TabIndex = 8;
+            _ButtonBottom10.Text = "Alarms";
+            _ButtonBottom10.TooltipText = null;
+            _ButtonBottom10.UseVisualStyleBackColor = false;
+            _ButtonBottom10.Click += _Button_Bottom_Click;
             // 
             // _ButtonBottom8
             // 
@@ -666,7 +667,7 @@ namespace EQ.UI
         private Controls._Label _Label9;
         private Controls._Label _LabelLogin;
         private FlowLayoutPanel flowLayoutPanel2;
-        private Controls._Button _Button1;
+        private Controls._Button _ButtonBottom10;
         private Controls._Label _Label10;
         private System.Windows.Forms.Timer timer1000;
         private Controls._Button _Button2;

@@ -20,7 +20,7 @@ namespace EQ.Core.Act.Composition.Extruder
         private CancellationTokenSource _controlCts;
 
         public ActPuller(ACT act) : base(act)
-        {
+        {          
             _pid = new PidController();
         }
 
@@ -50,6 +50,7 @@ namespace EQ.Core.Act.Composition.Extruder
                             _pid.SetGains(recipe.Kp, recipe.Ki, recipe.Kd);
                             _pid.SetLimits(recipe.MINCV, recipe.MAXCV);
                             _pid.Reset();
+                            
                             Log.Instance.Info(L("PID 초기화 완료 - Kp:{0}, Ki:{1}, Kd:{2}", recipe.Kp, recipe.Ki, recipe.Kd));
                             nextStep++;
                             break;

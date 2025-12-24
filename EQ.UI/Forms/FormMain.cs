@@ -32,6 +32,51 @@ namespace EQ.UI
 
         }
 
+        DateTime preDateTime = DateTime.Now;
+
+        protected override void WndProc(ref Message m)
+        {
+            const int WM_PARENTNOTIFY = 0x0210;
+            // 마우스 메시지
+            const int WM_MOUSEMOVE = 0x0200;
+            const int WM_LBUTTONDOWN = 0x0201;
+            const int WM_LBUTTONUP = 0x0202;
+            const int WM_RBUTTONDOWN = 0x0204;
+            const int WM_RBUTTONUP = 0x0205;
+            const int WM_MBUTTONDOWN = 0x0207;
+            const int WM_MBUTTONUP = 0x0208;
+            const int WM_MOUSEWHEEL = 0x020A;
+            // 키보드 메시지
+            const int WM_KEYDOWN = 0x0100;
+            const int WM_KEYUP = 0x0101;
+            const int WM_SYSKEYDOWN = 0x0104;
+            const int WM_SYSKEYUP = 0x0105;
+            // 터치 메시지
+            const int WM_TOUCH = 0x0240;
+            switch (m.Msg)
+            {
+                case WM_PARENTNOTIFY:
+                case WM_MOUSEMOVE:
+                case WM_LBUTTONDOWN:
+                case WM_LBUTTONUP:
+                case WM_RBUTTONDOWN:
+                case WM_RBUTTONUP:
+                case WM_MBUTTONDOWN:
+                case WM_MBUTTONUP:
+                case WM_MOUSEWHEEL:
+                case WM_KEYDOWN:
+                case WM_KEYUP:
+                case WM_SYSKEYDOWN:
+                case WM_SYSKEYUP:
+                case WM_TOUCH:
+                    // 특정 시간동안 입력이 없는것 감지 하기 위해... 현재는 아무것도 안함
+                    preDateTime = DateTime.Now;
+                    break;
+            }
+
+            base.WndProc(ref m);
+        }
+
         private void FormMain_Load(object sender, EventArgs e)
         {
             this.Location = new Point(0, 0);
@@ -70,25 +115,7 @@ namespace EQ.UI
                         break;
                     }
 
-                case 10: // EXIT
-                    {
-                        var r = await _act.PopupYesNo.ConfirmAsync("종료", "프로그램을 종료하시겠습니까?");
-                        if (r == YesNoResult.Yes)
-                        {
-                            var splash = Application.OpenForms.OfType<FormSplash>().FirstOrDefault();
-
-                            if (splash != null)
-                            {
-                                splash.Show();
-                                splash.BringToFront();
-                                Application.DoEvents();
-                                splash.EndProgram();
-                                await Task.Delay(1000);
-                            }
-                            Application.Exit();
-                        }
-                        break;
-                    }
+                
 
                 default:
                     {
@@ -125,6 +152,8 @@ namespace EQ.UI
                             if (idx == 6) fm = new Form06Parameter();
                             if (idx == 7) fm = new Form07Reporting();
                             if (idx == 8) fm = new FormTest();
+                            
+                            if (idx == 10) fm = new Form10Alarm();
 
                             fm.TopLevel = false;
                             fm.Dock = DockStyle.Fill;
@@ -204,10 +233,19 @@ namespace EQ.UI
             // 2. 컴퓨터 이름 가져오기
             string name = Environment.MachineName;
 
-            // 3. 요청하신 포맷으로 빌드 날짜 및 컴퓨터 이름 문자열 생성
+            // 3. 
             // 예: "[MY-PC] 241126:1645"
             string buildDate = $"[{name}] {System.IO.File.GetLastWriteTime(assembly.Location).ToString("yyMMdd:HHmm")}";
-
+            
+            if(File.Exists(Application.StartupPath + "\\git_info.txt"))
+            {
+                //첫째줄만 읽어서 = 뒤에 값 가져옴
+                string gitInfo = File.ReadLines(Application.StartupPath + "\\git_info.txt").First();
+                string gitHash = gitInfo.Split('=')[1];
+                buildDate += $" [{gitHash}]";
+                
+            }
+               
             return buildDate;
         }
 

@@ -30,11 +30,13 @@ namespace EQ.UI.Forms
             var detailedMessage = AppendSolutionInfo(title);
 
             // UI 설정
-            this._LabelTitle.Text = title;
+            this._LabelTitle.Text = title + $" [{detailedMessage.No}]";
 
             //this.labelMessage.Text = $"{detailedMessage}\n{message}" ;
-            this.labelMessage.Text = $"솔루션 추가 하자~~\n\n{message}";
-            
+            this.labelMessage.Text = $"{message}";
+            label1.Text = $"Cause: {detailedMessage.cause}";
+            label2.Text = $"Solution: {detailedMessage.solution}";
+
             // 스타일 설정 (알람이므로 기본 Red)
             SetTheme(ThemeStyle.Danger_Red);
 
@@ -47,13 +49,15 @@ namespace EQ.UI.Forms
         /// <summary>
         /// 에러 제목(Enum String)을 기반으로 JSON 파일에서 원인/조치를 찾아 메시지에 덧붙입니다.
         /// </summary>
-        private (string cause , string solution) AppendSolutionInfo(string errorTitle )
+        private (int No,string cause , string solution) AppendSolutionInfo(string errorTitle )
         {
+            int no = -1;
             try
             {
                 // 파일 경로: 실행 폴더/CommonData/AlarmSolutions.json
                 string filePath = Path.Combine(Environment.CurrentDirectory, "CommonData", "AlarmSolutions.json");
 
+               
                 string cause = "";
                 string solution = "";
 
@@ -70,6 +74,7 @@ namespace EQ.UI.Forms
                             // 2. 리스트에서 해당 에러 코드 검색
                             var solutionData = data.Items.FirstOrDefault(x => x.ErrorCode == errorEnum);
 
+                            no = (int)errorEnum;
                             // 3. 데이터가 존재하면 메시지 포맷팅
                             if (solutionData != null)
                             {
@@ -80,7 +85,7 @@ namespace EQ.UI.Forms
                                 if (!string.IsNullOrWhiteSpace(solutionData.Solution))
                                     solution = $"{solutionData.Solution}";
 
-                                return (cause, solution);
+                                return (no,cause, solution);
                             }
                         }
                     }
@@ -92,7 +97,7 @@ namespace EQ.UI.Forms
                 EQ.Common.Logs.Log.Instance.Error($"[FormAlarmPopup] Solution Load Fail: {ex.Message}");
             }
 
-            return ("","");
+            return (no,"","");
         }
 
         private void SetTheme(ThemeStyle style)

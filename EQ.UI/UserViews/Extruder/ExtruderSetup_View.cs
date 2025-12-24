@@ -1,4 +1,6 @@
+using EQ.Core.Act;
 using EQ.Core.Service;
+using EQ.Domain.Enums;
 using System;
 using System.Windows.Forms;
 
@@ -28,6 +30,9 @@ namespace EQ.UI.UserViews.Extruder
             InitializeRecipeComboBox();
             InitializeParameterEvents();
             InitializeButtonEvents();
+
+            timer1.Interval = 1000;
+            timer1.Start();
         }
 
         #region Recipe/Batch ID Section
@@ -58,7 +63,7 @@ namespace EQ.UI.UserViews.Extruder
             else if (_comboRecipe.Items.Count > 0)
             {
                 _comboRecipe.SelectedIndex = 0;
-            }           
+            }
 
             _comboRecipe.SelectedIndexChanged += OnRecipeChanged;
         }
@@ -77,9 +82,11 @@ namespace EQ.UI.UserViews.Extruder
         /// </summary>
         private void InitializeParameterEvents()
         {
+            var _act = ActManager.Instance.Act;
+
             // Target 초기값 설정
-            _targetValues[0] = 0.0;
-            _targetValues[1] = 0.0;
+            _targetValues[0] = _act.Temp.Get(TempID.Zone1).ReadSV();
+            _targetValues[1] = _act.Temp.Get(TempID.Zone2).ReadSV();
             _targetValues[2] = 0.0;
             _targetValues[3] = 8.9;
             _targetValues[4] = 80.0;
@@ -140,7 +147,7 @@ namespace EQ.UI.UserViews.Extruder
         /// </summary>
         private void UpdateTargetLabels()
         {
-            EQ.UI.Controls._Label[] targetLabels = { _lblTarget1, _lblTarget2, _lblTarget3, _lblTarget4, _lblTarget5 };
+            EQ.UI.Controls._TextBox[] targetLabels = { _txtInput1, _txtInput2, _txtInput3, _txtInput4, _txtInput5 };
             for (int i = 0; i < 5; i++)
             {
                 targetLabels[i].Text = _targetValues[i].ToString("F1");
@@ -155,11 +162,16 @@ namespace EQ.UI.UserViews.Extruder
             if (sender is EQ.UI.Controls._Button btn && btn.Tag is int index)
             {
                 EQ.UI.Controls._TextBox[] inputBoxes = { _txtInput1, _txtInput2, _txtInput3, _txtInput4, _txtInput5 };
-                
+
                 if (double.TryParse(inputBoxes[index].Text, out double value))
                 {
                     _targetValues[index] = value;
                     UpdateTargetLabels();
+
+                    if (index == 0)
+                        ActManager.Instance.Act.Temp.Get(TempID.Zone1).WriteSV(value);
+                    if (index == 1)
+                        ActManager.Instance.Act.Temp.Get(TempID.Zone2).WriteSV(value);
 
                     // TODO: 실제 장비로 값 전송
                     // ActManager.Instance.Act.Extruder.SetParameter(index, value);
@@ -184,6 +196,14 @@ namespace EQ.UI.UserViews.Extruder
                     if (keypad.ShowDialog() == DialogResult.OK)
                     {
                         txt.Text = keypad.ResultValue.ToString("F1");
+
+                        // _targetValues 배열에 값 저장
+                        EQ.UI.Controls._TextBox[] inputBoxes = { _txtInput1, _txtInput2, _txtInput3, _txtInput4, _txtInput5 };
+                        int index = Array.IndexOf(inputBoxes, txt);
+                        if (index >= 0 && index < _targetValues.Length)
+                        {
+                            _targetValues[index] = keypad.ResultValue;
+                        }
                     }
                 }
             }
@@ -304,5 +324,23 @@ namespace EQ.UI.UserViews.Extruder
         }
 
         #endregion
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            var _act = ActManager.Instance.Act;
+
+            double[] actualValues = new double[5];
+            actualValues[0] = _act.Temp.Get(TempID.Zone1).ReadPV();
+            actualValues[1] = _act.Temp.Get(TempID.Zone2).ReadPV();
+            UpdateActualValues(actualValues);
+
+            _lblTarget1.Text = _act.Temp.Get(TempID.Zone1).ReadSV().ToString("F1");
+            _lblTarget2.Text = _act.Temp.Get(TempID.Zone2).ReadSV().ToString("F1");
+        }
+
+        private void ExtruderSetup_View_Load(object sender, EventArgs e)
+        {
+            if (DesignMode) return;          
+        }
     }
 }

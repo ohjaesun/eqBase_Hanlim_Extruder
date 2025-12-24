@@ -423,43 +423,97 @@ namespace EQ.UI
                 else
                 {
 
-                    // 1. 시리얼 포트 설정 및 오픈
-                    var comPort = act.Option.Option4.Temperature_COMPort;
-                    SerialPort port = new SerialPort(comPort, 9600, Parity.None, 8, StopBits.One);
-                    port.Open();
-
-                    // 2. NModbus RTU Master 생성
-                    var modbusMaster = ModbusSerialMaster.CreateRtu(port);
-                    modbusMaster.Transport.ReadTimeout = 300;
-                    modbusMaster.Transport.WriteTimeout = 300;
-
-                    if(!port.IsOpen)
+                    //Zone1
+                    if(true)
                     {
-                        updateLable($"[ModbusRTU] Port Open failed : {comPort}\n");
-                        Log.Instance.Error($"[ModbusRTU] Port Open failed : {comPort}");
-                    }                        
+                        // 1. 시리얼 포트 설정 및 오픈
+                        var comPort = "COM1";
+                        SerialPort port = new SerialPort(comPort, 9600, Parity.None, 8, StopBits.One);
+                        port.Open();
 
-                    
-                    var vx = new VX4_Controller(modbusMaster, slaveId: 1);
-                    act.Temp.Register(TempID.Zone1, vx);
+                        // 2. NModbus RTU Master 생성
+                        var modbusMaster = ModbusSerialMaster.CreateRtu(port);
+                        modbusMaster.Transport.ReadTimeout = 300;
+                        modbusMaster.Transport.WriteTimeout = 300;
 
-                    var vx2 = new VX4_Controller(modbusMaster, slaveId: 1);
-                    act.Temp.Register(TempID.Zone2, vx2);
+                        if (!port.IsOpen)
+                        {
+                            updateLable($"[ModbusRTU] Port Open failed : {comPort}\n");
+                            Log.Instance.Error($"[ModbusRTU] Port Open failed : {comPort}");
+                        }
 
+                        var vx = new VX4_Controller(modbusMaster, slaveId: 1);
+                        act.Temp.Register(TempID.Zone1, vx);
+                    }
 
-                    //칠러 등록
-                    // 1. 시리얼 포트 설정 및 오픈
-                    var comPort2 = act.Option.Option4.Temperature_COMPort;
-                    SerialPort port2 = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
-                    port2.Open();
+                    //Zone2
+                    if (true)
+                    {
+                        // 1. 시리얼 포트 설정 및 오픈
+                        var comPort = "COM2";
+                        SerialPort port = new SerialPort(comPort, 9600, Parity.None, 8, StopBits.One);
+                        port.Open();
 
-                    // 2. NModbus RTU Master 생성
-                    var modbusMaster2 = ModbusSerialMaster.CreateRtu(port2);
-                    modbusMaster2.Transport.ReadTimeout = 300;
-                    modbusMaster2.Transport.WriteTimeout = 300;
+                        // 2. NModbus RTU Master 생성
+                        var modbusMaster = ModbusSerialMaster.CreateRtu(port);
+                        modbusMaster.Transport.ReadTimeout = 300;
+                        modbusMaster.Transport.WriteTimeout = 300;
 
-                    var rw3Driver = new JeioTechRW3Driver(modbusMaster2, slaveId: 1);
-                    act.Temp.Register(TempID.BathCirculator, rw3Driver);
+                        if (!port.IsOpen)
+                        {
+                            updateLable($"[ModbusRTU] Port Open failed : {comPort}\n");
+                            Log.Instance.Error($"[ModbusRTU] Port Open failed : {comPort}");
+                        }
+
+                        var vx2 = new VX4_Controller(modbusMaster, slaveId: 1);
+                        act.Temp.Register(TempID.Zone2, vx2);
+                    }
+
+                    //칠러1
+                    if (false)
+                    {
+                        // 1. 시리얼 포트 설정 및 오픈
+                        var comPort2 = "COM3";
+                        SerialPort port2 = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
+                        port2.Open();
+
+                        // 2. NModbus RTU Master 생성
+                        var modbusMaster2 = ModbusSerialMaster.CreateRtu(port2);
+                        modbusMaster2.Transport.ReadTimeout = 300;
+                        modbusMaster2.Transport.WriteTimeout = 300;
+
+                        var rw3Driver = new JeioTechRW3Driver(modbusMaster2, slaveId: 1);
+                        act.Temp.Register(TempID.BathCirculator, rw3Driver);
+                    }
+                    else
+                    {
+                        var mockChamber = new MockTempController("Chamber_A", initialTemp: 60.0); // 이미 예열된 상태 가정
+                        act.Temp.Register(TempID.BathCirculator, mockChamber);
+
+                    }
+
+                    //칠러2
+                    if (false)
+                    {
+                        // 1. 시리얼 포트 설정 및 오픈
+                        var comPort2 = "COM4";
+                        SerialPort port2 = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
+                        port2.Open();
+
+                        // 2. NModbus RTU Master 생성
+                        var modbusMaster2 = ModbusSerialMaster.CreateRtu(port2);
+                        modbusMaster2.Transport.ReadTimeout = 300;
+                        modbusMaster2.Transport.WriteTimeout = 300;
+
+                        var rw3Driver = new JeioTechRW3Driver(modbusMaster2, slaveId: 1);
+                        act.Temp.Register(TempID.BathCirculator2, rw3Driver);
+                    }
+                    else
+                    {
+                        var mockChamber = new MockTempController("Chamber_B", initialTemp: 60.0); // 이미 예열된 상태 가정
+                        act.Temp.Register(TempID.BathCirculator2, mockChamber);
+                    }
+
 
                     Log.Instance.Info("온도 컨트롤러(REAL) 등록 완료");
                 }

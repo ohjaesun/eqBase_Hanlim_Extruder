@@ -23,7 +23,7 @@ namespace EQ.Infra.Device
         public double ReadSV() => ReadRegister(VX4_RegMap.SV);
         public bool IsRunning() => ReadRegister(VX4_RegMap.Status) == 1;
 
-        public void WriteSV(double value) => WriteRegister(VX4_RegMap.SV_Write, (ushort)value);
+        public void WriteSV(double value) => WriteRegister(VX4_RegMap.SV_Write, (ushort)(value*10));
         public void SetRun(bool run)
         {
             ushort val = run ? (ushort)1 : (ushort)0;

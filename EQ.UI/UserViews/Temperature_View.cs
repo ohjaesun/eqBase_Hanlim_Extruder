@@ -1,4 +1,6 @@
 ﻿using EQ.Common.Logs;
+using EQ.Core.Act;
+using EQ.Core.Act.Composition;
 using EQ.Core.Service;
 using EQ.Domain.Enums;
 using EQ.Domain.Interface;
@@ -34,6 +36,27 @@ namespace EQ.UI.UserViews
 
             _updateTimer.Start();
             this.Disposed += (s, ev) => _updateTimer.Stop();
+
+            var act = ActManager.Instance.Act;
+            SafeSubscribe(
+      () => act.Temp.OnTemperatureUpdated += OnTempUpdate,
+      () => act.Temp.OnTemperatureUpdated -= OnTempUpdate);
+        }
+
+        TemperatureData[] _temp = new TemperatureData[Enum.GetValues<TempID>().Length];
+        private void OnTempUpdate(TemperatureData data)
+        {
+            TemperatureData temp = new TemperatureData()
+            {
+                Name = data.Name,
+                IsRunning = data.IsRunning,
+                CurrentTemperature = data.CurrentTemperature,
+                TargetTemperature = data.TargetTemperature,
+                IsConnected = data.IsConnected
+            };
+
+            var idx = (int)Enum.Parse(typeof(TempID), temp.Name);
+            _temp[idx] = temp;
         }
 
         private void InitGrid()
@@ -128,7 +151,7 @@ namespace EQ.UI.UserViews
             {
                 var actTemp = ActManager.Instance.Act.Temp;
 
-                // 1. [Background] 데이터 읽기 (통신)
+                // 1. [Background] 데이터 읽기 (_temp 캐시 사용)
                 // UI 스레드가 멈추지 않도록 Task.Run 사용
                 var updates = await Task.Run(() =>
                 {
@@ -140,13 +163,14 @@ namespace EQ.UI.UserViews
                         // Enum 변환
                         if (Enum.TryParse(zoneName, out TempID zone))
                         {
-                            var ctrl = actTemp.Get(zone);
-                            if (ctrl != null)
+                            // _temp 배열에서 캐시된 값 사용
+                            int idx = (int)zone;
+                           
+                            if (!string.IsNullOrEmpty(_temp[idx].Name))
                             {
-                                // ※ 통신 에러 시 0 또는 예외가 발생할 수 있음 (Controller 내부 로그 확인)
-                                double pv = ctrl.ReadPV();
-                                double sv = ctrl.ReadSV();
-                                bool isRun = ctrl.IsRunning();
+                                double pv = _temp[idx].CurrentTemperature;
+                                double sv = _temp[idx].TargetTemperature;
+                                bool isRun = _temp[idx].IsRunning;
                                 results.Add((zoneName, pv, sv, isRun));
                             }
                         }

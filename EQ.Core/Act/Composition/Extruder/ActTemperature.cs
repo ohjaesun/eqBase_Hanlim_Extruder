@@ -40,6 +40,9 @@ namespace EQ.Core.Act.Composition
         // 이름으로 컨트롤러를 찾기 위한 딕셔너리
         private readonly ConcurrentDictionary<string, ITemperatureController> _controllers = new();
 
+        // 캐시된 온도 데이터 저장소
+        private readonly ConcurrentDictionary<string, TemperatureData> _cachedData = new();
+
         // 온도 폴링용
         private CancellationTokenSource _pollingCts;
         private Task _pollingTask;
@@ -97,6 +100,61 @@ namespace EQ.Core.Act.Composition
         }
 
         /// <summary>
+        /// 캐시된 온도 데이터 전체를 조회합니다.
+        /// </summary>
+        /// <param name="zone">온도 Zone ID</param>
+        /// <returns>캐시된 TemperatureData, 없으면 기본값 반환</returns>
+        public TemperatureData GetCachedData(TempID zone)
+        {
+            string name = zone.ToString();
+            if (_cachedData.TryGetValue(name, out var data))
+            {
+                return data;
+            }
+            Log.Instance.Warning($"[ActTemp] 캐시된 데이터 없음: {name}");
+            return new TemperatureData { Name = name, IsConnected = false };
+        }
+
+        /// <summary>
+        /// 캐시된 현재 온도(PV)를 조회합니다.
+        /// </summary>
+        /// <param name="zone">온도 Zone ID</param>
+        /// <returns>현재 온도 값</returns>
+        public double GetCachedPV(TempID zone)
+        {
+            return GetCachedData(zone).CurrentTemperature;
+        }
+
+        /// <summary>
+        /// 캐시된 설정 온도(SV)를 조회합니다.
+        /// </summary>
+        /// <param name="zone">온도 Zone ID</param>
+        /// <returns>설정 온도 값</returns>
+        public double GetCachedSV(TempID zone)
+        {
+            return GetCachedData(zone).TargetTemperature;
+        }
+
+        /// <summary>
+        /// 캐시된 동작 상태를 조회합니다.
+        /// </summary>
+        /// <param name="zone">온도 Zone ID</param>
+        /// <returns>동작 중이면 true, 아니면 false</returns>
+        public bool GetCachedIsRunning(TempID zone)
+        {
+            return GetCachedData(zone).IsRunning;
+        }
+
+        /// <summary>
+        /// 모든 캐시된 온도 데이터를 조회합니다.
+        /// </summary>
+        /// <returns>캐시된 모든 TemperatureData 리스트</returns>
+        public List<TemperatureData> GetAllCachedData()
+        {
+            return _cachedData.Values.ToList();
+        }
+
+        /// <summary>
         /// 모든 등록된 온도 컨트롤러를 주기적으로 폴링하여 온도 값을 읽습니다.
         /// </summary>
         /// <param name="samplingTimeMs">샘플링 주기 (밀리초)</param>
@@ -130,6 +188,10 @@ namespace EQ.Core.Act.Composition
                                     TargetTemperature = controller.ReadSV(),
                                     IsConnected = true // 읽기 성공 시 연결됨
                                 };
+
+                                // 캐시에 저장
+                                _cachedData[name] = data;
+
                                 OnTemperatureUpdated?.Invoke(data);
 
                                 
@@ -147,6 +209,10 @@ namespace EQ.Core.Act.Composition
                                     TargetTemperature = 0,
                                     IsConnected = false
                                 };
+
+                                // 캐시에 저장
+                                _cachedData[name] = errorData;
+
                                 OnTemperatureUpdated?.Invoke(errorData);
                             }
                         }                       

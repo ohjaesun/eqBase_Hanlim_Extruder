@@ -80,8 +80,8 @@ namespace EQ.UI.UserViews.EQ_HanLim_Extuder
                 row["Vel"] = 0.0;
                 row["Trq"] = 0.0;
                 row["Alarm"] = "0";
-                row["SetVel"] = 0.0;
-                row["SetTrq"] = 0.0;
+                row["SetVel"] = 3.0;
+                row["SetTrq"] = 50.0;
                 row["Servo"] = false;
                 row["HomeDone"] = false;
                 row["Busy"] = false;

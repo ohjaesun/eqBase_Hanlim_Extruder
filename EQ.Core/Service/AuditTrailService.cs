@@ -185,9 +185,9 @@ namespace EQ.Core.Service
         /// Recipe 수정 이력 기록
         /// (사양서 8.12, 9.9.3.7 - Recipe open/edit 이력)
         /// </summary>
-        public void RecordRecipeModified(string recipeName)
+        public void RecordRecipeModified(string recipeName , int recipeNo)
         {
-            var detail = new { RecipeName = recipeName };
+            var detail = new { RecipeName = recipeName , Index = recipeNo };
 
             var entry = new AuditTrailEntry(
                 AuditEventType.RecipeModified,
@@ -204,10 +204,11 @@ namespace EQ.Core.Service
         /// 파라미터 변경 이력 기록
         /// (사양서 5.4.2, 9.9.3.7 - 파라미터 변경 이력)
         /// </summary>
-        public void RecordParameterChanged(string parameterName, object oldValue, object newValue)
+        public void RecordParameterChanged(int recipeNo , string parameterName, object oldValue, object newValue)
         {
             var detail = new
             {
+                RecipeName = recipeNo ,
                 ParameterName = parameterName,
                 OldValue = oldValue?.ToString() ?? "null",
                 NewValue = newValue?.ToString() ?? "null"
@@ -217,7 +218,7 @@ namespace EQ.Core.Service
                 AuditEventType.ParameterChanged,
                 _currentUserId,
                 _currentUserName,
-                $"파라미터 변경: {parameterName} ({oldValue} → {newValue})",
+                $"{parameterName} ({oldValue} → {newValue})",
                 JsonConvert.SerializeObject(detail)
             );
 

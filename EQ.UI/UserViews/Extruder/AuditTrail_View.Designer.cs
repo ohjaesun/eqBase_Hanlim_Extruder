@@ -338,7 +338,7 @@
             _Label2.BackColor = Color.FromArgb(46, 204, 113);
             _Label2.Font = new Font("D2Coding", 12F);
             _Label2.ForeColor = Color.Black;
-            _Label2.Location = new Point(1000, 7);
+            _Label2.Location = new Point(1038, 7);
             _Label2.Margin = new Padding(2, 0, 2, 0);
             _Label2.Name = "_Label2";
             _Label2.Size = new Size(114, 22);
@@ -356,7 +356,7 @@
             _Label1.Location = new Point(908, 7);
             _Label1.Margin = new Padding(2, 0, 2, 0);
             _Label1.Name = "_Label1";
-            _Label1.Size = new Size(87, 22);
+            _Label1.Size = new Size(113, 22);
             _Label1.TabIndex = 0;
             _Label1.Text = "Usage Disk :";
             _Label1.TextAlign = ContentAlignment.MiddleRight;

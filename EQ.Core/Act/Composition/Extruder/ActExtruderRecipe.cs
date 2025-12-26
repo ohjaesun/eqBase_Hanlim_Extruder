@@ -184,11 +184,66 @@ namespace EQ.Core.Act.Composition.Extruder
 
             // 3. 저장 수행
             string path = _act.Recipe.GetCurrentRecipePath();
-
+           
             try
             {
                 await Task.Run(() =>
                 {
+                    // 1. 레시피 파일을 임시 변수에 로드
+                    var originalRecipes = _storage.Load(path, STORAGE_KEY);
+                    
+                    // 2. 현재 레시피와 비교하여 변경된 항목만 RecordParameterChanged 사용해 기록
+                    for (int i = 0; i < _recipes.Count; i++)
+                    {
+                        var newRecipe = _recipes[i];
+                        int recipeNo = i + 1; // 1-based
+                        
+                        // 원본 레시피가 없거나 리스트가 없으면 건너뜀
+                        if (originalRecipes == null || i >= originalRecipes.Count)
+                            continue;
+                            
+                        var existingRecipe = originalRecipes[i];
+                        int changeCount = 0;
+                        
+                        // 리플렉션으로 모든 프로퍼티 비교
+                        var properties = typeof(ExtruderRecipe).GetProperties(
+                            System.Reflection.BindingFlags.Public | 
+                            System.Reflection.BindingFlags.Instance);
+                        
+                        foreach (var prop in properties)
+                        {
+                            // 읽기 전용 프로퍼티는 건너뜀
+                            if (!prop.CanWrite || !prop.CanRead)
+                                continue;
+                                
+                            var oldValue = prop.GetValue(existingRecipe);
+                            var newValue = prop.GetValue(newRecipe);
+                            
+                            // 값이 변경되었는지 확인
+                            bool isChanged = false;
+                            if (oldValue == null && newValue != null)
+                                isChanged = true;
+                            else if (oldValue != null && !oldValue.Equals(newValue))
+                                isChanged = true;
+                            
+                            if (isChanged)
+                            {
+                                _act.AuditTrail.RecordParameterChanged(
+                                    recipeNo, 
+                                    prop.Name, 
+                                    oldValue, 
+                                    newValue);
+                                changeCount++;
+                            }
+                        }
+                        
+                        // 3. 변경 사항이 있으면 RecordRecipeModified 사용해 기록
+                        if (changeCount > 0)
+                        {
+                            _act.AuditTrail.RecordRecipeModified(newRecipe.Name, recipeNo);
+                        }
+                    }
+
                     _storage.Save(_recipes, path, STORAGE_KEY);
                     _act.PopupNoti("저장 완료", "ExtruderRecipe가 정상적으로 저장되었습니다.", NotifyType.Info);
                 });

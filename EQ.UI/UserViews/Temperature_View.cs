@@ -245,7 +245,7 @@ namespace EQ.UI.UserViews
             if (colName == "Btn_SetSV")
             {
                 // FormKeypad를 사용하여 숫자 입력
-                double currentSv = ctrl.ReadSV();
+                double currentSv = ActManager.Instance.Act.Temp.GetCachedSV(zone);
                
                 using (var keypad = new FormKeypad("input", currentSv))
                 {

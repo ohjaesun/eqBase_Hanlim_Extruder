@@ -199,22 +199,22 @@ namespace EQ.UI.UserViews.Extruder
             switch (idx)
             {
                 case 1:
-                    var heater11 = act.Temp.Get(TempID.BathCirculator).IsRunning();
+                    var heater11 = act.Temp.GetCachedIsRunning(TempID.BathCirculator);
                     act.Temp.Get(TempID.BathCirculator).SetRun(!heater11);
                     break;
                 case 2:
-                    var heater21 = act.Temp.Get(TempID.BathCirculator2).IsRunning();
+                    var heater21 = act.Temp.GetCachedIsRunning(TempID.BathCirculator2);
                     act.Temp.Get(TempID.BathCirculator2).SetRun(!heater21);
                     break;
                 case 3: //히터1
                     {
-                        var heater1 = act.Temp.Get(TempID.Zone1).IsRunning();
+                        var heater1 = act.Temp.GetCachedIsRunning(TempID.Zone1);
                         act.Temp.Get(TempID.Zone1).SetRun(!heater1);
                     }
                     break;
                 case 4: //히터2
                     {
-                        var heater2 = act.Temp.Get(TempID.Zone2).IsRunning();
+                        var heater2 = act.Temp.GetCachedIsRunning(TempID.Zone2);
                         act.Temp.Get(TempID.Zone2).SetRun(!heater2);
                     }
 

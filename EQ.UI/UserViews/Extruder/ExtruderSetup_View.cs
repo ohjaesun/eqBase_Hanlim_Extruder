@@ -85,8 +85,8 @@ namespace EQ.UI.UserViews.Extruder
             var _act = ActManager.Instance.Act;
 
             // Target 초기값 설정
-            _targetValues[0] = _act.Temp.Get(TempID.Zone1).ReadSV();
-            _targetValues[1] = _act.Temp.Get(TempID.Zone2).ReadSV();
+            _targetValues[0] = _act.Temp.GetCachedSV(TempID.Zone1);
+            _targetValues[1] = _act.Temp.GetCachedSV(TempID.Zone2);
             _targetValues[2] = 0.0;
             _targetValues[3] = 8.9;
             _targetValues[4] = 80.0;
@@ -330,12 +330,12 @@ namespace EQ.UI.UserViews.Extruder
             var _act = ActManager.Instance.Act;
 
             double[] actualValues = new double[5];
-            actualValues[0] = _act.Temp.Get(TempID.Zone1).ReadPV();
-            actualValues[1] = _act.Temp.Get(TempID.Zone2).ReadPV();
+            actualValues[0] = _act.Temp.GetCachedPV(TempID.Zone1);
+            actualValues[1] = _act.Temp.GetCachedPV(TempID.Zone2);
             UpdateActualValues(actualValues);
 
-            _lblTarget1.Text = _act.Temp.Get(TempID.Zone1).ReadSV().ToString("F1");
-            _lblTarget2.Text = _act.Temp.Get(TempID.Zone2).ReadSV().ToString("F1");
+            _lblTarget1.Text = _act.Temp.GetCachedSV(TempID.Zone1).ToString("F1");
+            _lblTarget2.Text = _act.Temp.GetCachedSV(TempID.Zone2).ToString("F1");
         }
 
         private void ExtruderSetup_View_Load(object sender, EventArgs e)

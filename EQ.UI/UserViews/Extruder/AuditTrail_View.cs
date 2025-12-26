@@ -161,7 +161,7 @@ namespace EQ.UI.UserViews
 
                 // Parameter 필터 (ParameterChanged, SequenceStarted, SequenceStopped)
                 if (_chkParameter.Checked &&
-                    (entry.EventType == AuditEventType.ParameterChanged ||
+                    (entry.EventType == AuditEventType.ParameterChanged ||                    
                      entry.EventType == AuditEventType.SequenceStarted ||
                      entry.EventType == AuditEventType.SequenceStopped))
                 {

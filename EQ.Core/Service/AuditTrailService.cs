@@ -193,7 +193,7 @@ namespace EQ.Core.Service
                 AuditEventType.RecipeModified,
                 _currentUserId,
                 _currentUserName,
-                $"Recipe 수정: {recipeName}",
+                $"Modify: [{recipeNo}]{recipeName}",
                 JsonConvert.SerializeObject(detail)
             );
 
